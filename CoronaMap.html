@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -47,18 +48,14 @@
     #myTitle {
       display: none;
     }
-	#myMenu{
-      display: none;
-    }
+
   }
 
    @media (min-width: 600px) {
     #myTitleMobile {
       display: none;
     }
-	#myMenuMobile{
-      display: none;
-    }
+
   }
 
 .list__tile__title {
@@ -125,6 +122,19 @@
     display: inline-block;
 }
 
+.play_slider_watermark
+{
+    position: absolute;
+    left: 10%!important;
+    margin-top: 93px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+
 .info_watermark
 {
     position: absolute;
@@ -171,6 +181,25 @@
     z-index: 1;
     font-family: mapiregular;
     display: inline-block;
+}
+
+.slider_watermark
+{
+	position: fixed;
+    margin-top: 100px;
+    left: 15%;
+	right: 15%;
+    width: 60%;
+    z-index:99;
+}
+
+
+.chip_watermark
+{
+	position: fixed;
+    margin-top: -5px;
+    width: 30;
+    z-index:99;
 }
 
 
@@ -226,7 +255,16 @@
   ></v-progress-linear>
 
 
-  <div class="text-right" style="width:25%; text-align:right">
+
+  <div class="text-right" style="width:25%; text-align:right;">
+	<v-progress-circular
+	v-model="circle_value"
+	:size="50"
+	:value="circle_value"
+	:width="8"
+	color="white"
+  >{{ circle_value }}
+  </v-progress-circular>
   </div>
 	
 		<v-divider vertical></v-divider>
@@ -263,6 +301,9 @@
 
 
 
+
+	
+
 	<v-app-bar
     color="brown lighten-1"
     dense
@@ -272,9 +313,20 @@
 
 
   
-  
-	  <v-divider vertical></v-divider>
+  <div class="text-right" style="width:15%; text-align:right;">
+	<v-progress-circular
+	v-model="circle_value"
+	:size="50"
+	:value="circle_value"
+	:width="8"
+	color="white"
+  >{{ circle_value }}
+  </v-progress-circular>
+  </div>
+	
+		<v-divider vertical></v-divider>
 	  
+
 	  <v-text-field v-model="geocode_text" style="margin-top: 25px; text-align: right;"
 	  label="התמקדות לכתובת או ישוב"
 	  outlined
@@ -296,7 +348,40 @@
 	</template>
 	<v-icon>mdi-magnify</v-icon>
   </v-btn>
+  
+
+
+
+
+ 
+
+
+
   </v-app-bar>
+
+
+<v-slider
+  v-model="slider"
+  thumb-color="red"
+  class="slider_watermark"
+  :max="max"
+  :min="min"
+  hide-details
+  thumb-label="always">
+  <template v-slot:thumb-label="props">
+	{{ thumb_value }}
+  </template>
+  <template v-slot:append>
+	<v-chip
+	  v-model="slider_date" class ="chip_watermark"
+      color="#1A237E"
+      text-color="white"
+	>
+	{{slider_date}}
+    </v-chip>
+  </template>
+</v-slider>
+
 
 	<form name="form" style='height: 100%;' scrolling='no'> 
 			
@@ -371,6 +456,20 @@
 			</v-layout>
 		</v-bottom-sheet>
 	  </div>
+
+	<v-btn class="play_slider_watermark"
+	  v-model="mdiPause"
+	   @click="playDateSlider" 
+	   absolute
+	   dark
+	   fab
+	   small
+	   left
+	   color="#1A237E"
+	 >
+	   <v-icon v-if="mdiPause">pause</v-icon>
+	   <v-icon v-else>play_arrow</v-icon>
+	 </v-btn>
 
 
 	<v-btn class="select_map_watermark"
@@ -652,13 +751,38 @@ function WgsToIsrael(latitude, longitude)
 function dateConvert(unixts)
 {
 	var date = new Date(unixts);
-	var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+	//var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+	var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
 	return(fdate);
 }
 
 function isInArray(value, array) {
 	return array.indexOf(value) > -1;
 }
+
+function stringToDate(_date,_format,_delimiter)
+{
+            var formatLowerCase=_format.toLowerCase();
+            var formatItems=formatLowerCase.split(_delimiter);
+            var dateItems=_date.split(_delimiter);
+            var monthIndex=formatItems.indexOf("mm");
+            var dayIndex=formatItems.indexOf("dd");
+            var yearIndex=formatItems.indexOf("yyyy");
+            var month=parseInt(dateItems[monthIndex]);
+            month-=1;
+            var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+            return formatedDate;
+}
+
+
+var date_sort_asc = function (date1, date2) {
+  // This is a comparison function that will result in dates being sorted in
+  // ASCENDING order. As you can see, JavaScript's native comparison operators
+  // can be used to compare dates. This was news to me.
+  if (date1 > date2) return 1;
+  if (date1 < date2) return -1;
+  return 0;
+};
 
 
 function PointToPolygon(x, y, r)
@@ -687,8 +811,24 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
 
-function AddUserPoint(x, y, place, name, fdate_stay_times){	
+function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
+
+function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){	
 		var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
 		var data = {  
 		wkts: ["POINT(("+x+" "+y+"))"],  
@@ -697,11 +837,11 @@ function AddUserPoint(x, y, place, name, fdate_stay_times){
 	    	defaultSymbol:  
 		{  
 			url:'https://image.flaticon.com/icons/svg/1500/1500374.svg',  
-			width:25,  
-			height:25  
+			width:20,  
+			height:20  
 		},   
 		symbols: [],  
-		clearExisting: false,  
+		clearExisting: clearExisting,  
 		data: {  
 				tooltips: [place],  
 				headers: [place],
@@ -717,12 +857,62 @@ function AddUserPoint(x, y, place, name, fdate_stay_times){
 }
 
 
+var lastDate;
+var currentDate;
+var filter_Date;
+function myLoop (i, all) {  //  create a loop function
+			setTimeout(function () {   
+				i = i + 1; 
+				console.log('hello ' + i);         
+				appVue.slider = i;
+				date = dates[i-1];
+				appVue.slider_date = date;
+ 				filter_Date = corona_features.filter(function(f) {
+							return f.attributes["fromTime"] == date;
+				});
+				
+  				if (i == 1)
+				{
+					for (c = 0; c < filter_Date.length; c++)
+					{
+						feat = filter_Date[c];
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+						appVue.thumb_value = filter_Date.length;
+					
+					} 
+				}
+				else{
+					for (c = 0; c < filter_Date.length; c++)
+					{
+						feat = filter_Date[c];
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+					}
+					appVue.thumb_value = appVue.thumb_value + filter_Date.length;
+
+				} 
+				if (i < all) {     
+					myLoop(i, all);            
+				}
+				else{
+					setTimeout(function () {
+					appVue.thumb_value = 0;
+					appVue.circle_value = corona_features.length;
+
+					appVue.slider = 0;
+					appVue.mdiPause = false;
+					appVue.slider_date = dates[0];
+					}, 2000);
+				}                   
+			}, 1000)
+		}
+
 
 var PolygonId;
 //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
 //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
 var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-
+var dates = [];
+var real_dates = [];
 var features = []
 var corona_features = []
 $(document).ready(function (){
@@ -744,6 +934,7 @@ $(document).ready(function (){
 			console.log(response);
 			for (i = 0; i < d.responseJSON.features.length; i++)
 			{
+				console.log(i);
 				feat = d.responseJSON.features[i];
 				name = d.responseJSON.features[i].attributes.Name;
 				place = d.responseJSON.features[i].attributes.Place;
@@ -756,18 +947,70 @@ $(document).ready(function (){
 				var unixt_fr = d.responseJSON.features[i].attributes.fromTime;
 				fdate = dateConvert(unixt_fr)
 				d.responseJSON.features[i].attributes.fromTime = fdate;
+				d.responseJSON.features[i].attributes.realdate = stringToDate(fdate,"dd/MM/yyyy","/");
 				var unixt_to = d.responseJSON.features[i].attributes.toTime;
 				tdate = dateConvert(unixt_to)
 				d.responseJSON.features[i].attributes.toTime = tdate;
 				stay_times = d.responseJSON.features[i].attributes.stayTimes;
 
 				corona_features.push(d.responseJSON.features[i]);
-				AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times);
+				AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);
 
 				
 			}
 			console.log("features loaded succesfully");
+
+
+
+
+			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
 			appVue.loading = false;
+
+			// dates for slider...
+
+            for (i=0; i < corona_features.length; i++)
+            {
+                if (isInArray(corona_features[i].attributes.toTime, dates) == false)
+                {
+                    dates.push(corona_features[i].attributes.toTime)
+					real_dates.push(stringToDate(corona_features[i].attributes.toTime,"dd/MM/yyyy","/"))
+                }
+            }
+			dates = dates.sort();
+			sorted_dates  = real_dates.sort(date_sort_asc);
+			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
+
+			appVue.max = dates_array.length;
+			appVue.range = [1, dates_array.length];
+
+			filter_Date = corona_features.filter(function(f) {
+						return f.attributes["fromTime"] == dates[0];
+			});
+			appVue.thumb_value = 0;
+			appVue.circle_value = corona_features.length;
+			
+		});
+		//set pan event;
+		govmap.onEvent(govmap.events.PAN).progress(function (e)  
+		{  
+			Xmax = e.extent.xmax;
+			Xmin = e.extent.xmin;
+			Ymax = e.extent.ymax;
+			Ymin = e.extent.ymin;
+			//var scale = Math.round((Xmax - Xmin)  / (document.getElementById("map_div").width * 0.000264583));
+			points_count = 0;
+			for (var i=0; i< corona_features.length; i++)
+			{
+				point = corona_features[i].geometry;
+				pt_x = corona_features[i].geometry.x;
+				pt_y = corona_features[i].geometry.y;
+				if ((pt_x > Xmin  && pt_x  < Xmax) && (pt_y > Ymin  && pt_y  < Ymax))
+				{
+					points_count++;
+				}
+			}					 
+			appVue.circle_value = points_count;
+			
 		});
 });
 
@@ -781,6 +1024,18 @@ var appVue = new Vue({
     data () {
       return {
 
+		circle_value: 2,
+
+		slider_date: "01/01/2020",
+
+		thumb_value: 2,
+
+        min: 0,
+        max: 100,
+        slider: 0,
+        range: [0, 100],
+		
+
 		loading: true,
 		expanded: [],
 		search: '',
@@ -791,7 +1046,7 @@ var appVue = new Vue({
           { text: 'מרחק במטרים', value: "flat_number" },
           { text: 'מקום השהיה', value: 'Place' },
           { text: 'הערות', value: 'Comments' },
-          { text: 'תאריך', value: 'toTime' },
+          { text: 'תאריך', value: 'fromTime' },
           { text: 'שעות השהיה', value: 'stayTimes' },
 		  {text: 'התמקדות', value: 'action'},
         ],
@@ -811,7 +1066,8 @@ var appVue = new Vue({
 
 		loading: false,
 
-		mdiClose: false
+		mdiClose: false,
+		mdiPause: false
       }
     },
     methods: {
@@ -1074,7 +1330,32 @@ var appVue = new Vue({
 			} else {
 				alert("מיקום אינו זמין בדפדפן זה");
 			}
-		}
+		},
+
+        playDateSlider()
+        {
+			this.mdiPause = true;
+			govmap.clearDrawings(); 
+            var dates = [];
+			var real_dates = [];
+
+            for (i=0; i < corona_features.length; i++)
+            {
+                if (isInArray(corona_features[i].attributes.toTime, dates) == false)
+                {
+                    dates.push(corona_features[i].attributes.toTime)
+					real_dates.push(stringToDate(corona_features[i].attributes.toTime,"dd/MM/yyyy","/"))
+                }
+            }
+			dates = dates.sort();
+			sorted_dates  = real_dates.sort(date_sort_asc);
+			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
+			//one = 100 / dates_array.length;
+			i = 0;
+			//all = corona_features.length;
+			myLoop(i, dates_array.length)
+			//return real_dates;
+        }
 	}
 	
 })
