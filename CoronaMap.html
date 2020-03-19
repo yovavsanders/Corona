@@ -110,6 +110,7 @@
     display: inline-block;
 }
 
+
 .select_map_watermark
 {
     position: absolute;
@@ -122,17 +123,18 @@
     display: inline-block;
 }
 
-.play_slider_watermark
+.heat_map_watermark
 {
     position: absolute;
-    left: 10%!important;
-    margin-top: 93px!important;
+    right: 0%!important;
+    bottom: 40%!important;
     background-color: transparent;
     border: none;
     z-index: 1;
     font-family: mapiregular;
     display: inline-block;
 }
+
 
 
 .info_watermark
@@ -159,38 +161,28 @@
     display: inline-block;
 }
 
-.filter_watermark
+
+.slider_watermark
 {
-    position: absolute;
-    left: 0%!important;
-    bottom: 30%!important;
-    background-color: transparent;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
+	position: absolute;
+    bottom: 20%!important;
+	display: inline-block;
+	left: 10%!important;
+    width: 80%;
+    z-index:99;
 }
 
-.share_watermark
+.play_slider_watermark
 {
     position: absolute;
     left: 0%!important;
     bottom: 20%!important;
     background-color: transparent;
     border: none;
-    z-index: 1;
+    z-index: 99;
     font-family: mapiregular;
     display: inline-block;
-}
 
-.slider_watermark
-{
-	position: fixed;
-    margin-top: 100px;
-    left: 15%;
-	right: 15%;
-    width: 60%;
-    z-index:99;
 }
 
 
@@ -263,20 +255,29 @@
 	:value="circle_value"
 	:width="8"
 	color="white"
-  >{{ circle_value }}
+   >{{ circle_value }}
   </v-progress-circular>
+  נדבקים בתיחום המפה
   </div>
 	
 		<v-divider vertical></v-divider>
 
 	<v-spacer></v-spacer>
-      <v-toolbar-title class="white--text" style="text-align: center; width:50%">מפת התפשטות נגיף הקורונה בישראל</v-toolbar-title>
+      <v-toolbar-title class="white--text" style="text-align: center; width:40%">מפת התפשטות נגיף הקורונה בישראל</v-toolbar-title>
     <v-spacer></v-spacer>
 	
 	
 		<v-divider vertical></v-divider>
+		<v-select right
+		v-on:change="bufferChange"
+		style="margin-top: 30px; text-align: right; width: 10%"
+		:items="buffer_items"
+		label="רדיוס חיפוש"
+		outlined
+		></v-select>
+		<v-divider vertical></v-divider>
 		
-		<v-text-field v-model="geocode_text" style="margin-top: 30px; text-align: right;"
+		<v-text-field right v-model="geocode_text" style="margin-top: 30px; text-align: right;"
 		label="התמקדות לכתובת או ישוב"
 		outlined
 	  ></v-text-field>
@@ -297,6 +298,7 @@
       </template>
       <v-icon>mdi-magnify</v-icon>
 	</v-btn>
+
 	</v-app-bar>
 
 
@@ -348,12 +350,16 @@
 	</template>
 	<v-icon>mdi-magnify</v-icon>
   </v-btn>
-  
 
 
+<v-select right
+style="margin-top: 30px; text-align: right; width: 20%"
+:items="buffer_items"
+v-on:change="bufferChange"
+label="רדיוס"
+outlined
+></v-select>
 
-
- 
 
 
 
@@ -369,7 +375,7 @@
   hide-details
   thumb-label="always">
   <template v-slot:thumb-label="props">
-	{{ thumb_value }}
+	{{ getCountByDate() }}
   </template>
   <template v-slot:append>
 	<v-chip
@@ -381,6 +387,11 @@
     </v-chip>
   </template>
 </v-slider>
+
+
+
+
+
 
 
 	<form name="form" style='height: 100%;' scrolling='no'> 
@@ -417,7 +428,7 @@
 				  <v-flex style="overflow: auto;">
 					<v-card style="bottom: 0; ">
 					<v-card-title>
-						 מיקומי חולים
+						 מיקומי נדבקים מאומתים
 						<v-spacer></v-spacer>
 						<v-text-field
 						  v-model="search"
@@ -513,6 +524,24 @@ color="#1A237E"
 
 
 
+<v-btn class="heat_map_watermark"
+v-model="mdiHeatClose"
+ @click="heatMapClick" 
+ absolute
+ dark
+ fab
+ small
+ right
+ color="#FF9800"
+>
+ <v-icon v-if="mdiHeatClose">mdi-close</v-icon>
+ <v-icon v-else>mdi-hubspot</v-icon>
+</v-btn>
+
+
+
+
+
 
 
 
@@ -523,7 +552,7 @@ color="#1A237E"
 					absolute
 					direction="right"
 					transition="slide-x-transition"
-					style="bottom: 20%!important; left: 0%!important;"
+					style="bottom: 30%!important; left: 0%!important;"
 
 					>
             <template v-slot:activator>
@@ -538,7 +567,7 @@ color="#1A237E"
 			
             <v-btn 
 			color="green"
-				style="bottom: 20%!important;"
+				style="bottom: 30%!important;"
 			    dark
 				fab
 				small
@@ -549,7 +578,7 @@ color="#1A237E"
 
 			<v-btn
 			color="blue"
-				style="bottom: 20%!important;"
+				style="bottom: 30%!important;"
 			    dark
 				fab
 				small
@@ -560,7 +589,7 @@ color="#1A237E"
 
 			<v-btn
 				color="red"
-					style="bottom: 20%!important;"
+					style="bottom: 30%!important;"
 					dark
 					fab
 					small
@@ -568,7 +597,8 @@ color="#1A237E"
 				<v-icon>mdi-email</v-icon>
 			</v-btn>
 
-          </v-speed-dial>
+		  </v-speed-dial>
+		  
 
 </v-app>
 </div>
@@ -843,7 +873,7 @@ function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 		symbols: [],  
 		clearExisting: clearExisting,  
 		data: {  
-				tooltips: [place],  
+				tooltips: [],  
 				headers: [place],
 				bubbleHTML: bubbleContent,
 				bubbleHTMLParameters:[[name, fdate_stay_times]]
@@ -856,47 +886,29 @@ function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 		}); 
 }
 
-
+var new_wkt;
+var d;
 var lastDate;
 var currentDate;
 var filter_Date;
 function myLoop (i, all) {  //  create a loop function
 			setTimeout(function () {   
 				i = i + 1; 
-				console.log('hello ' + i);         
+				console.log('hello ' + appVue.slider);         
 				appVue.slider = i;
-				date = dates[i-1];
+ 				date = dates[appVue.slider - 1];
 				appVue.slider_date = date;
- 				filter_Date = corona_features.filter(function(f) {
-							return f.attributes["fromTime"] == date;
-				});
-				
-  				if (i == 1)
-				{
-					for (c = 0; c < filter_Date.length; c++)
-					{
-						feat = filter_Date[c];
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-						appVue.thumb_value = filter_Date.length;
-					
-					} 
-				}
-				else{
-					for (c = 0; c < filter_Date.length; c++)
-					{
-						feat = filter_Date[c];
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-					}
-					appVue.thumb_value = appVue.thumb_value + filter_Date.length;
-
-				} 
-				if (i < all) {     
-					myLoop(i, all);            
+				if (appVue.slider < all) {     
+					myLoop(i, all);          
 				}
 				else{
 					setTimeout(function () {
-					appVue.thumb_value = 0;
-					appVue.circle_value = corona_features.length;
+
+					for (c = 0; c < corona_features.length; c++)
+					{
+						feat = corona_features[c];
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+					}
 
 					appVue.slider = 0;
 					appVue.mdiPause = false;
@@ -906,6 +918,7 @@ function myLoop (i, all) {  //  create a loop function
 			}, 1000)
 		}
 
+var res;
 
 var PolygonId;
 //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
@@ -960,9 +973,6 @@ $(document).ready(function (){
 			}
 			console.log("features loaded succesfully");
 
-
-
-
 			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
 			appVue.loading = false;
 
@@ -980,13 +990,14 @@ $(document).ready(function (){
 			sorted_dates  = real_dates.sort(date_sort_asc);
 			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
 
+			//appVue.getCountByDate();
+
 			appVue.max = dates_array.length;
 			appVue.range = [1, dates_array.length];
 
 			filter_Date = corona_features.filter(function(f) {
 						return f.attributes["fromTime"] == dates[0];
 			});
-			appVue.thumb_value = 0;
 			appVue.circle_value = corona_features.length;
 			
 		});
@@ -1023,6 +1034,10 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
+
+		radius: 2500,
+
+		buffer_items: [2500, 5000, 7500, 10000],
 
 		circle_value: 2,
 
@@ -1065,7 +1080,7 @@ var appVue = new Vue({
 		geocode_text: "",
 
 		loading: false,
-
+		mdiHeatClose: false,
 		mdiClose: false,
 		mdiPause: false
       }
@@ -1080,6 +1095,40 @@ var appVue = new Vue({
 			else return 'green'
 		},
 
+		heatMapClick(){
+			if (this.mdiHeatClose  == false)
+			{
+				this.mdiHeatClose  = true
+				points_heat = [];
+				for (c = 0; c < corona_features.length; c++)
+				{
+					feat = corona_features[c];
+					{
+						val1 = corona_features[0].attributes.stayTimes.split("-")[0].replace(":00", "");
+						val2 = corona_features[0].attributes.stayTimes.split("-")[1].replace(":00", "");
+						val0 = (val2 - val1) * 1000;
+						points_heat.push({ point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val1: val0  } });
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+					}
+				}
+
+				//val1 = corona_features[0].attributes.stayTimes.split("-")[0].replace(":00", "");
+				//val2 = corona_features[0].attributes.stayTimes.split("-")[1].replace(":00", "");
+				//val2 - val1
+
+				govmap.setHeatLayer({  
+					points: points_heat 
+					,options: { valueField: 'val1' }  
+				});  
+
+			}
+			else
+			{
+				this.mdiHeatClose = false;
+				govmap.removeHeatLayer();  
+				//this.cancelClick();
+			}
+		},
 
 		selectFromMapClick(){
 			console.log("select");
@@ -1108,7 +1157,7 @@ var appVue = new Vue({
 						if (point.within(polygon))
 						{
 							var c = 0;
-							corona_features[i].attributes.flat_number = formatNumber(parseInt(c));
+							corona_features[i].attributes.flat_number = parseInt(c);
 							tableData.push(corona_features[i].attributes);
 							console.log(corona_features[i].attributes);
 						}
@@ -1140,59 +1189,194 @@ var appVue = new Vue({
 			console.log(this.geocode_text);
 			govmap.geocode({keyword: this.geocode_text},govmap.geocodeType.FullResult)
 			.then(function(response){
-				console.log("then:");
+
 				console.log(response);
-				var data = {
-				'circleGeometries': [{x: response.data[0].X, y: response.data[0].Y, radius: 2500}],
-				'names': ['p1'],
-				'geometryType': govmap.geometryType.CIRCLE,
-				'defaultSymbol':
+			if (response.status == 0)
+			{
+				if (response.data[0].DescLayerID == "ADDR_V1" || response.data[0].DescLayerID == "STREET_MID_POINT")
 				{
-				'outlineColor': [0, 0, 255, 1],
-				'outlineWidth': 3,
-				'fillColor': [255, 255, 255, 0.5]
-				},
-				'symbols': [],
-				'clearExisting': false,
-				'data': { }
-				};
-
-				govmap.displayGeometries(data).then(function (e)
-				{
-					circle_result = e;
-					console.log(e);
-					PolygonId = circle_result.data;
-				});
-				//govmap.zoomToDrawing();
-				govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
-				
-				wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, 2750);	
-				polygon = Terraformer.WKT.parse(wkt_polygon);
-				for (i = 0; i < corona_features.length; i++)
-				{
-
-					pt_json = {
-								"type": "Point",
-								"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
-							   };
-
-					var point = new Terraformer.Primitive(pt_json);
-					if (point.within(polygon))
+					console.log("then:");
+					console.log(response);
+					var data = {
+					'circleGeometries': [{x: response.data[0].X, y: response.data[0].Y, radius: appVue.radius}],
+					'names': ['p1'],
+					'geometryType': govmap.geometryType.CIRCLE,
+					'defaultSymbol':
 					{
-						//console.log(corona_features[i].attributes.Place);
-						var a = response.data[0].X - corona_features[i].geometry.x;
-						var b = response.data[0].Y - corona_features[i].geometry.y;
-						var c = Math.sqrt( a*a + b*b );
-						corona_features[i].attributes.flat_number = formatNumber(parseInt(c));
-						tableData.push(corona_features[i].attributes);
-						console.log(corona_features[i].attributes);
-					}
-					
-				}	
-			});
-			appVue.desserts = tableData;
-			this.sheet = true;
+					'outlineColor': [0, 0, 255, 1],
+					'outlineWidth': 3,
+					'fillColor': [255, 255, 255, 0.5]
+					},
+					'symbols': [],
+					'clearExisting': true,
+					'data': { }
+					};
 
+					govmap.displayGeometries(data).then(function (e)
+					{
+						circle_result = e;
+						console.log(e);
+						PolygonId = circle_result.data;
+					});
+					//govmap.zoomToDrawing();
+					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+					
+					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, 2750);	
+					polygon = Terraformer.WKT.parse(wkt_polygon);
+					for (i = 0; i < corona_features.length; i++)
+					{
+
+						pt_json = {
+									"type": "Point",
+									"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+								};
+
+						var point = new Terraformer.Primitive(pt_json);
+						if (point.within(polygon))
+						{
+							//console.log(corona_features[i].attributes.Place);
+							var a = response.data[0].X - corona_features[i].geometry.x;
+							var b = response.data[0].Y - corona_features[i].geometry.y;
+							var c = Math.sqrt( a*a + b*b );
+							corona_features[i].attributes.flat_number = parseInt(c);
+							tableData.push(corona_features[i].attributes);
+							console.log(corona_features[i].attributes);
+						}
+						
+					}
+				}
+				if (response.data[0].DescLayerID =="SETL_MID_POINT")
+				{
+
+					setl_id = response.data[0].ObjectID;
+					var wkt = PointToPolygon(response.data[0].X, response.data[0].Y, 1);
+					govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "LOCALITY_210410", 'fields': ["CR_LAMAS"],getShapes: true})
+					.then(function (e) {
+							console.log(e);
+							if (e.data != null && e.data.length > 0)
+							{
+								new_wkt = e.data[0].Values[3];
+								 
+								var data = {  
+									wkts: [new_wkt],  
+									names: ['p1'],  
+									geometryType: govmap.drawType.Polygon,  
+									defaultSymbol:  
+									{  
+										'outlineColor': [0, 0, 255, 1],
+										'outlineWidth': 3,
+										'fillColor': [255, 255, 255, 0.5]
+									},    
+									symbols: [],  
+									'clearExisting': true,
+									data: {  
+		
+									} 
+								}
+								govmap.displayGeometries(data).then(function (response)  
+								{  
+									console.log(response.data);
+								}); 
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+								
+								wkt_polygon = new_wkt
+								polygon = Terraformer.WKT.parse(wkt_polygon);
+								for (i = 0; i < corona_features.length; i++)
+								{
+
+									pt_json = {
+												"type": "Point",
+												"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+											};
+
+									var point = new Terraformer.Primitive(pt_json);
+									if (point.within(polygon))
+									{
+										//console.log(corona_features[i].attributes.Place);
+										var a = response.data[0].X - corona_features[i].geometry.x;
+										var b = response.data[0].Y - corona_features[i].geometry.y;
+										var c = Math.sqrt( a*a + b*b );
+										corona_features[i].attributes.flat_number = parseInt(c);
+										tableData.push(corona_features[i].attributes);
+										console.log(corona_features[i].attributes);
+									}
+									
+								}
+							};
+
+					});				 
+				}
+				if (response.data[0].DescLayerID == "Neighborhoods_area")
+				{
+					var wkt = PointToPolygon(response.data[0].X, response.data[0].Y, 1);
+					govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "NEIGHBORHOODS_AREA", 'fields': ["UNIQ_ID"],getShapes: true})
+					.then(function (e) {
+							console.log(e);
+							if (e.data != null && e.data.length > 0)
+							{
+								new_wkt = e.data[0].Values[3];
+								 console.log(new_wkt.replace("Z ", ""));
+								var data = {  
+									wkts: [new_wkt.replace("Z ", "")],  
+									names: ['p1'],  
+									geometryType: govmap.drawType.Polygon,  
+									defaultSymbol:  
+									{  
+										'outlineColor': [0, 0, 255, 1],
+										'outlineWidth': 3,
+										'fillColor': [255, 255, 255, 0.5]
+									},    
+									symbols: [],  
+									'clearExisting': true, 
+									data: {  
+		
+									} 
+								}
+								govmap.displayGeometries(data).then(function (response)  
+								{  
+									console.log(response.data);
+								}); 
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+								
+								wkt_polygon = new_wkt
+								polygon = Terraformer.WKT.parse(wkt_polygon);
+								for (i = 0; i < corona_features.length; i++)
+								{
+
+									pt_json = {
+												"type": "Point",
+												"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+											};
+
+									var point = new Terraformer.Primitive(pt_json);
+									if (point.within(polygon))
+									{
+										//console.log(corona_features[i].attributes.Place);
+										var a = response.data[0].X - corona_features[i].geometry.x;
+										var b = response.data[0].Y - corona_features[i].geometry.y;
+										var c = Math.sqrt( a*a + b*b );
+										corona_features[i].attributes.flat_number = parseInt(c);
+										tableData.push(corona_features[i].attributes);
+										console.log(corona_features[i].attributes);
+									}
+									
+								}
+							};
+
+					});		
+
+
+				}
+				appVue.desserts = tableData;
+				appVue.sheet = true;
+				appVue.mdiClose = true;
+			}
+			else{
+				alert("לא נמצאה הכתובת המבוקשת");
+			}
+			
+					
+			});
 
 		},
 
@@ -1201,9 +1385,37 @@ var appVue = new Vue({
 		cancelClick()
 		{
 			appVue.desserts = [];
-			tableData = [],
-
+			tableData = []
+			for (c = 0; c < corona_features.length; c++)
+			{
+				feat = corona_features[c];
+				if (c == 0)
+				{
+					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+				}
+				else
+				{
+					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+				}
+			}
 			govmap.clearDrawings(); 
+
+			
+
+
+
+			for (c = 0; c < corona_features.length; c++)
+			{
+				feat = corona_features[c];
+				if (c == 0)
+				{
+					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+				}
+				else
+				{
+					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+				}
+			}
 		},
 
 
@@ -1274,11 +1486,12 @@ var appVue = new Vue({
 		zoomCurrentLocation()
 		{
 			if (navigator.geolocation) {
+				this.mdiClose = true;
 				navigator.geolocation.getCurrentPosition(function showPosition(position) {
 					x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
 					y_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[1];
 					var data = {
-				'circleGeometries': [{x: x_, y: y_, radius: 2500}],
+				'circleGeometries': [{x: x_, y: y_, radius: appVue.radius}],
 				'names': ['p1'],
 				'geometryType': govmap.geometryType.CIRCLE,
 				'defaultSymbol':
@@ -1317,7 +1530,7 @@ var appVue = new Vue({
 						var a = x_- corona_features[i].geometry.x;
 						var b = y_ - corona_features[i].geometry.y;
 						var c = Math.sqrt( a*a + b*b );
-						corona_features[i].attributes.flat_number = formatNumber(parseInt(c));
+						corona_features[i].attributes.flat_number = parseInt(c);
 						tableData.push(corona_features[i].attributes);
 						console.log(corona_features[i].attributes);
 					}
@@ -1334,28 +1547,67 @@ var appVue = new Vue({
 
         playDateSlider()
         {
-			this.mdiPause = true;
-			govmap.clearDrawings(); 
-            var dates = [];
-			var real_dates = [];
+			if (this.mdiPause == true)
+			{
+				console.log("no...");
+			}
+			else{
+				this.mdiPause = true;
+				this.slider = 0;
+				myLoop(0, dates.length)
+			}
+        },
 
-            for (i=0; i < corona_features.length; i++)
-            {
-                if (isInArray(corona_features[i].attributes.toTime, dates) == false)
-                {
-                    dates.push(corona_features[i].attributes.toTime)
-					real_dates.push(stringToDate(corona_features[i].attributes.toTime,"dd/MM/yyyy","/"))
-                }
-            }
-			dates = dates.sort();
-			sorted_dates  = real_dates.sort(date_sort_asc);
-			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
-			//one = 100 / dates_array.length;
-			i = 0;
-			//all = corona_features.length;
-			myLoop(i, dates_array.length)
-			//return real_dates;
-        }
+		getCountByDate()
+		{
+			if (this.mdiPause == true)
+			{
+
+				console.log("getCountByDate() " +this.slider);
+				
+				date = dates[this.slider];
+
+				console.log(date);
+
+				filter_Date = corona_features.filter(function(f) {
+								return f.attributes["fromTime"] == date;
+				
+				});
+
+
+				if (this.slider == 0)
+				{
+					d = 0;
+					for (c = 0; c < filter_Date.length; c++)
+					{
+						feat = filter_Date[c];
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+					
+					} 
+				}
+				else{
+					d = d + filter_Date.length;
+					for (c = 0; c < filter_Date.length; c++)
+					{
+						feat = filter_Date[c];
+						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+					}
+					d = c
+				}
+			}
+			else
+			{
+				d = 0;
+			}
+				//d = d + c
+			return d
+		
+		},
+		bufferChange(e)
+		{
+			console.log(e);
+			this.radius = e;
+		}
 	}
 	
 })
