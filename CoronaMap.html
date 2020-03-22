@@ -490,19 +490,7 @@ placeholder="רדיוס במ'"
 		</v-bottom-sheet>
 	  </div>
 
-	<v-btn class="play_slider_watermark"
-	  v-model="mdiPause"
-	   @click="playDateSlider" 
-	   absolute
-	   dark
-	   fab
-	   small
-	   left
-	   color="#1A237E"
-	 >
-	   <v-icon v-if="mdiPause">pause</v-icon>
-	   <v-icon v-else>play_arrow</v-icon>
-	 </v-btn>
+
 
 
 	<v-btn class="select_map_watermark"
@@ -592,6 +580,20 @@ right>
 	>{{ getCountByDateTotal() }}
 </v-progress-circular>
 </button>
+
+<v-btn class="play_slider_watermark"
+v-model="mdiPause"
+ @click="playDateSlider" 
+ absolute
+ dark
+ fab
+ small
+ left
+ color="#1A237E"
+>
+ <v-icon v-if="mdiPause">pause</v-icon>
+ <v-icon v-else>play_arrow</v-icon>
+</v-btn>
 
 
 
