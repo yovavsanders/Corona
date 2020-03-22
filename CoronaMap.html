@@ -178,15 +178,10 @@
 
 .play_slider_watermark
 {
-    position: fixed;
-    left: 58px!important;
-    bottom: 50px!important;
-    background-color: transparent;
-    border: none;
-    z-index: 99;
-    font-family: mapiregular;
-    display: inline-block;
-
+	position: fixed;
+    margin-top: -7px;
+    margin-left: -50px;
+    z-index:99;
 }
 
 
@@ -400,6 +395,21 @@ placeholder="רדיוס במ'"
 	{{ getCountByDate() }}
   </template>
   <template v-slot:append>
+
+    <v-btn class="play_slider_watermark"
+        v-model="mdiPause"
+        @click="playDateSlider" 
+        absolute
+        dark
+        fab
+        small
+        left
+        color="#1A237E"
+        >
+        <v-icon v-if="mdiPause">pause</v-icon>
+        <v-icon v-else>play_arrow</v-icon>
+        </v-btn>
+
 	<v-chip
 	  v-model="slider_date" class ="chip_watermark"
       color="#1A237E"
@@ -581,19 +591,7 @@ right>
 </v-progress-circular>
 </button>
 
-<v-btn class="play_slider_watermark"
-v-model="mdiPause"
- @click="playDateSlider" 
- absolute
- dark
- fab
- small
- left
- color="#1A237E"
->
- <v-icon v-if="mdiPause">pause</v-icon>
- <v-icon v-else>play_arrow</v-icon>
-</v-btn>
+
 
 
 
