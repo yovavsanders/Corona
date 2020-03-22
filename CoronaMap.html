@@ -55,7 +55,12 @@
     #myTitleMobile {
       display: none;
     }
-
+	#CircleMobile {
+		display: none
+	}
+	#sliderCircle{
+		right: 50%!important;
+	}
   }
 
 .list__tile__title {
@@ -140,7 +145,7 @@
 .info_watermark
 {
     position: absolute;
-    left: 0%!important;
+    left: 3%!important;
     bottom: 50%!important;
     background-color: transparent;
     border: none;
@@ -152,7 +157,7 @@
 .search_watermark
 {
     position: absolute;
-    left: 0%!important;
+    left: 3%!important;
     bottom: 40%!important;
     background-color: transparent;
     border: none;
@@ -164,19 +169,18 @@
 
 .slider_watermark
 {
-	position: absolute;
-    bottom: 20%!important;
+	position: fixed;
+	left: 90px!important;
+    bottom: 50px!important;
 	display: inline-block;
-	left: 10%!important;
-    width: 80%;
     z-index:99;
 }
 
 .play_slider_watermark
 {
-    position: absolute;
-    left: 0%!important;
-    bottom: 20%!important;
+    position: fixed;
+    left: 58px!important;
+    bottom: 50px!important;
     background-color: transparent;
     border: none;
     z-index: 99;
@@ -195,6 +199,30 @@
 }
 
 
+.circle_watermark_mobile
+{
+    position: fixed;
+	right: 3px!important;
+    top: 60px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 99;
+    font-family: mapiregular;
+
+}
+
+.slider_circle_watermark
+{
+    position: fixed;
+    right: 100px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 99;
+    font-family: mapiregular;
+
+}
+
+
 #create .v-speed-dial {
     position: absolute;
   }
@@ -202,6 +230,11 @@
   #create .v-btn--floating {
     position: relative;
   }
+
+  .centered-input input {
+  text-align: center
+}
+
 
 </style>
 <html>
@@ -255,7 +288,7 @@
 	:value="circle_value"
 	:width="8"
 	color="white"
-   >{{ circle_value }}
+   >{{ displayCircleValue() }}
   </v-progress-circular>
   נדבקים בתיחום המפה
   </div>
@@ -268,18 +301,10 @@
 	
 	
 		<v-divider vertical></v-divider>
-		<v-select right
-		v-on:change="bufferChange"
-		style="margin-top: 30px; text-align: right; width: 10%"
-		:items="buffer_items"
-		label="רדיוס חיפוש"
-		outlined
-		></v-select>
-		<v-divider vertical></v-divider>
+
 		
-		<v-text-field right v-model="geocode_text" style="margin-top: 30px; text-align: right;"
-		label="התמקדות לכתובת או ישוב"
-		outlined
+	  <v-text-field right v-model="geocode_text" style="margin-top: 30px; text-align: right;"
+	  	placeholder="כתובת, ישוב, שכונה" 
 	  ></v-text-field>
 
       <v-btn
@@ -299,13 +324,21 @@
       <v-icon>mdi-magnify</v-icon>
 	</v-btn>
 
+
+	<v-select right
+	v-on:change="bufferChange"
+	style="margin-top: 30px; text-align: right; width: 10%"
+	:items="buffer_items"
+	placeholder="ברדיוס של"
+	></v-select>
+	<v-divider vertical></v-divider>
+
 	</v-app-bar>
 
 
 
 
 	
-
 	<v-app-bar
     color="brown lighten-1"
     dense
@@ -314,51 +347,38 @@
   >
 
 
-  
-  <div class="text-right" style="width:15%; text-align:right;">
-	<v-progress-circular
-	v-model="circle_value"
-	:size="50"
-	:value="circle_value"
-	:width="8"
-	color="white"
-  >{{ circle_value }}
-  </v-progress-circular>
-  </div>
+
 	
 		<v-divider vertical></v-divider>
 	  
 
-	  <v-text-field v-model="geocode_text" style="margin-top: 25px; text-align: right;"
-	  label="התמקדות לכתובת או ישוב"
-	  outlined
-	></v-text-field>
+        <v-toolbar
+        dense
+        floating
+        style="text-align: right; width: 50%" color="brown lighten-1"
+      >
+        <v-text-field right v-model="geocode_text" placeholder="כתבות, ישוב"  style="text-align: right;"
+          hide-details
+          single-line
+        ></v-text-field>
+  
+        <v-btn icon @click="geocode">
+          <v-icon>search</v-icon>
+        </v-btn>  
+      </v-toolbar>
 
-	<v-btn
-	class="ma-1"
-	:loading="loading"
-	:disabled="loading"
-	color="success"
-	@click="geocode"
-	style="width:5%"
-  >
 
-	<template v-slot:loader>
-	  <span class="custom-loader">
-		<v-icon light>cached</v-icon>
-	  </span>
-	</template>
-	<v-icon>mdi-magnify</v-icon>
-  </v-btn>
+      <v-divider vertical></v-divider>
 
 
 <v-select right
-style="margin-top: 30px; text-align: right; width: 20%"
+style="margin-top: 30px; text-align: right; width: 30%"
 :items="buffer_items"
 v-on:change="bufferChange"
-label="רדיוס"
-outlined
+placeholder="רדיוס במ'"
 ></v-select>
+
+<v-divider vertical></v-divider>
 
 
 
@@ -368,6 +388,8 @@ outlined
 
 <v-slider
   v-model="slider"
+  id="Slider"
+  style="width: 40%; min-width: 10%; max-width:250px"
   thumb-color="red"
   class="slider_watermark"
   :max="max"
@@ -383,7 +405,7 @@ outlined
       color="#1A237E"
       text-color="white"
 	>
-	{{slider_date}}
+	{{slider_date.substring(0, 5)}}
     </v-chip>
   </template>
 </v-slider>
@@ -394,9 +416,9 @@ outlined
 
 
 
-	<form name="form" style='height: 100%;' scrolling='no'> 
+	<form name="form" id="map_form" style='height: 100%;' scrolling='no'> 
 			
-			<div id="map_div" style="width: 100%; height: 100%; float:left">
+			<div id="map_div" style="width: 100%; height: 100%;">
 					
 					
             </div> 			
@@ -539,8 +561,37 @@ v-model="mdiHeatClose"
 </v-btn>
 
 
+<button   id="CircleMobile" class="circle_watermark_mobile"
+absolute
+fab
+small
+right>
+<v-progress-circular
+v-model="circle_value"
+:size="50"
+:value="circle_value"
+:width="8"
+color="#1A237E"
+>{{ displayCircleValue() }}
+</v-progress-circular>
+</button>
 
 
+<button id="sliderCircle" class="slider_circle_watermark"	style="bottom: 50px;"
+absolute
+dark
+fab
+small
+right>
+<v-progress-circular
+	v-model="slider_circle_value"
+	:size="50"
+	:value="slider_circle_value"
+	:width="8"
+	color="#1A237E"
+	>{{ getCountByDateTotal() }}
+</v-progress-circular>
+</button>
 
 
 
@@ -552,7 +603,7 @@ v-model="mdiHeatClose"
 					absolute
 					direction="right"
 					transition="slide-x-transition"
-					style="bottom: 30%!important; left: 0%!important;"
+					style="bottom: 30%!important; left: 3%!important;"
 
 					>
             <template v-slot:activator>
@@ -858,15 +909,27 @@ function getDates(startDate, stopDate) {
 }
 
 
-function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){	
+function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
+		// if (current_scale >= 1000003)
+		// {
+		// 	png = 'http://localhost/Corona/O3.png'
+		// }
+		// else if (current_scale <= 100000)
+		// {
+		// 	png = 'http://localhost/Corona/O1.png'
+		// }
+		// else{
+		// 	png = 'http://localhost/Corona/O2.png'
+		// }
+
 		var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
 		var data = {  
 		wkts: ["POINT(("+x+" "+y+"))"],  
 		names: [place],  
 		geometryType: govmap.drawType.Point,  
-	    	defaultSymbol:  
+	    defaultSymbol:  
 		{  
-			url:'https://image.flaticon.com/icons/svg/1500/1500374.svg',  
+			url:'https://govmap.gov.il/sites/O1.png',  
 			width:20,  
 			height:20  
 		},   
@@ -933,13 +996,15 @@ $(document).ready(function (){
 			token: my_token,
 			visibleLayers: [],
 			layers:["SCHOOL","KIDS_G"], 
-			layersMode: 2, 
+			layersMode: 4, 
 			showXY: true,
 			level: 1,
 			center: {x: 186000, y: 658000},
 			identifyOnClick: true
 		});
 		appVue.loading = true;
+
+		current_scale = 1000003;
 
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
@@ -966,6 +1031,30 @@ $(document).ready(function (){
 				d.responseJSON.features[i].attributes.toTime = tdate;
 				stay_times = d.responseJSON.features[i].attributes.stayTimes;
 
+				//set heatPoint
+				val_farsh = 250;
+				if (feat.attributes.stayTimes != "לא ידוע")
+				{
+					val1 = feat.attributes.stayTimes.split("-")[0];
+					val1 = val1.split(":")[0];
+					val2 = feat.attributes.stayTimes.split("-")[1];
+					val2 = val2.split(":")[0];
+					if ((val2 - val1) > 0)
+					{
+						val0 = (val2 - val1) * 100;
+						//val0 = 500;
+					}
+					else
+					{
+							val0 = 250;
+					}
+				}
+				else{
+					val0 = 250;
+				}
+				d.responseJSON.features[i].heatPoint = { point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val0, val_farsh } };
+
+
 				corona_features.push(d.responseJSON.features[i]);
 				AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);
 
@@ -974,6 +1063,40 @@ $(document).ready(function (){
 			console.log("features loaded succesfully");
 
 			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
+
+
+
+			for (c = 0; c < corona_features.length; c++)
+			{
+				feat = corona_features[c];
+				{
+					val_farsh = 1000;
+					if (feat.attributes.stayTimes != "לא ידוע")
+					{
+						val1 = feat.attributes.stayTimes.split("-")[0];
+						val1 = val1.split(":")[0];
+						val2 = feat.attributes.stayTimes.split("-")[1];
+						val2 = val2.split(":")[0];
+						if ((val2 - val1) > 0)
+						{
+							val0 = (val2 - val1) * 1000;
+							//val0 = 500;
+						}
+						else
+						{
+								val0 = 500;
+						}
+					}
+					else{
+						val0 = 500;
+					}
+					console.log(val0);
+					heatmap_features.push({ point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val0, val_farsh } });
+				}
+			}
+
+
+
 			appVue.loading = false;
 
 			// dates for slider...
@@ -998,9 +1121,12 @@ $(document).ready(function (){
 			filter_Date = corona_features.filter(function(f) {
 						return f.attributes["fromTime"] == dates[0];
 			});
-			appVue.circle_value = corona_features.length;
+			appVue.circle_value = corona_features.length / (corona_features.length / 100);
+			appVue.slider_circle_value = 0;
 			
 		});
+
+		govmap.zoomToXY({ x: 186000, y: 658000, level: 2, marker: false });
 		//set pan event;
 		govmap.onEvent(govmap.events.PAN).progress(function (e)  
 		{  
@@ -1008,7 +1134,8 @@ $(document).ready(function (){
 			Xmin = e.extent.xmin;
 			Ymax = e.extent.ymax;
 			Ymin = e.extent.ymin;
-			//var scale = Math.round((Xmax - Xmin)  / (document.getElementById("map_div").width * 0.000264583));
+			var scale = Math.round((Xmax - Xmin)  / (document.getElementById("map_form").offsetWidth * 0.000264583));
+			current_scale = scale;
 			points_count = 0;
 			for (var i=0; i< corona_features.length; i++)
 			{
@@ -1020,14 +1147,18 @@ $(document).ready(function (){
 					points_count++;
 				}
 			}					 
-			appVue.circle_value = points_count;
+			appVue.circle_value = points_count / (corona_features.length / 100);
 			
 		});
 });
 
+
+var current_scale;
 var tableData = [];
 var WktExtent = ""
 var planning_types = {};
+var heatmap_features = [];
+var heatmap_features_date = [];
 
 var appVue = new Vue({
     el:"#toolbar_app",
@@ -1040,6 +1171,8 @@ var appVue = new Vue({
 		buffer_items: [2500, 5000, 7500, 10000],
 
 		circle_value: 2,
+
+		slider_circle_value: 0,
 
 		slider_date: "01/01/2020",
 
@@ -1099,25 +1232,9 @@ var appVue = new Vue({
 			if (this.mdiHeatClose  == false)
 			{
 				this.mdiHeatClose  = true
-				points_heat = [];
-				for (c = 0; c < corona_features.length; c++)
-				{
-					feat = corona_features[c];
-					{
-						val1 = corona_features[0].attributes.stayTimes.split("-")[0].replace(":00", "");
-						val2 = corona_features[0].attributes.stayTimes.split("-")[1].replace(":00", "");
-						val0 = (val2 - val1) * 1000;
-						points_heat.push({ point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val1: val0  } });
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-					}
-				}
-
-				//val1 = corona_features[0].attributes.stayTimes.split("-")[0].replace(":00", "");
-				//val2 = corona_features[0].attributes.stayTimes.split("-")[1].replace(":00", "");
-				//val2 - val1
 
 				govmap.setHeatLayer({  
-					points: points_heat 
+					points: heatmap_features 
 					,options: { valueField: 'val1' }  
 				});  
 
@@ -1208,7 +1325,7 @@ var appVue = new Vue({
 					'fillColor': [255, 255, 255, 0.5]
 					},
 					'symbols': [],
-					'clearExisting': true,
+					'clearExisting': false,
 					'data': { }
 					};
 
@@ -1218,8 +1335,8 @@ var appVue = new Vue({
 						console.log(e);
 						PolygonId = circle_result.data;
 					});
-					//govmap.zoomToDrawing();
-					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+                    //govmap.zoomToDrawing();
+					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
 					
 					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, 2750);	
 					polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -1268,7 +1385,7 @@ var appVue = new Vue({
 										'fillColor': [255, 255, 255, 0.5]
 									},    
 									symbols: [],  
-									'clearExisting': true,
+									'clearExisting': false,
 									data: {  
 		
 									} 
@@ -1276,8 +1393,10 @@ var appVue = new Vue({
 								govmap.displayGeometries(data).then(function (response)  
 								{  
 									console.log(response.data);
+                                    PolygonId = response.data;
 								}); 
-								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+                                //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
 								polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -1327,7 +1446,7 @@ var appVue = new Vue({
 										'fillColor': [255, 255, 255, 0.5]
 									},    
 									symbols: [],  
-									'clearExisting': true, 
+									'clearExisting': false, 
 									data: {  
 		
 									} 
@@ -1335,8 +1454,10 @@ var appVue = new Vue({
 								govmap.displayGeometries(data).then(function (response)  
 								{  
 									console.log(response.data);
+                                    PolygonId = response.data;
 								}); 
 								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+                                //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
 								polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -1367,6 +1488,7 @@ var appVue = new Vue({
 
 
 				}
+                govmap.zoomToDrawing();
 				appVue.desserts = tableData;
 				appVue.sheet = true;
 				appVue.mdiClose = true;
@@ -1562,37 +1684,40 @@ var appVue = new Vue({
 		{
 			if (this.mdiPause == true)
 			{
-
-				console.log("getCountByDate() " +this.slider);
-				
+				console.log("getCountByDate() " +this.slider);	
 				date = dates[this.slider];
-
 				console.log(date);
-
 				filter_Date = corona_features.filter(function(f) {
-								return f.attributes["fromTime"] == date;
-				
+								return f.attributes["fromTime"] == date;			
 				});
 
-
+				govmap.removeHeatLayer();
 				if (this.slider == 0)
 				{
+					heatmap_features_date = [];
 					d = 0;
 					for (c = 0; c < filter_Date.length; c++)
 					{
 						feat = filter_Date[c];
 						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-					
-					} 
+						heatmap_features_date.push(feat.heatPoint);
+					}
 				}
 				else{
-					d = d + filter_Date.length;
 					for (c = 0; c < filter_Date.length; c++)
 					{
 						feat = filter_Date[c];
 						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+						heatmap_features_date.push(feat.heatPoint);
 					}
 					d = c
+				}
+				if (this.mdiHeatClose  == true)
+				{
+					govmap.setHeatLayer({  
+						points: heatmap_features_date
+						,options: { valueField: 'val1' }  
+					});
 				}
 			}
 			else
@@ -1603,6 +1728,36 @@ var appVue = new Vue({
 			return d
 		
 		},
+
+		getCountByDateTotal()
+		{
+			indx = this.slider - 1;
+			if (indx > 0)
+			{
+				date = dates[indx];
+				conter = 0;
+				for (i= 0; i < corona_features.length; i++)
+				{
+					if (dates.indexOf(corona_features[i].attributes.fromTime) <= indx)
+					{
+						conter = conter + 1;
+					}
+				}
+			}
+			else{
+				conter = 0;
+			}
+
+			this.slider_circle_value = conter / (corona_features.length  / 100);
+			return conter;
+		},
+
+		displayCircleValue()
+		{
+			val = this.circle_value *  (corona_features.length  / 100);
+			return parseInt(val);
+		},
+
 		bufferChange(e)
 		{
 			console.log(e);
