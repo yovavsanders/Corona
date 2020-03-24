@@ -459,8 +459,7 @@ placeholder="רדיוס במ'"
 
 			<v-layout column style="max-height: 50vh">       
 				  <v-flex style="overflow: auto;">
-					<v-card style="bottom: 0; ">
-					<p center class="font-weight-thin" style="font-size:small;" v-model ="tableTitle">{{tableTitle}}</p>
+					<v-card style="bottom: 0;">
 					<v-card-title >
 						<v-badge left
 						color="green"
@@ -468,7 +467,9 @@ placeholder="רדיוס במ'"
 						:value="desserts.length"
 					  >
 						מיקומי נבדקים מאומתים
-						</v-badge>   
+						<v-subheader style="margin-right: -13px;" right class="font-weight-lightd" v-model ="tableTitle">{{tableTitle}}</v-subheader> 
+						</v-badge> 
+						
 						<v-spacer></v-spacer>
 						<v-text-field
 						  v-model="search"
@@ -477,7 +478,7 @@ placeholder="רדיוס במ'"
 						  single-line
 						  hide-details
 						></v-text-field>
-					  </v-card-title>
+					  </v-card-title> 
 					
 
 					<v-data-table
@@ -578,6 +579,7 @@ v-model="circle_value"
 :value="circle_value"
 :width="8"
 color="#1A237E"
+class="font-weight-black"
 >{{ displayCircleValue() }}
 </v-progress-circular>
 </button>
@@ -595,6 +597,7 @@ right>
 	:value="slider_circle_value"
 	:width="8"
 	color="#1A237E"
+	class="font-weight-black"
 	>{{ getCountByDateTotal() }}
 </v-progress-circular>
 </button>
@@ -1635,7 +1638,7 @@ var appVue = new Vue({
 		zoomCurrentLocation()
 		{
 			if (navigator.geolocation) {
-				appVue.tableTitle = "במרחק " + appVue.radius/1000 + ' ק"מ'
+				appVue.tableTitle = "במרחק " + appVue.radius/1000 + ' ק"מ ממיקומך'
 				this.mdiClose = true;
 				navigator.geolocation.getCurrentPosition(function showPosition(position) {
 					x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
