@@ -324,7 +324,7 @@
 	v-on:change="bufferChange"
 	style="margin-top: 30px; text-align: right; width: 10%"
 	:items="buffer_items"
-	placeholder="ברדיוס של"
+	placeholder="רדיוס במ'"
 	></v-select>
 	<v-divider vertical></v-divider>
 
@@ -368,6 +368,7 @@
 
 <v-select right
 style="margin-top: 30px; text-align: right; width: 30%"
+
 :items="buffer_items"
 v-on:change="bufferChange"
 placeholder="רדיוס במ'"
@@ -1182,7 +1183,6 @@ var appVue = new Vue({
 		radius: 2500,
 
 		buffer_items: [2500, 5000, 7500, 10000],
-
 		circle_value: 2,
 
 		slider_circle_value: 0,
@@ -1240,6 +1240,11 @@ var appVue = new Vue({
 				self.geocode()
 			}
 		})
+
+
+		setTimeout(() => {
+    		this.radius = '2500';
+    	}, 2000);
 	},
     methods: {
 
@@ -1362,7 +1367,7 @@ var appVue = new Vue({
                     //govmap.zoomToDrawing();
 					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
 					
-					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, 2750);	
+					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, appVue.radius);	
 					polygon = Terraformer.WKT.parse(wkt_polygon);
 					for (i = 0; i < corona_features.length; i++)
 					{
@@ -1667,7 +1672,7 @@ var appVue = new Vue({
 				//govmap.zoomToDrawing();
 				govmap.zoomToXY({ x: x_, y: y_, level: 5, marker: true });
 				
-				wkt_polygon = PointToPolygon(x_, y_, 2750);	
+				wkt_polygon = PointToPolygon(x_, y_, appVue.radius);	
 				polygon = Terraformer.WKT.parse(wkt_polygon);
 				for (i = 0; i < corona_features.length; i++)
 				{
@@ -1793,10 +1798,11 @@ var appVue = new Vue({
 
 		bufferChange(e)
 		{
-			//console.log(e);
-			this.radius = e;
+			console.log(e);
+			appVue.radius = e;
 		}
-	}
+	},
+
 
 	
 })
