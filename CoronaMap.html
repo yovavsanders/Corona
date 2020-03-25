@@ -555,7 +555,7 @@ color="#1A237E"
 
 
 
-<v-btn class="heat_map_watermark"
+<v-btn class="heat_map_watermark" id="heat_map_btn"
 v-model="mdiHeatClose"
  @click="heatMapClick" 
  absolute
@@ -920,6 +920,53 @@ function getDates(startDate, stopDate) {
     return dateArray;
 }
 
+function getPointDataByDate(date)
+{
+	heatmap_features_date = [];
+	filter_Date = corona_features.filter(function(f) {
+								return f.attributes["fromTime"] <= date;			
+	});
+	wkts_all = [];
+	names_all = [];
+	bubbleHTMLParameters_all = [];
+	for (c = 0; c < filter_Date.length; c++)
+	{
+		feat = filter_Date[c];
+		heatmap_features_date.push(feat.heatPoint);
+		wkts_all.push("POINT(("+feat.geometry.x+" "+feat.geometry.y+"))");
+		names_all.push(feat.attributes.Name);
+		bubbleHTMLParameters_all.push([feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + place, "בשעות " + feat.attributes.stayTimes]);
+		//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+	}
+	data_date = {  
+		wkts: wkts_all,  
+		names: names_all,  
+		geometryType: govmap.drawType.Point,  
+		defaultSymbol:  
+		{  
+			url:'https://govmap.gov.il/sites/O1.png',  
+			width:20,  
+			height:20  
+		},   
+		symbols: [],  
+		clearExisting: true,  
+		data: {  
+				tooltips: [],  
+				headers: names_all,
+				bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+				bubbleHTMLParameters:bubbleHTMLParameters_all
+			}  
+	};
+	return [data_date, heatmap_features_date]; 
+}
+
+function AddUserPoints(data_all)
+{
+	govmap.displayGeometries(data_all).then(function (response)  
+	{  
+		//console.log(response.data);
+	});
+}
 
 function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 		// if (current_scale >= 1000003)
@@ -953,7 +1000,7 @@ function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 				bubbleHTML: bubbleContent,
 				bubbleHTMLParameters:[[name, fdate_stay_times]]
 		      }  
-                };  
+        };  
 				  
 		govmap.displayGeometries(data).then(function (response)  
 		{  
@@ -979,23 +1026,20 @@ function myLoop (i, all) {  //  create a loop function
 				else{
 					setTimeout(function () {
 
-					for (c = 0; c < corona_features.length; c++)
-					{
-						feat = corona_features[c];
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-					}
-
+					AddUserPoints(data_all);
+					document.getElementById("heat_map_btn").disabled = false;
 					appVue.slider = 0;
 					appVue.mdiPause = false;
 					appVue.slider_date = dates[0];
-					}, 2000);
+					}, 1500);
 				}                   
-			}, 1000)
+			}, 1250)
 		}
 
 var res;
-
+var data_dates;
 var PolygonId;
+var data_all;
 //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
 //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
 var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
@@ -1017,6 +1061,11 @@ $(document).ready(function (){
 		appVue.loading = true;
 
 		current_scale = 1000003;
+
+
+		wkts_all = [];
+		names_all = [];
+		bubbleHTMLParameters_all = [];
 
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
@@ -1068,15 +1117,42 @@ $(document).ready(function (){
 
 
 				corona_features.push(d.responseJSON.features[i]);
-				AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);
 
-				
+
+
+				wkts_all.push("POINT(("+xy[0]+" "+xy[1]+"))");
+				names_all.push(place);
+				bubbleHTMLParameters_all.push([name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times]);
+
+
+
+
+				//AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);				
 			}
-			//console.log("features loaded succesfully");
 
 			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
-
-
+			//Add Points
+			data_all = {  
+					wkts: wkts_all,  
+					names: names_all,  
+					geometryType: govmap.drawType.Point,  
+					defaultSymbol:  
+					{  
+						url:'https://govmap.gov.il/sites/O1.png',  
+						width:20,  
+						height:20  
+					},   
+					symbols: [],  
+					clearExisting: true,  
+					data: {  
+							tooltips: [],  
+							headers: names_all,
+							bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+							bubbleHTMLParameters:bubbleHTMLParameters_all
+						}  
+			}; 
+			AddUserPoints(data_all);
+			console.log("features loaded succesfully");
 
 			for (c = 0; c < corona_features.length; c++)
 			{
@@ -1122,8 +1198,15 @@ $(document).ready(function (){
                 }
             }
 			dates = dates.sort();
+
 			sorted_dates  = real_dates.sort(date_sort_asc);
 			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
+
+			data_dates = [];
+			for (date_idx = 1; date_idx < dates.length; date_idx++)
+			{
+				data_dates.push(getPointDataByDate(dates[date_idx]));
+			}
 
 			//appVue.getCountByDate();
 
@@ -1337,7 +1420,7 @@ var appVue = new Vue({
 				{
 					appVue.tableTitle =response.data[0].ResultLable;
 					//console.log("then:");
-					console.log(response);
+					//console.log(response);
 					var data = {
 					'circleGeometries': [{x: response.data[0].X, y: response.data[0].Y, radius: appVue.radius}],
 					'names': ['p1'],
@@ -1360,7 +1443,7 @@ var appVue = new Vue({
 						PolygonId = circle_result.data;
 					});
                     //govmap.zoomToDrawing();
-					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
 					
 					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, appVue.radius);	
 					polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -1420,7 +1503,7 @@ var appVue = new Vue({
 									//console.log(response.data);
                                     PolygonId = response.data;
 								}); 
-								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
                                 //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
@@ -1483,7 +1566,7 @@ var appVue = new Vue({
 									//console.log(response.data);
                                     PolygonId = response.data;
 								}); 
-								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
                                 //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
@@ -1538,36 +1621,37 @@ var appVue = new Vue({
 			appVue.tableTitle = "";
 			appVue.desserts = [];
 			tableData = []
-			for (c = 0; c < corona_features.length; c++)
-			{
-				feat = corona_features[c];
-				if (c == 0)
-				{
-					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-				}
-				else
-				{
-					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-				}
-			}
+			// for (c = 0; c < corona_features.length; c++)
+			// {
+			// 	feat = corona_features[c];
+			// 	if (c == 0)
+			// 	{
+			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+			// 	}
+			// 	else
+			// 	{
+			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+			// 	}
+			// }
+			AddUserPoints(data_all);
 			govmap.clearDrawings(); 
 
 			
 
 
 
-			for (c = 0; c < corona_features.length; c++)
-			{
-				feat = corona_features[c];
-				if (c == 0)
-				{
-					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-				}
-				else
-				{
-					AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-				}
-			}
+			// for (c = 0; c < corona_features.length; c++)
+			// {
+			// 	feat = corona_features[c];
+			// 	if (c == 0)
+			// 	{
+			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+			// 	}
+			// 	else
+			// 	{
+			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+			// 	}
+			// }
 		},
 
 
@@ -1707,6 +1791,7 @@ var appVue = new Vue({
 				//console.log("no...");
 			}
 			else{
+				document.getElementById("heat_map_btn").disabled = true;
 				this.mdiPause = true;
 				this.slider = 0;
 				myLoop(0, dates.length)
@@ -1723,34 +1808,48 @@ var appVue = new Vue({
 				filter_Date = corona_features.filter(function(f) {
 								return f.attributes["fromTime"] == date;			
 				});
-
-				govmap.removeHeatLayer();
+				// wkts_all = [];
+				// names_all = [];
+				// bubbleHTMLParameters_all = [];
+				//govmap.removeHeatLayer();
 				if (this.slider == 0)
 				{
-					heatmap_features_date = [];
+					//heatmap_features_date = [];
 					d = 0;
-					for (c = 0; c < filter_Date.length; c++)
-					{
-						feat = filter_Date[c];
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-						heatmap_features_date.push(feat.heatPoint);
-					}
+					//for (c = 0; c < filter_Date.length; c++)
+					//{
+						//feat = filter_Date[c];
+						//wkts_all.push("POINT(("+feat.geometry.x+" "+feat.geometry.y+"))");
+						//names_all.push(feat.attributes.Name);
+						//bubbleHTMLParameters_all.push([feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + place, "בשעות " + feat.attributes.stayTimes]);
+						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+						//heatmap_features_date.push(feat.heatPoint);
+					//}
 				}
 				else{
-					for (c = 0; c < filter_Date.length; c++)
-					{
-						feat = filter_Date[c];
-						AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-						heatmap_features_date.push(feat.heatPoint);
-					}
-					d = c
+					//for (c = 0; c < filter_Date.length; c++)
+					//{
+						//feat = filter_Date[c];
+						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+						//heatmap_features_date.push(feat.heatPoint);
+					//}
+					d = filter_Date.length;
 				}
-				if (this.mdiHeatClose  == true)
+
+				pts_date = data_dates[this.slider];
+				if (pts_date)
 				{
-					govmap.setHeatLayer({  
-						points: heatmap_features_date
-						,options: { valueField: 'val1' }  
-					});
+					heatmap_features_date = pts_date[1];
+					pts_features_date = pts_date[0];
+
+					if (this.mdiHeatClose  == true)
+					{
+						govmap.setHeatLayer({  
+							points: heatmap_features_date
+							,options: { valueField: 'val1' }  
+						});
+					}
+					AddUserPoints(pts_features_date);
 				}
 			}
 			else
@@ -1758,6 +1857,7 @@ var appVue = new Vue({
 				d = 0;
 			}
 				//d = d + c
+			//console.log(d + " " + this.slider);
 			return d
 		
 		},
@@ -1793,7 +1893,7 @@ var appVue = new Vue({
 
 		bufferChange(e)
 		{
-			console.log(e);
+			//console.log(e);
 			appVue.radius = e;
 		}
 	},
