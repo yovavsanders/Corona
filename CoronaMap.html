@@ -1265,7 +1265,7 @@ var appVue = new Vue({
 
 		radius: 2500,
 
-		buffer_items: [2500, 5000, 7500, 10000],
+		buffer_items: [100,2500, 5000, 7500, 10000],
 		circle_value: 2,
 
 		slider_circle_value: 0,
@@ -1408,7 +1408,8 @@ var appVue = new Vue({
 
 			appVue.desserts = [];
 			tableData = [];
-			
+			govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "UNIQ_ID = -1", 'zoomToExtent': false});
+			govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='x'", 'zoomToExtent': true});
 			//console.log(this.geocode_text);
 			govmap.geocode({keyword: this.geocode_text},govmap.geocodeType.FullResult)
 			.then(function(response){
@@ -1481,6 +1482,7 @@ var appVue = new Vue({
 							if (e.data != null && e.data.length > 0)
 							{
 								new_wkt = e.data[0].Values[3];
+								//console.log(e.data[0].Values[0])
 								 
 								var data = {  
 									wkts: [new_wkt],  
@@ -1498,12 +1500,13 @@ var appVue = new Vue({
 		
 									} 
 								}
-								govmap.displayGeometries(data).then(function (response)  
-								{  
+								//govmap.displayGeometries(data).then(function (response)  
+								//{  
 									//console.log(response.data);
-                                    PolygonId = response.data;
-								}); 
-								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
+                                    //PolygonId = response.data;
+								//}); 
+								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
+								govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+e.data[0].Values[0]+"'", 'zoomToExtent': true});
                                 //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
@@ -1561,12 +1564,13 @@ var appVue = new Vue({
 		
 									} 
 								}
-								govmap.displayGeometries(data).then(function (response)  
-								{  
+								//govmap.displayGeometries(data).then(function (response)  
+								//{  
 									//console.log(response.data);
-                                    PolygonId = response.data;
-								}); 
-								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+                                    //PolygonId = response.data;
+								//}); 
+								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+								govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "UNIQ_ID ="+e.data[0].Values[0], 'zoomToExtent': true});
                                 //govmap.zoomToDrawing();
 								
 								wkt_polygon = new_wkt
