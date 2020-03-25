@@ -1443,8 +1443,30 @@ var appVue = new Vue({
 						//console.log(e);
 						PolygonId = circle_result.data;
 					});
+					lvl = 4;
                     //govmap.zoomToDrawing();
-					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
+					if (appVue.radius == 100)
+					{
+						lvl = 10
+					}
+					if (appVue.radius == 2500)
+					{
+						lvl = 5
+					}
+					if (appVue.radius == 5000)
+					{
+						lvl = 4
+					}
+					if (appVue.radius == 7500)
+					{
+						lvl = 3
+					}
+					if (appVue.radius == 10000)
+					{
+						lvl = 2
+					}
+					console.log(lvl);
+					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: lvl, marker: true });
 					
 					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, appVue.radius);	
 					polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -1753,7 +1775,27 @@ var appVue = new Vue({
 					PolygonId = circle_result.data;
 				});
 				//govmap.zoomToDrawing();
-				govmap.zoomToXY({ x: x_, y: y_, level: 5, marker: true });
+				if (appVue.radius == 100)
+					{
+						lvl = 10
+					}
+					if (appVue.radius == 2500)
+					{
+						lvl = 5
+					}
+					if (appVue.radius == 5000)
+					{
+						lvl = 4
+					}
+					if (appVue.radius == 7500)
+					{
+						lvl = 3
+					}
+					if (appVue.radius == 10000)
+					{
+						lvl = 2
+					}
+				govmap.zoomToXY({ x: x_, y: y_, level: lvl, marker: true });
 				
 				wkt_polygon = PointToPolygon(x_, y_, appVue.radius);	
 				polygon = Terraformer.WKT.parse(wkt_polygon);
