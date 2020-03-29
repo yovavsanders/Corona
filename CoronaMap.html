@@ -291,7 +291,7 @@
 		<v-divider vertical></v-divider>
 
 	<v-spacer></v-spacer>
-      <v-toolbar-title class="white--text" style="text-align: center; width:40%">מפת התפשטות נגיף הקורונה בישראל</v-toolbar-title>
+      <v-toolbar-title class="white--text" style="text-align: center; width:40%">מפת חשיפה לקורונה</v-toolbar-title>
     <v-spacer></v-spacer>
 	
 	
@@ -557,6 +557,7 @@ color="#1A237E"
 
 <v-btn class="heat_map_watermark" id="heat_map_btn"
 v-model="mdiHeatClose"
+v-show="!hidden"
  @click="heatMapClick" 
  absolute
  dark
@@ -1047,6 +1048,7 @@ var dates = [];
 var real_dates = [];
 var features = []
 var corona_features = []
+var isHeatMap = false;
 $(document).ready(function (){
 		govmap.createMap('map_div', {
 			token: my_token,
@@ -1054,18 +1056,24 @@ $(document).ready(function (){
 			layers:["SCHOOL","KIDS_G"], 
 			layersMode: 4, 
 			showXY: true,
-			level: 1,
+			level: 3,
 			center: {x: 186000, y: 658000},
 			identifyOnClick: true
 		});
 		appVue.loading = true;
 
 		current_scale = 1000003;
-
-
 		wkts_all = [];
 		names_all = [];
 		bubbleHTMLParameters_all = [];
+		
+		//setl_json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		//var s = $.getJSON(setl_json_str);
+		//s.complete(function(response) {
+			//console.log(response);
+		//});
+
+
 
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
@@ -1221,7 +1229,7 @@ $(document).ready(function (){
 			
 		});
 
-		govmap.zoomToXY({ x: 186000, y: 658000, level: 2, marker: false });
+		govmap.zoomToXY({ x: 181440, y: 665200, level: 6, marker: false });
 		//set pan event;
 		govmap.onEvent(govmap.events.PAN).progress(function (e)  
 		{  
@@ -1230,6 +1238,10 @@ $(document).ready(function (){
 			Ymax = e.extent.ymax;
 			Ymin = e.extent.ymin;
 			var scale = Math.round((Xmax - Xmin)  / (document.getElementById("map_form").offsetWidth * 0.000264583));
+
+
+			
+
 			current_scale = scale;
 			points_count = 0;
 			for (var i=0; i< corona_features.length; i++)
@@ -1242,7 +1254,28 @@ $(document).ready(function (){
 					points_count++;
 				}
 			}					 
-			appVue.circle_value = points_count / (corona_features.length / 100);
+			appVue.circle_value = points_count / (corona_features.length / 100); 
+
+			if (current_scale <= 50000)
+			{
+				appVue.hidden = false;
+				if (appVue.mdiHeatClose == true && appVue.hidden == false && isHeatMap == false)
+				{
+					govmap.setHeatLayer({  
+						points: heatmap_features 
+						,options: { valueField: 'val1' }  
+					});
+				}
+				isHeatMap = true;
+			}
+			else
+			{
+
+				appVue.hidden = true;
+				govmap.removeHeatLayer();
+				isHeatMap = false;
+			}
+
 			
 		});
 });
@@ -1260,6 +1293,8 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
+
+		hidden: true,
 
 		tableTitle: "",
 
@@ -1338,17 +1373,21 @@ var appVue = new Vue({
 			if (this.mdiHeatClose  == false)
 			{
 				this.mdiHeatClose  = true
-
-				govmap.setHeatLayer({  
-					points: heatmap_features 
-					,options: { valueField: 'val1' }  
-				});  
+				if (current_scale <= 50000)
+				{
+					govmap.setHeatLayer({  
+						points: heatmap_features 
+						,options: { valueField: 'val1' }  
+					});  
+					isHeatMap = true;
+				}
 
 			}
 			else
 			{
+				isHeatMap = false;
 				this.mdiHeatClose = false;
-				govmap.removeHeatLayer();  
+				govmap.removeHeatLayer(); 
 				//this.cancelClick();
 			}
 		},
