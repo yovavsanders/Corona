@@ -1256,7 +1256,7 @@ $(document).ready(function (){
 			}					 
 			appVue.circle_value = points_count / (corona_features.length / 100); 
 
-			if (current_scale <= 50000)
+			if (current_scale <= 25000)
 			{
 				appVue.hidden = false;
 				if (appVue.mdiHeatClose == true && appVue.hidden == false && isHeatMap == false)
@@ -1373,7 +1373,7 @@ var appVue = new Vue({
 			if (this.mdiHeatClose  == false)
 			{
 				this.mdiHeatClose  = true
-				if (current_scale <= 50000)
+				if (current_scale <= 25000)
 				{
 					govmap.setHeatLayer({  
 						points: heatmap_features 
