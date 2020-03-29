@@ -1926,7 +1926,7 @@ var appVue = new Vue({
 					heatmap_features_date = pts_date[1];
 					pts_features_date = pts_date[0];
 
-					if (this.mdiHeatClose  == true)
+					if (appVue.mdiHeatClose == true && current_scale <= 25030)
 					{
 						govmap.setHeatLayer({  
 							points: heatmap_features_date
