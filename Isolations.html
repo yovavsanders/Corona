@@ -163,7 +163,7 @@
                                 class="display-2 font-weight-black"
                                 v-text="pointsCount"
                             ></span>
-                            <strong>מיקומי נבדקים מאומתים</strong>
+                            <strong>מיקומים בהם שהו חולי קורונה</strong>
                             <div class="caption grey--text">
                               <span style="float:right;">
                               {{dateMin}}
@@ -207,7 +207,7 @@
                         {{setl_sum}}
                         </p>
                         <div>({{per1000}} לכל 1000 תושבים)</div>
-                        <p>מתוך סה"כ תושבים הנמצאים בבידוד בארץ</p>
+                        <p>מתוך סה"כ תושבים בישוב</p>
                         <div class=" display-1 text--primary">
                           {{sum}}
                         </div>
@@ -255,7 +255,7 @@
                               class="display-2 font-weight-black"
                               v-text="pointsCount"
                           ></span>
-                          <strong>מיקומי נבדקים מאומתים</strong>
+                          <strong>מיקומים בהם שהו חולי קורונה</strong>
                           <div class="caption grey--text">
                             <span style="float:right;">
                               {{dateMin}}
@@ -303,7 +303,7 @@
                         {{setl_sum}}
                         </p>
                         <div>({{per1000}} לכל 1000 תושבים)</div>
-                        <p>מתוך סה"כ תושבים הנמצאים בבידוד בארץ</p>
+                        <p>מתוך סה"כ תושבים בישוב</p>
                         <div class=" display-1 text--primary">
                           {{sum}}
                         </div>
@@ -730,7 +730,7 @@
                                             bubbleHTMLParameters_all.push(["<div>שם ישוב: " + setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div>","<div>מבודדים: "+isolations+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div><div>מבודדים ל 1000 נפש: "+isoper1000+"<br /></div>"]);          
                                         }
                                         
-                                        appVue.sum = iso_count_all;
+                                        //appVue.sum = iso_count_all;
                                         setlnames = setlnames.sort();
                                         appVue.items = setlnames;
                                         appVue.itemsMobile =setlnames; 
@@ -961,7 +961,8 @@
                           polygon = s_features[0].geometry;
                           setlcode = s_features[0].attributes["Municipality"];
                           appVue.setl_sum = s_features[0].attributes["Isolations"];
-                          appVue.per1000 = s_features[0].attributes["Iso_per_1000"]
+                          appVue.per1000 = s_features[0].attributes["Iso_per_1000"];
+                          appVue.sum = s_features[0].attributes["Total_Pop2017"];
                           //get point intersected
                           for (i=0; i < corona_features.length; i++)
                           {
