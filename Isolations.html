@@ -1,0 +1,1025 @@
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    @media (max-width: 800px) {
+    #desktopCards {
+      display: none;
+    }
+    #myTitleDesktop {
+      display: none;
+    }
+
+  }
+
+   @media (min-width: 800px) {
+    #mobileCards {
+      display: none;
+    }
+    #myTitleMobile {
+      display: none;
+    }
+
+  }
+</style>
+<head>
+<title>בידוד בישובים</title>
+
+<link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+<script src="https://unpkg.com/terraformer@1.0.8"></script>
+<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+
+<link rel="stylesheet" type="text/css" href="https://www.chartjs.org/samples/latest/style.css">
+<script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+
+</head>
+<body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+    <div id="isolation_app">
+        <v-app>
+                    
+
+
+
+              <v-row no-gutters id="myTitleDesktop">
+                <v-col cols="9" md="12">
+                  <v-card class="pa-2" outlined tile>
+                           
+                  <v-app-bar
+                  color="brown lighten-1"
+                  dense
+                  dark
+                  >
+                  <div class="text-right" style="width:25%; text-align:right;">
+                      <v-autocomplete
+                      v-model="select"
+                      :loading="loading"
+                      :items="items"
+                      :search-input.sync="search"
+                      cache-items
+                      class="mx-4"
+                      flat
+                      hide-no-data
+                      hide-details
+                      label="שם ישוב"
+                      solo-inverted
+                       @change='getSetlPointCount'
+                    ></v-autocomplete>
+                  </div>
+        
+                  <v-divider vertical></v-divider>
+
+                  <v-spacer></v-spacer>
+                  <v-toolbar-title class="white--text" style="text-align: center; width:40%">ישובים לפי אחוז מבודדים בישוב</v-toolbar-title>
+                  <v-spacer></v-spacer>
+
+                  <div class="text-right" style="width:25%; text-align:right;">
+                  </div>
+                  </v-app-bar>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            <v-row no-gutters id="myTitleMobile">
+              <v-col cols="12" md="12">
+                <v-card class="pa-2" outlined tile>
+                  <v-app-bar
+                  color="brown lighten-1"
+                  dense
+                  dark
+                  >
+                  <div class="text-right caption" style="width:40%; text-align:right;">
+                      <v-autocomplete
+                      v-model="select"
+                      :loading="loading"
+                      :items="itemsMobile"
+                      :search-input.sync="searchMobile"
+                      cache-items
+                      class="text-right caption"
+                      flat
+                      hide-no-data
+                      hide-details
+                      label="שם ישוב"
+                      solo-inverted
+                      @change='getSetlPointCount'
+                    ></v-autocomplete>
+                  </div>
+        
+                  <v-divider vertical></v-divider>
+
+                  <v-spacer></v-spacer>
+                  <v-toolbar-title class="white--text caption" style="text-align: center; width:60%">ישובים לפי אחוז מבודדים בישוב</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  </v-app-bar>
+                </v-card>
+              </v-col>
+            </v-row>
+
+          
+
+
+            <form name="form" style='height: 70%;' scrolling='no'> 
+                  
+              <div id="map_div" style="width: 100%; height: 100%; float:left">
+                      
+                      
+              </div> 			
+            </form>
+  
+
+
+              <v-row no-gutters id = "desktopCards">
+                <v-col cols="3" md="4">
+                  <v-card class="pa-2" outlined tile>
+                    <v-card
+                        color="grey lighten-4"
+                    >
+                        <v-card-title center>
+                        <v-icon
+                            :color="checking ? 'red lighten-2' : 'indigo'"
+                            class="mr-12"
+                            size="64"
+                            center
+                        >
+                        </v-icon>
+                        <v-row>
+
+                            <div center>
+                            <span
+                                class="display-2 font-weight-black"
+                                v-text="pointsCount"
+                            ></span>
+                            <strong>מיקומי נבדקים מאומתים</strong>
+                            <div class="caption grey--text">
+                              <span style="float:right;">
+                              {{dateMin}}
+                            </span>
+                            <span style="float:left;">
+                                  {{dateMax}}
+                                </span>
+                                </div>
+                            </div>
+                        </v-row>
+
+                        <v-spacer></v-spacer>
+                        </v-card-title>
+
+                        <v-sheet color="transparent">
+                        <v-sparkline
+                            :key="pointsCount"
+                            :smooth="16"
+                            :gradient="['#f72047', '#ffd200', '#1feaea']"
+                            :line-width="3"
+                            :value="points"
+                            :labels="labels"
+                            show-labels
+                            auto-draw
+                            stroke-linecap="round"
+                            padding="16"
+                            label-size="8"
+                        ></v-sparkline>
+                        </v-sheet>
+                    </v-card>
+                  </v-card>
+                </v-col>
+
+                <v-col cols="3" md="4">
+                  <v-card class="pa-2" outlined tile>
+                    <v-card
+                      class="mx-auto"
+                      max-width="344"
+                    >
+                      <v-card-text>
+                        <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
+                        <p class="display-2 text--primary">
+                        {{setl_sum}}
+                        </p>
+                        <div>({{per1000}} לכל 1000 תושבים)</div>
+                        <p>מתוך סה"כ תושבים הנמצאים בבידוד בארץ</p>
+                        <div class=" display-1 text--primary">
+                          {{sum}}
+                        </div>
+                      </v-card-text>
+                    </v-card>
+                  </v-card>
+                </v-col>
+                <v-col cols="3" md="4">
+                  <v-card  class="pa-2" outlined tile>
+                    <v-card-text>
+                      <p>התפלגות תושבים בבידוד לפי ישוב</p>
+                    <canvas id="chart-area"></canvas>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+
+
+
+              
+            <v-card
+              class="mx-auto"
+              width="95%"
+              id="mobileCards"
+            >
+        
+            <v-window v-model="step">
+              <v-window-item :value="1">
+
+
+                <v-card class="pa-2" outlined tile>
+                  <v-card
+                      color="grey lighten-4"
+                  >
+                      <v-card-title center>
+                      <v-icon
+                          :color="checking ? 'red lighten-2' : 'indigo'"
+                          class="mr-12"
+                          size="64"
+                          center
+                      >
+                      </v-icon>
+                      <v-row>
+
+                          <div center>
+                          <span
+                              class="display-2 font-weight-black"
+                              v-text="pointsCount"
+                          ></span>
+                          <strong>מיקומי נבדקים מאומתים</strong>
+                          <div class="caption grey--text">
+                            <span style="float:right;">
+                              {{dateMin}}
+                          </span>
+                          <span style="float:left;">
+                                {{dateMax}}
+                              </span>
+                              </div>
+                          </div>
+                      </v-row>
+
+                      <v-spacer></v-spacer>
+                      </v-card-title>
+
+                      <v-sheet color="transparent">
+                      <v-sparkline
+                          :key="pointsCount"
+                          :smooth="16"
+                          :gradient="['#f72047', '#ffd200', '#1feaea']"
+                          :line-width="3"
+                          :value="points"
+                          :labels="labels"
+                          show-labels
+                          auto-draw
+                          stroke-linecap="round"
+                          padding="16"
+                          label-size="8"
+                      ></v-sparkline>
+                      </v-sheet>
+                  </v-card>
+                </v-card>
+
+                
+              </v-window-item>
+        
+              <v-window-item :value="2">
+                <v-card class="pa-2" outlined tile>
+                    <v-card
+                      class="mx-auto"
+                      max-width="344"
+                    >
+                      <v-card-text>
+                        <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
+                        <p class="display-2 text--primary">
+                        {{setl_sum}}
+                        </p>
+                        <div>({{per1000}} לכל 1000 תושבים)</div>
+                        <p>מתוך סה"כ תושבים הנמצאים בבידוד בארץ</p>
+                        <div class=" display-1 text--primary">
+                          {{sum}}
+                        </div>
+                      </v-card-text>
+                    </v-card>
+                  </v-card>
+              
+              </v-window-item>
+        
+              <v-window-item :value="3">
+                  <v-card  class="pa-2" outlined tile>
+                    <v-card-text>
+                    <p>התפלגות תושבים בבידוד לפי ישוב</p>
+                    <canvas id="chart-area-mobile"></canvas>
+                  </v-card-text>
+                  </v-card>
+              </v-window-item>
+            </v-window>
+        
+            <v-divider></v-divider>
+        
+            <v-card-actions>
+              <v-btn
+                :disabled="step === 1"
+                text
+                @click="step--"
+              >
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                :disabled="step === 3"
+                color="primary"
+                depressed
+                @click="step++"
+              >
+              <v-icon>mdi-chevron-left</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+
+          <v-dialog
+          v-model="dialog"
+          hide-overlay
+          persistent
+          width="300"
+        >
+          <v-card
+            color="primary"
+            dark
+          >
+            <v-card-text>
+              טוען נתונים
+              <v-progress-linear
+                indeterminate
+                color="white"
+                class="mb-0"
+              ></v-progress-linear>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
+
+
+        </v-app>
+    </div>
+
+
+   
+    <script>
+
+    
+
+
+
+      /////////////////////////////////////////
+      // convert wgs84 to israel tm grid...
+      //////////////////////////////////////////
+      
+      function degreesToRadians(degrees) {
+          return degrees * Math.PI / 180;
+      }
+      
+      function pow2(x) {
+          return x*x;
+      }
+      
+      function pow3(x) {
+          return x*x*x;
+      }
+      
+      function pow4(x) {
+          return x*x*x*x;
+      }
+      
+      
+      
+      function ITMLocation(easting, northing) {
+          this.easting = easting;
+          this.northing = northing;
+          this.eastingInOldGrid = function() {
+                      return easting - 50000;
+          }
+          this.northingInOldGrid = function() {
+              var retval = northing - 500000;
+              if (retval<0) {
+              retval += 1000000;
+              }       
+              return retval;
+          }
+      }
+      
+      
+      
+      //////////////
+      
+      //// Main Function…
+      
+      //////////////
+      
+      function WgsToIsrael(latitude, longitude)
+      {
+          longitude = degreesToRadians(longitude);
+          latitude = degreesToRadians(latitude);
+          //LatLongToITM(latitude, longitud);
+          // Projection parameters
+          var centralMeridian = degreesToRadians(35.2045169444444);  // central meridian of ITM projection
+          var k0 = 1.0000067;  // scale factor
+          // Ellipsoid constants (WGS 80 datum)
+          var a = 6378137;  // equatorial radius
+          var b = 6356752.3141; // polar radius
+          var e = Math.sqrt(1 - b*b/a/a);  // eccentricity
+          var e1sq = e*e/(1-e*e);
+          var n = (a-b)/(a+b);
+          // Curvature at specified location
+          var tmp = e*Math.sin(latitude);
+          var nu = a/Math.sqrt(1 - tmp*tmp);
+          // Meridional arc length
+          var n3 = pow3(n);
+          var n4 = pow4(n);
+          var A0 = a*(1-n+(5*n*n/4)*(1-n) +(81*n4/64)*(1-n));
+          var B0 = (3*a*n/2)*(1 - n - (7*n*n/8)*(1-n) + 55*n4/64);
+          var C0 = (15*a*n*n/16)*(1 - n +(3*n*n/4)*(1-n));
+          var D0 = (35*a*n3/48)*(1 - n + 11*n*n/16);
+          var E0 = (315*a*n4/51)*(1-n);
+          var S = A0*latitude - B0*Math.sin(2*latitude) + C0*Math.sin(4*latitude)
+          - D0*Math.sin(6*latitude) + E0*Math.sin(8*latitude);
+          // Coefficients for ITM coordinates
+          var p = longitude-centralMeridian;
+          var Ki = S*k0;
+          var Kii = nu*Math.sin(latitude)*Math.cos(latitude)*k0/2;
+          var Kiii = ((nu*Math.sin(latitude)*pow3(Math.cos(latitude)))/24)*(5-pow2(Math.tan(latitude))+9*e1sq*pow2(Math.cos(latitude))+4*e1sq*e1sq*pow4(Math.cos(latitude)))*k0;
+          var Kiv = nu*Math.cos(latitude)*k0;
+          var Kv = pow3(Math.cos(latitude))*(nu/6)*(1-pow2(Math.tan(latitude))+e1sq*pow2(Math.cos(latitude)))*k0;
+          var easting = Math.round(219529.58+ Kiv*p+Kv*pow3(p) - 60);
+          var northing = Math.round(Ki+Kii*p*p+Kiii*pow4(p) - 3512424.41+ 626907.39 - 45);
+          return [easting, northing];
+      }
+      
+      ///////////////////
+      
+      // end convert
+      
+      ///////////////////
+      
+              function PointToPolygon(x, y, r)
+          {			
+            x1 = x - r;
+            y1 = y;
+            x2 = x - (((r / 2)) / (2)) - ((r / 2));
+            y2 = y + (((r / 2)) / (2)) + ((r / 2));
+            x3 = x;
+            y3 = y + r;
+            x4 = x + (((r / 2)) / (2)) + ((r / 2));
+            y4 = y + (((r / 2)) / (2)) + ((r / 2));
+            x5 = x + r;
+            y5 = y;
+            x6 = x + (((r / 2)) / (2)) + ((r / 2));
+            y6 = y - (((r / 2)) / (2)) - ((r / 2));
+            x7 = x;
+            y7 = y - r;
+            x8 = x - (((r / 2)) / (2)) - ((r / 2));
+            y8 = y - (((r / 2)) / (2)) - ((r / 2));
+            wkt = "POLYGON(("+x1+" "+y1+", "+x2+" "+y2+", "+x3+" "+y3+", "+x4+" "+y4+", "+x5+" "+y5+", "+x6+" "+y6+", "+x7+" "+y7+", "+x8+" "+y8+", "+x1+" "+y1+"))";
+            return wkt;
+          }
+      
+              function isInArray(value, array) {
+                  return array.indexOf(value) > -1;
+              }
+      
+              function getDates(startDate, stopDate) {
+                  var dateArray = new Array();
+                  var currentDate = startDate;
+                  while (currentDate <= stopDate) {
+                      dateArray.push(new Date (currentDate));
+                      currentDate = currentDate.addDays(1);
+                  }
+                  return dateArray;
+              }
+      
+          
+      
+             
+      
+              var intersect_res;
+      
+      
+              
+              var setl_area_features =[];
+              var iso_setl_features =[];
+      
+              var s_wkts = [];
+              var s_names = [];
+              var s_symbols = [];
+              var bubbleHTMLParameters_all = [];
+      
+              var corona_features = [];
+      
+      
+              var classBreakeSymbols ={
+                  blue:
+                      {  
+                          'outlineColor': [0, 0, 255, 1],
+                          'outlineWidth': 3,
+                          'fillColor': [255, 255, 255, 0.5]
+                      },    
+                  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [183, 28, 28, 0.5]
+                      },
+                  red_orange:  
+                       {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
+                      },
+                  orange:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 179, 0, 0.5]
+                      },
+                  yellow:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 238, 88, 0.5]
+                      },
+                  green_yellow: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [178, 255, 89, 0.5]
+                      },
+                  green: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [56, 142, 60, 0.5]
+                         }
+                  };
+      
+      
+                  Number.prototype.between = function(a, b) {
+                  var min = Math.min.apply(Math, [a, b]),
+                      max = Math.max.apply(Math, [a, b]);
+                      return this >= min && this < max;
+                  };
+      
+                  function dateConvert(unixts)
+                  {
+                      var date = new Date(unixts);
+                      //var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+                      var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
+                      return(fdate);
+                  }
+      
+                  function stringToDate(_date,_format,_delimiter)
+                  {
+                              var formatLowerCase=_format.toLowerCase();
+                              var formatItems=formatLowerCase.split(_delimiter);
+                              var dateItems=_date.split(_delimiter);
+                              var monthIndex=formatItems.indexOf("mm");
+                              var dayIndex=formatItems.indexOf("dd");
+                              var yearIndex=formatItems.indexOf("yyyy");
+                              var month=parseInt(dateItems[monthIndex]);
+                              month-=1;
+                              var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                              return formatedDate;
+                  }
+      
+                 function getSymbol(number) {
+                      Symbol = classBreakeSymbols.blue;
+                      if (number.between(0,3))
+                      {
+                          Symbol = classBreakeSymbols.green;
+                      }
+                      if (number.between(3,5))
+                      {
+                          Symbol = classBreakeSymbols.green_yellow;
+                      }
+                      if (number.between(5,7))
+                      {
+                          Symbol = classBreakeSymbols.yellow;
+                      }
+                      if (number.between(7,11))
+                      {
+                          Symbol = classBreakeSymbols.orange;
+                      }
+                      if (number.between(11,16))
+                      {
+                          Symbol = classBreakeSymbols.red_orange;
+                      }
+                      if (number.between(16,100))
+                      {
+                          Symbol = classBreakeSymbols.red;
+                      }
+                      return  Symbol;
+                 }
+                 var polyon;
+
+
+                 var config = {
+                  type: 'pie',
+                  data: {
+                    datasets: [{
+                      data: [
+
+                      ],
+                      backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                        window.chartColors.blue,
+                      ],
+                      label: 'Dataset 1'
+                    }],
+                    labels: [
+
+                    ]
+                  },
+                  options: {
+                    responsive: true
+                  }
+                };
+
+                            
+               //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+              var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+              //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+              $(document).ready(function ()
+              {
+                  //appVue.dialog = true;
+      
+      
+                  govmap.createMap('map_div', {
+                      token: my_token,
+                      visibleLayers: [],
+                      layers:["SCHOOL","KIDS_G"], 
+                      layersMode: 4, 
+                      showXY: true,
+                      level: 1,
+                      center: {x: 186000, y: 658000},
+                      identifyOnClick: true
+                  });
+      
+              
+                  json_pts_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+                  var json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+                  var mapi_json_string = "SETL_AREA.json";
+                  $.ajax({
+                      dataType: 'json',
+                      beforeSend : function() {
+                      console.log('Before Ajax Request Starts !!');
+                      appVue.dialog = true
+                      },
+                      success: function(setl_area_data) {
+                          //appVue.dialog = true;
+                          $.getJSON( json_string, function( iso_data ) {
+                              //console.log(iso_data);
+                              //console.log(setl_area_data);
+                              iso_setl_features = iso_data.features; 
+                              setl_area_features = setl_area_data.features;
+                              setlnames = [];
+                              iso_count_all = 0;
+                              if (iso_setl_features.length == 0)
+                              {
+                                appVue.dialog = false;
+                                alert("בעיה בקריאה לשרת");
+                              }
+                              else{
+
+                                    for (i in iso_setl_features)
+                                    {
+                                        iso_feat = iso_setl_features[i];
+            
+                
+                                        setlcode = iso_feat.attributes.Municipality;
+                                        //console.log(setlcode);
+                                        s_features = setl_area_features.filter(function(f) {
+                                            return f.properties["SETL_CODE"] == setlcode;			
+                                        }); 
+                                        if (s_features.length > 0)
+                                        {
+                                            //console.log(s_features[0].geometry);
+                                            iso_feat.geometry = s_features[0].geometry;
+                                            setlname = iso_feat.attributes.Municipality_desc;
+                                            isolations = iso_feat.attributes.Isolations;
+                                            iso_count_all = iso_count_all + isolations;
+                                            population = iso_feat.attributes.Total_Pop2017;
+                                            isoper1000 = iso_feat.attributes.Iso_per_1000;
+                                            appVue.iso.push(iso_feat.attributes);
+                                            setlnames.push(setlname);
+            
+                                            //set geometry layer atts:
+                                            polygon = iso_feat.geometry
+                                            s_wkts.push(Terraformer.WKT.convert(polygon));
+                                            s_names.push(setlname);
+                                            s_symbols.push(getSymbol(isoper1000));
+                                            bubbleHTMLParameters_all.push(["<div>שם ישוב: " + setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div>","<div>מבודדים: "+isolations+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div><div>מבודדים ל 1000 נפש: "+isoper1000+"<br /></div>"]);          
+                                        }
+                                        
+                                        appVue.sum = iso_count_all;
+                                        setlnames = setlnames.sort();
+                                        appVue.items = setlnames;
+                                        appVue.itemsMobile =setlnames; 
+                                    }
+
+                                //set pieChart
+                                chart_features = iso_setl_features.sort((a, b) => (a.attributes.Isolations < b.attributes.Isolations) ? 1 : -1);
+                                console.log(chart_features.length);
+                                appVue.chartData = [];
+                                appVue.chartLabels = [];
+                                for (i = 0; i < 8; i++)
+                                {
+                                    if (!isInArray(chart_features[i].attributes.Municipality_desc, appVue.chartLabels))
+                                    {
+                                        appVue.chartData.push(chart_features[i].attributes.Isolations);
+                                        appVue.chartLabels.push(chart_features[i].attributes.Municipality_desc);
+                                    }
+                                }
+                                appVue.chartLabels.push("שאר הישובים");
+                                othersCount = 0;
+                                others = [];
+                                for (i = 8; i < chart_features.length; i++)
+                                {
+                                    if (!isInArray(chart_features[i].attributes.Municipality_desc, others))
+                                    {
+                                    others.push(chart_features[i].attributes.Municipality_desc);
+                                    othersCount = othersCount + chart_features[i].attributes.Isolations;
+                                    }
+                                }
+                                appVue.chartData.push(othersCount);
+
+
+
+
+
+                                config = {
+                                    type: 'pie',
+                                    data: {
+                                        datasets: [{
+                                        data: appVue.chartData,
+                                        backgroundColor: [
+                                            window.chartColors.red,
+                                            window.chartColors.orange,
+                                            window.chartColors.yellow,
+                                            window.chartColors.green,
+                                            window.chartColors.blue,
+                                            window.chartColors.purple,
+                                            window.chartColors.grey,
+                                        ],
+                                        label: 'Dataset 1'
+                                        }],
+                                        labels: appVue.chartLabels
+                                    },
+                                    options: {
+                                        responsive: true
+                                    }
+                                };
+                                var colorNames = Object.keys(window.chartColors);
+                                var isMobile = window.matchMedia("(max-width: 800px)");
+                                if (isMobile.matches)
+                                {
+                                    appVue.step = 3;
+                                    setTimeout(function(){
+                                        var ctx_mobile = document.getElementById('chart-area-mobile').getContext('2d');
+                                        window.myPieMobile = new Chart(ctx_mobile , config);
+                                        appVue.step = 2;
+                                        }, 1000)
+                                }
+                                else
+                                {
+                                    var ctx = document.getElementById('chart-area').getContext('2d');
+                                    window.myPie = new Chart(ctx, config);
+                                }
+            
+                                    var data = {  
+                                        wkts: s_wkts,  
+                                        names: s_names,  
+                                        geometryType: govmap.drawType.Polygon,  
+                                        defaultSymbol:  
+                                        {  
+                                            'outlineColor': [0, 0, 255, 1],
+                                            'outlineWidth': 3,
+                                            'fillColor': [255, 255, 255, 0.5]
+                                        },    
+                                        symbols: s_symbols,  
+                                        'clearExisting': false,
+                                        data: {  
+                                            tooltips: s_names,  
+                                            headers: s_names,
+                                            bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+                                            bubbleHTMLParameters:bubbleHTMLParameters_all
+            
+                                        } 
+                                    }
+            
+                                    govmap.displayGeometries(data).then(function (response)  
+                                    {  
+                                        PolygonId = response.data;
+                                    });
+                              }
+    
+      
+                          });
+                          var d = $.getJSON(json_pts_str);
+                          d.complete(function(response) {
+                              //console.log(response);
+                              for (i = 0; i < d.responseJSON.features.length; i++)
+                              {
+                                  //console.log(i);
+                                  feat = d.responseJSON.features[i];
+                                  name = d.responseJSON.features[i].attributes.Name;
+                                  place = d.responseJSON.features[i].attributes.Place;
+                                  comments = d.responseJSON.features[i].attributes.Comments;
+                                  x = d.responseJSON.features[i].geometry.x;
+                                  y = d.responseJSON.features[i].geometry.y;
+                                  xy = WgsToIsrael(y,x);
+                                  d.responseJSON.features[i].geometry.x = xy[0];
+                                  d.responseJSON.features[i].geometry.y = xy[1];
+                                  var unixt_fr = d.responseJSON.features[i].attributes.fromTime;
+                                  fdate = dateConvert(unixt_fr)
+                                  d.responseJSON.features[i].attributes.fromTime = fdate;
+                                  d.responseJSON.features[i].attributes.realdate = stringToDate(fdate,"dd/MM/yyyy","/");
+                                  var unixt_to = d.responseJSON.features[i].attributes.toTime;
+                                  tdate = dateConvert(unixt_to)
+                                  d.responseJSON.features[i].attributes.toTime = tdate;
+                                  stay_times = d.responseJSON.features[i].attributes.stayTimes;
+      
+                                  var point = new Terraformer.Primitive({
+                                  type:"Point",
+                                      coordinates:[d.responseJSON.features[i].geometry.x,d.responseJSON.features[i].geometry.y]
+                                  });
+                                  corona_features.push(d.responseJSON.features[i]);
+                              }
+                              corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);      
+                          });
+                          appVue.dialog = false;
+                      },
+                      error : function(jqXHR, textStatus, errorThrown) {
+                          console.log("Error occurred: " + errorThrown);
+                      },
+                      url: mapi_json_string
+                      
+                  }); 
+              });
+      
+              
+          var appVue = new Vue({
+              el:"#isolation_app",
+              vuetify: new Vuetify(),
+              data () {
+                  return {
+
+                      dialog: false,
+
+                      chartData: [
+                                ],
+                      chartLabels:[
+  
+                              ],
+
+                      dateMin: String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear(),
+                      dateMax:  String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear(),
+
+                      sum: 0,
+
+                      setl_sum: 0,
+
+                      pointsCount: 0,
+      
+                      checking: false,
+                      points: [],
+                      labels: [],
+      
+                      graphTitle: "שם ישוב",
+                      step: 1,
+                  
+                      loading: false,
+                      loadingMobile: false,
+                      items: [],
+                      itemsMobile: [],
+                      search: null,
+                      searchMobile: null,
+                      select: null,
+                      setl_names: [],
+      
+                      per1000: 0,
+                      iso: [],
+                  }
+              },
+              watch: {
+                  search (val) {
+                      val && val !== this.select && this.querySelections(val)
+                  },
+                  // dialog (val) {
+                  //   if (!val) return
+
+                  //   setTimeout(() => (this.dialog = false), 4000)
+                  // },
+              },
+
+      
+              methods: {
+                  querySelections (v) {
+                      this.loading = true
+                      // Simulated ajax query
+                      setTimeout(() => {
+                      this.items = this.setl_names.filter(e => {
+                          return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                      })
+                      this.loading = false
+                      }, 500)
+                  },
+      
+      
+                  getSetlPointCount (setlname){
+                      console.log(setlname);
+                      var count = 0;
+                      s_features = iso_setl_features.filter(function(f) {
+                          return f.attributes["Municipality_desc"] == setlname;		
+                      });
+                      var setlcode = '0';
+                      var setl_dates = [];
+                      if (s_features.length > 0)
+                      {
+                          polygon = s_features[0].geometry;
+                          setlcode = s_features[0].attributes["Municipality"];
+                          appVue.setl_sum = s_features[0].attributes["Isolations"];
+                          appVue.per1000 = s_features[0].attributes["Iso_per_1000"]
+                          //get point intersected
+                          for (i=0; i < corona_features.length; i++)
+                          {
+                              var point = new Terraformer.Primitive({
+                                  type:"Point",
+                                  coordinates:[corona_features[i].geometry.x,corona_features[i].geometry.y]
+                              });
+                              if (point.within(polygon))
+                              {
+                                  setl_dates.push(corona_features[i].attributes.fromTime);
+                                  count++;
+                              }
+                          }
+                      }
+                      console.log(setl_dates);
+                      if (setl_dates.length > 0)
+                      {
+                        this.dateMax = setl_dates[0];
+                        this.dateMin = setl_dates[setl_dates.length - 1];
+                      }
+                      else{
+                        this.dateMin = String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear();
+                        this.dateMax = String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear();
+
+                      }
+                      const result = setl_dates.reduce((total, value) => {
+                          total[value] = (total[value] || 0) + 1;
+                          return total;
+                      }, {});
+                      appVue.labels = [];
+                      appVue.points = [];
+                      appVue.pointsCount= 0;
+                      for (i in result){
+                          appVue.labels.push(result[i]);
+                          //appVue.labels.push(result[i]);
+                          appVue.points.push(result[i]);
+                          appVue.pointsCount = appVue.pointsCount + result[i]
+                      }
+                      appVue.graphTitle = setlname;
+                      console.log(appVue.pointsCount);
+
+
+                      govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+setlcode+"'", 'zoomToExtent': true});
+                  }
+      
+      
+      
+              },
+          });
+          
+          
+          </script>
+
+
+
+</body>
+
+
+   
+</html>
