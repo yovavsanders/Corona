@@ -60,7 +60,7 @@
 
               <v-row no-gutters id="myTitleDesktop">
                 <v-col cols="9" md="12">
-                  <v-card class="pa-2" outlined tile>
+                  <v-card>
                            
                   <v-app-bar
                   color="brown lighten-1"
@@ -99,7 +99,7 @@
 
             <v-row no-gutters id="myTitleMobile">
               <v-col cols="12" md="12">
-                <v-card class="pa-2" outlined tile>
+                <v-card class="pa-2" raised>
                   <v-app-bar
                   color="brown lighten-1"
                   dense
@@ -135,7 +135,7 @@
           
 
 
-            <form name="form" style='height: 70%;' scrolling='no'> 
+            <form name="form" style='height: 80%;' scrolling='no'> 
                   
               <div id="map_div" style="width: 100%; height: 100%; float:left">
                       
@@ -145,12 +145,9 @@
   
 
 
-              <v-row no-gutters id = "desktopCards">
+              <v-row no-gutters id = "desktopCards" >
                 <v-col cols="3" md="4">
-                  <v-card class="pa-2" outlined tile>
-                    <v-card
-                        color="grey lighten-4"
-                    >
+                  <v-card height='100%' style="position: relative">
                         <v-card-title center>
                         <v-icon
                             :color="checking ? 'red lighten-2' : 'indigo'"
@@ -181,6 +178,8 @@
                         <v-spacer></v-spacer>
                         </v-card-title>
 
+                        <v-card-text style="height:100%">
+
                         <v-sheet color="transparent">
                         <v-sparkline
                             :key="pointsCount"
@@ -196,17 +195,13 @@
                             label-size="8"
                         ></v-sparkline>
                         </v-sheet>
-                    </v-card>
+                      </v-card-text>
                   </v-card>
                 </v-col>
 
                 <v-col cols="3" md="4">
-                  <v-card class="pa-2" outlined tile>
-                    <v-card
-                      class="mx-auto"
-                      max-width="344"
-                    >
-                      <v-card-text>
+                  <v-card height='100%' style="position: relative">
+                      <v-card-text style="height:100%">
                         <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
                         <p class="display-2 text--primary">
                         {{setl_sum}}
@@ -217,12 +212,13 @@
                           {{sum}}
                         </div>
                       </v-card-text>
-                    </v-card>
                   </v-card>
                 </v-col>
+
+
                 <v-col cols="3" md="4">
-                  <v-card  class="pa-2" outlined tile>
-                    <v-card-text>
+                  <v-card height='100%' style="position: relative">
+                    <v-card-text style="height:100%">
                       <p>התפלגות תושבים בבידוד לפי ישוב</p>
                     <canvas id="chart-area"></canvas>
                     </v-card-text>
@@ -243,10 +239,7 @@
               <v-window-item :value="1">
 
 
-                <v-card class="pa-2" outlined tile>
-                  <v-card
-                      color="grey lighten-4"
-                  >
+                <v-card class="pa-2" outlined tile height='100%' style="position: relative">
                       <v-card-title center>
                       <v-icon
                           :color="checking ? 'red lighten-2' : 'indigo'"
@@ -276,7 +269,7 @@
 
                       <v-spacer></v-spacer>
                       </v-card-title>
-
+                      <v-card-text style="height:100%">
                       <v-sheet color="transparent">
                       <v-sparkline
                           :key="pointsCount"
@@ -292,19 +285,19 @@
                           label-size="8"
                       ></v-sparkline>
                       </v-sheet>
-                  </v-card>
+                      </v-card-text>
                 </v-card>
 
                 
               </v-window-item>
         
               <v-window-item :value="2">
-                <v-card class="pa-2" outlined tile>
+                <v-card class="pa-2" outlined tile height='100%' style="position: relative">
                     <v-card
                       class="mx-auto"
                       max-width="344"
                     >
-                      <v-card-text>
+                    <v-card-text style="height:100%">
                         <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
                         <p class="display-2 text--primary">
                         {{setl_sum}}
@@ -321,8 +314,8 @@
               </v-window-item>
         
               <v-window-item :value="3">
-                  <v-card  class="pa-2" outlined tile>
-                    <v-card-text>
+                  <v-card  class="pa-2" outlined tile height='100%' style="position: relative">
+                    <v-card-text style="height:100%">
                     <p>התפלגות תושבים בבידוד לפי ישוב</p>
                     <canvas id="chart-area-mobile"></canvas>
                   </v-card-text>
@@ -654,7 +647,10 @@
                     ]
                   },
                   options: {
-                    responsive: true
+                    responsive: true,
+                    legend: {
+                        position: 'right'
+                    }
                   }
                 };
 
@@ -670,7 +666,7 @@
                   govmap.createMap('map_div', {
                       token: my_token,
                       visibleLayers: [],
-                      layers:["SCHOOL","KIDS_G"], 
+                      layers:["SCHOOL","KIDS_G"],
                       layersMode: 4, 
                       showXY: true,
                       level: 1,
@@ -745,7 +741,7 @@
                                 console.log(chart_features.length);
                                 appVue.chartData = [];
                                 appVue.chartLabels = [];
-                                for (i = 0; i < 8; i++)
+                                for (i = 0; i < 6; i++)
                                 {
                                     if (!isInArray(chart_features[i].attributes.Municipality_desc, appVue.chartLabels))
                                     {
@@ -756,7 +752,7 @@
                                 appVue.chartLabels.push("שאר הישובים");
                                 othersCount = 0;
                                 others = [];
-                                for (i = 8; i < chart_features.length; i++)
+                                for (i = 6; i < chart_features.length; i++)
                                 {
                                     if (!isInArray(chart_features[i].attributes.Municipality_desc, others))
                                     {
@@ -789,7 +785,10 @@
                                         labels: appVue.chartLabels
                                     },
                                     options: {
-                                        responsive: true
+                                        responsive: true,
+                                        legend: {
+                                            position: 'right'
+                                        }
                                     }
                                 };
                                 var colorNames = Object.keys(window.chartColors);
