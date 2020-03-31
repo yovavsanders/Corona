@@ -24,6 +24,20 @@
     }
 
   }
+
+
+  .select_map_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 65%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
 </style>
 <head>
 <title>בידוד בישובים</title>
@@ -63,7 +77,7 @@
                   <v-card>
                            
                   <v-app-bar
-                  color="brown lighten-1"
+                  color="blue lighten-1"
                   dense
                   dark
                   >
@@ -101,7 +115,7 @@
               <v-col cols="12" md="12">
                 <v-card class="pa-2" raised>
                   <v-app-bar
-                  color="brown lighten-1"
+                  color="blue lighten-1"
                   dense
                   dark
                   >
@@ -135,7 +149,7 @@
           
 
 
-            <form name="form" style='height: 80%;' scrolling='no'> 
+            <form name="form" style='height: 70%;' scrolling='no'> 
                   
               <div id="map_div" style="width: 100%; height: 100%; float:left">
                       
@@ -159,19 +173,14 @@
                         <v-row>
 
                             <div center>
+                              <div class="caption grey--text">
+                                {{graphTitle.replace("שם ", "")}}
+                              </div>
                             <span
-                                class="display-2 font-weight-black"
+                                class="display-1 font-weight-black"
                                 v-text="pointsCount"
                             ></span>
                             <strong>מיקומים בהם שהו חולי קורונה</strong>
-                            <div class="caption grey--text">
-                              <span style="float:right;">
-                              {{dateMin}}
-                            </span>
-                            <span style="float:left;">
-                                  {{dateMax}}
-                                </span>
-                                </div>
                             </div>
                         </v-row>
 
@@ -195,6 +204,15 @@
                             label-size="8"
                         ></v-sparkline>
                         </v-sheet>
+                        <div class="caption grey--text text-center">
+                          מספר מקרים ביום - על ציר הזמן
+                          <span style="float:left;">
+                            {{dateMax.slice(0, -5)}}
+                          </span>
+                          <span style="float:right;">
+                            {{dateMin.slice(0, -5)}}
+                          </span>
+                        </div>
                       </v-card-text>
                   </v-card>
                 </v-col>
@@ -204,12 +222,12 @@
                       <v-card-text style="height:100%">
                         <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
                         <p class="display-2 text--primary">
-                        {{setl_sum}}
+                        {{setl_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                         </p>
                         <div>({{per1000}} לכל 1000 תושבים)</div>
                         <p>מתוך סה"כ תושבים בישוב</p>
                         <div class=" display-1 text--primary">
-                          {{sum}}
+                          {{sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                         </div>
                       </v-card-text>
                   </v-card>
@@ -236,7 +254,7 @@
             >
         
             <v-window v-model="step">
-              <v-window-item :value="1">
+              <v-window-item :value="0">
 
 
                 <v-card class="pa-2" outlined tile height='100%' style="position: relative">
@@ -251,19 +269,14 @@
                       <v-row>
 
                           <div center>
+                            <div class="caption grey--text">
+                                  {{graphTitle.replace("שם ", "")}}
+                            </div>
                           <span
-                              class="display-2 font-weight-black"
+                              class="display-1 font-weight-black"
                               v-text="pointsCount"
                           ></span>
                           <strong>מיקומים בהם שהו חולי קורונה</strong>
-                          <div class="caption grey--text">
-                            <span style="float:right;">
-                              {{dateMin}}
-                          </span>
-                          <span style="float:left;">
-                                {{dateMax}}
-                              </span>
-                              </div>
                           </div>
                       </v-row>
 
@@ -285,13 +298,22 @@
                           label-size="8"
                       ></v-sparkline>
                       </v-sheet>
+                      <div class="caption grey--text text-center">
+                        מספר מקרים ביום - על ציר הזמן
+                        <span style="float:left;">
+                          {{dateMax.slice(0, -5)}}
+                        </span>
+                        <span style="float:right;">
+                          {{dateMin.slice(0, -5)}}
+                        </span>
+                      </div>
                       </v-card-text>
                 </v-card>
 
                 
               </v-window-item>
         
-              <v-window-item :value="2">
+              <v-window-item :value="1">
                 <v-card class="pa-2" outlined tile height='100%' style="position: relative">
                     <v-card
                       class="mx-auto"
@@ -300,12 +322,12 @@
                     <v-card-text style="height:100%">
                         <div>סה"כ נמצאים בבידוד ב{{graphTitle.replace("שם ", "")}}</div>
                         <p class="display-2 text--primary">
-                        {{setl_sum}}
+                        {{setl_sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                         </p>
                         <div>({{per1000}} לכל 1000 תושבים)</div>
                         <p>מתוך סה"כ תושבים בישוב</p>
                         <div class=" display-1 text--primary">
-                          {{sum}}
+                          {{sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                         </div>
                       </v-card-text>
                     </v-card>
@@ -313,7 +335,7 @@
               
               </v-window-item>
         
-              <v-window-item :value="3">
+              <v-window-item :value="2">
                   <v-card  class="pa-2" outlined tile height='100%' style="position: relative">
                     <v-card-text style="height:100%">
                     <p>התפלגות תושבים בבידוד לפי ישוב</p>
@@ -325,21 +347,37 @@
         
             <v-divider></v-divider>
         
-            <v-card-actions>
+            <v-card-actions class="justify-space-between">
               <v-btn
-                :disabled="step === 1"
+                :disabled="step === 0"
                 text
-                @click="step--"
+                @click="prev"
               >
                 <v-icon>mdi-chevron-right</v-icon>
               </v-btn>
-              <v-spacer></v-spacer>
+              <v-item-group
+                v-model="step"
+                class="text-center"
+                mandatory
+              >
+                <v-item
+                  v-for="n in length"
+                  :key="`btn-${n}`"
+                  v-slot:default="{ active, toggle }"
+                >
+                  <v-btn
+                    :input-value="active"
+                    icon
+                    @click="toggle"
+                  >
+                    <v-icon color="blue">mdi-record</v-icon>
+                  </v-btn>
+                </v-item>
+              </v-item-group>
               <v-btn
-                text
-                :disabled="step === 3"
-                color="primary"
-                depressed
-                @click="step++"
+              :disabled="step === 2"
+              text
+              @click="next"
               >
               <v-icon>mdi-chevron-left</v-icon>
               </v-btn>
@@ -367,6 +405,77 @@
           </v-card>
         </v-dialog>
 
+
+
+        <v-btn class="select_map_watermark"
+        v-model="mdiClose"
+         @click="selectFromMapClick" 
+         absolute
+         dark
+         fab
+         small
+         right
+         color="#FF5722"
+       >
+         <v-icon v-if="mdiClose">mdi-close</v-icon>
+         <v-icon v-else>mdi-map-search-outline</v-icon>
+       </v-btn>
+
+
+
+
+        <v-speed-dial
+        bottom
+        left
+        absolute
+        direction="right"
+        transition="slide-x-transition"
+        style="bottom: 65%!important; left: 3%!important;"
+
+        >
+          <template v-slot:activator>
+      <v-btn 
+      color="#1A237E"
+      dark
+      small
+       fab>
+              <v-icon>share</v-icon>
+            </v-btn>
+    </template>
+    
+          <v-btn 
+    color="green"
+      style="bottom: 65%!important;"
+        dark
+      fab
+      small
+      @click="shareWhatsapp()"
+      >
+    <v-icon>mdi-whatsapp</v-icon>
+    </v-btn>
+
+    <v-btn
+    color="blue"
+      style="bottom: 65%!important;"
+        dark
+      fab
+      small
+      @click="shareFacebook()"
+      >
+    <v-icon>mdi-facebook</v-icon>
+    </v-btn>
+
+    <v-btn
+      color="red"
+        style="bottom: 65%!important;"
+        dark
+        fab
+        small
+        >
+      <v-icon>mdi-email</v-icon>
+    </v-btn>
+
+    </v-speed-dial>
 
 
         </v-app>
@@ -623,7 +732,91 @@
                       }
                       return  Symbol;
                  }
-                 var polyon;
+
+                 function getIsoData(li, json_string){
+                    $.ajax({
+                        dataType: 'json',
+                        beforeSend : function() {
+                        console.log('Before Ajax Request Starts !!');
+                        },
+                        success: function(iso_data) {
+                          console.log(iso_data.features.length)
+                          for (i = 0; i < iso_data.features.length; i++)
+                          {
+                            li.push(iso_data.features[i]);
+                          }
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                          console.log("Error occurred: " + errorThrown);
+                        },
+                        url: json_string
+                    });
+                  }
+
+
+
+                  function  getSetlPointCountByCode (setlcode){
+                      appVue.mdiClose = false;
+                      var count = 0;
+                      s_features = iso_setl_features.filter(function(f) {
+                          return f.attributes["Municipality"] == setlcode;		
+                      });
+                      console.log(s_features);
+                      var setl_dates = [];
+                      if (s_features.length > 0)
+                      {
+                          polygon = s_features[0].geometry;
+                          setlname = s_features[0].attributes["Municipality_desc"];
+                          appVue.select = setlname;
+                          //setlcode = s_features[0].attributes["Municipality"];
+                          appVue.setl_sum = s_features[0].attributes["Isolations"];
+                          appVue.per1000 = s_features[0].attributes["Iso_per_1000"];
+                          appVue.sum = s_features[0].attributes["Total_Pop2017"];
+                          //get point intersected
+                          for (i=0; i < corona_features.length; i++)
+                          {
+                              var point = new Terraformer.Primitive({
+                                  type:"Point",
+                                  coordinates:[corona_features[i].geometry.x,corona_features[i].geometry.y]
+                              });
+                              if (point.within(polygon))
+                              {
+                                  setl_dates.push(corona_features[i].attributes.fromTime);
+                                  count++;
+                              }
+                          }
+                      
+                          console.log(setl_dates);
+                          if (setl_dates.length > 0)
+                          {
+                            appVue.dateMax = setl_dates[0];
+                            appVue.dateMin = setl_dates[setl_dates.length - 1];
+                          }
+                          else{
+                            appVue.dateMin = String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear();
+                            appVue.dateMax = String(new Date().getDate()).padStart(2, '0') + '/' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear();
+
+                          }
+                          const result = setl_dates.reduce((total, value) => {
+                              total[value] = (total[value] || 0) + 1;
+                              return total;
+                          }, {});
+                          appVue.labels = [];
+                          appVue.points = [];
+                          appVue.pointsCount= 0;
+                          for (i in result){
+                              appVue.labels.push(result[i]);
+                              //appVue.labels.push(result[i]);
+                              appVue.points.push(result[i]);
+                              appVue.pointsCount = appVue.pointsCount + result[i]
+                          }
+                          appVue.graphTitle = appVue.select;
+                          console.log(appVue.graphTitle);
+
+
+                          govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+setlcode+"'", 'zoomToExtent': true});
+                      }
+                  }
 
 
                  var config = {
@@ -654,42 +847,42 @@
                   }
                 };
 
-                            
+              json_pts_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+              var json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+              var mapi_json_string = "SETL_AREA.json";
+
+              var s_codes = [];
+
                //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
               var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
               //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
               $(document).ready(function ()
               {
-                  //appVue.dialog = true;
-      
-      
                   govmap.createMap('map_div', {
                       token: my_token,
                       visibleLayers: [],
-                      layers:["SCHOOL","KIDS_G"],
+                      layers:[],
                       layersMode: 4, 
                       showXY: true,
                       level: 1,
                       center: {x: 186000, y: 658000},
                       identifyOnClick: true
                   });
-      
-              
-                  json_pts_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
-                  var json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
-                  var mapi_json_string = "SETL_AREA.json";
+
                   $.ajax({
                       dataType: 'json',
                       beforeSend : function() {
-                      console.log('Before Ajax Request Starts !!');
-                      appVue.dialog = true
+                        setTimeout(getIsoData(iso_setl_features, json_string),5000);
+                        console.log('Before Ajax Request Starts !!');
+                        appVue.dialog = true;
                       },
                       success: function(setl_area_data) {
                           //appVue.dialog = true;
-                          $.getJSON( json_string, function( iso_data ) {
+                          
                               //console.log(iso_data);
                               //console.log(setl_area_data);
-                              iso_setl_features = iso_data.features; 
+                              //setTimeout(getIsoData(iso_setl_features, json_string),5000);
+                              //getIsoData(iso_setl_features, json_string);
                               setl_area_features = setl_area_data.features;
                               setlnames = [];
                               iso_count_all = 0;
@@ -725,6 +918,7 @@
                                             //set geometry layer atts:
                                             polygon = iso_feat.geometry
                                             s_wkts.push(Terraformer.WKT.convert(polygon));
+                                            s_codes.push("'" +setlcode + "'");
                                             s_names.push(setlname);
                                             s_symbols.push(getSymbol(isoper1000));
                                             bubbleHTMLParameters_all.push(["<div>שם ישוב: " + setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div>","<div>מבודדים: "+isolations+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div><div>מבודדים ל 1000 נפש: "+isoper1000+"<br /></div>"]);          
@@ -741,7 +935,7 @@
                                 console.log(chart_features.length);
                                 appVue.chartData = [];
                                 appVue.chartLabels = [];
-                                for (i = 0; i < 6; i++)
+                                for (i = 0; i < 5; i++)
                                 {
                                     if (!isInArray(chart_features[i].attributes.Municipality_desc, appVue.chartLabels))
                                     {
@@ -752,7 +946,7 @@
                                 appVue.chartLabels.push("שאר הישובים");
                                 othersCount = 0;
                                 others = [];
-                                for (i = 6; i < chart_features.length; i++)
+                                for (i = 5; i < chart_features.length; i++)
                                 {
                                     if (!isInArray(chart_features[i].attributes.Municipality_desc, others))
                                     {
@@ -795,11 +989,11 @@
                                 var isMobile = window.matchMedia("(max-width: 800px)");
                                 if (isMobile.matches)
                                 {
-                                    appVue.step = 3;
+                                    appVue.step = 2;
                                     setTimeout(function(){
                                         var ctx_mobile = document.getElementById('chart-area-mobile').getContext('2d');
                                         window.myPieMobile = new Chart(ctx_mobile , config);
-                                        appVue.step = 2;
+                                        appVue.step = 1;
                                         }, 1000)
                                 }
                                 else
@@ -836,7 +1030,7 @@
                               }
     
       
-                          });
+
                           var d = $.getJSON(json_pts_str);
                           d.complete(function(response) {
                               //console.log(response);
@@ -886,6 +1080,8 @@
               data () {
                   return {
 
+                      setlcode: 0,
+
                       dialog: false,
 
                       chartData: [
@@ -908,7 +1104,8 @@
                       labels: [],
       
                       graphTitle: "שם ישוב",
-                      step: 1,
+                      step: 0,
+                      length: 3,
                   
                       loading: false,
                       loadingMobile: false,
@@ -921,21 +1118,144 @@
       
                       per1000: 0,
                       iso: [],
+                      mdiClose: false,
                   }
               },
               watch: {
                   search (val) {
                       val && val !== this.select && this.querySelections(val)
                   },
-                  // dialog (val) {
-                  //   if (!val) return
-
-                  //   setTimeout(() => (this.dialog = false), 4000)
-                  // },
               },
 
       
               methods: {
+                    
+                  selectFromMapClick()
+                  {
+                    
+                    govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS IN ("+s_codes+")", 'zoomToExtent': false});
+                    govmap.setVisibleLayers(["LOCALITY_210410"], []);
+                    console.log("select");
+                    //clear geometries
+                    var data = {  
+                        wkts: [],  
+                        names: [],  
+                        geometryType: govmap.drawType.Polygon,  
+                        defaultSymbol:  
+                        {  
+                            'outlineColor': [0, 0, 255, 1],
+                            'outlineWidth': 3,
+                            'fillColor': [255, 255, 255, 0.5]
+                        },    
+                        symbols: [],  
+                        'clearExisting': true,
+                        data: {
+                        } 
+                    }
+                    govmap.displayGeometries(data).then(function (response)  
+                    {  
+                        //console.log(response)
+                    });
+
+                    if (this.mdiClose  == false)
+                    {
+                      this.mdiClose  = true;
+                      govmap.draw(govmap.drawType.Point).progress(function (e)
+                      {
+
+                        var data = {  
+                            wkts: s_wkts,  
+                            names: s_names,  
+                            geometryType: govmap.drawType.Polygon,  
+                            defaultSymbol:  
+                            {  
+                                'outlineColor': [0, 0, 255, 1],
+                                'outlineWidth': 3,
+                                'fillColor': [255, 255, 255, 0.5]
+                            },    
+                            symbols: s_symbols,  
+                            'clearExisting': false,
+                            data: {  
+                                tooltips: s_names,  
+                                headers: s_names,
+                                bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+                                bubbleHTMLParameters:bubbleHTMLParameters_all
+
+                            } 
+                        }
+
+                        govmap.displayGeometries(data).then(function (response)  
+                        {  
+                            PolygonId = response.data;
+                        });
+
+
+
+
+
+
+
+                        var counter = 0;
+                        wkt = e.wkt;
+                        x = Terraformer.WKT.parse(wkt).coordinates[0];
+                        y = Terraformer.WKT.parse(wkt).coordinates[1];
+                        var params = {
+                          LayerName: 'LOCALITY_210410',
+                          Point: {x: x, y: y},
+                          Radius:100
+                        };
+
+                        appVue.setlcode = 0;
+                        govmap.getLayerData(params).then(function(getLayerDataResponse){
+                          console.log(getLayerDataResponse);
+                          appVue.setlcode = getLayerDataResponse.data[0].Fields[3].Value;
+                          if (appVue.setlcode){
+                                //appVue.setlcode = console.log(getLayerDataResponse.data[0].Fields[3].Value);
+                                //console.log(setl_code);
+                                //appVue.setlcode = setl_code;
+                                getSetlPointCountByCode (appVue.setlcode);
+
+
+                          }
+                        });
+
+
+                        // var point = new Terraformer.Primitive({
+                        //       type:"Point",
+                        //       coordinates:[e.X,e.Y]
+                        // });
+                        // console.log(point);
+                        // for (i = 0; i < iso_setl_features.length; i++)
+                        // {
+                        //   polygon =  iso_setl_features[i].geometry;
+
+                        //   if (point.within(polygon))
+                        //   {
+                        //     console.log(iso_setl_features[i].attributes);
+                        //   }           
+                          
+                        // }	
+
+
+                        
+                      });
+                    }
+                    else
+                    {
+                      this.mdiClose = false;
+                    }
+                  },
+
+                  next () {
+                      this.step = this.step + 1 === this.length
+                        ? 0
+                        : this.step + 1
+                    },
+                  prev () {
+                      this.step = this.step - 1 < 0
+                        ? this.length - 1
+                        : this.step - 1
+                    },
                   querySelections (v) {
                       this.loading = true
                       // Simulated ajax query
@@ -1006,11 +1326,60 @@
 
 
                       govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+setlcode+"'", 'zoomToExtent': true});
+                  },
+
+
+                 
+
+
+
+              shareWhatsapp()
+              {
+                var isMobile = {
+                  Android: function() {
+                    return navigator.userAgent.match(/Android/i);
+                  },
+
+                  BlackBerry: function() {
+                    return navigator.userAgent.match(/BlackBerry/i);
+                  },
+                  iOS: function() {
+                    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+                  },
+                  Opera: function() {
+                    return navigator.userAgent.match(/Opera Mini/i);
+                  },
+                  Windows: function() {
+                    return navigator.userAgent.match(/IEMobile/i);
+                  },
+                  any: function() {
+                    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
                   }
-      
-      
-      
+                };
+                if( isMobile.any() ) {
+
+                  var url = window.location.href;
+                  var message = encodeURIComponent(window.location.href);
+                  var whatsapp_url = "whatsapp://send?text=" + message;
+                  window.location.href = whatsapp_url;
+                } else {
+                  var win = window.open('https://web.whatsapp.com/', '_blank');
+                    win.focus();
+                }
+
               },
+
+              shareFacebook()
+              {
+                window.open(
+                'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+                'facebook-share-dialog', 
+                'width=626,height=436');
+              }
+            }
+
+            
+
           });
           
           
