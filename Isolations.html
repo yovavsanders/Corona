@@ -149,7 +149,7 @@
           
 
 
-            <form name="form" style='height: 70%;' scrolling='no'> 
+            <form name="form" style='height: 60%;' scrolling='no'> 
                   
               <div id="map_div" style="width: 100%; height: 100%; float:left">
                       
@@ -162,7 +162,7 @@
               <v-row no-gutters id = "desktopCards" >
                 <v-col cols="3" md="4">
                   <v-card height='100%' style="position: relative">
-                        <v-card-title center>
+                      <v-card-text style="height:100%">
                         <v-icon
                             :color="checking ? 'red lighten-2' : 'indigo'"
                             class="mr-12"
@@ -185,7 +185,7 @@
                         </v-row>
 
                         <v-spacer></v-spacer>
-                        </v-card-title>
+  
 
                         <v-card-text style="height:100%">
 
@@ -258,7 +258,7 @@
 
 
                 <v-card class="pa-2" outlined tile height='100%' style="position: relative">
-                      <v-card-title center>
+                  <v-card-text style="height:100%">
                       <v-icon
                           :color="checking ? 'red lighten-2' : 'indigo'"
                           class="mr-12"
@@ -281,8 +281,7 @@
                       </v-row>
 
                       <v-spacer></v-spacer>
-                      </v-card-title>
-                      <v-card-text style="height:100%">
+                      
                       <v-sheet color="transparent">
                       <v-sparkline
                           :key="pointsCount"
