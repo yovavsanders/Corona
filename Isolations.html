@@ -173,14 +173,14 @@
                         <v-row>
 
                             <div center>
-                              <div class="caption grey--text">
+                              <div>
                                 {{graphTitle.replace("שם ", "")}}
                               </div>
                             <span
-                                class="display-1 font-weight-black"
+                                class="display-2 text--primary"
                                 v-text="pointsCount"
                             ></span>
-                            <strong>מיקומים בהם שהו חולי קורונה</strong>
+                            מיקומים בהם שהו חולי קורונה
                             </div>
                         </v-row>
 
@@ -269,14 +269,14 @@
                       <v-row>
 
                           <div center>
-                            <div class="caption grey--text">
+                            <div>
                                   {{graphTitle.replace("שם ", "")}}
                             </div>
                           <span
-                              class="display-1 font-weight-black"
-                              v-text="pointsCount"
+                          class="display-2 text--primary"
+                          v-text="pointsCount"
                           ></span>
-                          <strong>מיקומים בהם שהו חולי קורונה</strong>
+                          מיקומים בהם שהו חולי קורונה
                           </div>
                       </v-row>
 
@@ -344,7 +344,6 @@
               </v-window-item>
             </v-window>
         
-            <v-divider></v-divider>
         
             <v-card-actions class="justify-space-between">
               <v-btn
@@ -849,6 +848,7 @@
               json_pts_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
               var json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
               var mapi_json_string = "SETL_AREA.json";
+              var json_infceted = "Infected.json";
 
               var s_codes = [];
 
