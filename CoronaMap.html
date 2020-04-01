@@ -1259,90 +1259,7 @@ var a=0;
 var addr = "";
 var res;
 var status = true;
-function Geocoding()
-{
-	if (a < infected_setl_features.length)
-	{
-		console.log(infected_setl_features[a].SETL_NAME);
-		govmap.geocode({keyword: infected_setl_features[a].SETL_NAME},govmap.geocodeType.AccuracyOnly)
-		.then(function(response){	
-			try {
-				
-				res = response;		
-				if (res.status == 0){
-					console.log(response.data[0].ObjectID);
-					setlcode = response.data[0].ObjectID;
-					this_setlname = infected_setl_features[a].SETL_NAME;
-					infecteds = infected_setl_features[a].INFECTED;
-					population = infected_setl_features[a].POPULATION;
-					
-					s_features = setl_area_features.filter(function(f) {
-					 	return f.properties["SETL_CODE"] == setlcode;			
-					 }); 
 
-					if (s_features.length > 0)
-					{
-						infectedper1000 = infecteds / (population/1000);
-						setlnames.push(this_setlname);
-						//set geometry layer atts:
-						polygon = s_features[0].geometry
-						s_wkts.push(Terraformer.WKT.convert(polygon));
-						s_codes.push("'" +setlcode + "'");
-						s_names.push(this_setlname);
-						s_symbols.push(getSymbol(infecteds));
-						iso_features = iso_setl_features.filter(function(f) {
-							return f.attributes["Municipality"] == setlcode;			
-						}); 
-						if (iso_features.length > 0)
-						{
-							iso_feat = iso_features[0];
-							isolations = iso_feat.attributes.Isolations;
-							isoper1000 = iso_feat.attributes.Iso_per_1000;		
-							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
-						}
-						else
-						{
-							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div>"]);          
-						}
-						
-					}
-					a++;
-					setTimeout(Geocoding(), 10);
-				}
-				else{
-					console.log("0");
-					setTimeout(Geocoding(), 10);
-				}
-				//a++;
-				
-			}
-			catch { 
-				console.log("err!!");
-				if (res.status == 0){
-					//console.log(response.data[0].ObjectID);
-					//setTimeout(Geocoding(), 10);
-					appVue.diailog = false;
-					alert("תקלה בקריאה לשרת");
-				}
-				else{
-					console.log("0");
-					setTimeout(Geocoding(), 10);
-				}	
-			}
-			if (a == (infected_setl_features.length))
-			{
-				console.log("done");
-				displaySetlPolygons();
-				appVue.dialog = false;
-			}
-		})
-		.fail(function(response){
-			console.log("fail!");
-			setTimeout(Geocoding(), 500);	
-		})
-	}
-		
-}
 
 
 
@@ -1437,7 +1354,7 @@ $(document).ready(function (){
 
 		//json_str = "https://gisweb.azureedge.net/Points.json";
 		var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
-		var mapi_json_string = "SETL_AREA.json";
+		var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA.json";
 		iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
@@ -1620,7 +1537,57 @@ $(document).ready(function (){
 							iso_count_all = iso_count_all + feat.attributes.Isolations
 						}
 						appVue.dialog = true;
-						setTimeout(Geocoding(), 10000);
+						console.log(infected_setl_features);
+						console.log("for (i = 0; i < infected_setl_features; i++)");
+						for (i = 0; i < infected_setl_features.length; i++)
+						{
+							console.log(infected_setl_features[i].SETL_CODE);
+							setlcode= infected_setl_features[i].SETL_CODE;
+							 this_setlname = infected_setl_features[i].SETL_NAME;
+							 console.log(this_setlname);
+							infecteds = infected_setl_features[i].INFECTED;
+							population = infected_setl_features[i].POPULATION;
+
+							//console.log();
+							
+							s_features = setl_area_features.filter(function(f) {
+								return f.properties["SETL_CODE"] == setlcode;			
+							}); 
+							console.log("s_features: ");
+							console.log(s_features);
+							if (s_features.length > 0)
+							{
+								infectedper1000 = infecteds / (population/1000);
+								setlnames.push(this_setlname);
+								//set geometry layer atts:
+								polygon = s_features[0].geometry
+								s_wkts.push(Terraformer.WKT.convert(polygon));
+								s_codes.push("'" +setlcode + "'");
+								s_names.push(this_setlname);
+								s_symbols.push(getSymbol(infecteds));
+								iso_features = iso_setl_features.filter(function(f) {
+									return f.attributes["Municipality"] == setlcode;			
+								}); 
+								if (iso_features.length > 0)
+								{
+									iso_feat = iso_features[0];
+									isolations = iso_feat.attributes.Isolations;
+									isoper1000 = iso_feat.attributes.Iso_per_1000;		
+									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
+								}
+								else
+								{
+									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div>"]);          
+								}
+							}
+							else{
+								console.log("no setlcode found");
+							}	
+
+						}
+						appVue.dialog = false;
+						displaySetlPolygons();
+
 					  },
                       error : function(jqXHR, textStatus, errorThrown) {
                           console.log("Error occurred: " + errorThrown);
