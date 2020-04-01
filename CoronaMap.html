@@ -97,11 +97,6 @@
     right: 0;
 }
 
-.v-dialog {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
 
 .watermark
 {
@@ -139,6 +134,32 @@
     font-family: mapiregular;
     display: inline-block;
 }
+
+.switch_watermark1
+{
+	position: absolute;
+    right: 0%!important;
+    bottom: 30%!important;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+	font-size: 50
+}
+
+
+.switch_watermark2
+{
+	position: absolute;
+    right: 0%!important;
+    bottom: 25%!important;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+	font-size: 50
+}
+
 
 
 
@@ -217,6 +238,13 @@
 
 }
 
+.layers_watermark
+{
+    position: fixed;
+    right: 100px!important;
+	top: 60px!important;
+}
+
 
 #create .v-speed-dial {
     position: absolute;
@@ -232,6 +260,7 @@
 
 
 </style>
+
 <html>
 
 <head>
@@ -527,6 +556,14 @@ placeholder="רדיוס במ'"
 	  <v-icon v-if="mdiClose">mdi-close</v-icon>
 	  <v-icon v-else>mdi-vector-rectangle</v-icon>
 	</v-btn>
+
+
+
+
+		<v-checkbox color="blue darken-4" class="switch_watermark1" v-model="setl_checkbox" label="שכבת ישובים"  @change="turnSetl"></v-checkbox>
+		<v-checkbox color="blue darken-4" class="switch_watermark2" v-model="points_checkbox" label="שכבת מיקומי נדבקים"  @change="turnPoints"></v-checkbox>
+
+			
 	  
   <v-btn class="info_watermark"
   absolute
@@ -608,7 +645,26 @@ right>
 
 
 
-
+<v-dialog
+v-model="dialog"
+hide-overlay
+persistent
+width="300"
+>
+<v-card
+  color="primary"
+  dark
+>
+  <v-card-text>
+	טוען נתונים
+	<v-progress-linear
+	  indeterminate
+	  color="white"
+	  class="mb-0"
+	></v-progress-linear>
+  </v-card-text>
+</v-card>
+</v-dialog>
 
 		<v-speed-dial
 					bottom
@@ -662,6 +718,8 @@ right>
 			</v-btn>
 
 		  </v-speed-dial>
+
+
 		  
 
 </v-app>
@@ -905,6 +963,13 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
+
+Number.prototype.between = function(a, b) {
+                  var min = Math.min.apply(Math, [a, b]),
+                      max = Math.max.apply(Math, [a, b]);
+                      return this >= min && this < max;
+                  };
+
 Date.prototype.addDays = function(days) {
     var date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
@@ -950,7 +1015,7 @@ function getPointDataByDate(date)
 			height:20  
 		},   
 		symbols: [],  
-		clearExisting: true,  
+		clearExisting: false,  
 		data: {  
 				tooltips: [],  
 				headers: names_all,
@@ -967,6 +1032,37 @@ function AddUserPoints(data_all)
 	{  
 		//console.log(response.data);
 	});
+}
+
+
+function ClearUserPoints(){
+
+	var bubbleContent = "";
+		var data = {  
+		wkts: [],  
+		names: [],  
+		geometryType: govmap.drawType.Point,  
+	    defaultSymbol:  
+		{  
+			url:'https://govmap.gov.il/sites/O1.png',  
+			width:20,  
+			height:20  
+		},   
+		symbols: [],  
+		clearExisting: true,  
+		data: {  
+				tooltips: [],  
+				headers: [],
+				bubbleHTML: bubbleContent,
+				bubbleHTMLParameters:[]
+		      }  
+        };  
+				  
+		govmap.displayGeometries(data).then(function (response)  
+		{  
+		  //console.log(response.data);
+		}); 
+
 }
 
 function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
@@ -1009,6 +1105,82 @@ function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 		}); 
 }
 
+
+
+
+
+var classBreakeSymbols ={
+                  blue:
+                      {  
+                          'outlineColor': [0, 0, 255, 1],
+                          'outlineWidth': 3,
+                          'fillColor': [255, 255, 255, 0.5]
+                      },    
+                  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [183, 28, 28, 0.5]
+                      },
+                  red_orange:  
+                       {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
+                      },
+                  orange:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 179, 0, 0.5]
+                      },
+                  yellow:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 238, 88, 0.5]
+                      },
+                  green_yellow: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [178, 255, 89, 0.5]
+                      },
+                  green: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [56, 142, 60, 0.5]
+                         }
+                  };
+
+
+
+function getSymbol(number) {
+	Symbol = classBreakeSymbols.blue;
+	if (number.between(0,5))
+	{
+		Symbol = classBreakeSymbols.green;
+	}
+	if (number.between(5,10))
+	{
+		Symbol = classBreakeSymbols.green_yellow;
+	}
+	if (number.between(10,20))
+	{
+		Symbol = classBreakeSymbols.yellow;
+	}
+	if (number.between(20,30))
+	{
+		Symbol = classBreakeSymbols.orange;
+	}
+	if (number.between(30,50))
+	{
+		Symbol = classBreakeSymbols.red_orange;
+	}
+	if (number.between(50,10000))
+	{
+		Symbol = classBreakeSymbols.red;
+	}
+	return  Symbol;
+}
+
 var new_wkt;
 var d;
 var lastDate;
@@ -1027,6 +1199,8 @@ function myLoop (i, all) {  //  create a loop function
 				else{
 					setTimeout(function () {
 
+					displaySetlPolygons();
+
 					AddUserPoints(data_all);
 					document.getElementById("heat_map_btn").disabled = false;
 					appVue.slider = 0;
@@ -1036,6 +1210,171 @@ function myLoop (i, all) {  //  create a loop function
 				}                   
 			}, 1250)
 		}
+
+
+
+function getJsonData(li, json_string){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {
+				console.log('Before Ajax Request Starts !!');
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							console.log(i);
+							li.push(json_data[i]);
+						}	
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_string
+			});
+	}
+
+	function getIsoData(li, json_string){
+                    $.ajax({
+                        dataType: 'json',
+                        beforeSend : function() {
+                        console.log('Before Ajax Request Starts !!');
+                        },
+                        success: function(iso_data) {
+                          console.log(iso_data.features.length)
+                          for (i = 0; i < iso_data.features.length; i++)
+                          {
+                            li.push(iso_data.features[i]);
+                          }
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                          console.log("Error occurred: " + errorThrown);
+                        },
+                        url: json_string
+                    });
+                  }
+
+var a=0;
+var addr = "";
+var res;
+var status = true;
+function Geocoding()
+{
+	if (a < infected_setl_features.length)
+	{
+		console.log(infected_setl_features[a].SETL_NAME);
+		govmap.geocode({keyword: infected_setl_features[a].SETL_NAME},govmap.geocodeType.AccuracyOnly)
+		.then(function(response){	
+			try {
+				
+				res = response;		
+				if (res.status == 0){
+					console.log(response.data[0].ObjectID);
+					setlcode = response.data[0].ObjectID;
+					this_setlname = infected_setl_features[a].SETL_NAME;
+					infecteds = infected_setl_features[a].INFECTED;
+					population = infected_setl_features[a].POPULATION;
+					
+					s_features = setl_area_features.filter(function(f) {
+					 	return f.properties["SETL_CODE"] == setlcode;			
+					 }); 
+
+					if (s_features.length > 0)
+					{
+						infectedper1000 = infecteds / (population/1000);
+						setlnames.push(this_setlname);
+						//set geometry layer atts:
+						polygon = s_features[0].geometry
+						s_wkts.push(Terraformer.WKT.convert(polygon));
+						s_codes.push("'" +setlcode + "'");
+						s_names.push(this_setlname);
+						s_symbols.push(getSymbol(infecteds));
+						iso_features = iso_setl_features.filter(function(f) {
+							return f.attributes["Municipality"] == setlcode;			
+						}); 
+						if (iso_features.length > 0)
+						{
+							iso_feat = iso_features[0];
+							isolations = iso_feat.attributes.Isolations;
+							isoper1000 = iso_feat.attributes.Iso_per_1000;		
+							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
+						}
+						else
+						{
+							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div>"]);          
+						}
+						
+					}
+					a++;
+					setTimeout(Geocoding(), 10);
+				}
+				else{
+					console.log("0");
+					setTimeout(Geocoding(), 10);
+				}
+				//a++;
+				
+			}
+			catch { 
+				console.log("err!!");
+				if (res.status == 0){
+					//console.log(response.data[0].ObjectID);
+					//setTimeout(Geocoding(), 10);
+					appVue.diailog = false;
+					alert("תקלה בקריאה לשרת");
+				}
+				else{
+					console.log("0");
+					setTimeout(Geocoding(), 10);
+				}	
+			}
+			if (a == (infected_setl_features.length))
+			{
+				console.log("done");
+				displaySetlPolygons();
+				appVue.dialog = false;
+			}
+		})
+		.fail(function(response){
+			console.log("fail!");
+			setTimeout(Geocoding(), 500);	
+		})
+	}
+		
+}
+
+
+
+function displaySetlPolygons()
+{
+	var setl_data = {  
+					wkts: s_wkts,  
+					names: s_names,  
+					geometryType: govmap.drawType.Polygon,  
+					defaultSymbol:  
+					{  
+						'outlineColor': [0, 0, 255, 1],
+						'outlineWidth': 3,
+						'fillColor': [255, 255, 255, 0.5]
+					},    
+					symbols: s_symbols,  
+					'clearExisting': false,
+					data: {  
+						tooltips: [],  
+						headers: s_names,
+						bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+						bubbleHTMLParameters:s_bubbleHTMLParameters
+
+					} 
+				}
+
+				govmap.displayGeometries(setl_data).then(function (response)  
+				{  
+					//PolygonId = response.data;
+					console.log(response);
+				});
+}
 
 var res;
 var data_dates;
@@ -1048,7 +1387,29 @@ var dates = [];
 var real_dates = [];
 var features = []
 var corona_features = []
+var infected_setl_features =[];
+var iso_setl_features =[];
+var setl_area_features = [];
 var isHeatMap = false;
+
+
+
+
+var s_wkts = [];
+var s_names = [];
+var s_symbols = [];
+var s_bubbleHTMLParameters = [];
+
+var infected_count_all = 0;
+var iso_count_all = 0;
+
+var s_codes = [];
+
+
+var setl_dict = {};
+var setlcodes = [];
+var setlnames = [];
+
 $(document).ready(function (){
 		govmap.createMap('map_div', {
 			token: my_token,
@@ -1067,14 +1428,17 @@ $(document).ready(function (){
 		names_all = [];
 		bubbleHTMLParameters_all = [];
 		
-		//setl_json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		//setl_json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_infecteds_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		//var s = $.getJSON(setl_json_str);
 		//s.complete(function(response) {
 			//console.log(response);
 		//});
 
 
-
+		//json_str = "https://gisweb.azureedge.net/Points.json";
+		var json_infceted = "Infected.json";
+		var mapi_json_string = "SETL_AREA.json";
+		iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
 		d.complete(function(response) {
@@ -1213,7 +1577,12 @@ $(document).ready(function (){
 			data_dates = [];
 			for (date_idx = 1; date_idx < dates.length; date_idx++)
 			{
-				data_dates.push(getPointDataByDate(dates[date_idx]));
+				data = getPointDataByDate(dates[date_idx]);
+				if (date_idx == 1)
+				{
+					data[0].clearExisting = true;
+				}
+				data_dates.push(data);
 			}
 
 			//appVue.getCountByDate();
@@ -1226,6 +1595,43 @@ $(document).ready(function (){
 			});
 			appVue.circle_value = corona_features.length / (corona_features.length / 100);
 			appVue.slider_circle_value = 0;
+
+			//get infected_setl_features..
+			//////////////////////////////
+
+			$.ajax({
+                      dataType: 'json',
+                      beforeSend : function() {
+                        setTimeout(getJsonData(infected_setl_features, json_infceted),5000);
+						setTimeout(getIsoData(iso_setl_features, iso_json_string),5000);
+                        console.log('Before Ajax Request Starts !!');
+                      },
+                      success: function(setl_area_data) {
+						setl_area_features = setl_area_data.features;
+
+						for (i in infected_setl_features)
+                        {
+                            feat = infected_setl_features[i];
+							infected_count_all = infected_count_all + feat.INFECTED
+						}
+						for (i in iso_setl_features)
+                        {
+                            feat = iso_setl_features[i];
+							iso_count_all = iso_count_all + feat.attributes.Isolations
+						}
+						appVue.dialog = true;
+						setTimeout(Geocoding(), 10000);
+					  },
+                      error : function(jqXHR, textStatus, errorThrown) {
+                          console.log("Error occurred: " + errorThrown);
+                      },
+                      url: mapi_json_string
+                      
+                  }); 
+
+			
+		
+
 			
 		});
 
@@ -1264,6 +1670,7 @@ $(document).ready(function (){
 						points: heatmap_features 
 						,options: { valueField: 'val1' }  
 					});
+					//displaySetlPolygons();
 				}
 				isHeatMap = true;
 			}
@@ -1292,6 +1699,12 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
+		setl_checkbox: true,
+		points_checkbox: true,
+		dialog: false,
+		setlname: "",
+		infecteds: "",
+		population: "",
 
 		hidden: true,
 
@@ -1360,7 +1773,42 @@ var appVue = new Vue({
 	},
     methods: {
 
+		turnSetl (e) 
+		{
+			console.log(e)
+			if (e == true)
+			{
+				displaySetlPolygons();
+			}
+			else
+			{
+				//AddUserPoints(data_all);
+				this.mdiClose = false;
+				this.cancelClick();
+				if (this.points_checkbox == true)
+				{
+					AddUserPoints(data_all);
+				}
+			}
+		},
 
+		turnPoints (e)
+		{
+			console.log(e);
+			if (e == true)
+			{
+				AddUserPoints(data_all);
+				displaySetlPolygons();
+			}
+			else{
+				ClearUserPoints();
+				if (this.setl_checkbox == true)
+				{
+					displaySetlPolygons();
+				}
+			}
+
+		},
 
 		getColor (FLAT_NUMBER) {
 			if (FLAT_NUMBER < 1000) return 'red'
@@ -1386,7 +1834,8 @@ var appVue = new Vue({
 			{
 				isHeatMap = false;
 				this.mdiHeatClose = false;
-				govmap.removeHeatLayer(); 
+				govmap.removeHeatLayer();
+
 				//this.cancelClick();
 			}
 		},
@@ -1697,8 +2146,17 @@ var appVue = new Vue({
 			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
 			// 	}
 			// }
-			AddUserPoints(data_all);
+	
+
 			govmap.clearDrawings(); 
+			if (this.points_checkbox == true)
+			{
+					AddUserPoints(data_all);
+			}
+			if (this.setl_checkbox == true)
+			{
+					displaySetlPolygons();
+			}
 
 			
 
@@ -1934,11 +2392,16 @@ var appVue = new Vue({
 						});
 					}
 					AddUserPoints(pts_features_date);
+					if (this.slider == 0)
+					{
+					 displaySetlPolygons();
+					}
 				}
 			}
 			else
 			{
 				d = 0;
+				//displaySetlPolygons();
 			}
 				//d = d + c
 			//console.log(d + " " + this.slider);
