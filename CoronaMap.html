@@ -656,7 +656,7 @@ width="300"
   dark
 >
   <v-card-text>
-	טוען נתונים
+  {{loading_text}}
 	<v-progress-linear
 	  indeterminate
 	  color="white"
@@ -1215,19 +1215,21 @@ function myLoop (i, all) {  //  create a loop function
 function getJsonData(json_infceted){
 			$.ajax({
 				dataType: 'json',
-				beforeSend : function() {
-				console.log('getIsoData() Before Ajax Request Starts !!');
-				getIsoData();
+				beforeSend : function() {;
 				},
 				success: function(json_data) {
 					{
 						for (i = 0; i < json_data.length; i++)
 						{
-							console.log(i);
+							//console.log(i);
 							infected_setl_features.push(json_data[i]);
+							appVue.loading_text = "60%";
 						}	
 					}
+					
 					//setTimeout(getIsoData(),5000);
+					getIsoData(iso_json_string);
+					console.log("RungetIsoData")
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log("Error occurred: " + errorThrown);
@@ -1236,17 +1238,20 @@ function getJsonData(json_infceted){
 			});
 	}
 
-	function getIsoData(){ 
+	function getIsoData(iso_json_string){ 
                     $.ajax({
                         dataType: 'json',
                         beforeSend : function() {
-                        console.log('Before Ajax Request Starts !!');
+						console.log('BeforegetIsoData');
                         },
                         success: function(iso_data) {
-                          console.log(iso_data.features.length)
+                          //console.log(iso_data.features.length)
                           for (i = 0; i < iso_data.features.length; i++)
                           {
                             iso_setl_features.push(iso_data.features[i]);
+							//appVue.loading_text = iso_data.features[i].attributes.Municipality_desc;
+							appVue.loading_text = "75%";
+							//console.log("iso " + i);
                           }
                         },
                         error : function(jqXHR, textStatus, errorThrown) {
@@ -1329,6 +1334,7 @@ var setlcodes = [];
 var setlnames = [];
 
 $(document).ready(function (){
+		appVue.dialog = true;
 		govmap.createMap('map_div', {
 			token: my_token,
 			visibleLayers: [],
@@ -1364,6 +1370,7 @@ $(document).ready(function (){
 			for (i = 0; i < d.responseJSON.features.length; i++)
 			{
 				//console.log(i);
+				appVue.loading_text ="10%";
 				feat = d.responseJSON.features[i];
 				name = d.responseJSON.features[i].attributes.Name;
 				place = d.responseJSON.features[i].attributes.Place;
@@ -1521,11 +1528,12 @@ $(document).ready(function (){
                       dataType: 'json',
                       beforeSend : function() {
                         getJsonData(json_infceted);
-						console.log("setTimeout(getJsonData(infected_setl_features, json_infceted),5000)");
+						console.log("getJsonData(json_infceted)");
 						//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
-                        console.log('setTimeout(getIsoData(iso_setl_features, iso_json_string),5000)');
+                       
                       },
                       success: function(setl_area_data) {
+
 						setl_area_features = setl_area_data.features;
 
 						for (i in infected_setl_features)
@@ -1539,14 +1547,15 @@ $(document).ready(function (){
 							iso_count_all = iso_count_all + feat.attributes.Isolations
 						}
 						appVue.dialog = true;
-						console.log(infected_setl_features);
+						//console.log(infected_setl_features);
 						console.log("for (i = 0; i < infected_setl_features; i++)");
 						for (i = 0; i < infected_setl_features.length; i++)
 						{
-							console.log(infected_setl_features[i].SETL_CODE);
+							//console.log(infected_setl_features[i].SETL_CODE);
 							setlcode= infected_setl_features[i].SETL_CODE;
 							 this_setlname = infected_setl_features[i].SETL_NAME;
 							 console.log(this_setlname);
+							 appVue.loading_text ="90%"
 							infecteds = infected_setl_features[i].INFECTED;
 							population = infected_setl_features[i].POPULATION;
 
@@ -1556,7 +1565,7 @@ $(document).ready(function (){
 								return f.properties["SETL_CODE"] == setlcode;			
 							}); 
 							console.log("s_features: ");
-							console.log(s_features);
+							//console.log(s_features);
 							if (s_features.length > 0)
 							{
 								infectedper1000 = infecteds / (population/1000);
@@ -1587,8 +1596,8 @@ $(document).ready(function (){
 							}	
 
 						}
-						appVue.dialog = false;
 						displaySetlPolygons();
+						appVue.dialog = false;
 
 					  },
                       error : function(jqXHR, textStatus, errorThrown) {
@@ -1668,6 +1677,7 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
+		loading_text: "טוען נתונים" ,
 		setl_checkbox: true,
 		points_checkbox: true,
 		dialog: false,
