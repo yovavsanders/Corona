@@ -1227,6 +1227,7 @@ function getJsonData(li, json_string){
 							li.push(json_data[i]);
 						}	
 					}
+					setTimeout(getIsoData(iso_setl_features, iso_json_string),5000);
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log("Error occurred: " + errorThrown);
@@ -1519,9 +1520,9 @@ $(document).ready(function (){
 			$.ajax({
                       dataType: 'json',
                       beforeSend : function() {
-                        setTimeout(getJsonData(infected_setl_features, json_infceted),5000);
+                        setTimeout(getJsonData(infected_setl_features, json_infceted),5);
 						console.log("setTimeout(getJsonData(infected_setl_features, json_infceted),5000)");
-						setTimeout(getIsoData(iso_setl_features, iso_json_string),5000);
+						//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
                         console.log('setTimeout(getIsoData(iso_setl_features, iso_json_string),5000)');
                       },
                       success: function(setl_area_data) {
