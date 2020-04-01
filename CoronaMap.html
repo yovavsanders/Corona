@@ -1520,8 +1520,9 @@ $(document).ready(function (){
                       dataType: 'json',
                       beforeSend : function() {
                         setTimeout(getJsonData(infected_setl_features, json_infceted),5000);
+						console.log("setTimeout(getJsonData(infected_setl_features, json_infceted),5000)");
 						setTimeout(getIsoData(iso_setl_features, iso_json_string),5000);
-                        console.log('Before Ajax Request Starts !!');
+                        console.log('setTimeout(getIsoData(iso_setl_features, iso_json_string),5000)');
                       },
                       success: function(setl_area_data) {
 						setl_area_features = setl_area_data.features;
