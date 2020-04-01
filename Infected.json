@@ -1,0 +1,607 @@
+[
+  {
+    "SETL_NAME": "תל אביב",
+    "POPULATION": 450192,
+    "INFECTED": 278
+  },
+  {
+    "SETL_NAME": "ירושלים",
+    "POPULATION": 925890,
+    "INFECTED": 650
+  },
+  {
+    "SETL_NAME": "בני ברק",
+    "POPULATION": 199230,
+    "INFECTED": 571
+  },
+  {
+    "SETL_NAME": "אשקלון",
+    "POPULATION": 143795,
+    "INFECTED": 114
+  },
+  {
+    "SETL_NAME": "ראשון לציון",
+    "POPULATION": 252869,
+    "INFECTED": 103
+  },
+  {
+    "SETL_NAME": "פתח תקווה",
+    "POPULATION": 246025,
+    "INFECTED": 96
+  },
+  {
+    "SETL_NAME": "נתניה",
+    "POPULATION": 218401,
+    "INFECTED": 83
+  },
+  {
+    "SETL_NAME": "באר שבע",
+    "POPULATION": 213817,
+    "INFECTED": 83
+  },
+  {
+    "SETL_NAME": "רמת גן",
+    "POPULATION": 160192,
+    "INFECTED": 81
+  },
+  {
+    "SETL_NAME": "אשדוד",
+    "POPULATION": 226175,
+    "INFECTED": 81
+  },
+  {
+    "SETL_NAME": "בת ים",
+    "POPULATION": 130789,
+    "INFECTED": 76
+  },
+  {
+    "SETL_NAME": "בית שמש",
+    "POPULATION": 123113,
+    "INFECTED": 76
+  },
+  {
+    "SETL_NAME": "חולון",
+    "POPULATION": 195229,
+    "INFECTED": 75
+  },
+  {
+    "SETL_NAME": "מגדל העמק",
+    "POPULATION": 25792,
+    "INFECTED": 72
+  },
+  {
+    "SETL_NAME": "אלעד",
+    "POPULATION": 47866,
+    "INFECTED": 68
+  },
+  {
+    "SETL_NAME": "חיפה",
+    "POPULATION": 285023,
+    "INFECTED": 67
+  },
+  {
+    "SETL_NAME": "רעננה",
+    "POPULATION": 76233,
+    "INFECTED": 57
+  },
+  {
+    "SETL_NAME": "רחובות",
+    "POPULATION": 143579,
+    "INFECTED": 53
+  },
+  {
+    "SETL_NAME": "הרצליה",
+    "POPULATION": 96608,
+    "INFECTED": 53
+  },
+  {
+    "SETL_NAME": "אפרת",
+    "POPULATION": 11193,
+    "INFECTED": 52
+  },
+  {
+    "SETL_NAME": "אור יהודה",
+    "POPULATION": 36913,
+    "INFECTED": 50
+  },
+  {
+    "SETL_NAME": "מודיעין עילית",
+    "POPULATION": 73632,
+    "INFECTED": 48
+  },
+  {
+    "SETL_NAME": "ביתר עילית",
+    "POPULATION": 57267,
+    "INFECTED": 38
+  },
+  {
+    "SETL_NAME": "לוד",
+    "POPULATION": 79760,
+    "INFECTED": 37
+  },
+  {
+    "SETL_NAME": "כפר סבא",
+    "POPULATION": 100921,
+    "INFECTED": 36
+  },
+  {
+    "SETL_NAME": "עפולה",
+    "POPULATION": 53883,
+    "INFECTED": 34
+  },
+  {
+    "SETL_NAME": "קרית אונו",
+    "POPULATION": 40328,
+    "INFECTED": 33
+  },
+  {
+    "SETL_NAME": "קרית מלאכי",
+    "POPULATION": 25181,
+    "INFECTED": 32
+  },
+  {
+    "SETL_NAME": "טבריה",
+    "POPULATION": 46146,
+    "INFECTED": 32
+  },
+  {
+    "SETL_NAME": "קרית יערים",
+    "POPULATION": 5565,
+    "INFECTED": 30
+  },
+  {
+    "SETL_NAME": "רמת השרון",
+    "POPULATION": 46884,
+    "INFECTED": 28
+  },
+  {
+    "SETL_NAME": "רמלה",
+    "POPULATION": 75832,
+    "INFECTED": 25
+  },
+  {
+    "SETL_NAME": "הוד השרון",
+    "POPULATION": 62768,
+    "INFECTED": 25
+  },
+  {
+    "SETL_NAME": "קרית גת",
+    "POPULATION": 61019,
+    "INFECTED": 22
+  },
+  {
+    "SETL_NAME": "גבעתיים",
+    "POPULATION": 60210,
+    "INFECTED": 22
+  },
+  {
+    "SETL_NAME": "חדרה",
+    "POPULATION": 99870,
+    "INFECTED": 20
+  },
+  {
+    "SETL_NAME": "שוהם",
+    "POPULATION": 20990,
+    "INFECTED": 19
+  },
+  {
+    "SETL_NAME": "צפת",
+    "POPULATION": 35717,
+    "INFECTED": 19
+  },
+  {
+    "SETL_NAME": "גדרה",
+    "POPULATION": 28093,
+    "INFECTED": 19
+  },
+  {
+    "SETL_NAME": "יבנה",
+    "POPULATION": 47982,
+    "INFECTED": 18
+  },
+  {
+    "SETL_NAME": "גן יבנה",
+    "POPULATION": 23751,
+    "INFECTED": 18
+  },
+  {
+    "SETL_NAME": "גבעת שמואל",
+    "POPULATION": 27563,
+    "INFECTED": 18
+  },
+  {
+    "SETL_NAME": "אבן יהודה",
+    "POPULATION": 13700,
+    "INFECTED": 18
+  },
+  {
+    "SETL_NAME": "זכרון יעקב",
+    "POPULATION": 23075,
+    "INFECTED": 17
+  },
+  {
+    "SETL_NAME": "גני תקווה",
+    "POPULATION": 19682,
+    "INFECTED": 17
+  },
+  {
+    "SETL_NAME": "נהריה",
+    "POPULATION": 59006,
+    "INFECTED": 16
+  },
+  {
+    "SETL_NAME": "מעלה אדומים",
+    "POPULATION": 38194,
+    "INFECTED": 16
+  },
+  {
+    "SETL_NAME": "כוכב יעקב",
+    "POPULATION": 8194,
+    "INFECTED": 16
+  },
+  {
+    "SETL_NAME": "נתיבות",
+    "POPULATION": 38581,
+    "INFECTED": 15
+  },
+  {
+    "SETL_NAME": "דימונה",
+    "POPULATION": 34536,
+    "INFECTED": 15
+  },
+  {
+    "SETL_NAME": "שדרות",
+    "POPULATION": 26880,
+    "INFECTED": 13
+  },
+  {
+    "SETL_NAME": "קרית ים",
+    "POPULATION": 40136,
+    "INFECTED": 13
+  },
+  {
+    "SETL_NAME": "קרית אתא",
+    "POPULATION": 59196,
+    "INFECTED": 12
+  },
+  {
+    "SETL_NAME": "כפר יונה",
+    "POPULATION": 26351,
+    "INFECTED": 12
+  },
+  {
+    "SETL_NAME": "אזור",
+    "POPULATION": 13139,
+    "INFECTED": 12
+  },
+  {
+    "SETL_NAME": "אופקים",
+    "POPULATION": 30267,
+    "INFECTED": 12
+  },
+  {
+    "SETL_NAME": "תל מונד",
+    "POPULATION": 12862,
+    "INFECTED": 11
+  },
+  {
+    "SETL_NAME": "מצפה רמון",
+    "POPULATION": 5220,
+    "INFECTED": 11
+  },
+  {
+    "SETL_NAME": "טמרה",
+    "POPULATION": 33851,
+    "INFECTED": 11
+  },
+  {
+    "SETL_NAME": "טירת כרמל",
+    "POPULATION": 24068,
+    "INFECTED": 11
+  },
+  {
+    "SETL_NAME": "ראש העין",
+    "POPULATION": 60733,
+    "INFECTED": 10
+  },
+  {
+    "SETL_NAME": "קרית ארבע",
+    "POPULATION": 7797,
+    "INFECTED": 10
+  },
+  {
+    "SETL_NAME": "יקנעם עילית",
+    "POPULATION": 24270,
+    "INFECTED": 10
+  },
+  {
+    "SETL_NAME": "גבעת זאב",
+    "POPULATION": 19584,
+    "INFECTED": 10
+  },
+  {
+    "SETL_NAME": "ערד",
+    "POPULATION": 26451,
+    "INFECTED": 9
+  },
+  {
+    "SETL_NAME": "עומר",
+    "POPULATION": 7586,
+    "INFECTED": 8
+  },
+  {
+    "SETL_NAME": "באר יעקב",
+    "POPULATION": 29123,
+    "INFECTED": 8
+  },
+  {
+    "SETL_NAME": "אילת",
+    "POPULATION": 51934,
+    "INFECTED": 8
+  },
+  {
+    "SETL_NAME": "כרמיאל",
+    "POPULATION": 46306,
+    "INFECTED": 7
+  },
+  {
+    "SETL_NAME": "כוכב יאיר",
+    "POPULATION": 8772,
+    "INFECTED": 7
+  },
+  {
+    "SETL_NAME": "קרית שמונה",
+    "POPULATION": 22622,
+    "INFECTED": 6
+  },
+  {
+    "SETL_NAME": "קרית ביאליק",
+    "POPULATION": 40493,
+    "INFECTED": 6
+  },
+  {
+    "SETL_NAME": "עכו",
+    "POPULATION": 49607,
+    "INFECTED": 6
+  },
+  {
+    "SETL_NAME": "סח'נין",
+    "POPULATION": 31056,
+    "INFECTED": 6
+  },
+  {
+    "SETL_NAME": "מבשרת ציון",
+    "POPULATION": 23962,
+    "INFECTED": 6
+  },
+  {
+    "SETL_NAME": "רכסים",
+    "POPULATION": 12110,
+    "INFECTED": 5
+  },
+  {
+    "SETL_NAME": "קרית מוצקין",
+    "POPULATION": 46166,
+    "INFECTED": 5
+  },
+  {
+    "SETL_NAME": "קצרין",
+    "POPULATION": 7381,
+    "INFECTED": 5
+  },
+  {
+    "SETL_NAME": "נס ציונה",
+    "POPULATION": 50538,
+    "INFECTED": 5
+  },
+  {
+    "SETL_NAME": "דייר חנא",
+    "POPULATION": 10345,
+    "INFECTED": 5
+  },
+  {
+    "SETL_NAME": "רהט",
+    "POPULATION": 69033,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "קרני שומרון",
+    "POPULATION": 9590,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "צור הדסה",
+    "POPULATION": 11148,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "נשר",
+    "POPULATION": 24761,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "מגאר",
+    "POPULATION": 22609,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "כסיפה",
+    "POPULATION": 21079,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "דבוריה",
+    "POPULATION": 10403,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "גבע בנימין",
+    "POPULATION": 5525,
+    "INFECTED": 4
+  },
+  {
+    "SETL_NAME": "שלומי",
+    "POPULATION": 6350,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "קרית עקרון",
+    "POPULATION": 10999,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "צור יצחק",
+    "POPULATION": 7903,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "נצרת",
+    "POPULATION": 77867,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "להבים",
+    "POPULATION": 6350,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "אריאל",
+    "POPULATION": 20456,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "אלפי מנשה",
+    "POPULATION": 8553,
+    "INFECTED": 3
+  },
+  {
+    "SETL_NAME": "רמת ישי",
+    "POPULATION": 7723,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "קרית טבעון",
+    "POPULATION": 18121,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "עתלית",
+    "POPULATION": 9071,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "מעלה עירון",
+    "POPULATION": 14833,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "מזכרת בתיה",
+    "POPULATION": 14972,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "כפר קרע",
+    "POPULATION": 18675,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "טייבה",
+    "POPULATION": 43128,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "חריש",
+    "POPULATION": 13113,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "ג'ת",
+    "POPULATION": 11799,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "בסמת טבעון",
+    "POPULATION": 7835,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "אור עקיבא",
+    "POPULATION": 20425,
+    "INFECTED": 2
+  },
+  {
+    "SETL_NAME": "שפרעם",
+    "POPULATION": 41559,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "קלנסווה",
+    "POPULATION": 22788,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "פרדסיה",
+    "POPULATION": 5984,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "עראבה",
+    "POPULATION": 25369,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "מיתר",
+    "POPULATION": 9483,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "כפר ורדים",
+    "POPULATION": 5579,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "ירוחם",
+    "POPULATION": 9975,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "יפיע",
+    "POPULATION": 18905,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "חורפיש",
+    "POPULATION": 6315,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "בת חפר",
+    "POPULATION": 5342,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "בית דגן",
+    "POPULATION": 7211,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "בית אל",
+    "POPULATION": 6042,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "אכסאל",
+    "POPULATION": 14500,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "אורנית",
+    "POPULATION": 8807,
+    "INFECTED": 1
+  },
+  {
+    "SETL_NAME": "אבו גוש",
+    "POPULATION": 7543,
+    "INFECTED": 1
+  }
+]
