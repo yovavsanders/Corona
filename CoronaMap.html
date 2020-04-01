@@ -1212,31 +1212,31 @@ function myLoop (i, all) {  //  create a loop function
 		}
 
 
-
-function getJsonData(li, json_string){
+function getJsonData(json_infceted){
 			$.ajax({
 				dataType: 'json',
 				beforeSend : function() {
-				console.log('Before Ajax Request Starts !!');
+				console.log('getIsoData() Before Ajax Request Starts !!');
+				getIsoData();
 				},
 				success: function(json_data) {
 					{
 						for (i = 0; i < json_data.length; i++)
 						{
 							console.log(i);
-							li.push(json_data[i]);
+							infected_setl_features.push(json_data[i]);
 						}	
 					}
-					setTimeout(getIsoData(iso_setl_features, iso_json_string),5000);
+					//setTimeout(getIsoData(),5000);
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log("Error occurred: " + errorThrown);
 				},
-				url: json_string
+				url: json_infceted
 			});
 	}
 
-	function getIsoData(li, json_string){
+	function getIsoData(){ 
                     $.ajax({
                         dataType: 'json',
                         beforeSend : function() {
@@ -1246,13 +1246,13 @@ function getJsonData(li, json_string){
                           console.log(iso_data.features.length)
                           for (i = 0; i < iso_data.features.length; i++)
                           {
-                            li.push(iso_data.features[i]);
+                            iso_setl_features.push(iso_data.features[i]);
                           }
                         },
                         error : function(jqXHR, textStatus, errorThrown) {
                           console.log("Error occurred: " + errorThrown);
                         },
-                        url: json_string
+                        url: iso_json_string
                     });
                   }
 
@@ -1520,7 +1520,7 @@ $(document).ready(function (){
 			$.ajax({
                       dataType: 'json',
                       beforeSend : function() {
-                        setTimeout(getJsonData(infected_setl_features, json_infceted),5);
+                        getJsonData(json_infceted);
 						console.log("setTimeout(getJsonData(infected_setl_features, json_infceted),5000)");
 						//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
                         console.log('setTimeout(getIsoData(iso_setl_features, iso_json_string),5000)');
