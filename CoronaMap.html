@@ -1116,23 +1116,35 @@ var classBreakeSymbols ={
                           'outlineColor': [0, 0, 255, 1],
                           'outlineWidth': 3,
                           'fillColor': [255, 255, 255, 0.5]
-                      },    
-                  red: 
+                      }, 
+				  cherry: 
                       {  
                           'outlineColor': [0, 0, 0, 1],
                           'outlineWidth': 1.5,
-                          'fillColor': [183, 28, 28, 0.5]
+                          'fillColor': [128, 0, 0, 0.5]
+                      }, 
+				  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [179, 0, 0, 0.5]
+                      },  
+                  light_red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
                       },
                   red_orange:  
                        {  
                           'outlineColor': [0, 0, 0, 1],
                           'outlineWidth': 1.5,
-                          'fillColor': [230, 81, 0, 0.5]
+                          'fillColor': [255, 179, 0, 0.5] 
                       },
                   orange:  {  
                           'outlineColor': [0, 0, 0, 1],
                           'outlineWidth': 1.5,
-                          'fillColor': [255, 179, 0, 0.5]
+                          'fillColor': [255, 164, 89, 0.5] 
                       },
                   yellow:  {  
                           'outlineColor': [0, 0, 0, 1],
@@ -1159,25 +1171,33 @@ function getSymbol(number) {
 	{
 		Symbol = classBreakeSymbols.green;
 	}
-	if (number.between(5,10))
+	if (number.between(5,13))
 	{
 		Symbol = classBreakeSymbols.green_yellow;
 	}
-	if (number.between(10,20))
+	if (number.between(13,25))
 	{
 		Symbol = classBreakeSymbols.yellow;
 	}
-	if (number.between(20,30))
+	if (number.between(25,37))
 	{
 		Symbol = classBreakeSymbols.orange;
 	}
-	if (number.between(30,50))
+	if (number.between(37,72))
 	{
 		Symbol = classBreakeSymbols.red_orange;
 	}
-	if (number.between(50,10000))
+	if (number.between(72,114))
 	{
-		Symbol = classBreakeSymbols.red;
+		Symbol = classBreakeSymbols.light_red;
+	}
+	if (number.between(114,278))
+	{
+		Symbol = classBreakeSymbols.red
+	}
+	if (number.between(278,1000))
+	{
+		Symbol = classBreakeSymbols.cherry;
 	}
 	return  Symbol;
 }
