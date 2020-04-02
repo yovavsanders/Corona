@@ -3578,5 +3578,45 @@
     "SETL_CODE": 416,
     "POPULATION": 745,
     "SETL_NAME": "מעין ברוך"
+  },
+  {
+    "INFECTED": 216,
+    "CURES": 4,
+    "DIES": 0,
+    "X": 0,
+    "Y": 0,
+    "SETL_CODE": 0,
+    "POPULATION": 0,
+    "SETL_NAME": "ישוב לא ידוע"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 0,
+    "Y": 0,
+    "SETL_CODE": 961,
+    "POPULATION": 0,
+    "SETL_NAME": "אבו רובייעה (שבט)"
+  },
+  {
+    "INFECTED": 84,
+    "CURES": 11,
+    "DIES": 1,
+    "X": 0,
+    "Y": 0,
+    "SETL_CODE": 0,
+    "POPULATION": 0,
+    "SETL_NAME": "לא רשום"
+  },
+  {
+    "INFECTED": 11,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 0,
+    "Y": 0,
+    "SETL_CODE": 748,
+    "POPULATION": 860,
+    "SETL_NAME": "מסלול"
   }
 ]
