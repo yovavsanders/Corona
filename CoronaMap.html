@@ -135,30 +135,19 @@
     display: inline-block;
 }
 
-.switch_watermark1
+.switch_watermark
 {
 	position: absolute;
     right: 0%!important;
-    bottom: 30%!important;
-    border: none;
+    bottom: 20%!important;
+	text-align: right;
+	background-color: rgb(245, 245, 245, 0.5);
     z-index: 1;
     font-family: mapiregular;
     display: inline-block;
 	font-size: 50
 }
 
-
-.switch_watermark2
-{
-	position: absolute;
-    right: 0%!important;
-    bottom: 25%!important;
-    border: none;
-    z-index: 1;
-    font-family: mapiregular;
-    display: inline-block;
-	font-size: 50
-}
 
 
 
@@ -558,10 +547,22 @@ placeholder="רדיוס במ'"
 	</v-btn>
 
 
+	<v-layout class="switch_watermark" right style="max-width: 180px">
+		<v-flex xs5 style="width: 175px">
+			<v-layout style="width: 175px">
+			<v-checkbox color="blue darken-4" hide-details style="margin-bottom: 12px;" class="shrink mr-2"  @change="turnSetl" v-model="setl_checkbox" ></v-checkbox>
+			<p style="margin-top: 20px;" class="text-right font-weight-bold">שכבת ישובים</p>
+			</v-layout>
+			<v-layout style="width: 175px">
+			<v-checkbox color="blue darken-4" hide-details style="margin-bottom: 12px;" class="shrink mr-2" @change="turnPoints" v-model="points_checkbox" ></v-checkbox>
+			<p style="margin-top:20px;" class="text-right font-weight-bold">שכבת מיקומי נדבקים</p>
+		  </v-layout>
+		</v-flex>
+	  </v-layout>
 
 
-		<v-checkbox color="blue darken-4" class="switch_watermark1" v-model="setl_checkbox" label="שכבת ישובים"  @change="turnSetl"></v-checkbox>
-		<v-checkbox color="blue darken-4" class="switch_watermark2" v-model="points_checkbox" label="שכבת מיקומי נדבקים"  @change="turnPoints"></v-checkbox>
+		<!-- <v-checkbox color="blue darken-4" class="switch_watermark1" v-model="setl_checkbox" label="שכבת ישובים"  @change="turnSetl"></v-checkbox>
+		<v-checkbox color="blue darken-4" class="switch_watermark2" v-model="points_checkbox" label="שכבת מיקומי נדבקים"  @change="turnPoints"></v-checkbox> -->
 
 			
 	  
@@ -1512,7 +1513,8 @@ $(document).ready(function (){
 
 			//appVue.getCountByDate();
 
-			appVue.max = dates_array.length;
+			appVue.max = dates.length;
+			console.log(appVue.max);
 			appVue.range = [1, dates_array.length];
 
 			filter_Date = corona_features.filter(function(f) {
@@ -2113,20 +2115,6 @@ var appVue = new Vue({
 			appVue.tableTitle = "";
 			appVue.desserts = [];
 			tableData = []
-			// for (c = 0; c < corona_features.length; c++)
-			// {
-			// 	feat = corona_features[c];
-			// 	if (c == 0)
-			// 	{
-			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-			// 	}
-			// 	else
-			// 	{
-			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-			// 	}
-			// }
-	
-
 			govmap.clearDrawings(); 
 			if (this.points_checkbox == true)
 			{
@@ -2136,23 +2124,6 @@ var appVue = new Vue({
 			{
 					displaySetlPolygons();
 			}
-
-			
-
-
-
-			// for (c = 0; c < corona_features.length; c++)
-			// {
-			// 	feat = corona_features[c];
-			// 	if (c == 0)
-			// 	{
-			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-			// 	}
-			// 	else
-			// 	{
-			// 		AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-			// 	}
-			// }
 		},
 
 
@@ -2371,19 +2342,16 @@ var appVue = new Vue({
 						});
 					}
 					AddUserPoints(pts_features_date);
-					if (this.slider == 0)
+					if (this.slider == 0 && this.setl_checkbox == true)
 					{
-					 displaySetlPolygons();
+					 	displaySetlPolygons();
 					}
 				}
 			}
 			else
 			{
 				d = 0;
-				//displaySetlPolygons();
 			}
-				//d = d + c
-			//console.log(d + " " + this.slider);
 			return d
 		
 		},
