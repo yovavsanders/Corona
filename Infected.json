@@ -1,970 +1,3582 @@
 [
   {
-    "SETL_NAME": "אילת",
-    "POPULATION": 51934,
-    "INFECTED": 8,
+    "INFECTED": 11,
+    "CURES": 2,
+    "DIES": 0,
     "X": 193982.24,
     "Y": 384601.16,
-    "SETL_CODE": 2600
+    "SETL_CODE": 2600,
+    "POPULATION": 51935,
+    "SETL_NAME": "אילת"
   },
   {
-    "SETL_NAME": "מצפה רמון",
-    "POPULATION": 5220,
-    "INFECTED": 11,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 205802.58,
+    "Y": 422945.23,
+    "SETL_CODE": 866,
+    "POPULATION": 696,
+    "SETL_NAME": "יטבתה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 206083.39,
+    "Y": 427809.85,
+    "SETL_CODE": 1129,
+    "POPULATION": 248,
+    "SETL_NAME": "גרופית"
+  },
+  {
+    "INFECTED": 18,
+    "CURES": 0,
+    "DIES": 0,
     "X": 180564.08,
     "Y": 502393.64,
-    "SETL_CODE": 99
+    "SETL_CODE": 99,
+    "POPULATION": 5221,
+    "SETL_NAME": "מצפה רמון"
   },
   {
-    "SETL_NAME": "ירוחם",
-    "POPULATION": 9975,
     "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 235142,
+    "Y": 539338.04,
+    "SETL_CODE": 1251,
+    "POPULATION": 190,
+    "SETL_NAME": "עין תמר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 193329.72,
     "Y": 544192.61,
-    "SETL_CODE": 831
+    "SETL_CODE": 831,
+    "POPULATION": 9974,
+    "SETL_NAME": "ירוחם"
   },
   {
-    "SETL_NAME": "דימונה",
-    "POPULATION": 34536,
-    "INFECTED": 15,
+    "INFECTED": 20,
+    "CURES": 0,
+    "DIES": 0,
     "X": 202602.12,
     "Y": 553029.97,
-    "SETL_CODE": 2200
+    "SETL_CODE": 2200,
+    "POPULATION": 34135,
+    "SETL_NAME": "דימונה"
   },
   {
-    "SETL_NAME": "כסיפה",
-    "POPULATION": 21079,
-    "INFECTED": 4,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 133672.3,
+    "Y": 564488.22,
+    "SETL_CODE": 1364,
+    "POPULATION": 305,
+    "SETL_NAME": "שלומית"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 182384.31,
+    "Y": 567415.37,
+    "SETL_CODE": 939,
+    "POPULATION": 0,
+    "SETL_NAME": "מסעודין אל-עזאזמה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 135777.56,
+    "Y": 568690.35,
+    "SETL_CODE": 1227,
+    "POPULATION": 461,
+    "SETL_NAME": "יתד"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 135725.73,
+    "Y": 571304.81,
+    "SETL_CODE": 1239,
+    "POPULATION": 164,
+    "SETL_NAME": "חולית"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 172799.87,
+    "Y": 572091.65,
+    "SETL_CODE": 397,
+    "POPULATION": 832,
+    "SETL_NAME": "חצרים"
+  },
+  {
+    "INFECTED": 6,
+    "CURES": 0,
+    "DIES": 0,
     "X": 207852.46,
     "Y": 572828.58,
-    "SETL_CODE": 1059
+    "SETL_CODE": 1059,
+    "POPULATION": 21079,
+    "SETL_NAME": "כסיפה"
   },
   {
-    "SETL_NAME": "באר שבע",
-    "POPULATION": 213817,
-    "INFECTED": 83,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 186825.99,
+    "Y": 573009.09,
+    "SETL_CODE": 1054,
+    "POPULATION": 20204,
+    "SETL_NAME": "תל שבע"
+  },
+  {
+    "INFECTED": 114,
+    "CURES": 2,
+    "DIES": 1,
     "X": 179942.8,
     "Y": 573319.6,
-    "SETL_CODE": 9000
+    "SETL_CODE": 9000,
+    "POPULATION": 209002,
+    "SETL_NAME": "באר שבע"
   },
   {
-    "SETL_NAME": "ערד",
-    "POPULATION": 26451,
-    "INFECTED": 9,
+    "INFECTED": 11,
+    "CURES": 0,
+    "DIES": 0,
     "X": 220151.01,
     "Y": 573794.51,
-    "SETL_CODE": 2560
+    "SETL_CODE": 2560,
+    "POPULATION": 26451,
+    "SETL_NAME": "ערד"
   },
   {
-    "SETL_NAME": "עומר",
-    "POPULATION": 7586,
-    "INFECTED": 8,
+    "INFECTED": 10,
+    "CURES": 1,
+    "DIES": 0,
     "X": 185279.88,
     "Y": 574781.87,
-    "SETL_CODE": 666
+    "SETL_CODE": 666,
+    "POPULATION": 7586,
+    "SETL_NAME": "עומר"
   },
   {
-    "SETL_NAME": "אופקים",
-    "POPULATION": 30267,
-    "INFECTED": 12,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 191783.25,
+    "Y": 577062.61,
+    "SETL_CODE": 1359,
+    "POPULATION": 5663,
+    "SETL_NAME": "אל סייד"
+  },
+  {
+    "INFECTED": 11,
+    "CURES": 1,
+    "DIES": 0,
     "X": 163835.63,
     "Y": 579862.28,
-    "SETL_CODE": 31
+    "SETL_CODE": 31,
+    "POPULATION": 29021,
+    "SETL_NAME": "אופקים"
   },
   {
-    "SETL_NAME": "מיתר",
-    "POPULATION": 9483,
-    "INFECTED": 1,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
     "X": 194103.08,
     "Y": 581797.25,
-    "SETL_CODE": 1268
+    "SETL_CODE": 1268,
+    "POPULATION": 8438,
+    "SETL_NAME": "מיתר"
   },
   {
-    "SETL_NAME": "להבים",
-    "POPULATION": 6350,
+    "INFECTED": 32,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 166950.16,
+    "Y": 581946.75,
+    "SETL_CODE": 736,
+    "POPULATION": 1437,
+    "SETL_NAME": "גילת"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 165123.38,
+    "Y": 582645.7,
+    "SETL_CODE": 762,
+    "POPULATION": 789,
+    "SETL_NAME": "בטחה"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 161994.51,
+    "Y": 583030.09,
+    "SETL_CODE": 789,
+    "POPULATION": 671,
+    "SETL_NAME": "רנן"
+  },
+  {
     "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 190800.38,
+    "Y": 585723.66,
+    "SETL_CODE": 3777,
+    "POPULATION": 458,
+    "SETL_NAME": "סנסנה"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 210690.92,
+    "Y": 585801.52,
+    "SETL_CODE": 3745,
+    "POPULATION": 512,
+    "SETL_NAME": "מצדות יהודה"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 182192.46,
     "Y": 586529.46,
-    "SETL_CODE": 1271
+    "SETL_CODE": 1271,
+    "POPULATION": 6350,
+    "SETL_NAME": "להבים"
   },
   {
-    "SETL_NAME": "רהט",
-    "POPULATION": 69033,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 187594.76,
+    "Y": 587518.56,
+    "SETL_CODE": 2023,
+    "POPULATION": 529,
+    "SETL_NAME": "להב"
+  },
+  {
+    "INFECTED": 12,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 201100.71,
+    "Y": 588340.8,
+    "SETL_CODE": 3784,
+    "POPULATION": 714,
+    "SETL_NAME": "שמעה"
+  },
+  {
     "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 176777.24,
     "Y": 588546.96,
-    "SETL_CODE": 1161
+    "SETL_CODE": 1161,
+    "POPULATION": 69032,
+    "SETL_NAME": "רהט"
   },
   {
-    "SETL_NAME": "נתיבות",
-    "POPULATION": 38581,
-    "INFECTED": 15,
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 161853.84,
+    "Y": 589585.42,
+    "SETL_CODE": 1082,
+    "POPULATION": 2059,
+    "SETL_NAME": "מעגלים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 162295.99,
+    "Y": 590319.37,
+    "SETL_CODE": 398,
+    "POPULATION": 319,
+    "SETL_NAME": "שרשרת"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 215258.5,
+    "Y": 590797.36,
+    "SETL_CODE": 3657,
+    "POPULATION": 575,
+    "SETL_NAME": "מעון"
+  },
+  {
+    "INFECTED": 17,
+    "CURES": 2,
+    "DIES": 0,
     "X": 160436.72,
     "Y": 592164.37,
-    "SETL_CODE": 246
+    "SETL_CODE": 246,
+    "POPULATION": 35631,
+    "SETL_NAME": "נתיבות"
   },
   {
-    "SETL_NAME": "שדרות",
-    "POPULATION": 26880,
-    "INFECTED": 13,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 151633.86,
+    "Y": 592678.21,
+    "SETL_CODE": 399,
+    "POPULATION": 1037,
+    "SETL_NAME": "בארי"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188953.66,
+    "Y": 593378.62,
+    "SETL_CODE": 1265,
+    "POPULATION": 806,
+    "SETL_NAME": "שומריה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 202893.39,
+    "Y": 594147.34,
+    "SETL_CODE": 3748,
+    "POPULATION": 1037,
+    "SETL_NAME": "עתניאל"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 160092.16,
+    "Y": 595717.01,
+    "SETL_CODE": 665,
+    "POPULATION": 699,
+    "SETL_NAME": "תקומה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 164981.52,
+    "Y": 598515.62,
+    "SETL_CODE": 2047,
+    "POPULATION": 584,
+    "SETL_NAME": "ניר משה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 166414.08,
+    "Y": 601638.16,
+    "SETL_CODE": 336,
+    "POPULATION": 822,
+    "SETL_NAME": "דורות"
+  },
+  {
+    "INFECTED": 22,
+    "CURES": 1,
+    "DIES": 0,
     "X": 161691.09,
     "Y": 604046.89,
-    "SETL_CODE": 1031
+    "SETL_CODE": 1031,
+    "POPULATION": 26455,
+    "SETL_NAME": "שדרות"
   },
   {
-    "SETL_NAME": "קרית ארבע",
-    "POPULATION": 7797,
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 191867.35,
+    "Y": 604481.66,
+    "SETL_CODE": 23,
+    "POPULATION": 353,
+    "SETL_NAME": "אמציה"
+  },
+  {
     "INFECTED": 10,
+    "CURES": 0,
+    "DIES": 0,
     "X": 211492.73,
     "Y": 605570.97,
-    "SETL_CODE": 3611
+    "SETL_CODE": 3611,
+    "POPULATION": 7323,
+    "SETL_NAME": "קרית ארבע"
   },
   {
-    "SETL_NAME": "קרית גת",
-    "POPULATION": 61019,
-    "INFECTED": 22,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 158912.73,
+    "Y": 607710.66,
+    "SETL_CODE": 714,
+    "POPULATION": 517,
+    "SETL_NAME": "ארז"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 177790.78,
+    "Y": 609243.71,
+    "SETL_CODE": 400,
+    "POPULATION": 1675,
+    "SETL_NAME": "אבן שמואל"
+  },
+  {
+    "INFECTED": 13,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 217850.19,
+    "Y": 610365.69,
+    "SETL_CODE": 3754,
+    "POPULATION": 835,
+    "SETL_NAME": "אספר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221863.96,
+    "Y": 611567.44,
+    "SETL_CODE": 3653,
+    "POPULATION": 535,
+    "SETL_NAME": "מעלה עמוס"
+  },
+  {
+    "INFECTED": 23,
+    "CURES": 2,
+    "DIES": 1,
     "X": 178441.66,
     "Y": 612964.09,
-    "SETL_CODE": 2630
+    "SETL_CODE": 2630,
+    "POPULATION": 54973,
+    "SETL_NAME": "קרית גת"
   },
   {
-    "SETL_NAME": "אפרת",
-    "POPULATION": 11193,
-    "INFECTED": 52,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 173000.29,
+    "Y": 613098.79,
+    "SETL_CODE": 11,
+    "POPULATION": 552,
+    "SETL_NAME": "ניר ח'ן"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 154612.22,
+    "Y": 613166.66,
+    "SETL_CODE": 584,
+    "POPULATION": 809,
+    "SETL_NAME": "זיקים"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 173946.34,
+    "Y": 614167.19,
+    "SETL_CODE": 7,
+    "POPULATION": 875,
+    "SETL_NAME": "שחר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195609.9,
+    "Y": 615215.19,
+    "SETL_CODE": 59,
+    "POPULATION": 1371,
+    "SETL_NAME": "נחושה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 162401.59,
+    "Y": 615222.19,
+    "SETL_CODE": 706,
+    "POPULATION": 970,
+    "SETL_NAME": "גיאה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 162923.94,
+    "Y": 616312.31,
+    "SETL_CODE": 747,
+    "POPULATION": 873,
+    "SETL_NAME": "בית שקמה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 161742.08,
+    "Y": 617250,
+    "SETL_CODE": 1323,
+    "POPULATION": 763,
+    "SETL_NAME": "בת הדר"
+  },
+  {
+    "INFECTED": 60,
+    "CURES": 7,
+    "DIES": 0,
     "X": 214194.84,
     "Y": 617798.8,
-    "SETL_CODE": 3650
+    "SETL_CODE": 3650,
+    "POPULATION": 10088,
+    "SETL_NAME": "אפרת"
   },
   {
-    "SETL_NAME": "אשקלון",
-    "POPULATION": 143795,
-    "INFECTED": 114,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221818.17,
+    "Y": 617856.64,
+    "SETL_CODE": 3563,
+    "POPULATION": 3882,
+    "SETL_NAME": "תקוע"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 172137.1,
+    "Y": 617992.36,
+    "SETL_CODE": 775,
+    "POPULATION": 638,
+    "SETL_NAME": "יד נתן"
+  },
+  {
+    "INFECTED": 10,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 211817.74,
+    "Y": 618296.39,
+    "SETL_CODE": 3604,
+    "POPULATION": 3151,
+    "SETL_NAME": "אלון שבות"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 178815.25,
+    "Y": 618386.89,
+    "SETL_CODE": 2030,
+    "POPULATION": 593,
+    "SETL_NAME": "מנוחה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 209452.67,
+    "Y": 618542.61,
+    "SETL_CODE": 3794,
+    "POPULATION": 1545,
+    "SETL_NAME": "בת עין"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213416.37,
+    "Y": 618804.15,
+    "SETL_CODE": 3618,
+    "POPULATION": 2510,
+    "SETL_NAME": "אלעזר"
+  },
+  {
+    "INFECTED": 151,
+    "CURES": 6,
+    "DIES": 0,
     "X": 159183.27,
     "Y": 618811.64,
-    "SETL_CODE": 7100
+    "SETL_CODE": 7100,
+    "POPULATION": 140968,
+    "SETL_NAME": "אשקלון"
   },
   {
-    "SETL_NAME": "ביתר עילית",
-    "POPULATION": 57267,
-    "INFECTED": 38,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 179318.79,
+    "Y": 619154.42,
+    "SETL_CODE": 1133,
+    "POPULATION": 286,
+    "SETL_NAME": "ורדון"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 194896.83,
+    "Y": 619792.16,
+    "SETL_CODE": 919,
+    "POPULATION": 828,
+    "SETL_NAME": "גבעת ישעיהו"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 176837.41,
+    "Y": 619992.24,
+    "SETL_CODE": 553,
+    "POPULATION": 731,
+    "SETL_NAME": "ניר בנים"
+  },
+  {
+    "INFECTED": 11,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 213645.71,
+    "Y": 620630.26,
+    "SETL_CODE": 3725,
+    "POPULATION": 2315,
+    "SETL_NAME": "נווה דניאל"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 201600.37,
+    "Y": 621034.38,
+    "SETL_CODE": 1070,
+    "POPULATION": 865,
+    "SETL_NAME": "אביעזר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 189339.09,
+    "Y": 621730.71,
+    "SETL_CODE": 52,
+    "POPULATION": 763,
+    "SETL_NAME": "לוזית"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 165579.79,
+    "Y": 621816.75,
+    "SETL_CODE": 699,
+    "POPULATION": 891,
+    "SETL_NAME": "ניר ישראל"
+  },
+  {
+    "INFECTED": 6,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 172421.89,
+    "Y": 622839.08,
+    "SETL_CODE": 1098,
+    "POPULATION": 2210,
+    "SETL_NAME": "מרכז שפירא"
+  },
+  {
+    "INFECTED": 50,
+    "CURES": 0,
+    "DIES": 0,
     "X": 210802.97,
     "Y": 622871.37,
-    "SETL_CODE": 3780
+    "SETL_CODE": 3780,
+    "POPULATION": 56746,
+    "SETL_NAME": "ביתר עילית"
   },
   {
-    "SETL_NAME": "בית שמש",
-    "POPULATION": 123113,
-    "INFECTED": 76,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 170838.12,
+    "Y": 623467.52,
+    "SETL_CODE": 620,
+    "POPULATION": 688,
+    "SETL_NAME": "משואות יצחק"
+  },
+  {
+    "INFECTED": 106,
+    "CURES": 2,
+    "DIES": 0,
     "X": 199778.15,
     "Y": 624418.17,
-    "SETL_CODE": 2610
+    "SETL_CODE": 2610,
+    "POPULATION": 118676,
+    "SETL_NAME": "בית שמש"
   },
   {
-    "SETL_NAME": "צור הדסה",
-    "POPULATION": 11148,
-    "INFECTED": 4,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 209212.17,
     "Y": 624821.47,
-    "SETL_CODE": 1113
+    "SETL_CODE": 1113,
+    "POPULATION": 9583,
+    "SETL_NAME": "צור הדסה"
   },
   {
-    "SETL_NAME": "קרית מלאכי",
-    "POPULATION": 25181,
-    "INFECTED": 32,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 205920.07,
+    "Y": 625031.54,
+    "SETL_CODE": 822,
+    "POPULATION": 899,
+    "SETL_NAME": "מטע"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 165495.23,
+    "Y": 625032.62,
+    "SETL_CODE": 359,
+    "POPULATION": 382,
+    "SETL_NAME": "ניצנים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 174092.56,
+    "Y": 625288.88,
+    "SETL_CODE": 320,
+    "POPULATION": 1142,
+    "SETL_NAME": "כפר ורבורג"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 206927.81,
+    "Y": 626332.19,
+    "SETL_CODE": 823,
+    "POPULATION": 672,
+    "SETL_NAME": "בר גיורא"
+  },
+  {
+    "INFECTED": 29,
+    "CURES": 7,
+    "DIES": 0,
     "X": 175934.15,
     "Y": 626612.44,
-    "SETL_CODE": 1034
+    "SETL_CODE": 1034,
+    "POPULATION": 23124,
+    "SETL_NAME": "קרית מלאכי"
   },
   {
-    "SETL_NAME": "ירושלים",
-    "POPULATION": 925890,
-    "INFECTED": 650,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 169744.01,
+    "Y": 626779.73,
+    "SETL_CODE": 793,
+    "POPULATION": 1022,
+    "SETL_NAME": "גבעתי"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 178428.14,
+    "Y": 626949.25,
+    "SETL_CODE": 593,
+    "POPULATION": 1164,
+    "SETL_NAME": "ערוגות"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 220782.53,
+    "Y": 627395.2,
+    "SETL_CODE": 127,
+    "POPULATION": 545,
+    "SETL_NAME": "רמת רחל"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 165130.37,
+    "Y": 627623.44,
+    "SETL_CODE": 351,
+    "POPULATION": 2343,
+    "SETL_NAME": "ניצן"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 174919.04,
+    "Y": 627839.15,
+    "SETL_CODE": 2012,
+    "POPULATION": 507,
+    "SETL_NAME": "אורות"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 176982.29,
+    "Y": 628121,
+    "SETL_CODE": 690,
+    "POPULATION": 868,
+    "SETL_NAME": "כפר אחים"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 214936.45,
+    "Y": 629310.14,
+    "SETL_CODE": 780,
+    "POPULATION": 1337,
+    "SETL_NAME": "אורה"
+  },
+  {
+    "INFECTED": 916,
+    "CURES": 30,
+    "DIES": 6,
     "X": 220185.91,
     "Y": 632010.8,
-    "SETL_CODE": 3000
+    "SETL_CODE": 3000,
+    "POPULATION": 919438,
+    "SETL_NAME": "ירושלים"
   },
   {
-    "SETL_NAME": "מעלה אדומים",
-    "POPULATION": 38194,
-    "INFECTED": 16,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 178259.09,
+    "Y": 632119.58,
+    "SETL_CODE": 700,
+    "POPULATION": 1467,
+    "SETL_NAME": "חצב"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 215430.97,
+    "Y": 632189.88,
+    "SETL_CODE": 710,
+    "POPULATION": 1678,
+    "SETL_NAME": "בית זית"
+  },
+  {
+    "INFECTED": 23,
+    "CURES": 2,
+    "DIES": 0,
     "X": 229773.99,
     "Y": 632377.1,
-    "SETL_CODE": 3616
+    "SETL_CODE": 3616,
+    "POPULATION": 38193,
+    "SETL_NAME": "מעלה אדומים"
   },
   {
-    "SETL_NAME": "גן יבנה",
-    "POPULATION": 23751,
-    "INFECTED": 18,
+    "INFECTED": 19,
+    "CURES": 4,
+    "DIES": 0,
     "X": 172256.92,
     "Y": 632797.98,
-    "SETL_CODE": 166
+    "SETL_CODE": 166,
+    "POPULATION": 23752,
+    "SETL_NAME": "גן יבנה"
   },
   {
-    "SETL_NAME": "מבשרת ציון",
-    "POPULATION": 23962,
-    "INFECTED": 6,
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 177411.27,
+    "Y": 633029.58,
+    "SETL_CODE": 1066,
+    "POPULATION": 7017,
+    "SETL_NAME": "בני עי'ש"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 182271.41,
+    "Y": 633313.92,
+    "SETL_CODE": 2033,
+    "POPULATION": 1221,
+    "SETL_NAME": "בית חלקיה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195094.88,
+    "Y": 633384.93,
+    "SETL_CODE": 364,
+    "POPULATION": 924,
+    "SETL_NAME": "כפר אוריה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 211584.28,
+    "Y": 633504.76,
+    "SETL_CODE": 521,
+    "POPULATION": 3424,
+    "SETL_NAME": "עין נקובא"
+  },
+  {
+    "INFECTED": 8,
+    "CURES": 3,
+    "DIES": 0,
     "X": 213479.81,
     "Y": 633639.53,
-    "SETL_CODE": 1015
+    "SETL_CODE": 1015,
+    "POPULATION": 23962,
+    "SETL_NAME": "מבשרת ציון"
   },
   {
-    "SETL_NAME": "קרית יערים",
-    "POPULATION": 5565,
-    "INFECTED": 30,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 174546.92,
+    "Y": 633807.49,
+    "SETL_CODE": 234,
+    "POPULATION": 1267,
+    "SETL_NAME": "ביצרון"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 206299.04,
+    "Y": 633808.36,
+    "SETL_CODE": 456,
+    "POPULATION": 1249,
+    "SETL_NAME": "שורש"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 183241.22,
+    "Y": 633887.45,
+    "SETL_CODE": 577,
+    "POPULATION": 4175,
+    "SETL_NAME": "יד בנימין"
+  },
+  {
+    "INFECTED": 32,
+    "CURES": 6,
+    "DIES": 0,
     "X": 209474.91,
     "Y": 634428.67,
-    "SETL_CODE": 1137
+    "SETL_CODE": 1137,
+    "POPULATION": 5565,
+    "SETL_NAME": "קרית יערים"
   },
   {
-    "SETL_NAME": "אבו גוש",
-    "POPULATION": 7543,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 212056.22,
+    "Y": 634618.82,
+    "SETL_CODE": 672,
+    "POPULATION": 723,
+    "SETL_NAME": "בית נקופה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 190866.33,
+    "Y": 634779.62,
+    "SETL_CODE": 462,
+    "POPULATION": 1366,
+    "SETL_NAME": "טל שחר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 210542.87,
     "Y": 634784.25,
-    "SETL_CODE": 472
+    "SETL_CODE": 472,
+    "POPULATION": 7543,
+    "SETL_NAME": "אבו גוש"
   },
   {
-    "SETL_NAME": "גדרה",
-    "POPULATION": 28093,
-    "INFECTED": 19,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 175524.06,
+    "Y": 634844.89,
+    "SETL_CODE": 827,
+    "POPULATION": 678,
+    "SETL_NAME": "נווה מבטח"
+  },
+  {
+    "INFECTED": 31,
+    "CURES": 3,
+    "DIES": 0,
     "X": 179289.42,
     "Y": 635385.93,
-    "SETL_CODE": 2550
+    "SETL_CODE": 2550,
+    "POPULATION": 28092,
+    "SETL_NAME": "גדרה"
   },
   {
-    "SETL_NAME": "אשדוד",
-    "POPULATION": 226175,
-    "INFECTED": 81,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 209898.79,
+    "Y": 635390.17,
+    "SETL_CODE": 1144,
+    "POPULATION": 212,
+    "SETL_NAME": "קרית יערים(מוסד)"
+  },
+  {
+    "INFECTED": 102,
+    "CURES": 3,
+    "DIES": 1,
     "X": 167582.88,
     "Y": 635675.82,
-    "SETL_CODE": 70
+    "SETL_CODE": 70,
+    "POPULATION": 224628,
+    "SETL_NAME": "אשדוד"
   },
   {
-    "SETL_NAME": "מזכרת בתיה",
-    "POPULATION": 14972,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 237414.17,
+    "Y": 635901.29,
+    "SETL_CODE": 3576,
+    "POPULATION": 2453,
+    "SETL_NAME": "מצפה יריחו"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 187311.29,
+    "Y": 635981.04,
+    "SETL_CODE": 440,
+    "POPULATION": 913,
+    "SETL_NAME": "יסודות"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198072.81,
+    "Y": 636164.99,
+    "SETL_CODE": 1259,
+    "POPULATION": 295,
+    "SETL_NAME": "נווה שלום"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 176155.81,
+    "Y": 636973.08,
+    "SETL_CODE": 591,
+    "POPULATION": 998,
+    "SETL_NAME": "עשרת"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 231266.73,
+    "Y": 636989.64,
+    "SETL_CODE": 3638,
+    "POPULATION": 4513,
+    "SETL_NAME": "כפר אדומים"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 212355.4,
+    "Y": 637107.22,
+    "SETL_CODE": 3769,
+    "POPULATION": 4056,
+    "SETL_NAME": "הר אדר"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195824.48,
+    "Y": 637581.03,
+    "SETL_CODE": 777,
+    "POPULATION": 580,
+    "SETL_NAME": "נחשון"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 175559.88,
+    "Y": 637928.94,
+    "SETL_CODE": 555,
+    "POPULATION": 623,
+    "SETL_NAME": "שדמה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 215130.06,
+    "Y": 639487.01,
+    "SETL_CODE": 3644,
+    "POPULATION": 1086,
+    "SETL_NAME": "גבעון החדשה"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 185244.58,
     "Y": 639663.63,
-    "SETL_CODE": 28
+    "SETL_CODE": 28,
+    "POPULATION": 14680,
+    "SETL_NAME": "מזכרת בתיה"
   },
   {
-    "SETL_NAME": "גבע בנימין",
-    "POPULATION": 5525,
-    "INFECTED": 4,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 226211.48,
     "Y": 639676.07,
-    "SETL_CODE": 3763
+    "SETL_CODE": 3763,
+    "POPULATION": 5525,
+    "SETL_NAME": "גבע בנימין"
   },
   {
-    "SETL_NAME": "קרית עקרון",
-    "POPULATION": 10999,
-    "INFECTED": 3,
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 174367.5,
+    "Y": 640518.32,
+    "SETL_CODE": 760,
+    "POPULATION": 1115,
+    "SETL_NAME": "בן זכאי"
+  },
+  {
+    "INFECTED": 6,
+    "CURES": 1,
+    "DIES": 0,
     "X": 183166.74,
     "Y": 641074.31,
-    "SETL_CODE": 469
+    "SETL_CODE": 469,
+    "POPULATION": 10999,
+    "SETL_NAME": "קרית עקרון"
   },
   {
-    "SETL_NAME": "גבעת זאב",
-    "POPULATION": 19584,
-    "INFECTED": 10,
+    "INFECTED": 12,
+    "CURES": 0,
+    "DIES": 0,
     "X": 215340.4,
     "Y": 641077.34,
-    "SETL_CODE": 3730
+    "SETL_CODE": 3730,
+    "POPULATION": 17922,
+    "SETL_NAME": "גבעת זאב"
   },
   {
-    "SETL_NAME": "יבנה",
-    "POPULATION": 47982,
-    "INFECTED": 18,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198834.83,
+    "Y": 641503.54,
+    "SETL_CODE": 1333,
+    "POPULATION": 2203,
+    "SETL_NAME": "נוף איילון"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 181269.88,
+    "Y": 641733.33,
+    "SETL_CODE": 147,
+    "POPULATION": 2703,
+    "SETL_NAME": "גבעת ברנר"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 212028.56,
+    "Y": 641959.27,
+    "SETL_CODE": 3416,
+    "POPULATION": 0,
+    "SETL_NAME": "טירה"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 183701.75,
+    "Y": 642033.7,
+    "SETL_CODE": 177,
+    "POPULATION": 1261,
+    "SETL_NAME": "כפר ביל'ו"
+  },
+  {
+    "INFECTED": 19,
+    "CURES": 3,
+    "DIES": 0,
     "X": 175252.12,
     "Y": 642876.6,
-    "SETL_CODE": 2660
+    "SETL_CODE": 2660,
+    "POPULATION": 46705,
+    "SETL_NAME": "יבנה"
   },
   {
-    "SETL_NAME": "כוכב יעקב",
-    "POPULATION": 8194,
-    "INFECTED": 16,
+    "INFECTED": 8,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 229071.27,
+    "Y": 642947.83,
+    "SETL_CODE": 3651,
+    "POPULATION": 1463,
+    "SETL_NAME": "מעלה מכמש"
+  },
+  {
+    "INFECTED": 21,
+    "CURES": 0,
+    "DIES": 0,
     "X": 223094.78,
     "Y": 643251.67,
-    "SETL_CODE": 3779
+    "SETL_CODE": 3779,
+    "POPULATION": 8194,
+    "SETL_NAME": "כוכב יעקב"
   },
   {
-    "SETL_NAME": "רחובות",
-    "POPULATION": 143579,
-    "INFECTED": 53,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 177925.2,
+    "Y": 643463.12,
+    "SETL_CODE": 853,
+    "POPULATION": 990,
+    "SETL_NAME": "גאליה"
+  },
+  {
+    "INFECTED": 67,
+    "CURES": 8,
+    "DIES": 1,
     "X": 179742.5,
     "Y": 643942.18,
-    "SETL_CODE": 8400
+    "SETL_CODE": 8400,
+    "POPULATION": 141579,
+    "SETL_NAME": "רחובות"
   },
   {
-    "SETL_NAME": "נס ציונה",
-    "POPULATION": 50538,
-    "INFECTED": 5,
+    "INFECTED": 10,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221431.22,
+    "Y": 645067.42,
+    "SETL_CODE": 3659,
+    "POPULATION": 1903,
+    "SETL_NAME": "פסגות"
+  },
+  {
+    "INFECTED": 86,
+    "CURES": 7,
+    "DIES": 0,
+    "X": 200409.81,
+    "Y": 645434.53,
+    "SETL_CODE": 1200,
+    "POPULATION": 92406,
+    "SETL_NAME": "מודיעין-מכבים-רעות"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 203651.56,
+    "Y": 647356.16,
+    "SETL_CODE": 3796,
+    "POPULATION": 2664,
+    "SETL_NAME": "כפר האורנים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 178749.26,
+    "Y": 647749.7,
+    "SETL_CODE": 202,
+    "POPULATION": 253,
+    "SETL_NAME": "בית עובד"
+  },
+  {
+    "INFECTED": 8,
+    "CURES": 0,
+    "DIES": 0,
     "X": 180734.4,
     "Y": 647841.03,
-    "SETL_CODE": 7200
+    "SETL_CODE": 7200,
+    "POPULATION": 50214,
+    "SETL_NAME": "נס ציונה"
   },
   {
-    "SETL_NAME": "רמלה",
-    "POPULATION": 75832,
-    "INFECTED": 25,
+    "INFECTED": 32,
+    "CURES": 1,
+    "DIES": 1,
     "X": 188055.14,
     "Y": 648247.21,
-    "SETL_CODE": 8500
+    "SETL_CODE": 8500,
+    "POPULATION": 75538,
+    "SETL_NAME": "רמלה"
   },
   {
-    "SETL_NAME": "מודיעין עילית",
-    "POPULATION": 73632,
-    "INFECTED": 48,
+    "INFECTED": 6,
+    "CURES": 4,
+    "DIES": 0,
+    "X": 178958.35,
+    "Y": 648435.53,
+    "SETL_CODE": 1336,
+    "POPULATION": 622,
+    "SETL_NAME": "אירוס"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 201706.66,
+    "Y": 648435.65,
+    "SETL_CODE": 3797,
+    "POPULATION": 73080,
+    "SETL_NAME": "גני מודיעין"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 202364.26,
+    "Y": 648703.94,
+    "SETL_CODE": 3770,
+    "POPULATION": 2760,
+    "SETL_NAME": "חשמונאים"
+  },
+  {
+    "INFECTED": 70,
+    "CURES": 0,
+    "DIES": 0,
     "X": 204374.87,
     "Y": 648812.76,
-    "SETL_CODE": 3797
+    "SETL_CODE": 3797,
+    "POPULATION": 73080,
+    "SETL_NAME": "מודיעין עילית"
   },
   {
-    "SETL_NAME": "באר יעקב",
-    "POPULATION": 29123,
-    "INFECTED": 8,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213329.19,
+    "Y": 649256.21,
+    "SETL_CODE": 3788,
+    "POPULATION": 4349,
+    "SETL_NAME": "טלמון"
+  },
+  {
+    "INFECTED": 11,
+    "CURES": 0,
+    "DIES": 0,
     "X": 184930.62,
     "Y": 649631.41,
-    "SETL_CODE": 2530
+    "SETL_CODE": 2530,
+    "POPULATION": 26122,
+    "SETL_NAME": "באר יעקב"
   },
   {
-    "SETL_NAME": "בית אל",
-    "POPULATION": 6042,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 221031.42,
     "Y": 649824.09,
-    "SETL_CODE": 3574
+    "SETL_CODE": 3574,
+    "POPULATION": 6042,
+    "SETL_NAME": "בית אל"
   },
   {
-    "SETL_NAME": "לוד",
-    "POPULATION": 79760,
-    "INFECTED": 37,
+    "INFECTED": 42,
+    "CURES": 2,
+    "DIES": 2,
     "X": 189764.31,
     "Y": 650996.88,
-    "SETL_CODE": 7000
+    "SETL_CODE": 7000,
+    "POPULATION": 75726,
+    "SETL_NAME": "לוד"
   },
   {
-    "SETL_NAME": "ראשון לציון",
-    "POPULATION": 252869,
-    "INFECTED": 103,
+    "INFECTED": 7,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 224849.59,
+    "Y": 651201.18,
+    "SETL_CODE": 3617,
+    "POPULATION": 3039,
+    "SETL_NAME": "עפרה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 233186.58,
+    "Y": 651983.5,
+    "SETL_CODE": 3564,
+    "POPULATION": 2122,
+    "SETL_NAME": "כוכב השחר"
+  },
+  {
+    "INFECTED": 121,
+    "CURES": 7,
+    "DIES": 1,
     "X": 180285,
     "Y": 652958.59,
-    "SETL_CODE": 8300
+    "SETL_CODE": 8300,
+    "POPULATION": 251719,
+    "SETL_NAME": "ראשון לציון"
   },
   {
-    "SETL_NAME": "שוהם",
-    "POPULATION": 20990,
-    "INFECTED": 19,
+    "INFECTED": 13,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 189751.2,
+    "Y": 653659.18,
+    "SETL_CODE": 788,
+    "POPULATION": 1081,
+    "SETL_NAME": "זיתן"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188015.07,
+    "Y": 654283.35,
+    "SETL_CODE": 797,
+    "POPULATION": 1872,
+    "SETL_NAME": "אחיעזר"
+  },
+  {
+    "INFECTED": 35,
+    "CURES": 2,
+    "DIES": 0,
+    "X": 185982.69,
+    "Y": 655205.83,
+    "SETL_CODE": 696,
+    "POPULATION": 6421,
+    "SETL_NAME": "כפר חב'ד"
+  },
+  {
+    "INFECTED": 22,
+    "CURES": 1,
+    "DIES": 0,
     "X": 194983.88,
     "Y": 656155.46,
-    "SETL_CODE": 1304
+    "SETL_CODE": 1304,
+    "POPULATION": 20990,
+    "SETL_NAME": "שוהם"
   },
   {
-    "SETL_NAME": "בית דגן",
-    "POPULATION": 7211,
-    "INFECTED": 1,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 183664.05,
     "Y": 656312.44,
-    "SETL_CODE": 466
+    "SETL_CODE": 466,
+    "POPULATION": 7211,
+    "SETL_NAME": "בית דגן"
   },
   {
-    "SETL_NAME": "חולון",
-    "POPULATION": 195229,
-    "INFECTED": 75,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 193848.93,
+    "Y": 657824.75,
+    "SETL_CODE": 663,
+    "POPULATION": 1189,
+    "SETL_NAME": "טירת יהודה"
+  },
+  {
+    "INFECTED": 92,
+    "CURES": 1,
+    "DIES": 1,
     "X": 179556.81,
     "Y": 657899.95,
-    "SETL_CODE": 6600
+    "SETL_CODE": 6600,
+    "POPULATION": 194273,
+    "SETL_NAME": "חולון"
   },
   {
-    "SETL_NAME": "בת ים",
-    "POPULATION": 130789,
-    "INFECTED": 76,
+    "INFECTED": 82,
+    "CURES": 0,
+    "DIES": 2,
     "X": 176423.44,
     "Y": 657969.02,
-    "SETL_CODE": 6200
+    "SETL_CODE": 6200,
+    "POPULATION": 128774,
+    "SETL_NAME": "בת ים"
   },
   {
-    "SETL_NAME": "אזור",
-    "POPULATION": 13139,
-    "INFECTED": 12,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 194970.2,
+    "Y": 658057.47,
+    "SETL_CODE": 2038,
+    "POPULATION": 2035,
+    "SETL_NAME": "ברקת"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 241635.78,
+    "Y": 658397.66,
+    "SETL_CODE": 3558,
+    "POPULATION": 283,
+    "SETL_NAME": "תומר"
+  },
+  {
+    "INFECTED": 15,
+    "CURES": 0,
+    "DIES": 0,
     "X": 181863.89,
     "Y": 659048.97,
-    "SETL_CODE": 565
+    "SETL_CODE": 565,
+    "POPULATION": 12854,
+    "SETL_NAME": "אזור"
   },
   {
-    "SETL_NAME": "אור יהודה",
-    "POPULATION": 36913,
-    "INFECTED": 50,
+    "INFECTED": 67,
+    "CURES": 3,
+    "DIES": 0,
     "X": 186601.18,
     "Y": 659517.44,
-    "SETL_CODE": 2400
+    "SETL_CODE": 2400,
+    "POPULATION": 36864,
+    "SETL_NAME": "אור יהודה"
   },
   {
-    "SETL_NAME": "אלעד",
-    "POPULATION": 47866,
-    "INFECTED": 68,
+    "INFECTED": 59,
+    "CURES": 3,
+    "DIES": 1,
+    "X": 189535.66,
+    "Y": 659920.36,
+    "SETL_CODE": 9400,
+    "POPULATION": 29930,
+    "SETL_NAME": "יהוד"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188649.04,
+    "Y": 661619.44,
+    "SETL_CODE": 587,
+    "POPULATION": 3968,
+    "SETL_NAME": "סביון"
+  },
+  {
+    "INFECTED": 106,
+    "CURES": 2,
+    "DIES": 0,
     "X": 196084.96,
     "Y": 661964.43,
-    "SETL_CODE": 1309
+    "SETL_CODE": 1309,
+    "POPULATION": 47866,
+    "SETL_NAME": "אלעד"
   },
   {
-    "SETL_NAME": "קרית אונו",
-    "POPULATION": 40328,
-    "INFECTED": 33,
+    "INFECTED": 8,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 228288.89,
+    "Y": 662185.5,
+    "SETL_CODE": 3641,
+    "POPULATION": 4153,
+    "SETL_NAME": "שילה"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 191930.96,
+    "Y": 662845.67,
+    "SETL_CODE": 449,
+    "POPULATION": 1798,
+    "SETL_NAME": "נחלים"
+  },
+  {
+    "INFECTED": 31,
+    "CURES": 4,
+    "DIES": 0,
     "X": 186800.88,
     "Y": 662927.58,
-    "SETL_CODE": 2620
+    "SETL_CODE": 2620,
+    "POPULATION": 39986,
+    "SETL_NAME": "קרית אונו"
   },
   {
-    "SETL_NAME": "גני תקווה",
-    "POPULATION": 19682,
-    "INFECTED": 17,
+    "INFECTED": 22,
+    "CURES": 0,
+    "DIES": 0,
     "X": 188245.63,
     "Y": 663207.93,
-    "SETL_CODE": 229
+    "SETL_CODE": 229,
+    "POPULATION": 19263,
+    "SETL_NAME": "גני תקווה"
   },
   {
-    "SETL_NAME": "רמת גן",
-    "POPULATION": 160192,
-    "INFECTED": 81,
+    "INFECTED": 106,
+    "CURES": 6,
+    "DIES": 1,
     "X": 183764.58,
     "Y": 663715.21,
-    "SETL_CODE": 8600
+    "SETL_CODE": 8600,
+    "POPULATION": 159159,
+    "SETL_NAME": "רמת גן"
   },
   {
-    "SETL_NAME": "גבעתיים",
-    "POPULATION": 60210,
-    "INFECTED": 22,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188845.77,
+    "Y": 663939.6,
+    "SETL_CODE": 128,
+    "POPULATION": 312,
+    "SETL_NAME": "גת רימון"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 224803.79,
+    "Y": 663960.74,
+    "SETL_CODE": 3765,
+    "POPULATION": 4311,
+    "SETL_NAME": "עלי"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 2,
+    "DIES": 0,
+    "X": 206520.66,
+    "Y": 664003.82,
+    "SETL_CODE": 3727,
+    "POPULATION": 2739,
+    "SETL_NAME": "עלי זהב"
+  },
+  {
+    "INFECTED": 21,
+    "CURES": 1,
+    "DIES": 0,
     "X": 182248.12,
     "Y": 664184.75,
-    "SETL_CODE": 6300
+    "SETL_CODE": 6300,
+    "POPULATION": 60212,
+    "SETL_NAME": "גבעתיים"
   },
   {
-    "SETL_NAME": "גבעת שמואל",
-    "POPULATION": 27563,
-    "INFECTED": 18,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 193009.91,
+    "Y": 664837.84,
+    "SETL_CODE": 249,
+    "POPULATION": 1495,
+    "SETL_NAME": "כפר סירקין"
+  },
+  {
+    "INFECTED": 24,
+    "CURES": 3,
+    "DIES": 0,
     "X": 186077.11,
     "Y": 664944.17,
-    "SETL_CODE": 681
+    "SETL_CODE": 681,
+    "POPULATION": 26023,
+    "SETL_NAME": "גבעת שמואל"
   },
   {
-    "SETL_NAME": "תל אביב",
-    "POPULATION": 450192,
-    "INFECTED": 278,
+    "INFECTED": 324,
+    "CURES": 27,
+    "DIES": 3,
     "X": 180428.74,
     "Y": 665727.47,
-    "SETL_CODE": 5000
+    "SETL_CODE": 5000,
+    "POPULATION": 451523,
+    "SETL_NAME": "תל אביב - יפו"
   },
   {
-    "SETL_NAME": "בני ברק",
-    "POPULATION": 199230,
-    "INFECTED": 571,
+    "INFECTED": 900,
+    "CURES": 4,
+    "DIES": 2,
     "X": 184624.66,
     "Y": 666292.02,
-    "SETL_CODE": 6100
+    "SETL_CODE": 6100,
+    "POPULATION": 198863,
+    "SETL_NAME": "בני ברק"
   },
   {
-    "SETL_NAME": "פתח תקווה",
-    "POPULATION": 246025,
-    "INFECTED": 96,
+    "INFECTED": 127,
+    "CURES": 9,
+    "DIES": 1,
     "X": 189354.01,
     "Y": 666540.21,
-    "SETL_CODE": 7900
+    "SETL_CODE": 7900,
+    "POPULATION": 244275,
+    "SETL_NAME": "פתח תקווה"
   },
   {
-    "SETL_NAME": "ראש העין",
-    "POPULATION": 60733,
-    "INFECTED": 10,
+    "INFECTED": 16,
+    "CURES": 0,
+    "DIES": 0,
     "X": 196549.28,
     "Y": 666814.19,
-    "SETL_CODE": 2640
+    "SETL_CODE": 2640,
+    "POPULATION": 56344,
+    "SETL_NAME": "ראש העין"
   },
   {
-    "SETL_NAME": "אריאל",
-    "POPULATION": 20456,
-    "INFECTED": 3,
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 216862.79,
     "Y": 668104.26,
-    "SETL_CODE": 3570
+    "SETL_CODE": 3570,
+    "POPULATION": 20456,
+    "SETL_NAME": "אריאל"
   },
   {
-    "SETL_NAME": "אורנית",
-    "POPULATION": 8807,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 210353.95,
+    "Y": 668281.71,
+    "SETL_CODE": 3654,
+    "POPULATION": 1833,
+    "SETL_NAME": "ברקן"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 203626.16,
+    "Y": 668496.88,
+    "SETL_CODE": 3560,
+    "POPULATION": 3812,
+    "SETL_NAME": "אלקנה"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223741.07,
+    "Y": 669571.08,
+    "SETL_CODE": 3572,
+    "POPULATION": 1238,
+    "SETL_NAME": "כפר תפוח"
+  },
+  {
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 199585.87,
     "Y": 670763.9,
-    "SETL_CODE": 3760
+    "SETL_CODE": 3760,
+    "POPULATION": 8807,
+    "SETL_NAME": "אורנית"
   },
   {
-    "SETL_NAME": "רמת השרון",
-    "POPULATION": 46884,
-    "INFECTED": 28,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195124.91,
+    "Y": 671382.09,
+    "SETL_CODE": 717,
+    "POPULATION": 1156,
+    "SETL_NAME": "חגור"
+  },
+  {
+    "INFECTED": 36,
+    "CURES": 2,
+    "DIES": 0,
     "X": 184210.1,
     "Y": 671577.46,
-    "SETL_CODE": 2650
+    "SETL_CODE": 2650,
+    "POPULATION": 46720,
+    "SETL_NAME": "רמת השרון"
   },
   {
-    "SETL_NAME": "הוד השרון",
-    "POPULATION": 62768,
-    "INFECTED": 25,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 190485.83,
+    "Y": 672408.26,
+    "SETL_CODE": 183,
+    "POPULATION": 366,
+    "SETL_NAME": "ירקונה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198743.72,
+    "Y": 672595.33,
+    "SETL_CODE": 1236,
+    "POPULATION": 895,
+    "SETL_NAME": "נירית"
+  },
+  {
+    "INFECTED": 35,
+    "CURES": 3,
+    "DIES": 0,
     "X": 189170.05,
     "Y": 673008.53,
-    "SETL_CODE": 9700
+    "SETL_CODE": 9700,
+    "POPULATION": 62325,
+    "SETL_NAME": "הוד השרון"
   },
   {
-    "SETL_NAME": "אלפי מנשה",
-    "POPULATION": 8553,
-    "INFECTED": 3,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195906.36,
+    "Y": 673142.57,
+    "SETL_CODE": 627,
+    "POPULATION": 9984,
+    "SETL_NAME": "ג'לג'וליה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 193403.52,
+    "Y": 673257.67,
+    "SETL_CODE": 841,
+    "POPULATION": 1199,
+    "SETL_NAME": "אלישמע"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 197251.22,
+    "Y": 673367.09,
+    "SETL_CODE": 718,
+    "POPULATION": 1086,
+    "SETL_NAME": "ירחיב"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 2,
+    "DIES": 0,
+    "X": 197808.33,
+    "Y": 673849.95,
+    "SETL_CODE": 1315,
+    "POPULATION": 3600,
+    "SETL_NAME": "מתן"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 194911.9,
+    "Y": 674100.47,
+    "SETL_CODE": 2015,
+    "POPULATION": 1017,
+    "SETL_NAME": "שדי חמד"
+  },
+  {
+    "INFECTED": 10,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213321.41,
+    "Y": 674242.18,
+    "SETL_CODE": 3660,
+    "POPULATION": 3693,
+    "SETL_NAME": "עמנואל"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 189191.15,
+    "Y": 674771.95,
+    "SETL_CODE": 206,
+    "POPULATION": 1730,
+    "SETL_NAME": "רמות השבים"
+  },
+  {
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 201590.92,
     "Y": 675174.4,
-    "SETL_CODE": 3750
+    "SETL_CODE": 3750,
+    "POPULATION": 7865,
+    "SETL_NAME": "אלפי מנשה"
   },
   {
-    "SETL_NAME": "הרצליה",
-    "POPULATION": 96608,
-    "INFECTED": 53,
+    "INFECTED": 70,
+    "CURES": 7,
+    "DIES": 0,
     "X": 184076.78,
     "Y": 675209.93,
-    "SETL_CODE": 6400
+    "SETL_CODE": 6400,
+    "POPULATION": 95142,
+    "SETL_NAME": "הרצליה"
   },
   {
-    "SETL_NAME": "קרני שומרון",
-    "POPULATION": 9590,
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 194464.53,
+    "Y": 675383.54,
+    "SETL_CODE": 686,
+    "POPULATION": 1189,
+    "SETL_NAME": "נווה ימין"
+  },
+  {
     "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 209242.49,
     "Y": 675419.01,
-    "SETL_CODE": 3640
+    "SETL_CODE": 3640,
+    "POPULATION": 7713,
+    "SETL_NAME": "קרני שומרון"
   },
   {
-    "SETL_NAME": "כפר סבא",
-    "POPULATION": 100921,
-    "INFECTED": 36,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 229174.62,
+    "Y": 675613.06,
+    "SETL_CODE": 3762,
+    "POPULATION": 1238,
+    "SETL_NAME": "איתמר"
+  },
+  {
+    "INFECTED": 43,
+    "CURES": 2,
+    "DIES": 0,
     "X": 192722.5,
     "Y": 675826.68,
-    "SETL_CODE": 6900
+    "SETL_CODE": 6900,
+    "POPULATION": 100763,
+    "SETL_NAME": "כפר סבא"
   },
   {
-    "SETL_NAME": "רעננה",
-    "POPULATION": 76233,
-    "INFECTED": 57,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 183287.36,
+    "Y": 677055.18,
+    "SETL_CODE": 267,
+    "POPULATION": 1891,
+    "SETL_NAME": "כפר שמריהו"
+  },
+  {
+    "INFECTED": 70,
+    "CURES": 3,
+    "DIES": 0,
     "X": 187858.74,
     "Y": 677141.33,
-    "SETL_CODE": 8700
+    "SETL_CODE": 8700,
+    "POPULATION": 73999,
+    "SETL_NAME": "רעננה"
   },
   {
-    "SETL_NAME": "כוכב יאיר",
-    "POPULATION": 8772,
-    "INFECTED": 7,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 193303.72,
+    "Y": 677395.35,
+    "SETL_CODE": 198,
+    "POPULATION": 1271,
+    "SETL_NAME": "צופית"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 225195.18,
+    "Y": 677711.02,
+    "SETL_CODE": 3710,
+    "POPULATION": 2620,
+    "SETL_NAME": "ברכה"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 201125.83,
+    "Y": 678165.52,
+    "SETL_CODE": 3791,
+    "POPULATION": 2369,
+    "SETL_NAME": "צופים"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 190524.94,
+    "Y": 679769.64,
+    "SETL_CODE": 284,
+    "POPULATION": 1486,
+    "SETL_NAME": "שדה ורבורג"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188822.12,
+    "Y": 680081.01,
+    "SETL_CODE": 389,
+    "POPULATION": 1217,
+    "SETL_NAME": "בצרה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 183610.73,
+    "Y": 680441.54,
+    "SETL_CODE": 232,
+    "POPULATION": 1276,
+    "SETL_NAME": "שפיים"
+  },
+  {
+    "INFECTED": 8,
+    "CURES": 2,
+    "DIES": 0,
     "X": 199720.03,
     "Y": 680904.21,
-    "SETL_CODE": 1224
+    "SETL_CODE": 1224,
+    "POPULATION": 8773,
+    "SETL_NAME": "כוכב יאיר"
   },
   {
-    "SETL_NAME": "צור יצחק",
-    "POPULATION": 7903,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 187437.88,
+    "Y": 681598.41,
+    "SETL_CODE": 1024,
+    "POPULATION": 866,
+    "SETL_NAME": "חרוצים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 192685.68,
+    "Y": 681671.58,
+    "SETL_CODE": 425,
+    "POPULATION": 1082,
+    "SETL_NAME": "משמרת"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 192278.02,
+    "Y": 682874.34,
+    "SETL_CODE": 162,
+    "POPULATION": 1309,
+    "SETL_NAME": "חירות"
+  },
+  {
     "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 199962.19,
     "Y": 683028.12,
-    "SETL_CODE": 1345
+    "SETL_CODE": 1345,
+    "POPULATION": 6044,
+    "SETL_NAME": "צור יצחק"
   },
   {
-    "SETL_NAME": "תל מונד",
-    "POPULATION": 12862,
-    "INFECTED": 11,
+    "INFECTED": 13,
+    "CURES": 0,
+    "DIES": 0,
     "X": 192498.08,
     "Y": 684414.9,
-    "SETL_CODE": 154
+    "SETL_CODE": 154,
+    "POPULATION": 12862,
+    "SETL_NAME": "תל מונד"
   },
   {
-    "SETL_NAME": "טייבה",
-    "POPULATION": 43128,
-    "INFECTED": 2,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 187829.25,
+    "Y": 684471.19,
+    "SETL_CODE": 287,
+    "POPULATION": 1017,
+    "SETL_NAME": "תל יצחק"
+  },
+  {
+    "INFECTED": 8,
+    "CURES": 0,
+    "DIES": 0,
     "X": 200741.96,
     "Y": 685401.79,
-    "SETL_CODE": 2730
+    "SETL_CODE": 2730,
+    "POPULATION": 43127,
+    "SETL_NAME": "טייבה"
   },
   {
-    "SETL_NAME": "אבן יהודה",
-    "POPULATION": 13700,
-    "INFECTED": 18,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 217644.03,
+    "Y": 685536.4,
+    "SETL_CODE": 3571,
+    "POPULATION": 929,
+    "SETL_NAME": "שבי שומרון"
+  },
+  {
+    "INFECTED": 20,
+    "CURES": 2,
+    "DIES": 0,
     "X": 189481.6,
     "Y": 686635.75,
-    "SETL_CODE": 182
+    "SETL_CODE": 182,
+    "POPULATION": 13700,
+    "SETL_NAME": "אבן יהודה"
   },
   {
-    "SETL_NAME": "קלנסווה",
-    "POPULATION": 22788,
+    "INFECTED": 6,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 194125.2,
+    "Y": 686703.25,
+    "SETL_CODE": 880,
+    "POPULATION": 1603,
+    "SETL_NAME": "עין שריד"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 196969.08,
+    "Y": 686738.94,
+    "SETL_CODE": 170,
+    "POPULATION": 644,
+    "SETL_NAME": "כפר יעבץ"
+  },
+  {
+    "INFECTED": 11,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 192052.09,
+    "Y": 687140.24,
+    "SETL_CODE": 195,
+    "POPULATION": 22490,
+    "SETL_NAME": "קדימה-צורן"
+  },
+  {
     "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 188437.17,
+    "Y": 687179.76,
+    "SETL_CODE": 316,
+    "POPULATION": 1222,
+    "SETL_NAME": "כפר נטר"
+  },
+  {
+    "INFECTED": 25,
+    "CURES": 3,
+    "DIES": 0,
+    "X": 212192.45,
+    "Y": 688034.26,
+    "SETL_CODE": 3712,
+    "POPULATION": 859,
+    "SETL_NAME": "ענב"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 206992.13,
+    "Y": 688057.57,
+    "SETL_CODE": 3793,
+    "POPULATION": 1895,
+    "SETL_NAME": "אבני חפץ"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 198261.03,
     "Y": 688411.18,
-    "SETL_CODE": 638
+    "SETL_CODE": 638,
+    "POPULATION": 22788,
+    "SETL_NAME": "קלנסווה"
   },
   {
-    "SETL_NAME": "פרדסיה",
-    "POPULATION": 5984,
     "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
     "X": 191670.38,
     "Y": 690316.88,
-    "SETL_CODE": 171
+    "SETL_CODE": 171,
+    "POPULATION": 5830,
+    "SETL_NAME": "פרדסיה"
   },
   {
-    "SETL_NAME": "נתניה",
-    "POPULATION": 218401,
-    "INFECTED": 83,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 200534.96,
+    "Y": 690320.72,
+    "SETL_CODE": 851,
+    "POPULATION": 1120,
+    "SETL_NAME": "ניצני עוז"
+  },
+  {
+    "INFECTED": 117,
+    "CURES": 2,
+    "DIES": 0,
     "X": 186959.66,
     "Y": 690353.11,
-    "SETL_CODE": 7400
+    "SETL_CODE": 7400,
+    "POPULATION": 217244,
+    "SETL_NAME": "נתניה"
   },
   {
-    "SETL_NAME": "כפר יונה",
-    "POPULATION": 26351,
-    "INFECTED": 12,
+    "INFECTED": 14,
+    "CURES": 2,
+    "DIES": 0,
     "X": 193776.41,
     "Y": 691410.66,
-    "SETL_CODE": 168
+    "SETL_CODE": 168,
+    "POPULATION": 23060,
+    "SETL_NAME": "כפר יונה"
   },
   {
-    "SETL_NAME": "בת חפר",
-    "POPULATION": 5342,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198758.66,
+    "Y": 693204.77,
+    "SETL_CODE": 737,
+    "POPULATION": 1119,
+    "SETL_NAME": "עולש"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 201457.84,
     "Y": 693329.15,
-    "SETL_CODE": 1319
+    "SETL_CODE": 1319,
+    "POPULATION": 5342,
+    "SETL_NAME": "בת חפר"
   },
   {
-    "SETL_NAME": "ג'ת",
-    "POPULATION": 11799,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 189862.34,
+    "Y": 693442.59,
+    "SETL_CODE": 326,
+    "POPULATION": 2079,
+    "SETL_NAME": "בית יצחק-שער חפר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188228.72,
+    "Y": 695224.66,
+    "SETL_CODE": 175,
+    "POPULATION": 1410,
+    "SETL_NAME": "אביחיל"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 199624.52,
+    "Y": 695228.05,
+    "SETL_CODE": 734,
+    "POPULATION": 990,
+    "SETL_NAME": "גן יאשיה"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188153.98,
+    "Y": 696312.45,
+    "SETL_CODE": 1361,
+    "POPULATION": 411,
+    "SETL_NAME": "בת חן"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 186880.19,
+    "Y": 696372.69,
+    "SETL_CODE": 1102,
+    "POPULATION": 264,
+    "SETL_NAME": "שושנת העמקים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 203677.23,
+    "Y": 696703.11,
+    "SETL_CODE": 1290,
+    "POPULATION": 6940,
+    "SETL_NAME": "זמר"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198651.39,
+    "Y": 698260.13,
+    "SETL_CODE": 377,
+    "POPULATION": 855,
+    "SETL_NAME": "המעפיל"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 188732.76,
+    "Y": 698568.97,
+    "SETL_CODE": 190,
+    "POPULATION": 2013,
+    "SETL_NAME": "כפר ויתקין"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 187827.39,
+    "Y": 698592.25,
+    "SETL_CODE": 877,
+    "POPULATION": 904,
+    "SETL_NAME": "בית חירות"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 199207.63,
+    "Y": 699233.89,
+    "SETL_CODE": 850,
+    "POPULATION": 1099,
+    "SETL_NAME": "אחיטוב"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 192002.07,
+    "Y": 700456.02,
+    "SETL_CODE": 219,
+    "POPULATION": 709,
+    "SETL_NAME": "חיבת ציון"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 203669.08,
     "Y": 700588.91,
-    "SETL_CODE": 628
+    "SETL_CODE": 628,
+    "POPULATION": 11798,
+    "SETL_NAME": "ג'ת"
   },
   {
-    "SETL_NAME": "חדרה",
-    "POPULATION": 99870,
-    "INFECTED": 20,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 193152.8,
+    "Y": 701563.79,
+    "SETL_CODE": 41,
+    "POPULATION": 3486,
+    "SETL_NAME": "אליכין"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 204129.06,
+    "Y": 702942.25,
+    "SETL_CODE": 6000,
+    "POPULATION": 29393,
+    "SETL_NAME": "באקה אל-גרביה"
+  },
+  {
+    "INFECTED": 25,
+    "CURES": 4,
+    "DIES": 0,
     "X": 192114.72,
     "Y": 705029.7,
-    "SETL_CODE": 6500
+    "SETL_CODE": 6500,
+    "POPULATION": 95683,
+    "SETL_NAME": "חדרה"
   },
   {
-    "SETL_NAME": "חריש",
-    "POPULATION": 13113,
-    "INFECTED": 2,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 204614.8,
     "Y": 707440.62,
-    "SETL_CODE": 1247
+    "SETL_CODE": 1247,
+    "POPULATION": 7569,
+    "SETL_NAME": "חריש"
   },
   {
-    "SETL_NAME": "כפר קרע",
-    "POPULATION": 18675,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 247458.74,
+    "Y": 708443.83,
+    "SETL_CODE": 383,
+    "POPULATION": 626,
+    "SETL_NAME": "עין הנצי'ב"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 209003.62,
+    "Y": 708732,
+    "SETL_CODE": 1326,
+    "POPULATION": 9779,
+    "SETL_NAME": "בסמ'ה"
+  },
+  {
+    "INFECTED": 8,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 197843.63,
+    "Y": 708972.79,
+    "SETL_CODE": 7800,
+    "POPULATION": 42083,
+    "SETL_NAME": "פרדס חנה-כרכור"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 200481.4,
+    "Y": 710036.26,
+    "SETL_CODE": 189,
+    "POPULATION": 1020,
+    "SETL_NAME": "כפר פינס"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 191586.02,
+    "Y": 711316.01,
+    "SETL_CODE": 1167,
+    "POPULATION": 5170,
+    "SETL_NAME": "קיסריה"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
     "X": 204929.26,
     "Y": 712313.95,
-    "SETL_CODE": 654
+    "SETL_CODE": 654,
+    "POPULATION": 18675,
+    "SETL_NAME": "כפר קרע"
   },
   {
-    "SETL_NAME": "אור עקיבא",
-    "POPULATION": 20425,
-    "INFECTED": 2,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 192736.17,
     "Y": 712855.82,
-    "SETL_CODE": 1020
+    "SETL_CODE": 1020,
+    "POPULATION": 18236,
+    "SETL_NAME": "אור עקיבא"
   },
   {
-    "SETL_NAME": "מעלה עירון",
-    "POPULATION": 14833,
-    "INFECTED": 2,
+    "INFECTED": 10,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 214246.55,
+    "Y": 714112.7,
+    "SETL_CODE": 2710,
+    "POPULATION": 55182,
+    "SETL_NAME": "אום אל-פחם"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 195070.55,
+    "Y": 714156.7,
+    "SETL_CODE": 9800,
+    "POPULATION": 15627,
+    "SETL_NAME": "בנימינה-גבעת עדה"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 230643.32,
+    "Y": 714245.37,
+    "SETL_CODE": 636,
+    "POPULATION": 1609,
+    "SETL_NAME": "צנדלה"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 191932.17,
+    "Y": 715881.78,
+    "SETL_CODE": 541,
+    "POPULATION": 14692,
+    "SETL_NAME": "ג'סר א-זרקא"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 215104.31,
     "Y": 716538.72,
-    "SETL_CODE": 1327
+    "SETL_CODE": 1327,
+    "POPULATION": 14833,
+    "SETL_NAME": "מעלה עירון"
   },
   {
-    "SETL_NAME": "זכרון יעקב",
-    "POPULATION": 23075,
-    "INFECTED": 17,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 241490.78,
+    "Y": 717391.22,
+    "SETL_CODE": 242,
+    "POPULATION": 1264,
+    "SETL_NAME": "בית השיטה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 237807.08,
+    "Y": 717900.06,
+    "SETL_CODE": 84,
+    "POPULATION": 549,
+    "SETL_NAME": "תל יוסף"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 194658.79,
+    "Y": 719320.08,
+    "SETL_CODE": 290,
+    "POPULATION": 727,
+    "SETL_NAME": "מעין צבי"
+  },
+  {
+    "INFECTED": 19,
+    "CURES": 2,
+    "DIES": 0,
     "X": 196428.72,
     "Y": 719347.21,
-    "SETL_CODE": 9300
+    "SETL_CODE": 9300,
+    "POPULATION": 23075,
+    "SETL_NAME": "זכרון יעקב"
   },
   {
-    "SETL_NAME": "עפולה",
-    "POPULATION": 53883,
-    "INFECTED": 34,
+    "INFECTED": 37,
+    "CURES": 2,
+    "DIES": 0,
     "X": 227476.47,
     "Y": 724046.06,
-    "SETL_CODE": 7700
+    "SETL_CODE": 7700,
+    "POPULATION": 51737,
+    "SETL_NAME": "עפולה"
   },
   {
-    "SETL_NAME": "יקנעם עילית",
-    "POPULATION": 24270,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 237033.34,
+    "Y": 724390.95,
+    "SETL_CODE": 524,
+    "POPULATION": 2277,
+    "SETL_NAME": "נאעורה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 231928.66,
+    "Y": 727713.04,
+    "SETL_CODE": 1330,
+    "POPULATION": 2256,
+    "SETL_NAME": "אחוזת ברק"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 218165.24,
+    "Y": 728007.67,
+    "SETL_CODE": 132,
+    "POPULATION": 579,
+    "SETL_NAME": "כפר ברוך"
+  },
+  {
     "INFECTED": 10,
+    "CURES": 1,
+    "DIES": 0,
     "X": 210054.23,
     "Y": 729138.01,
-    "SETL_CODE": 240
+    "SETL_CODE": 240,
+    "POPULATION": 23311,
+    "SETL_NAME": "יקנעם עילית"
   },
   {
-    "SETL_NAME": "מגדל העמק",
-    "POPULATION": 25792,
-    "INFECTED": 72,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 239392.61,
+    "Y": 729189.8,
+    "SETL_CODE": 436,
+    "POPULATION": 1026,
+    "SETL_NAME": "עין דור"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 196105.24,
+    "Y": 729813.42,
+    "SETL_CODE": 683,
+    "POPULATION": 1196,
+    "SETL_NAME": "גבע כרמל"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 221360.1,
+    "Y": 731476.45,
+    "SETL_CODE": 134,
+    "POPULATION": 1152,
+    "SETL_NAME": "יפעת"
+  },
+  {
+    "INFECTED": 77,
+    "CURES": 4,
+    "DIES": 0,
     "X": 223062.44,
     "Y": 731638.81,
-    "SETL_CODE": 874
+    "SETL_CODE": 874,
+    "POPULATION": 25636,
+    "SETL_NAME": "מגדל העמק"
   },
   {
-    "SETL_NAME": "אכסאל",
-    "POPULATION": 14500,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 230532.1,
     "Y": 731813.44,
-    "SETL_CODE": 478
+    "SETL_CODE": 478,
+    "POPULATION": 14500,
+    "SETL_NAME": "אכסאל"
   },
   {
-    "SETL_NAME": "יפיע",
-    "POPULATION": 18905,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 226046.42,
     "Y": 732145.68,
-    "SETL_CODE": 499
+    "SETL_CODE": 499,
+    "POPULATION": 18905,
+    "SETL_NAME": "יפיע"
   },
   {
-    "SETL_NAME": "דבוריה",
-    "POPULATION": 10403,
     "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 239747.17,
+    "Y": 732714.23,
+    "SETL_CODE": 47,
+    "POPULATION": 4262,
+    "SETL_NAME": "כפר תבור"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 235171.08,
     "Y": 733043.59,
-    "SETL_CODE": 489
+    "SETL_CODE": 489,
+    "POPULATION": 10402,
+    "SETL_NAME": "דבוריה"
   },
   {
-    "SETL_NAME": "עתלית",
-    "POPULATION": 9071,
-    "INFECTED": 2,
+    "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 194941.23,
     "Y": 733148.52,
-    "SETL_CODE": 53
+    "SETL_CODE": 53,
+    "POPULATION": 8047,
+    "SETL_NAME": "עתלית"
   },
   {
-    "SETL_NAME": "נצרת",
-    "POPULATION": 77867,
-    "INFECTED": 3,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213517.83,
+    "Y": 733748.85,
+    "SETL_CODE": 142,
+    "POPULATION": 1108,
+    "SETL_NAME": "שדה יעקב"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 198660.84,
+    "Y": 733931.32,
+    "SETL_CODE": 74,
+    "POPULATION": 632,
+    "SETL_NAME": "עין הוד"
+  },
+  {
+    "INFECTED": 7,
+    "CURES": 0,
+    "DIES": 0,
     "X": 227728.05,
     "Y": 734143.32,
-    "SETL_CODE": 7300
+    "SETL_CODE": 7300,
+    "POPULATION": 77064,
+    "SETL_NAME": "נצרת"
   },
   {
-    "SETL_NAME": "רמת ישי",
-    "POPULATION": 7723,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221398.97,
+    "Y": 734245.37,
+    "SETL_CODE": 1244,
+    "POPULATION": 1304,
+    "SETL_NAME": "תמרת"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
     "X": 215856.27,
     "Y": 734302.21,
-    "SETL_CODE": 122
+    "SETL_CODE": 122,
+    "POPULATION": 7722,
+    "SETL_NAME": "רמת ישי"
   },
   {
-    "SETL_NAME": "קרית טבעון",
-    "POPULATION": 18121,
+    "INFECTED": 3,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 247242.17,
+    "Y": 734996.89,
+    "SETL_CODE": 46,
+    "POPULATION": 4294,
+    "SETL_NAME": "יבנאל"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
     "X": 212129.61,
     "Y": 735221.45,
-    "SETL_CODE": 2300
+    "SETL_CODE": 2300,
+    "POPULATION": 18121,
+    "SETL_NAME": "קרית טבעון"
   },
   {
-    "SETL_NAME": "בסמת טבעון",
-    "POPULATION": 7835,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 197450.36,
+    "Y": 736105.42,
+    "SETL_CODE": 212,
+    "POPULATION": 345,
+    "SETL_NAME": "בית צבי"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213809.36,
+    "Y": 736259.84,
+    "SETL_CODE": 285,
+    "POPULATION": 504,
+    "SETL_NAME": "אלונים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 253156.18,
+    "Y": 736470.39,
+    "SETL_CODE": 63,
+    "POPULATION": 688,
+    "SETL_NAME": "כנרת (מושבה)"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 196680.56,
+    "Y": 736845.5,
+    "SETL_CODE": 689,
+    "POPULATION": 1329,
+    "SETL_NAME": "מגדים"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 243720.47,
+    "Y": 737105.12,
+    "SETL_CODE": 292,
+    "POPULATION": 573,
+    "SETL_NAME": "שרונה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223411.86,
+    "Y": 737611.61,
+    "SETL_CODE": 1337,
+    "POPULATION": 2547,
+    "SETL_NAME": "שמשית"
+  },
+  {
     "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
     "X": 213605.99,
     "Y": 737897.11,
-    "SETL_CODE": 944
+    "SETL_CODE": 944,
+    "POPULATION": 7835,
+    "SETL_NAME": "בסמת טבעון"
   },
   {
-    "SETL_NAME": "רכסים",
-    "POPULATION": 12110,
-    "INFECTED": 5,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 226455.22,
+    "Y": 739110.9,
+    "SETL_CODE": 613,
+    "POPULATION": 970,
+    "SETL_NAME": "ציפורי"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 232340.18,
+    "Y": 739237.71,
+    "SETL_CODE": 509,
+    "POPULATION": 22399,
+    "SETL_NAME": "כפר כנא"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 240015.91,
+    "Y": 739331.39,
+    "SETL_CODE": 721,
+    "POPULATION": 586,
+    "SETL_NAME": "שדה אילן"
+  },
+  {
+    "INFECTED": 18,
+    "CURES": 0,
+    "DIES": 0,
     "X": 209864.65,
     "Y": 739656.01,
-    "SETL_CODE": 922
+    "SETL_CODE": 922,
+    "POPULATION": 12110,
+    "SETL_NAME": "רכסים"
   },
   {
-    "SETL_NAME": "טירת כרמל",
-    "POPULATION": 24068,
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 227689.76,
+    "Y": 740391.6,
+    "SETL_CODE": 1186,
+    "POPULATION": 2023,
+    "SETL_NAME": "הושעיה"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213996.74,
+    "Y": 740501.77,
+    "SETL_CODE": 1284,
+    "POPULATION": 2672,
+    "SETL_NAME": "נופית"
+  },
+  {
     "INFECTED": 11,
+    "CURES": 1,
+    "DIES": 0,
     "X": 197358.87,
     "Y": 741270.3,
-    "SETL_CODE": 2100
+    "SETL_CODE": 2100,
+    "POPULATION": 22210,
+    "SETL_NAME": "טירת כרמל"
   },
   {
-    "SETL_NAME": "נשר",
-    "POPULATION": 24761,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 269362.81,
+    "Y": 741684.84,
+    "SETL_CODE": 4019,
+    "POPULATION": 287,
+    "SETL_NAME": "מיצר"
+  },
+  {
     "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 204344.91,
     "Y": 741703.56,
-    "SETL_CODE": 2500
+    "SETL_CODE": 2500,
+    "POPULATION": 23983,
+    "SETL_NAME": "נשר"
   },
   {
-    "SETL_NAME": "טבריה",
-    "POPULATION": 46146,
-    "INFECTED": 32,
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221189.78,
+    "Y": 742807.9,
+    "SETL_CODE": 998,
+    "POPULATION": 9317,
+    "SETL_NAME": "ביר אל-מכסור"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223154.59,
+    "Y": 743320.09,
+    "SETL_CODE": 1257,
+    "POPULATION": 963,
+    "SETL_NAME": "חנתון"
+  },
+  {
+    "INFECTED": 34,
+    "CURES": 0,
+    "DIES": 0,
     "X": 249709.07,
     "Y": 744315.21,
-    "SETL_CODE": 6700
+    "SETL_CODE": 6700,
+    "POPULATION": 44234,
+    "SETL_NAME": "טבריה"
   },
   {
-    "SETL_NAME": "חיפה",
-    "POPULATION": 285023,
-    "INFECTED": 67,
+    "INFECTED": 81,
+    "CURES": 6,
+    "DIES": 1,
     "X": 198944.55,
     "Y": 744929.76,
-    "SETL_CODE": 4000
+    "SETL_CODE": 4000,
+    "POPULATION": 283640,
+    "SETL_NAME": "חיפה"
   },
   {
-    "SETL_NAME": "שפרעם",
-    "POPULATION": 41559,
     "INFECTED": 1,
-    "X": 216417.32,
-    "Y": 745668.62,
-    "SETL_CODE": 8800
+    "CURES": 0,
+    "DIES": 0,
+    "X": 236512.46,
+    "Y": 745444.57,
+    "SETL_CODE": 1190,
+    "POPULATION": 1002,
+    "SETL_NAME": "מצפה נטופה"
   },
   {
-    "SETL_NAME": "קרית אתא",
-    "POPULATION": 59196,
-    "INFECTED": 12,
+    "INFECTED": 13,
+    "CURES": 2,
+    "DIES": 0,
     "X": 210144.28,
     "Y": 745681.48,
-    "SETL_CODE": 6800
+    "SETL_CODE": 6800,
+    "POPULATION": 58267,
+    "SETL_NAME": "קרית אתא"
   },
   {
-    "SETL_NAME": "קרית ביאליק",
-    "POPULATION": 40493,
-    "INFECTED": 6,
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 272057.16,
+    "Y": 747902.04,
+    "SETL_CODE": 4011,
+    "POPULATION": 714,
+    "SETL_NAME": "אבני איתן"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 246177.68,
+    "Y": 748379.1,
+    "SETL_CODE": 993,
+    "POPULATION": 1473,
+    "SETL_NAME": "חמאם"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 248342.93,
+    "Y": 748754.63,
+    "SETL_CODE": 65,
+    "POPULATION": 1941,
+    "SETL_NAME": "מגדל"
+  },
+  {
+    "INFECTED": 7,
+    "CURES": 2,
+    "DIES": 0,
     "X": 209464.89,
     "Y": 749061.37,
-    "SETL_CODE": 9500
+    "SETL_CODE": 9500,
+    "POPULATION": 39927,
+    "SETL_NAME": "קרית ביאליק"
   },
   {
-    "SETL_NAME": "קרית מוצקין",
-    "POPULATION": 46166,
     "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 208058.22,
     "Y": 749680.83,
-    "SETL_CODE": 8200
+    "SETL_CODE": 8200,
+    "POPULATION": 42014,
+    "SETL_NAME": "קרית מוצקין"
   },
   {
-    "SETL_NAME": "קרית ים",
-    "POPULATION": 40136,
-    "INFECTED": 13,
+    "INFECTED": 16,
+    "CURES": 2,
+    "DIES": 0,
     "X": 207057.64,
     "Y": 750456.1,
-    "SETL_CODE": 9600
+    "SETL_CODE": 9600,
+    "POPULATION": 39909,
+    "SETL_NAME": "קרית ים"
   },
   {
-    "SETL_NAME": "עראבה",
-    "POPULATION": 25369,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 231969.75,
     "Y": 750718.57,
-    "SETL_CODE": 531
+    "SETL_CODE": 531,
+    "POPULATION": 25369,
+    "SETL_NAME": "עראבה"
   },
   {
-    "SETL_NAME": "טמרה",
-    "POPULATION": 33851,
-    "INFECTED": 11,
+    "INFECTED": 13,
+    "CURES": 0,
+    "DIES": 0,
     "X": 218174.25,
     "Y": 751017.36,
-    "SETL_CODE": 8900
+    "SETL_CODE": 8900,
+    "POPULATION": 33851,
+    "SETL_NAME": "טמרה"
   },
   {
-    "SETL_NAME": "דייר חנא",
-    "POPULATION": 10345,
     "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 234775.62,
     "Y": 751882.97,
-    "SETL_CODE": 492
+    "SETL_CODE": 492,
+    "POPULATION": 10259,
+    "SETL_NAME": "דייר חנא"
   },
   {
-    "SETL_NAME": "סח'נין",
-    "POPULATION": 31056,
     "INFECTED": 6,
+    "CURES": 0,
+    "DIES": 0,
     "X": 228466.89,
     "Y": 752264.3,
-    "SETL_CODE": 7500
+    "SETL_CODE": 7500,
+    "POPULATION": 31057,
+    "SETL_NAME": "סח'נין"
   },
   {
-    "SETL_NAME": "מגאר",
-    "POPULATION": 22609,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223947.65,
+    "Y": 752296.38,
+    "SETL_CODE": 917,
+    "POPULATION": 1120,
+    "SETL_NAME": "עצמון שגב"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 225606.56,
+    "Y": 753705.71,
+    "SETL_CODE": 1226,
+    "POPULATION": 1105,
+    "SETL_NAME": "יובלים"
+  },
+  {
     "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
     "X": 238961.93,
     "Y": 754631.55,
-    "SETL_CODE": 481
+    "SETL_CODE": 481,
+    "POPULATION": 22609,
+    "SETL_NAME": "מגאר"
   },
   {
-    "SETL_NAME": "כרמיאל",
-    "POPULATION": 46306,
-    "INFECTED": 7,
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 222432.62,
+    "Y": 756550.34,
+    "SETL_CODE": 1204,
+    "POPULATION": 1029,
+    "SETL_NAME": "גילון"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 231190.85,
+    "Y": 756842.7,
+    "SETL_CODE": 1202,
+    "POPULATION": 533,
+    "SETL_NAME": "מכמנים"
+  },
+  {
+    "INFECTED": 20,
+    "CURES": 1,
+    "DIES": 0,
     "X": 227983.11,
     "Y": 757625.35,
-    "SETL_CODE": 1139
+    "SETL_CODE": 1139,
+    "POPULATION": 46124,
+    "SETL_NAME": "כרמיאל"
   },
   {
-    "SETL_NAME": "עכו",
-    "POPULATION": 49607,
-    "INFECTED": 6,
+    "INFECTED": 11,
+    "CURES": 2,
+    "DIES": 0,
     "X": 208321.16,
     "Y": 758700.25,
-    "SETL_CODE": 7600
+    "SETL_CODE": 7600,
+    "POPULATION": 48930,
+    "SETL_NAME": "עכו"
   },
   {
-    "SETL_NAME": "צפת",
-    "POPULATION": 35717,
-    "INFECTED": 19,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 226047.59,
+    "Y": 759333.89,
+    "SETL_CODE": 483,
+    "POPULATION": 8299,
+    "SETL_NAME": "בענה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 213515.44,
+    "Y": 759635.17,
+    "SETL_CODE": 1292,
+    "POPULATION": 20920,
+    "SETL_NAME": "ג'דיידה-מכר"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 259907.89,
+    "Y": 760010.26,
+    "SETL_CODE": 4026,
+    "POPULATION": 823,
+    "SETL_NAME": "חד-נס"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 230244.87,
+    "Y": 760041.96,
+    "SETL_CODE": 522,
+    "POPULATION": 12846,
+    "SETL_NAME": "נחף"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 241153.54,
+    "Y": 761027.84,
+    "SETL_CODE": 846,
+    "POPULATION": 425,
+    "SETL_NAME": "שפר"
+  },
+  {
+    "INFECTED": 16,
+    "CURES": 0,
+    "DIES": 1,
+    "X": 249718.76,
+    "Y": 761733.57,
+    "SETL_CODE": 8000,
+    "POPULATION": 35715,
+    "SETL_NAME": "נוף הגליל"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 215528.64,
+    "Y": 762047.94,
+    "SETL_CODE": 507,
+    "POPULATION": 10029,
+    "SETL_NAME": "כפר יאסיף"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 243168.25,
+    "Y": 762416.48,
+    "SETL_CODE": 605,
+    "POPULATION": 531,
+    "SETL_NAME": "כפר שמאי"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 231003.42,
+    "Y": 762441.96,
+    "SETL_CODE": 1209,
+    "POPULATION": 329,
+    "SETL_NAME": "חרשים"
+  },
+  {
+    "INFECTED": 20,
+    "CURES": 1,
+    "DIES": 0,
     "X": 247782.24,
     "Y": 763893.43,
-    "SETL_CODE": 8000
+    "SETL_CODE": 8000,
+    "POPULATION": 35715,
+    "SETL_NAME": "צפת"
   },
   {
-    "SETL_NAME": "קצרין",
-    "POPULATION": 7381,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 241421.67,
+    "Y": 765809.98,
+    "SETL_CODE": 607,
+    "POPULATION": 963,
+    "SETL_NAME": "מירון"
+  },
+  {
     "INFECTED": 5,
+    "CURES": 0,
+    "DIES": 0,
     "X": 264354.9,
     "Y": 766577.24,
-    "SETL_CODE": 4100
+    "SETL_CODE": 4100,
+    "POPULATION": 7132,
+    "SETL_NAME": "קצרין"
   },
   {
-    "SETL_NAME": "כפר ורדים",
-    "POPULATION": 5579,
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 225354.28,
     "Y": 766749.52,
-    "SETL_CODE": 1263
+    "SETL_CODE": 1263,
+    "POPULATION": 5578,
+    "SETL_NAME": "כפר ורדים"
   },
   {
-    "SETL_NAME": "נהריה",
-    "POPULATION": 59006,
-    "INFECTED": 16,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 220885.82,
+    "Y": 766924.04,
+    "SETL_CODE": 409,
+    "POPULATION": 716,
+    "SETL_NAME": "יחיעם"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 220428.52,
+    "Y": 767898.68,
+    "SETL_CODE": 463,
+    "POPULATION": 693,
+    "SETL_NAME": "געתון"
+  },
+  {
+    "INFECTED": 4,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 242003.19,
+    "Y": 767903.73,
+    "SETL_CODE": 1294,
+    "POPULATION": 548,
+    "SETL_NAME": "אור הגנוז"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 221844.53,
+    "Y": 768294.7,
+    "SETL_CODE": 813,
+    "POPULATION": 1106,
+    "SETL_NAME": "עין יעקב"
+  },
+  {
+    "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 241330.31,
+    "Y": 768398.56,
+    "SETL_CODE": 609,
+    "POPULATION": 787,
+    "SETL_NAME": "כפר חושן"
+  },
+  {
+    "INFECTED": 24,
+    "CURES": 2,
+    "DIES": 0,
     "X": 209560.99,
     "Y": 768451.51,
-    "SETL_CODE": 9100
+    "SETL_CODE": 9100,
+    "POPULATION": 56881,
+    "SETL_NAME": "נהריה"
   },
   {
-    "SETL_NAME": "חורפיש",
-    "POPULATION": 6315,
+    "INFECTED": 7,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 226235.92,
+    "Y": 768716.39,
+    "SETL_CODE": 1063,
+    "POPULATION": 21422,
+    "SETL_NAME": "מעלות-תרשיחא"
+  },
+  {
     "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
     "X": 232790.39,
     "Y": 769176,
-    "SETL_CODE": 496
+    "SETL_CODE": 496,
+    "POPULATION": 6315,
+    "SETL_NAME": "חורפיש"
   },
   {
-    "SETL_NAME": "שלומי",
-    "POPULATION": 6350,
+    "INFECTED": 1,
+    "CURES": 1,
+    "DIES": 0,
+    "X": 214277.45,
+    "Y": 769574.05,
+    "SETL_CODE": 576,
+    "POPULATION": 1051,
+    "SETL_NAME": "כברי"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 245056.77,
+    "Y": 770209.15,
+    "SETL_CODE": 1709,
+    "POPULATION": 0,
+    "SETL_NAME": "דלתון"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 217347.4,
+    "Y": 770284.38,
+    "SETL_CODE": 1314,
+    "POPULATION": 962,
+    "SETL_NAME": "נווה זיו"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223176.23,
+    "Y": 771237.62,
+    "SETL_CODE": 1208,
+    "POPULATION": 578,
+    "SETL_NAME": "הילה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 244122.63,
+    "Y": 771308.4,
+    "SETL_CODE": 664,
+    "POPULATION": 492,
+    "SETL_NAME": "כרם בן זמרה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 223674.95,
+    "Y": 773851.5,
+    "SETL_CODE": 1219,
+    "POPULATION": 186,
+    "SETL_NAME": "גורנות הגליל"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 215075.15,
+    "Y": 774155.43,
+    "SETL_CODE": 325,
+    "POPULATION": 1171,
+    "SETL_NAME": "מצובה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 220777.3,
+    "Y": 774294,
+    "SETL_CODE": 294,
+    "POPULATION": 1020,
+    "SETL_NAME": "אילון"
+  },
+  {
     "INFECTED": 3,
+    "CURES": 0,
+    "DIES": 0,
     "X": 213978.41,
     "Y": 775740.91,
-    "SETL_CODE": 812
+    "SETL_CODE": 812,
+    "POPULATION": 6351,
+    "SETL_NAME": "שלומי"
   },
   {
-    "SETL_NAME": "קרית שמונה",
-    "POPULATION": 22622,
-    "INFECTED": 6,
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 248089.82,
+    "Y": 778155.65,
+    "SETL_CODE": 596,
+    "POPULATION": 453,
+    "SETL_NAME": "מלכיה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 267450.83,
+    "Y": 780076.12,
+    "SETL_CODE": 4009,
+    "POPULATION": 263,
+    "SETL_NAME": "שעל"
+  },
+  {
+    "INFECTED": 2,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 273129.87,
+    "Y": 789557.64,
+    "SETL_CODE": 4001,
+    "POPULATION": 6528,
+    "SETL_NAME": "בוקעאתא"
+  },
+  {
+    "INFECTED": 7,
+    "CURES": 1,
+    "DIES": 0,
     "X": 253957.37,
     "Y": 790643.54,
-    "SETL_CODE": 2800
+    "SETL_CODE": 2800,
+    "POPULATION": 22625,
+    "SETL_NAME": "קרית שמונה"
+  },
+  {
+    "INFECTED": 1,
+    "CURES": 0,
+    "DIES": 0,
+    "X": 256998.62,
+    "Y": 793906.1,
+    "SETL_CODE": 416,
+    "POPULATION": 745,
+    "SETL_NAME": "מעין ברוך"
   }
 ]
