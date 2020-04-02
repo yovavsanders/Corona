@@ -1440,7 +1440,14 @@ $(document).ready(function (){
 
 				wkts_all.push("POINT(("+xy[0]+" "+xy[1]+"))");
 				names_all.push(place);
-				bubbleHTMLParameters_all.push([name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times]);
+				if (comments)
+				{
+					bubbleHTMLParameters_all.push(["החולה שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times + "<br />" + comments]);
+				}
+				else
+				{
+					bubbleHTMLParameters_all.push(["החולה שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times]);
+				}
 
 
 
