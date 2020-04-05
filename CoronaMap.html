@@ -551,11 +551,11 @@ placeholder="רדיוס במ'"
 		<v-flex xs5 style="width: 175px;">
 			<v-layout style="width: 175px; height:40px">
 			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2"  @change="turnSetl" v-model="setl_checkbox" ></v-checkbox>
-			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">שכבת ישובים</p>
+			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">ישובים</p>
 			</v-layout>
 			<v-layout style="width: 175px; height:40px">
 			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2" @change="turnPoints" v-model="points_checkbox" ></v-checkbox>
-			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">שכבת מיקומי נדבקים</p>
+			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">מיקומי נדבקים</p>
 		  </v-layout>
 		</v-flex>
 	  </v-layout>
@@ -1167,35 +1167,35 @@ var classBreakeSymbols ={
 
 function getSymbol(number) {
 	Symbol = classBreakeSymbols.blue;
-	if (number.between(0,5))
+	if (number.between(-1,2.6))
 	{
 		Symbol = classBreakeSymbols.green;
 	}
-	if (number.between(5,13))
+	if (number.between(2.6,5.8))
 	{
 		Symbol = classBreakeSymbols.green_yellow;
 	}
-	if (number.between(13,25))
+	if (number.between(5.8,8.8))
 	{
 		Symbol = classBreakeSymbols.yellow;
 	}
-	if (number.between(25,37))
+	if (number.between(8.8,12.1))
 	{
 		Symbol = classBreakeSymbols.orange;
 	}
-	if (number.between(37,72))
+	if (number.between(12.1,16.7))
 	{
 		Symbol = classBreakeSymbols.red_orange;
 	}
-	if (number.between(72,114))
+	if (number.between(16.7,23.5))
 	{
 		Symbol = classBreakeSymbols.light_red;
 	}
-	if (number.between(114,278))
+	if (number.between(23.5,32.7))
 	{
 		Symbol = classBreakeSymbols.red
 	}
-	if (number.between(278,1000))
+	if (number.between(32.7,1000))
 	{
 		Symbol = classBreakeSymbols.cherry;
 	}
@@ -1604,7 +1604,7 @@ $(document).ready(function (){
 								s_wkts.push(Terraformer.WKT.convert(polygon));
 								s_codes.push("'" +setlcode + "'");
 								s_names.push(this_setlname);
-								s_symbols.push(getSymbol(infecteds));
+								s_symbols.push(getSymbol((infecteds / (population / 100))  * (100)));
 								iso_features = iso_setl_features.filter(function(f) {
 									return f.attributes["Municipality"] == setlcode;			
 								}); 
