@@ -3707,17 +3707,6 @@
     "POPULATION": 38193
   },
   {
-    "SETL_NAME": "אביגדור",
-    "INFECTED": 0,
-    "ISOLATED": 22,
-    "CURES": 0,
-    "DIES": 0,
-    "X": 220865.01,
-    "Y": 632533.55,
-    "SETL_CODE": 819,
-    "POPULATION": 919438
-  },
-  {
     "SETL_NAME": "אלמוג",
     "INFECTED": 0,
     "ISOLATED": 6,
