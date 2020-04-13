@@ -111,6 +111,22 @@
     display: inline-block;
 }
 
+.infocard_watermark
+{
+	position: absolute;
+	left: 25%!important;
+	right: 25%!important;
+    top: 50px!important;
+	text-align: center;
+	background-color: rgb(245, 245, 245, 0.9);
+	color: rgb(194, 0, 0);
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+	font-size: 50
+
+}
+
 
 .select_map_watermark
 {
@@ -348,6 +364,44 @@
 	<v-divider vertical></v-divider>
 
 	</v-app-bar>
+
+
+
+  <v-layout class="infocard_watermark" style="text-align:center;" center>
+	<v-divider vertical></v-divider>
+	<v-flex center xs5 style="width: 33.3%; text-align:center;">
+		<v-layout center style="height:40px;  text-align:center;">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נדבקו</p>
+		</v-layout>
+		<v-layout center style="height:40px">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{infected_count_all}}
+			  </p>
+	  </v-layout>
+	</v-flex>
+	<v-divider vertical></v-divider>
+	<v-flex xs5 style="width: 33.3%;;">
+		<v-layout center style="height:40px; text-align:center;">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נפטרו</p>
+		</v-layout>
+		<v-layout center style="height:40px; text-align:center; align-content: center;">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{deaths_count_all}}
+			  </p>
+	  </v-layout>
+	</v-flex>
+	<v-divider vertical></v-divider>
+	<v-flex xs5 style="width: 33.3%;">
+		<v-layout center style="height:40px;  text-align:center;">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial;" class="text-center font-weight-light">החלימו</p>
+		</v-layout>
+		<v-layout style="height:40px">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; height: 5%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{cures_count_all}}
+			  </p>
+	  </v-layout>
+	</v-flex>
+  </v-layout>
 
 
 
@@ -1345,7 +1399,7 @@ var s_names = [];
 var s_symbols = [];
 var s_bubbleHTMLParameters = [];
 
-var infected_count_all = 0;
+
 var iso_count_all = 0;
 
 var s_codes = [];
@@ -1364,14 +1418,16 @@ $(document).ready(function (){
     // Success response
     	//health =$(html);
 		//dashboard = health.find('.dashboard');
-		infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
+		appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
 		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
 		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
 		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
 		//infected_benony = $(html).find('.dashboard').children()[0].children[0].children[2].children[1].children[1].innerText;
 		//infected_kashe = $(html).find('.dashboard').children()[0].children[0].children[2].children[2].children[1].innerText;
 		//infected_munshamim = $(html).find('.dashboard').children()[0].children[0].children[2].children[3].children[1].innerText;
-    	console.log("total_infected: " +infected_count_all);
+    	console.log("total_infected: " +appVue.infected_count_all);
 		//infected = {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony , kashe:infected_kashe, munshamim: infected_munshamim};
 		//setTimeout(function () { return {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony, kashe:infected_kashe, munshamim:infected_munshamim}}, 1500);
 
@@ -1637,11 +1693,11 @@ $(document).ready(function (){
 									iso_feat = iso_features[0];
 									isolations = iso_feat.attributes.Isolations;
 									isoper1000 = iso_feat.attributes.Iso_per_1000;		
-									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
+									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
 								}
 								else
 								{
-									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+infected_count_all+"<br /></div>"]);          
+									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div>"]);          
 								}
 							}
 							else{
@@ -1736,6 +1792,10 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
+
+		infected_count_all: 0,
+		deaths_count_all: 0,
+		cures_count_all: 0,
 		loading_text: "טוען נתונים" ,
 		setl_checkbox: true,
 		points_checkbox: true,
