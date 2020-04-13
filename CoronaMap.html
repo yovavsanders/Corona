@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -1355,6 +1356,27 @@ var setlcodes = [];
 var setlnames = [];
 
 $(document).ready(function (){
+	
+	const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	const url = "https://govextra.gov.il/ministry-of-health/corona/corona-virus/";
+	var infected;
+	$.get(proxyurl + url).then(function (html) {
+    // Success response
+    	//health =$(html);
+		//dashboard = health.find('.dashboard');
+		infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
+		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
+		//infected_benony = $(html).find('.dashboard').children()[0].children[0].children[2].children[1].children[1].innerText;
+		//infected_kashe = $(html).find('.dashboard').children()[0].children[0].children[2].children[2].children[1].innerText;
+		//infected_munshamim = $(html).find('.dashboard').children()[0].children[0].children[2].children[3].children[1].innerText;
+    	console.log("total_infected: " +infected_count_all);
+		//infected = {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony , kashe:infected_kashe, munshamim: infected_munshamim};
+		//setTimeout(function () { return {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony, kashe:infected_kashe, munshamim:infected_munshamim}}, 1500);
+
+
+		
 		appVue.dialog = true;
 		govmap.createMap('map_div', {
 			token: my_token,
@@ -1381,7 +1403,8 @@ $(document).ready(function (){
 
 
 		//json_str = "https://gisweb.azureedge.net/Points.json";
-		var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
+        var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
+        //var json_infceted = "Infected_1304.json";
 		var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA.json";
 		iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
@@ -1556,6 +1579,7 @@ $(document).ready(function (){
 			$.ajax({
                       dataType: 'json',
                       beforeSend : function() {
+						//getHealthGovData();
                         getJsonData(json_infceted);
 						console.log("getJsonData(json_infceted)");
 						//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
@@ -1565,11 +1589,11 @@ $(document).ready(function (){
 
 						setl_area_features = setl_area_data.features;
 
-						for (i in infected_setl_features)
-                        {
-                            feat = infected_setl_features[i];
-							infected_count_all = infected_count_all + feat.INFECTED
-						}
+						// for (i in infected_setl_features)
+                        // {
+                        //     feat = infected_setl_features[i];
+						// 	infected_count_all = infected_count_all + feat.INFECTED
+						// }
 						for (i in iso_setl_features)
                         {
                             feat = iso_setl_features[i];
@@ -1593,7 +1617,7 @@ $(document).ready(function (){
 							s_features = setl_area_features.filter(function(f) {
 								return f.properties["SETL_CODE"] == setlcode;			
 							}); 
-							console.log("s_features: ");
+							//console.log("s_features: ");
 							//console.log(s_features);
 							if (s_features.length > 0)
 							{
@@ -1691,6 +1715,12 @@ $(document).ready(function (){
 
 			
 		});
+
+
+		
+	}, function () {
+		console.log('Error respons');
+	});
 });
 
 
@@ -1783,7 +1813,7 @@ var appVue = new Vue({
 
 		turnSetl (e) 
 		{
-			console.log(e)
+			//console.log(e)
 			if (e == true)
 			{
 				displaySetlPolygons();
