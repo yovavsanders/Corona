@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -114,8 +115,8 @@
 .infocard_watermark
 {
 	position: absolute;
-	left: 25%!important;
-	right: 25%!important;
+	left: 33%!important;
+	right: 33%!important;
     top: 50px!important;
 	text-align: center;
 	background-color: rgb(245, 245, 245, 0.9);
@@ -128,22 +129,21 @@
 }
 
 
+
 @media only screen and (max-width: 600px) {
 	.infocard_watermark
 	{
 		position: absolute;
-		height: 60px;
-		left: 30%!important;
-		right: 25%!important;
+		left: 33%!important;
+		right: 17%!important;
 		top: 50px!important;
 		text-align: center;
-		background-color: rgb(245, 245, 245, 0.5);
+		background-color: rgb(245, 245, 245, 0.9);
 		color: rgb(194, 0, 0);
 		z-index: 1;
 		font-family: mapiregular;
 		display: inline-block;
 		font-size: 50
-
 	}
 }
 
@@ -284,6 +284,10 @@
   text-align: center
 }
 
+.active {
+	cursor:pointer;
+}
+
 
 </style>
 
@@ -386,11 +390,18 @@
 	</v-app-bar>
 
 
+	<v-tooltip bottom>
+		<template v-slot:activator="{ on }">
 
-  <v-layout class="infocard_watermark" style="text-align:center;" center>
+  <v-layout class="infocard_watermark" style="text-align:center;" center v-on="on">
 	<v-divider vertical></v-divider>
-	<v-flex center xs5 style="width: 33.3%; text-align:center;">
-		<v-layout center style="height:40px;  text-align:center;">
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+	<v-flex xs5 style="width: 33.3%; text-align:center;">
+	<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px;  text-align:center; color :red">
 		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נדבקו</p>
 		</v-layout>
 		<v-layout center style="height:40px">
@@ -398,10 +409,18 @@
 				{{infected_count_all}}
 			  </p>
 	  </v-layout>
+	  </v-card>
 	</v-flex>
+	</v-hover>
+
 	<v-divider vertical></v-divider>
-	<v-flex xs5 style="width: 33.3%;;">
-		<v-layout center style="height:40px; text-align:center;">
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+	<v-flex xs5 style="width: 33.3%;">
+		<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px; text-align:center; color :red">
 		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נפטרו</p>
 		</v-layout>
 		<v-layout center style="height:40px; text-align:center; align-content: center;">
@@ -409,10 +428,17 @@
 				{{deaths_count_all}}
 			  </p>
 	  </v-layout>
+		</v-card>
 	</v-flex>
+	</v-hover>
 	<v-divider vertical></v-divider>
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
 	<v-flex xs5 style="width: 33.3%;">
-		<v-layout center style="height:40px;  text-align:center;">
+		<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px;  text-align:center; color :red;">
 		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial;" class="text-center font-weight-light">החלימו</p>
 		</v-layout>
 		<v-layout style="height:40px">
@@ -420,8 +446,14 @@
 				{{cures_count_all}}
 			  </p>
 	  </v-layout>
+	  </v-card>
 	</v-flex>
+	</v-hover>
   </v-layout>
+
+</template>
+<span>{{tooltip_text}}</span>
+</v-tooltip>
 
 
 
@@ -1428,19 +1460,38 @@ var s_codes = [];
 var setl_dict = {};
 var setlcodes = [];
 var setlnames = [];
+var ar;
+
+function toArray(x) {
+    for(var i = 0, a = []; i < x.length; i++)
+        a.push(x[i]);
+
+    return a
+}
 
 $(document).ready(function (){
+
 	
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = "https://govextra.gov.il/ministry-of-health/corona/corona-virus/";
 	var infected;
 	$.get(proxyurl + url).then(function (html) {
+		appVue.loading = true;
     // Success response
     	//health =$(html);
 		//dashboard = health.find('.dashboard');
 		appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
 		appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
 		appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
+		htmlList = $(html).find('h2');
+		arry = toArray(htmlList);
+		ar = arry;
+		result = arry.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
+		if (result)
+		{
+			console.log(result);
+			appVue.tooltip_text = result[0].innerText;
+		}
 		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
 		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
 		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
@@ -1464,7 +1515,6 @@ $(document).ready(function (){
 			center: {x: 186000, y: 658000},
 			identifyOnClick: true
 		});
-		appVue.loading = true;
 
 		current_scale = 1000003;
 		wkts_all = [];
@@ -1812,7 +1862,7 @@ var appVue = new Vue({
     vuetify: new Vuetify(),
     data () {
       return {
-
+		tooltip_text: "#",
 		infected_count_all: 0,
 		deaths_count_all: 0,
 		cures_count_all: 0,
@@ -1890,6 +1940,7 @@ var appVue = new Vue({
 		})
 	},
     methods: {
+
 
 		turnSetl (e) 
 		{
