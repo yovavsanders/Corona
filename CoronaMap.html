@@ -1475,23 +1475,30 @@ $(document).ready(function (){
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = "https://govextra.gov.il/ministry-of-health/corona/corona-virus/";
 	var infected;
-	$.get(proxyurl + url).then(function (html) {
+	//$.get(proxyurl + url).then(function (html) {
+	$.get('https://yovavsanders.github.io/Corona/Sum.json').then(function (data) {
 		appVue.loading = true;
     // Success response
     	//health =$(html);
 		//dashboard = health.find('.dashboard');
-		appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
-		appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
-		appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
-		htmlList = $(html).find('h2');
-		arry = toArray(htmlList);
-		ar = arry;
-		result = arry.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
-		if (result)
-		{
-			console.log(result);
-			appVue.tooltip_text = result[0].innerText;
-		}
+
+		appVue.infected_count_all = data[0].INFECTED;
+		appVue.deaths_count_all = data[0].DIES;
+		appVue.cures_count_all = data[0].CURED;
+
+		// appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		// appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
+		// appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
+		// htmlList = $(html).find('h2');
+		// arry = toArray(htmlList);
+		// ar = arry;
+		// result = arry.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
+		// if (result)
+		// {
+		// 	console.log(result);
+		appVue.tooltip_text = appVue.cures_count_all = data[0].REMARK;
+		// }
+
 		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
 		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
 		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
@@ -1529,8 +1536,8 @@ $(document).ready(function (){
 
 
 		//json_str = "https://gisweb.azureedge.net/Points.json";
-        var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
-        //var json_infceted = "Infected_1304.json";
+       // var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
+        var json_infceted = "Infected_1904.json";
 		var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA.json";
 		iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
@@ -1736,9 +1743,8 @@ $(document).ready(function (){
 							 console.log(this_setlname);
 							 appVue.loading_text ="90%"
 							infecteds = infected_setl_features[i].INFECTED;
-							population = infected_setl_features[i].POPULATION;
 
-							//console.log();
+							population = infected_setl_features[i].POPULATION;
 							
 							s_features = setl_area_features.filter(function(f) {
 								return f.properties["SETL_CODE"] == setlcode;			
@@ -1748,12 +1754,17 @@ $(document).ready(function (){
 							if (s_features.length > 0)
 							{
 								infectedper1000 = infecteds / (population/1000);
+								infectedper10000 =  parseFloat(infected_setl_features[i].POP_TO_10000);
 								setlnames.push(this_setlname);
 								//set geometry layer atts:
 								polygon = s_features[0].geometry
 								s_wkts.push(Terraformer.WKT.convert(polygon));
 								s_codes.push("'" +setlcode + "'");
 								s_names.push(this_setlname);
+								console.log("infecteds: " + infecteds);
+								console.log("population: " + population);
+								console.log(infectedper10000);
+
 								s_symbols.push(getSymbol((infecteds / (population / 100))  * (100)));
 								iso_features = iso_setl_features.filter(function(f) {
 									return f.attributes["Municipality"] == setlcode;			
