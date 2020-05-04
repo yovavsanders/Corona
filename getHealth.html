@@ -34,7 +34,7 @@ $.get(proxyurl + url).then(function (html) {
     console.log($(html).find('.dashboard').children()[0].children[0].children[1].innerText);
 
     var para = document.createElement("p");
-    var node = document.createTextNode('[{ "INFECTED": "'+$(html).find('.dashboard').children()[0].children[0].children[1].innerText+'",');
+    var node = document.createTextNode('[{ "INFECTED": "'+$(html).find('.dashboard').children()[1].children[0].children[1].innerText+'",');
     para.appendChild(node);
    
 
@@ -47,20 +47,20 @@ $.get(proxyurl + url).then(function (html) {
     var node2 = document.createTextNode('"CURED": "' + $(html).find('.corona-well')[0].children[0].children[1].innerText+ '",');
     para2.appendChild(node2);
 
-   htmlList = $(html).find('h2');
+   htmlList = $(html).find('span');
    arry = toArray(htmlList);
    for (i = 0; i < arry.length; i++)
    {
-       //if (arry[i].innerText.includes("תמונת מצב נכונה ל"))
-       //{
+       if (arry[i].innerText.includes("נכונה לתאריך"))
+       {
            console.log(arry[i]);
-           if (i == 0)
-           {
+           //if (i == 0)
+           //{
                var para3 = document.createElement("p");
-               var node3 = document.createTextNode('"REMARK": "' + arry[i].innerText + '"}]');
+               var node3 = document.createTextNode('"REMARK": " תמונת מצב ' + arry[i].innerText + '"}]');
                para3.appendChild(node3)
-           }
-      // }
+           //}
+      }
    }
    ar = arry;
    //result = ar.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
