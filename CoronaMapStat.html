@@ -1,0 +1,2929 @@
+
+
+
+
+<!DOCTYPE html>
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 600px) {
+    #myTitle {
+      display: none;
+    }
+
+  }
+
+   @media (min-width: 600px) {
+    #myTitleMobile {
+      display: none;
+    }
+	#CircleMobile {
+		display: none
+	}
+	#sliderCircle{
+		right: 50%!important;
+	}
+  }
+
+.list__tile__title {
+    text-align: right;
+}
+
+.toolbar__title {
+    margin-right: 16px;
+}
+
+.input-group--text-field label {
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+
+.input-group label {
+    text-align: right;
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+}
+.input-group.input-group--selection-controls label{
+    right: 32px;
+    left: auto;
+}
+.input-group.input-group--selection-controls .icon--selection-control {
+    left: auto;
+    right: 0;
+}
+.input-group--selection-controls__ripple {
+    -webkit-transform: translate3d(12px,-52%,0);
+    transform: translate3d(12px,-52%,0);
+    left: auto;
+    right: 0;
+}
+
+
+.watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 7%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.infocard_watermark
+{
+	position: absolute;
+	left: 33%!important;
+	right: 33%!important;
+    top: 50px!important;
+	text-align: center;
+	background-color: rgb(245, 245, 245, 0.9);
+	color: rgb(194, 0, 0);
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+	font-size: 50
+
+}
+
+
+
+@media only screen and (max-width: 600px) {
+	.infocard_watermark
+	{
+		position: absolute;
+		left: 33%!important;
+		right: 17%!important;
+		top: 50px!important;
+		text-align: center;
+		background-color: rgb(245, 245, 245, 0.9);
+		color: rgb(194, 0, 0);
+		z-index: 1;
+		font-family: mapiregular;
+		display: inline-block;
+		font-size: 50
+	}
+}
+
+
+.select_map_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 50%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.heat_map_watermark
+{
+    position: absolute;
+    right: 0%!important;
+    bottom: 40%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.switch_watermark
+{
+	position: absolute;
+    right: 0.5%!important;
+    bottom: 20%!important;
+	text-align: right;
+	background-color: rgb(245, 245, 245, 0.9);
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+	font-size: 50
+}
+
+
+
+
+
+.info_watermark
+{
+    position: absolute;
+    left: 3%!important;
+    bottom: 50%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+.search_watermark
+{
+    position: absolute;
+    left: 3%!important;
+    bottom: 40%!important;
+    background-color: transparent;
+    border: none;
+    z-index: 1;
+    font-family: mapiregular;
+    display: inline-block;
+}
+
+
+.slider_watermark
+{
+	position: fixed;
+	left: 90px!important;
+    bottom: 50px!important;
+	display: inline-block;
+    z-index:99;
+}
+
+.play_slider_watermark
+{
+	position: fixed;
+    margin-top: -7px;
+    margin-left: -50px;
+    z-index:99;
+}
+
+
+.chip_watermark
+{
+	position: fixed;
+    margin-top: -5px;
+    width: 30;
+    z-index:99;
+}
+
+
+.circle_watermark_mobile
+{
+    position: fixed;
+	right: 3px!important;
+    top: 60px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 99;
+    font-family: mapiregular;
+
+}
+
+.slider_circle_watermark
+{
+    position: fixed;
+    right: 100px!important;
+    background-color: transparent;
+    border: none;
+    z-index: 99;
+    font-family: mapiregular;
+
+}
+
+.layers_watermark
+{
+    position: fixed;
+    right: 100px!important;
+	top: 60px!important;
+}
+
+
+#create .v-speed-dial {
+    position: absolute;
+  }
+
+  #create .v-btn--floating {
+    position: relative;
+  }
+
+  .centered-input input {
+  text-align: center
+}
+
+.active {
+	cursor:pointer;
+}
+
+
+</style>
+
+<html>
+
+<head>
+
+  <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script>  
+  <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+
+
+  <script src="https://unpkg.com/terraformer@1.0.8"></script>
+<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+</head>
+<body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+  <div id="toolbar_app">
+    <v-app>
+
+    <v-app-bar
+      color="brown lighten-1"
+      dense
+	  dark
+      id="myTitle"
+	>
+	
+	<v-progress-linear
+	:active="loading"
+	:indeterminate="loading"
+	absolute
+	bottom
+	color="deep-purple accent-4"
+  ></v-progress-linear>
+
+
+
+  <div class="text-right" style="width:25%; text-align:right;">
+	<v-progress-circular
+	v-model="circle_value"
+	:size="50"
+	:value="circle_value"
+	:width="8"
+	color="white"
+   >{{ displayCircleValue() }}
+  </v-progress-circular>
+  מספר המיקומים המוצגים כרגע
+  </div>
+	
+		<v-divider vertical></v-divider>
+
+	<v-spacer></v-spacer>
+      <v-toolbar-title class="white--text" style="text-align: center; width:40%">מפת חשיפה לקורונה</v-toolbar-title>
+    <v-spacer></v-spacer>
+	
+	
+		<v-divider vertical></v-divider>
+
+		
+	  <v-text-field right v-model="geocode_text" style="margin-top: 30px; text-align: right;"
+	  	placeholder="כתובת, ישוב, שכונה" 
+	  ></v-text-field>
+
+      <v-btn
+      class="ma-2"
+      :loading="loading"
+      :disabled="loading"
+      color="success"
+	  @click="geocode"
+	  style="width:5%"
+    >
+
+      <template v-slot:loader>
+        <span class="custom-loader">
+          <v-icon light>cached</v-icon>
+        </span>
+      </template>
+      <v-icon>mdi-magnify</v-icon>
+	</v-btn>
+
+
+	<v-select right
+	v-on:change="bufferChange"
+	style="margin-top: 30px; text-align: right; width: 10%"
+	:items="buffer_items"
+	placeholder="רדיוס במ'"
+	></v-select>
+	<v-divider vertical></v-divider>
+
+	</v-app-bar>
+
+
+	<v-tooltip bottom>
+		<template v-slot:activator="{ on }">
+
+  <v-layout class="infocard_watermark" style="text-align:center;" center v-on="on">
+	<v-divider vertical></v-divider>
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+	<v-flex xs5 style="width: 33.3%; text-align:center;">
+	<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px;  text-align:center; color :red">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נדבקו</p>
+		</v-layout>
+		<v-layout center style="height:40px">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{infected_count_all}}
+			  </p>
+	  </v-layout>
+	  </v-card>
+	</v-flex>
+	</v-hover>
+
+	<v-divider vertical></v-divider>
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+	<v-flex xs5 style="width: 33.3%;">
+		<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px; text-align:center; color :red">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נפטרו</p>
+		</v-layout>
+		<v-layout center style="height:40px; text-align:center; align-content: center;">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{deaths_count_all}}
+			  </p>
+	  </v-layout>
+		</v-card>
+	</v-flex>
+	</v-hover>
+	<v-divider vertical></v-divider>
+	<v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+	<v-flex xs5 style="width: 33.3%;">
+		<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-layout center style="height:40px;  text-align:center; color :red;">
+		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial;" class="text-center font-weight-light">החלימו</p>
+		</v-layout>
+		<v-layout style="height:40px">
+			<p style="width: 100%; margin-left: 0%; margin-right: 0%; height: 5%; font-family:Arial;" class="font-weight-bold text--primary text-center">
+				{{cures_count_all}}
+			  </p>
+	  </v-layout>
+	  </v-card>
+	</v-flex>
+	</v-hover>
+  </v-layout>
+
+</template>
+<span>{{tooltip_text}}</span>
+</v-tooltip>
+
+
+
+
+	
+	<v-app-bar
+    color="brown lighten-1"
+    dense
+    dark
+	id="myTitleMobile"
+  >
+
+
+
+	
+		<v-divider vertical></v-divider>
+	  
+
+        <v-toolbar
+        dense
+        floating
+        style="text-align: right; width: 50%" color="brown lighten-1"
+      >
+        <v-text-field right v-model="geocode_text" placeholder="כתובת, ישוב, שכונה"  style="text-align: right;"
+          hide-details
+          single-line
+        ></v-text-field>
+  
+        <v-btn icon @click="geocode">
+          <v-icon>search</v-icon>
+        </v-btn>  
+      </v-toolbar>
+
+
+      <v-divider vertical></v-divider>
+
+
+<v-select right
+style="margin-top: 30px; text-align: right; width: 30%"
+
+:items="buffer_items"
+v-on:change="bufferChange"
+placeholder="רדיוס במ'"
+></v-select>
+
+<v-divider vertical></v-divider>
+
+
+
+
+  </v-app-bar>
+
+
+<v-slider
+  v-model="slider"
+  id="Slider"
+  style="width: 40%; min-width: 10%; max-width:250px"
+  thumb-color="red"
+  class="slider_watermark"
+  :max="max"
+  :min="min"
+  hide-details
+  thumb-label="always">
+  <template v-slot:thumb-label="props">
+	{{ getCountByDate() }}
+  </template>
+  <template v-slot:append>
+
+    <v-btn class="play_slider_watermark"
+        v-model="mdiPause"
+        @click="playDateSlider" 
+        absolute
+        dark
+        fab
+        small
+        left
+        color="#1A237E"
+        >
+        <v-icon v-if="mdiPause">pause</v-icon>
+        <v-icon v-else>play_arrow</v-icon>
+        </v-btn>
+
+	<v-chip
+	  v-model="slider_date" class ="chip_watermark"
+      color="#1A237E"
+      text-color="white"
+	>
+	{{slider_date.substring(0, 5)}}
+    </v-chip>
+  </template>
+</v-slider>
+
+
+
+
+
+
+
+	<form name="form" id="map_form" style='height: 100%;' scrolling='no'> 
+			
+			<div id="map_div" style="width: 100%; height: 100%;">
+					
+					
+            </div> 			
+	</form>
+	
+
+	<div class="text-center">
+		<v-bottom-sheet v-model="sheet">
+		  <template v-slot:activator="{ on }">
+			<v-btn
+			  block 
+              color="brown lighten-1"
+			  dark
+			  v-on="on"
+			  @click="sheet = false"
+			>
+
+			<v-badge
+			left
+			color="green"
+			:content="desserts.length"
+			:value="desserts.length"
+		  >
+		  הצגת טבלה
+		  </v-badge>
+			</v-btn>
+		  </template>
+
+			<v-layout column style="max-height: 50vh">       
+				  <v-flex style="overflow: auto;">
+					<v-card style="bottom: 0;">
+					<v-card-title >
+						<v-badge left
+						color="green"
+						:content="desserts.length"
+						:value="desserts.length"
+					  >
+						מיקומי נבדקים מאומתים
+						<v-subheader style="margin-right: -13px;" right class="font-weight-lightd" v-model ="tableTitle">{{tableTitle}}</v-subheader> 
+						</v-badge> 
+						
+						<v-spacer></v-spacer>
+						<v-text-field
+						  v-model="search"
+						  append-icon="mdi-magnify"
+						  label="חיפוש בתוצאות"
+						  single-line
+						  hide-details
+						></v-text-field>
+					  </v-card-title> 
+					
+
+					<v-data-table
+					:headers="headers"
+					:items="desserts"
+					item-key="OBJECTID"
+					:search="search"
+					class="elevation-1"
+					>
+
+					<template v-slot:item.flat_number="{ item }">
+						<v-chip :color='getColor(item["flat_number"])' dark>{{ item.flat_number }}</v-chip>
+					</template>
+
+					<template v-slot:item.action="{ item }">
+						<v-icon
+						  color="blue"
+						  @click="zoomItem(item)"
+						>
+						mdi-map-marker-radius
+						</v-icon>
+					  </template>
+				   
+					
+					</v-data-table>
+					</v-card>
+				</v-flex>
+			</v-layout>
+		</v-bottom-sheet>
+	  </div>
+
+
+
+
+	<v-btn class="select_map_watermark"
+	 v-model="mdiClose"
+	  @click="selectFromMapClick" 
+	  absolute
+	  dark
+	  fab
+	  small
+	  right
+	  color="#FF5722"
+	>
+	  <v-icon v-if="mdiClose">mdi-close</v-icon>
+	  <v-icon v-else>mdi-vector-rectangle</v-icon>
+	</v-btn>
+
+
+	<v-layout class="switch_watermark" right style="max-width: 180px">
+		<v-flex xs5 style="width: 175px;">
+			<v-layout style="width: 175px; height:40px">
+			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2"  @change="turnStat" v-model="setl_checkbox" ></v-checkbox>
+			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">אזורים סטיסטיים</p>
+			</v-layout>
+			<v-layout style="width: 175px; height:40px">
+			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2" @change="turnPoints" v-model="points_checkbox" ></v-checkbox>
+			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">מיקומי נדבקים</p>
+		  </v-layout>
+		</v-flex>
+	  </v-layout>
+
+
+		<!-- <v-checkbox color="blue darken-4" class="switch_watermark1" v-model="setl_checkbox" label="שכבת ישובים"  @change="turnSetl"></v-checkbox>
+		<v-checkbox color="blue darken-4" class="switch_watermark2" v-model="points_checkbox" label="שכבת מיקומי נדבקים"  @change="turnPoints"></v-checkbox> -->
+
+			
+	  
+  <v-btn class="info_watermark"
+  absolute
+  dark
+  fab
+  small
+  left
+  color="#1A237E"
+  @click="sheet = true"
+>
+  <v-icon>info</v-icon>
+</v-btn>
+
+
+<v-btn class="search_watermark" 
+absolute
+dark
+fab
+small
+left
+color="#1A237E"
+@click="zoomCurrentLocation"
+>
+<v-icon>mdi-crosshairs-gps</v-icon>
+</v-btn>
+
+
+
+<v-btn class="heat_map_watermark" id="heat_map_btn"
+v-model="mdiHeatClose"
+v-show="!hidden"
+ @click="heatMapClick" 
+ absolute
+ dark
+ fab
+ small
+ right
+ color="#FF9800"
+>
+ <v-icon v-if="mdiHeatClose">mdi-close</v-icon>
+ <v-icon v-else>mdi-hubspot</v-icon>
+</v-btn>
+
+<button   id="CircleMobile" class="circle_watermark_mobile"
+absolute
+fab
+small
+right>
+<v-progress-circular
+v-model="circle_value"
+:size="50"
+:value="circle_value"
+:width="8"
+color="#1A237E"
+class="font-weight-black"
+>{{ displayCircleValue() }}
+</v-progress-circular>
+</button>
+
+
+<button id="sliderCircle" class="slider_circle_watermark"	style="bottom: 50px;"
+absolute
+dark
+fab
+small
+right>
+<v-progress-circular
+	v-model="slider_circle_value"
+	:size="50"
+	:value="slider_circle_value"
+	:width="8"
+	color="#1A237E"
+	class="font-weight-black"
+	>{{ getCountByDateTotal() }}
+</v-progress-circular>
+</button>
+
+
+
+
+
+<v-dialog
+v-model="dialog"
+hide-overlay
+persistent
+width="300"
+>
+<v-card
+  color="primary"
+  dark
+>
+  <v-card-text>
+  {{loading_text}}
+	<v-progress-linear
+	  indeterminate
+	  color="white"
+	  class="mb-0"
+	></v-progress-linear>
+  </v-card-text>
+</v-card>
+</v-dialog>
+
+		<v-speed-dial
+					bottom
+					left
+					absolute
+					direction="right"
+					transition="slide-x-transition"
+					style="bottom: 30%!important; left: 3%!important;"
+
+					>
+            <template v-slot:activator>
+			  <v-btn 
+			  color="#1A237E"
+			  dark
+			  small
+			   fab>
+                <v-icon>share</v-icon>
+              </v-btn>
+			</template>
+			
+            <v-btn 
+			color="green"
+				style="bottom: 30%!important;"
+			    dark
+				fab
+				small
+				@click="shareWhatsapp()"
+				>
+			<v-icon>mdi-whatsapp</v-icon>
+			</v-btn>
+
+			<v-btn
+			color="blue"
+				style="bottom: 30%!important;"
+			    dark
+				fab
+				small
+				@click="shareFacebook()"
+				>
+			<v-icon>mdi-facebook</v-icon>
+			</v-btn>
+
+			<v-btn
+				color="red"
+					style="bottom: 30%!important;"
+					dark
+					fab
+					small
+					>
+				<v-icon>mdi-email</v-icon>
+			</v-btn>
+
+		  </v-speed-dial>
+
+
+		  
+
+</v-app>
+</div>
+
+
+<script>
+
+
+
+	
+
+//////////////////////////////////////////
+
+                              // convert wgs84 to israel tm grid...
+
+                              //////////////////////////////////////////
+
+ 
+
+                              function degreesToRadians(degrees) {
+
+return degrees * Math.PI / 180;
+
+}
+
+
+
+function pow2(x) {
+
+return x*x;
+
+}
+
+
+
+function pow3(x) {
+
+return x*x*x;
+
+}
+
+
+
+function pow4(x) {
+
+return x*x*x*x;
+
+}
+
+
+
+function ITMLocation(easting, northing) {
+
+this.easting = easting;
+
+this.northing = northing;
+
+this.eastingInOldGrid = function() {
+
+			 return easting - 50000;
+
+}
+
+this.northingInOldGrid = function() {
+
+			 var retval = northing - 500000;
+
+			 if (retval<0) {
+
+			   retval += 1000000;
+
+			 }
+
+			 return retval;
+
+}
+
+}
+
+
+
+//////////////
+
+//// Main Function…
+
+//////////////
+
+function WgsToIsrael(latitude, longitude)
+
+{
+
+			 longitude = degreesToRadians(longitude);
+
+			 latitude = degreesToRadians(latitude);
+
+			 //LatLongToITM(latitude, longitud);
+
+			 // Projection parameters
+
+			 var centralMeridian = degreesToRadians(35.2045169444444);  // central meridian of ITM projection
+
+			 var k0 = 1.0000067;  // scale factor
+
+
+
+			 // Ellipsoid constants (WGS 80 datum)
+
+			 var a = 6378137;  // equatorial radius
+
+			 var b = 6356752.3141; // polar radius
+
+			 var e = Math.sqrt(1 - b*b/a/a);  // eccentricity
+
+			 var e1sq = e*e/(1-e*e);
+
+			 var n = (a-b)/(a+b);
+
+
+
+			 // Curvature at specified location
+
+			 var tmp = e*Math.sin(latitude);
+
+			 var nu = a/Math.sqrt(1 - tmp*tmp);
+
+
+
+			 // Meridional arc length
+
+			 var n3 = pow3(n);
+
+			 var n4 = pow4(n);
+
+			 var A0 = a*(1-n+(5*n*n/4)*(1-n) +(81*n4/64)*(1-n));
+
+			 var B0 = (3*a*n/2)*(1 - n - (7*n*n/8)*(1-n) + 55*n4/64);
+
+			 var C0 = (15*a*n*n/16)*(1 - n +(3*n*n/4)*(1-n));
+
+			 var D0 = (35*a*n3/48)*(1 - n + 11*n*n/16);
+
+			 var E0 = (315*a*n4/51)*(1-n);
+
+			 var S = A0*latitude - B0*Math.sin(2*latitude) + C0*Math.sin(4*latitude)
+
+			 - D0*Math.sin(6*latitude) + E0*Math.sin(8*latitude);
+
+
+
+			 // Coefficients for ITM coordinates
+
+			 var p = longitude-centralMeridian;
+
+			 var Ki = S*k0;
+
+			 var Kii = nu*Math.sin(latitude)*Math.cos(latitude)*k0/2;
+
+			 var Kiii = ((nu*Math.sin(latitude)*pow3(Math.cos(latitude)))/24)*(5-pow2(Math.tan(latitude))+9*e1sq*pow2(Math.cos(latitude))+4*e1sq*e1sq*pow4(Math.cos(latitude)))*k0;
+
+			 var Kiv = nu*Math.cos(latitude)*k0;
+
+			 var Kv = pow3(Math.cos(latitude))*(nu/6)*(1-pow2(Math.tan(latitude))+e1sq*pow2(Math.cos(latitude)))*k0;
+
+
+
+			 var easting = Math.round(219529.58+ Kiv*p+Kv*pow3(p) - 60);
+
+			 var northing = Math.round(Ki+Kii*p*p+Kiii*pow4(p) - 3512424.41+ 626907.39 - 45);
+
+			 return [easting, northing];
+
+}
+
+///////////////////
+
+// end convert
+
+///////////////////
+
+function dateConvert(unixts)
+{
+	var date = new Date(unixts);
+	//var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+	var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
+	return(fdate);
+}
+
+function isInArray(value, array) {
+	return array.indexOf(value) > -1;
+}
+
+function stringToDate(_date,_format,_delimiter)
+{
+            var formatLowerCase=_format.toLowerCase();
+            var formatItems=formatLowerCase.split(_delimiter);
+            var dateItems=_date.split(_delimiter);
+            var monthIndex=formatItems.indexOf("mm");
+            var dayIndex=formatItems.indexOf("dd");
+            var yearIndex=formatItems.indexOf("yyyy");
+            var month=parseInt(dateItems[monthIndex]);
+            month-=1;
+            var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+            return formatedDate;
+}
+
+
+var date_sort_asc = function (date1, date2) {
+  // This is a comparison function that will result in dates being sorted in
+  // ASCENDING order. As you can see, JavaScript's native comparison operators
+  // can be used to compare dates. This was news to me.
+  if (date1 > date2) return 1;
+  if (date1 < date2) return -1;
+  return 0;
+};
+
+
+function PointToPolygon(x, y, r)
+		{			
+			x1 = x - r;
+			y1 = y;
+			x2 = x - (((r / 2)) / (2)) - ((r / 2));
+			y2 = y + (((r / 2)) / (2)) + ((r / 2));
+			x3 = x;
+			y3 = y + r;
+			x4 = x + (((r / 2)) / (2)) + ((r / 2));
+			y4 = y + (((r / 2)) / (2)) + ((r / 2));
+			x5 = x + r;
+			y5 = y;
+			x6 = x + (((r / 2)) / (2)) + ((r / 2));
+			y6 = y - (((r / 2)) / (2)) - ((r / 2));
+			x7 = x;
+			y7 = y - r;
+			x8 = x - (((r / 2)) / (2)) - ((r / 2));
+			y8 = y - (((r / 2)) / (2)) - ((r / 2));
+			wkt = "POLYGON(("+x1+" "+y1+", "+x2+" "+y2+", "+x3+" "+y3+", "+x4+" "+y4+", "+x5+" "+y5+", "+x6+" "+y6+", "+x7+" "+y7+", "+x8+" "+y8+", "+x1+" "+y1+"))";
+			return wkt;
+		}
+
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
+
+Number.prototype.between = function(a, b) {
+                  var min = Math.min.apply(Math, [a, b]),
+                      max = Math.max.apply(Math, [a, b]);
+                      return this >= min && this < max;
+                  };
+
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
+function getPointDataByDate(date)
+{
+	heatmap_features_date = [];
+	filter_Date = corona_features.filter(function(f) {
+								return f.attributes["fromTime"] <= date;			
+	});
+	wkts_all = [];
+	names_all = [];
+	bubbleHTMLParameters_all = [];
+	for (c = 0; c < filter_Date.length; c++)
+	{
+		feat = filter_Date[c];
+		heatmap_features_date.push(feat.heatPoint);
+		wkts_all.push("POINT(("+feat.geometry.x+" "+feat.geometry.y+"))");
+		names_all.push(feat.attributes.Name);
+		bubbleHTMLParameters_all.push([feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + place, "בשעות " + feat.attributes.stayTimes]);
+		//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+	}
+	data_date = {  
+		wkts: wkts_all,  
+		names: names_all,  
+		geometryType: govmap.drawType.Point,  
+		defaultSymbol:  
+		{  
+			url:'https://govmap.gov.il/sites/O1.png',  
+			width:20,  
+			height:20  
+		},   
+		symbols: [],  
+		clearExisting: false,  
+		data: {  
+				tooltips: [],  
+				headers: names_all,
+				bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+				bubbleHTMLParameters:bubbleHTMLParameters_all
+			}  
+	};
+	return [data_date, heatmap_features_date]; 
+}
+
+function AddUserPoints(data_all)
+{
+	govmap.displayGeometries(data_all).then(function (response)  
+	{  
+		//console.log(response.data);
+	});
+}
+
+
+function ClearUserPoints(){
+
+	var bubbleContent = "";
+		var data = {  
+		wkts: [],  
+		names: [],  
+		geometryType: govmap.drawType.Point,  
+	    defaultSymbol:  
+		{  
+			url:'https://govmap.gov.il/sites/O1.png',  
+			width:20,  
+			height:20  
+		},   
+		symbols: [],  
+		clearExisting: true,  
+		data: {  
+				tooltips: [],  
+				headers: [],
+				bubbleHTML: bubbleContent,
+				bubbleHTMLParameters:[]
+		      }  
+        };  
+				  
+		govmap.displayGeometries(data).then(function (response)  
+		{  
+		  //console.log(response.data);
+		}); 
+
+}
+
+function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
+		// if (current_scale >= 1000003)
+		// {
+		// 	png = 'http://localhost/Corona/O3.png'
+		// }
+		// else if (current_scale <= 100000)
+		// {
+		// 	png = 'http://localhost/Corona/O1.png'
+		// }
+		// else{
+		// 	png = 'http://localhost/Corona/O2.png'
+		// }
+
+		var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
+		var data = {  
+		wkts: ["POINT(("+x+" "+y+"))"],  
+		names: [place],  
+		geometryType: govmap.drawType.Point,  
+	    defaultSymbol:  
+		{  
+			url:'https://govmap.gov.il/sites/O1.png',  
+			width:20,  
+			height:20  
+		},   
+		symbols: [],  
+		clearExisting: clearExisting,  
+		data: {  
+				tooltips: [],  
+				headers: [place],
+				bubbleHTML: bubbleContent,
+				bubbleHTMLParameters:[[name, fdate_stay_times]]
+		      }  
+        };  
+				  
+		govmap.displayGeometries(data).then(function (response)  
+		{  
+		  //console.log(response.data);
+		}); 
+}
+
+
+
+var json_stat_str = "https://yovavsanders.github.io/Corona/STAT_AREA.json";
+        var json_stat_infceted_5000 = "https://data.gov.il/api/3/action/datastore_search?&resource_id=d07c0771-01a8-43b2-96cc-c6154e7fa9bd&limit=5000";
+
+
+        var st_wkts = [];
+        var st_names = [];
+        var st_symbols = [];
+        var st_tooltips = [];
+        var st_bubbleHTMLParameters = [];
+        var infected_stat_features = [];
+        var infected_stat_features_5000 = [];
+        var max_date;
+
+        Number.prototype.between = function(a, b) {
+                  var min = Math.min.apply(Math, [a, b]),
+                      max = Math.max.apply(Math, [a, b]);
+                      return this >= min && this < max;
+                  };
+
+
+
+var classBreakeSymbolsStat ={
+                  blue:
+                      {  
+                          'outlineColor': [0, 0, 255, 1],
+                          'outlineWidth': 3,
+                          'fillColor': [255, 255, 255, 0.5]
+                      }, 
+				  cherry: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [128, 0, 0, 0.5]
+                      }, 
+				  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [179, 0, 0, 0.5]
+                      },  
+                  light_red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
+                      },
+                  red_orange:  
+                       {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 179, 0, 0.5] 
+                      },
+                  orange:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 164, 89, 0.5] 
+                      },
+                  yellow:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 238, 88, 0.5]
+                      },
+                  green_yellow: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [178, 255, 89, 0.5]
+                      },
+                  green: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [56, 142, 60, 0.5]
+                         }
+                  };
+      
+
+function getSymbolStat(number) {
+    //console.log(number);
+	Symbol = classBreakeSymbolsStat.blue;
+	if (number.between(-1,15))
+	{
+		Symbol = classBreakeSymbolsStat.green;
+	}
+	if (number.between(15,17))
+	{
+		Symbol = classBreakeSymbolsStat.green_yellow;
+	}
+	if (number.between(17,20))
+	{
+		Symbol = classBreakeSymbolsStat.yellow;
+	}
+	if (number.between(20,25))
+	{
+		Symbol = classBreakeSymbolsStat.orange;
+	}
+	if (number.between(25,30))
+	{
+		Symbol = classBreakeSymbolsStat.red_orange;
+	}
+	if (number.between(30,40))
+	{
+		Symbol = classBreakeSymbolsStat.light_red;
+	}
+	if (number.between(40,60))
+	{
+		Symbol = classBreakeSymbolsStat.red
+	}
+	if (number.between(60,1000))
+	{
+		Symbol = classBreakeSymbolsStat.cherry;
+	}
+	return  Symbol;
+}
+
+
+
+function getJsonData(json_infceted){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {;
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							//console.log(i);
+							infected_setl_features.push(json_data[i]);
+							appVue.loading_text = "60%";
+						}	
+					}
+					
+					//setTimeout(getIsoData(),5000);
+					getIsoData(iso_json_string);
+					console.log("RungetIsoData")
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_infceted
+			});
+	}
+
+        function getJsonDataStat(json_file){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {
+                    $.get(json_stat_infceted_5000).then(function (data) {
+                        //console.log(data.result.records);
+                        var mostRecentDate = new Date(Math.max.apply(null, data.result.records.map( e => {
+                            return new Date(e.date);
+                        })));
+                        max_date = formatDate(mostRecentDate);
+                    });
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							console.log(i);
+							infected_stat_features.push(json_data[i]);
+						}	
+					}
+					
+					//setTimeout(getIsoData(),5000);
+					//getIsoData(iso_json_stat_string);
+					//console.log("RungetIsoData")
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_file
+			});
+	    }
+
+        function getMaximumDates(json_stat_infceted_5000)
+        {
+            var max_date;
+            var mostRecentDate = new Date(Math.max.apply(null, $.getJSON(json_stat_infceted_5000).responseJSON.result.records.map( e => {
+                    return new Date(e.date);
+                })));
+            max_date =  formatDate(mostRecentDate);
+            return max_date;
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+
+
+
+
+
+var classBreakeSymbols ={
+                  blue:
+                      {  
+                          'outlineColor': [0, 0, 255, 1],
+                          'outlineWidth': 3,
+                          'fillColor': [255, 255, 255, 0.5]
+                      }, 
+				  cherry: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [128, 0, 0, 0.5]
+                      }, 
+				  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [179, 0, 0, 0.5]
+                      },  
+                  light_red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
+                      },
+                  red_orange:  
+                       {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 179, 0, 0.5] 
+                      },
+                  orange:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 164, 89, 0.5] 
+                      },
+                  yellow:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 238, 88, 0.5]
+                      },
+                  green_yellow: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [178, 255, 89, 0.5]
+                      },
+                  green: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [56, 142, 60, 0.5]
+                         }
+                  };
+
+
+
+function getSymbol(number) {
+	Symbol = classBreakeSymbols.blue;
+	if (number.between(-1,2.6))
+	{
+		Symbol = classBreakeSymbols.green;
+	}
+	if (number.between(2.6,5.8))
+	{
+		Symbol = classBreakeSymbols.green_yellow;
+	}
+	if (number.between(5.8,8.8))
+	{
+		Symbol = classBreakeSymbols.yellow;
+	}
+	if (number.between(8.8,12.1))
+	{
+		Symbol = classBreakeSymbols.orange;
+	}
+	if (number.between(12.1,16.7))
+	{
+		Symbol = classBreakeSymbols.red_orange;
+	}
+	if (number.between(16.7,23.5))
+	{
+		Symbol = classBreakeSymbols.light_red;
+	}
+	if (number.between(23.5,32.7))
+	{
+		Symbol = classBreakeSymbols.red
+	}
+	if (number.between(32.7,1000))
+	{
+		Symbol = classBreakeSymbols.cherry;
+	}
+	return  Symbol;
+}
+
+var new_wkt;
+var d;
+var lastDate;
+var currentDate;
+var filter_Date;
+function myLoop (i, all) {  //  create a loop function
+			setTimeout(function () {   
+				i = i + 1; 
+				//console.log('hello ' + appVue.slider);         
+				appVue.slider = i;
+ 				date = dates[appVue.slider - 1];
+				appVue.slider_date = date;
+				if (appVue.slider < all) {     
+					myLoop(i, all);          
+				}
+				else{
+					setTimeout(function () {
+
+					displaySetlPolygons();
+
+					AddUserPoints(data_all);
+					document.getElementById("heat_map_btn").disabled = false;
+					appVue.slider = 0;
+					appVue.mdiPause = false;
+					appVue.slider_date = dates[0];
+					}, 1500);
+				}                   
+			}, 1250)
+		}
+
+
+function getJsonData(json_infceted){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {;
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							//console.log(i);
+							infected_setl_features.push(json_data[i]);
+							appVue.loading_text = "60%";
+						}	
+					}
+					
+					//setTimeout(getIsoData(),5000);
+					getIsoData(iso_json_string);
+					console.log("RungetIsoData")
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_infceted
+			});
+	}
+
+	function getIsoData(iso_json_string){ 
+                    $.ajax({
+                        dataType: 'json',
+                        beforeSend : function() {
+						console.log('Before_getIsoData');
+                        },
+                        success: function(iso_data) {
+                          //console.log(iso_data.features.length)
+                          for (i = 0; i < iso_data.features.length; i++)
+                          {
+                            iso_setl_features.push(iso_data.features[i]);
+							//appVue.loading_text = iso_data.features[i].attributes.Municipality_desc;
+							appVue.loading_text = "75%";
+							//console.log("iso " + i);
+                          }
+                        },
+                        error : function(jqXHR, textStatus, errorThrown) {
+                          console.log("Error occurred: " + errorThrown);
+                        },
+                        url: iso_json_string
+                    });
+                  }
+
+var a=0;
+var addr = "";
+var res;
+var status = true;
+
+
+
+
+function displaySetlPolygons()
+{
+	var setl_data = {  
+					wkts: s_wkts,  
+					names: s_names,  
+					geometryType: govmap.drawType.Polygon,  
+					defaultSymbol:  
+					{  
+						'outlineColor': [0, 0, 255, 1],
+						'outlineWidth': 3,
+						'fillColor': [255, 255, 255, 0.5]
+					},    
+					symbols: s_symbols,  
+					'clearExisting': false,
+					data: {  
+						tooltips: [],  
+						headers: s_names,
+						bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+						bubbleHTMLParameters:s_bubbleHTMLParameters
+
+					} 
+				}
+
+				govmap.displayGeometries(setl_data).then(function (response)  
+				{  
+					//PolygonId = response.data;
+					console.log(response);
+				});
+}
+
+function displayStatPolygons()
+{
+
+				govmap.displayGeometries(stat_data).then(function (response)  
+				{  
+					//PolygonId = response.data;
+					console.log(response);
+				});
+}
+
+var res;
+var data_dates;
+var PolygonId;
+var data_all;
+//var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+//var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+var dates = [];
+var real_dates = [];
+var features = []
+var corona_features = []
+var infected_setl_features =[];
+var iso_setl_features =[];
+var setl_area_features = [];
+var isHeatMap = false;
+
+
+
+
+var s_wkts = [];
+var s_names = [];
+var s_symbols = [];
+var s_bubbleHTMLParameters = [];
+
+
+var iso_count_all = 0;
+
+var s_codes = [];
+
+
+var setl_dict = {};
+var setlcodes = [];
+var setlnames = [];
+var ar;
+
+function toArray(x) {
+    for(var i = 0, a = []; i < x.length; i++)
+        a.push(x[i]);
+
+    return a
+}
+
+var filter_test;
+var stat_data;
+var d_stat;
+$(document).ready(function (){
+
+	
+	const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	const url = "https://govextra.gov.il/ministry-of-health/corona/corona-virus/";
+	var infected;
+			
+
+	//$.get(proxyurl + url).then(function (html) {
+	$.get('https://yovavsanders.github.io/Corona/Sum.json').then(function (data) {
+		appVue.loading = true;
+    // Success response
+    	//health =$(html);
+		//dashboard = health.find('.dashboard');
+
+		appVue.infected_count_all = data[0].INFECTED;
+		appVue.deaths_count_all = data[0].DIES;
+		appVue.cures_count_all = data[0].CURED;
+
+
+
+		// appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		// appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
+		// appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
+		// htmlList = $(html).find('h2');
+		// arry = toArray(htmlList);
+		// ar = arry;
+		// result = arry.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
+		// if (result)
+		// {
+		// 	console.log(result);
+		appVue.tooltip_text = data[0].REMARK;
+		// }
+
+		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
+		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
+		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
+		//infected_benony = $(html).find('.dashboard').children()[0].children[0].children[2].children[1].children[1].innerText;
+		//infected_kashe = $(html).find('.dashboard').children()[0].children[0].children[2].children[2].children[1].innerText;
+		//infected_munshamim = $(html).find('.dashboard').children()[0].children[0].children[2].children[3].children[1].innerText;
+    	console.log("total_infected: " +appVue.infected_count_all);
+		//infected = {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony , kashe:infected_kashe, munshamim: infected_munshamim};
+		//setTimeout(function () { return {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony, kashe:infected_kashe, munshamim:infected_munshamim}}, 1500);
+
+
+		
+		appVue.dialog = true;
+		govmap.createMap('map_div', {
+			token: my_token,
+			visibleLayers: [],
+			layers:["SCHOOL","KIDS_G"], 
+			layersMode: 4, 
+			showXY: true,
+			level: 3,
+			center: {x: 186000, y: 658000},
+			identifyOnClick: true
+		});
+
+		current_scale = 1000003;
+		wkts_all = [];
+		names_all = [];
+		bubbleHTMLParameters_all = [];
+
+		
+		//setl_json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_infecteds_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		//var s = $.getJSON(setl_json_str);
+		//s.complete(function(response) {
+			//console.log(response);
+		//});
+
+
+		//var json_str = "https://gisweb.azureedge.net/Points.json";
+        //var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
+        var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
+		var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA.json";
+		var iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		var json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		var d = $.getJSON(json_str);
+		d.complete(function(response) {
+			//console.log(response);
+			for (i = 0; i < d.responseJSON.features.length; i++)
+			{
+				//console.log(i);
+				appVue.loading_text ="10%";
+				feat = d.responseJSON.features[i];
+				name = d.responseJSON.features[i].attributes.Name;
+				place = d.responseJSON.features[i].attributes.Place;
+				comments = d.responseJSON.features[i].attributes.Comments;
+				x = d.responseJSON.features[i].geometry.x;
+				y = d.responseJSON.features[i].geometry.y;
+				xy = WgsToIsrael(y,x);
+				d.responseJSON.features[i].geometry.x = xy[0];
+				d.responseJSON.features[i].geometry.y = xy[1];
+				var unixt_fr = d.responseJSON.features[i].attributes.fromTime;
+				fdate = dateConvert(unixt_fr)
+				d.responseJSON.features[i].attributes.fromTime = fdate;
+				d.responseJSON.features[i].attributes.realdate = stringToDate(fdate,"dd/MM/yyyy","/");
+				var unixt_to = d.responseJSON.features[i].attributes.toTime;
+				tdate = dateConvert(unixt_to)
+				d.responseJSON.features[i].attributes.toTime = tdate;
+				stay_times = d.responseJSON.features[i].attributes.stayTimes;
+
+				//set heatPoint
+				val_farsh = 250;
+				if (feat.attributes.stayTimes != "לא ידוע")
+				{
+					val1 = feat.attributes.stayTimes.split("-")[0];
+					val1 = val1.split(":")[0];
+					val2 = feat.attributes.stayTimes.split("-")[1];
+					val2 = val2.split(":")[0];
+					if ((val2 - val1) > 0)
+					{
+						val0 = ((val2 - val1) * (val2 - val1)) * 100;
+						//val0 = 500;
+					}
+					else
+					{
+							val0 = 250;
+					}
+				}
+				else{
+					val0 = 250;
+				}
+				d.responseJSON.features[i].heatPoint = { point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val0, val_farsh } };
+
+
+				corona_features.push(d.responseJSON.features[i]);
+
+
+
+				wkts_all.push("POINT(("+xy[0]+" "+xy[1]+"))");
+				names_all.push(place);
+				if (comments)
+				{
+					bubbleHTMLParameters_all.push(["החולה שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times + "<br />" + comments]);
+				}
+				else
+				{
+					bubbleHTMLParameters_all.push(["החולה שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times]);
+				}
+
+
+
+
+				//AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);				
+			}
+
+			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
+			//Add Points
+			data_all = {  
+					wkts: wkts_all,  
+					names: names_all,  
+					geometryType: govmap.drawType.Point,  
+					defaultSymbol:  
+					{  
+						url:'https://govmap.gov.il/sites/O1.png',  
+						width:20,  
+						height:20  
+					},   
+					symbols: [],  
+					clearExisting: true,  
+					data: {  
+							tooltips: [],  
+							headers: names_all,
+							bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+							bubbleHTMLParameters:bubbleHTMLParameters_all
+						}  
+			}; 
+			AddUserPoints(data_all);
+			console.log("features loaded succesfully");
+
+			for (c = 0; c < corona_features.length; c++)
+			{
+				feat = corona_features[c];
+				{
+					val_farsh = 1000;
+					if (feat.attributes.stayTimes != "לא ידוע")
+					{
+						val1 = feat.attributes.stayTimes.split("-")[0];
+						val1 = val1.split(":")[0];
+						val2 = feat.attributes.stayTimes.split("-")[1];
+						val2 = val2.split(":")[0];
+						if ((val2 - val1) > 0)
+						{
+							val0 = (val2 - val1) * 1000;
+							//val0 = 500;
+						}
+						else
+						{
+								val0 = 500;
+						}
+					}
+					else{
+						val0 = 500;
+					}
+					//console.log(val0);
+					heatmap_features.push({ point: { x: feat.geometry.x, y:feat.geometry.y }, attributes: { val0, val_farsh } });
+				}
+			}
+
+
+
+			appVue.loading = false;
+
+			// dates for slider...
+
+            for (i=0; i < corona_features.length; i++)
+            {
+                if (isInArray(corona_features[i].attributes.toTime, dates) == false)
+                {
+                    dates.push(corona_features[i].attributes.toTime)
+					real_dates.push(stringToDate(corona_features[i].attributes.toTime,"dd/MM/yyyy","/"))
+                }
+            }
+			dates = dates.sort();
+
+			sorted_dates  = real_dates.sort(date_sort_asc);
+			dates_array = getDates(sorted_dates[0], sorted_dates[sorted_dates.length - 1]);
+
+			data_dates = [];
+			for (date_idx = 1; date_idx < dates.length; date_idx++)
+			{
+				data = getPointDataByDate(dates[date_idx]);
+				if (date_idx == 1)
+				{
+					data[0].clearExisting = true;
+				}
+				data_dates.push(data);
+			}
+
+			//appVue.getCountByDate();
+
+			appVue.max = dates.length;
+			console.log(appVue.max);
+			appVue.range = [1, dates_array.length];
+
+			filter_Date = corona_features.filter(function(f) {
+						return f.attributes["fromTime"] == dates[0];
+			});
+			appVue.circle_value = corona_features.length / (corona_features.length / 100);
+			appVue.slider_circle_value = 0;
+
+
+			//get stat_features..
+			//////////////////////////////
+			d_stat = $.getJSON(json_stat_str);
+            d_stat.complete(function(response) {
+
+				appVue.loading_text ="70%";
+                $.get(json_stat_infceted_5000).then(function (data) {
+                    //console.log(data.result.records);
+                    var mostRecentDate = new Date(Math.max.apply(null, data.result.records.map( e => {
+                        return new Date(e.date);
+                    })));
+                    max_date = formatDate(mostRecentDate);
+                    $.get("https://data.gov.il/api/3/action/datastore_search?q="+max_date+"&resource_id=d07c0771-01a8-43b2-96cc-c6154e7fa9bd&limit=2500").then(function (max_data) {
+                        console.log(max_data.result.records);
+                        infected_stat_features = max_data.result.records;
+                        //console.log(response);
+                        formated_max_date = max_date.split("-")[2] + "/" + max_date.split("-")[1] + "/" +  max_date.split("-")[0];
+                        console.log(formated_max_date);
+                        for (i = 0; i < d_stat.responseJSON.features.length; i++)
+                        {
+                            //console.log(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
+                            polygon = d_stat.responseJSON.features[i].geometry
+                            st_wkts.push(Terraformer.WKT.convert(polygon));
+                            st_names.push(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
+                            this_setlname = d_stat.responseJSON.features[i].properties.SHEM_YISHU;
+                            this_setlcode = d_stat.responseJSON.features[i].properties.SEMEL_YISH;
+                            this_statcode = d_stat.responseJSON.features[i].properties.STAT11;
+                            //console.log(this_setlcode + ' ' + this_statcode) ;	
+                            filter = infected_stat_features.filter(function(f) {
+                                        return f.town_code == this_setlcode &&  f.agas_code == this_statcode ;			
+                            });
+                            filter_test = filter;
+                            if (filter.length > 0)
+                            {
+                                //console.log(filter);
+                                filter_test = filter;
+                                accumulated_cases = filter[0].accumulated_cases;
+                                if (accumulated_cases > 0)
+                                {
+                                    st_symbols.push(getSymbolStat(parseInt(accumulated_cases)));
+                                    accumulated_cases = parseInt(accumulated_cases);
+                                }
+                                if (accumulated_cases == "<15")
+                                {
+                                    st_symbols.push({  
+                                        outlineColor: [0, 0, 0, 1],  
+                                        outlineWidth: 1,  
+                                        fillColor: [205, 232, 238, 0.5]
+                                        });
+                                    accumulated_cases = "פחות מ 15";
+                                }
+                                accumulated_deaths = filter[0].accumulated_deaths;
+                                accumulated_hospitalized = filter[0].accumulated_hospitalized;
+                                accumulated_recoveries = filter[0].accumulated_recoveries;
+                                new_cases_on_date = filter[0].new_cases_on_date;
+                                new_deaths_on_date = filter[0].new_deaths_on_date;
+                                new_hospitalized_on_date = filter[0].new_hospitalized_on_date;
+                                new_recoveries_on_date = filter[0].new_recoveries_on_date;
+                                st_tooltips.push(this_setlname+": " + accumulated_cases + " מאומתים")
+                                st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים במצטבר: "+accumulated_cases+"<br /></div><div>מאומתים בתאריך "+ formated_max_date + ": " + new_cases_on_date+"<br /></div>"]); 
+                            }
+                            else{
+                                st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים: אין מידע</div>"]);
+                                st_symbols.push({  
+                                    outlineColor: [0, 0, 0, 1],  
+                                    outlineWidth: 1,  
+                                    fillColor: [255, 255, 255, 0.5]
+                                        });
+                                st_tooltips.push(this_setlname+": אין מידע")
+                            }
+							
+                            
+
+                        }
+						appVue.loading_text ="90%";
+                        var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
+                        stat_data = {  
+                            wkts: st_wkts,  
+                            names: st_names,  
+                            geometryType: govmap.drawType.Polygon,  
+                            BubbleType: 1,
+                            defaultSymbol:  
+                                {  
+                                outlineColor: [0, 0, 0, 1],  
+                                outlineWidth: 1,  
+                                fillColor: [255, 255, 255, 0.5]
+                                },  
+                            symbols: st_symbols,  
+                            clearExisting: false,  
+                            data: {  
+                                    tooltips: st_tooltips,  
+                                    headers: st_names,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+                                    bubbleHTMLParameters: st_bubbleHTMLParameters
+                            }  
+                        };  
+                        govmap.displayGeometries(stat_data).then(function (response)  
+                        {  
+                            //console.log(response.data);
+                        });
+						appVue.dialog = false; 
+
+                    })
+                });
+                
+            });
+
+		// 	//get infected_setl_features..
+		// 	//////////////////////////////
+
+		// 	$.ajax({
+        //               dataType: 'json',
+        //               beforeSend : function() {
+		// 				//getHealthGovData();
+        //                 getJsonData(json_infceted);
+		// 				console.log("getJsonData(json_infceted)");
+		// 				//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
+                       
+        //               },
+        //               success: function(setl_area_data) {
+
+		// 				setl_area_features = setl_area_data.features;
+
+		// 				// for (i in infected_setl_features)
+        //                 // {
+        //                 //     feat = infected_setl_features[i];
+		// 				// 	infected_count_all = infected_count_all + feat.INFECTED
+		// 				// }
+		// 				for (i in iso_setl_features)
+        //                 {
+        //                     feat = iso_setl_features[i];
+		// 					iso_count_all = iso_count_all + feat.attributes.Isolations
+		// 				}
+		// 				appVue.dialog = true;
+		// 				//console.log(infected_setl_features);
+		// 				console.log("for (i = 0; i < infected_setl_features; i++)");
+		// 				for (i = 0; i < infected_setl_features.length; i++)
+		// 				{
+		// 					//console.log(infected_setl_features[i].SETL_CODE);
+		// 					setlcode= infected_setl_features[i].SETL_CODE;
+		// 					this_setlname = infected_setl_features[i].SETL_NAME;
+		// 					console.log(this_setlname);
+		// 					appVue.loading_text ="90%"
+		// 					infecteds = infected_setl_features[i].INFECTED;
+
+		// 					population = infected_setl_features[i].POPULATION;
+							
+		// 					s_features = setl_area_features.filter(function(f) {
+		// 						return f.properties["SETL_CODE"] == setlcode;			
+		// 					}); 
+		// 					//console.log("s_features: ");
+		// 					//console.log(s_features);
+		// 					if (s_features.length > 0)
+		// 					{
+		// 						infectedper1000 = infecteds / (population/1000);
+		// 						infectedper10000 =  parseFloat(infected_setl_features[i].POP_TO_10000);
+		// 						setlnames.push(this_setlname);
+		// 						//set geometry layer atts:
+		// 						polygon = s_features[0].geometry
+		// 						s_wkts.push(Terraformer.WKT.convert(polygon));
+		// 						s_codes.push("'" +setlcode + "'");
+		// 						s_names.push(this_setlname);
+		// 						console.log("infecteds: " + infecteds);
+		// 						console.log("population: " + population);
+		// 						console.log(infectedper10000);
+
+		// 						s_symbols.push(getSymbol((infecteds / (population / 100))  * (100)));
+		// 						iso_features = iso_setl_features.filter(function(f) {
+		// 							return f.attributes["Municipality"] == setlcode;			
+		// 						}); 
+		// 						if (iso_features.length > 0)
+		// 						{
+		// 							iso_feat = iso_features[0];
+		// 							isolations = iso_feat.attributes.Isolations;
+		// 							isoper1000 = iso_feat.attributes.Iso_per_1000;		
+		// 							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
+		// 						}
+		// 						else
+		// 						{
+		// 							s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div>"]);          
+		// 						}
+		// 					}
+		// 					else{
+		// 						console.log("no setlcode found");
+		// 					}	
+
+		// 				}
+		// 				displaySetlPolygons();
+		// 				appVue.dialog = false;
+
+		// 			  },
+        //               error : function(jqXHR, textStatus, errorThrown) {
+        //                   console.log("Error occurred: " + errorThrown);
+        //               },
+        //               url: mapi_json_string
+                      
+        //           }); 
+
+			
+		
+
+			
+		 });
+
+		govmap.zoomToXY({ x: 181440, y: 665200, level: 6, marker: false });
+		//set pan event;
+		govmap.onEvent(govmap.events.PAN).progress(function (e)  
+		{  
+			Xmax = e.extent.xmax;
+			Xmin = e.extent.xmin;
+			Ymax = e.extent.ymax;
+			Ymin = e.extent.ymin;
+			var scale = Math.round((Xmax - Xmin)  / (document.getElementById("map_form").offsetWidth * 0.000264583));
+
+			
+
+			current_scale = scale;
+			points_count = 0;
+			for (var i=0; i< corona_features.length; i++)
+			{
+				point = corona_features[i].geometry;
+				pt_x = corona_features[i].geometry.x;
+				pt_y = corona_features[i].geometry.y;
+				if ((pt_x > Xmin  && pt_x  < Xmax) && (pt_y > Ymin  && pt_y  < Ymax))
+				{
+					points_count++;
+				}
+			}					 
+			appVue.circle_value = points_count / (corona_features.length / 100); 
+
+			if (current_scale <= 25030)
+			{
+				appVue.hidden = false;
+				if (appVue.mdiHeatClose == true && appVue.hidden == false && isHeatMap == false)
+				{
+					govmap.setHeatLayer({  
+						points: heatmap_features 
+						,options: { valueField: 'val1' }  
+					});
+					//displaySetlPolygons();
+				}
+				isHeatMap = true;
+			}
+			else
+			{
+
+				appVue.hidden = true;
+				govmap.removeHeatLayer();
+				isHeatMap = false;
+			}
+
+			
+		});
+
+
+		
+	}, function () {
+		console.log('Error respons');
+	});
+});
+
+
+var current_scale;
+var tableData = [];
+var WktExtent = ""
+var planning_types = {};
+var heatmap_features = [];
+var heatmap_features_date = [];
+
+var appVue = new Vue({
+    el:"#toolbar_app",
+    vuetify: new Vuetify(),
+    data () {
+      return {
+		tooltip_text: "#",
+		infected_count_all: 0,
+		deaths_count_all: 0,
+		cures_count_all: 0,
+		loading_text: "טוען נתונים" ,
+		setl_checkbox: true,
+		points_checkbox: true,
+		dialog: false,
+		setlname: "",
+		infecteds: "",
+		population: "",
+
+		hidden: true,
+
+		tableTitle: "",
+
+		radius: 2500,
+
+		buffer_items: [100,2500, 5000, 7500, 10000],
+		circle_value: 2,
+
+		slider_circle_value: 0,
+
+		slider_date: "07/03/2020",
+
+		thumb_value: 2,
+
+        min: 0,
+        max: 100,
+        slider: 0,
+        range: [0, 100],
+		
+
+		loading: true,
+		expanded: [],
+		search: '',
+		sheet: false,
+		headers: [
+		 { text: 'מזהה', value: 'OBJECTID', },	
+          { text: 'מספר חולה', value: 'Name', },
+          { text: 'מרחק במטרים', value: "flat_number" },
+          { text: 'מקום השהיה', value: 'Place' },
+          { text: 'הערות', value: 'Comments' },
+          { text: 'תאריך', value: 'fromTime' },
+          { text: 'שעות השהיה', value: 'stayTimes' },
+		  {text: 'התמקדות', value: 'action'},
+        ],
+        desserts: [
+	
+        ],
+
+		OBJECTID: "",
+		Name: "",
+		flat_number: "",
+		Place: "",
+		Comments: "",
+		Date: "",
+		stayTimes: "",
+
+		geocode_text: "",
+
+		loading: false,
+		mdiHeatClose: false,
+		mdiClose: false,
+		mdiPause: false
+      }
+    },
+
+
+	mounted () {
+		let self = this
+		window.addEventListener('keyup', function (event) {
+			if (event.keyCode === 13) {
+				self.geocode()
+			}
+		})
+	},
+    methods: {
+
+
+		turnStat (e) 
+		{
+			//console.log(e)
+			if (e == true)
+			{
+				displayStatPolygons();
+			}
+			else
+			{
+				//AddUserPoints(data_all);
+				this.mdiClose = false;
+				this.cancelClick();
+				if (this.points_checkbox == true)
+				{
+					AddUserPoints(data_all);
+				}
+			}
+		},
+
+		turnPoints (e)
+		{
+			console.log(e);
+			if (e == true)
+			{
+				AddUserPoints(data_all);
+				displaySetlPolygons();
+			}
+			else{
+				ClearUserPoints();
+				if (this.setl_checkbox == true)
+				{
+					displaySetlPolygons();
+				}
+			}
+
+		},
+
+		getColor (FLAT_NUMBER) {
+			if (FLAT_NUMBER < 1000) return 'red'
+			else if (FLAT_NUMBER < 2000) return 'orange'
+			else return 'green'
+		},
+
+		heatMapClick(){
+			if (this.mdiHeatClose  == false)
+			{
+				this.mdiHeatClose  = true
+				if (current_scale <= 25030)
+				{
+					govmap.setHeatLayer({  
+						points: heatmap_features 
+						,options: { valueField: 'val1' }  
+					});  
+					isHeatMap = true;
+				}
+
+			}
+			else
+			{
+				isHeatMap = false;
+				this.mdiHeatClose = false;
+				govmap.removeHeatLayer();
+
+				//this.cancelClick();
+			}
+		},
+
+		selectFromMapClick(){
+			//console.log("select");
+			if (this.mdiClose  == false)
+			{
+				this.mdiClose  = true
+			//if (document.getElementById("cancel_button"))
+			//{
+				appVue.desserts = [];
+				tableData = [];
+				govmap.draw(govmap.drawType.Polygon).progress(function (e)
+				{
+					var counter = 0;
+					wkt = e.wkt;
+					//console.log(wkt);
+					polygon = Terraformer.WKT.parse(wkt);
+					for (i = 0; i < corona_features.length; i++)
+					{
+
+						pt_json = {
+									"type": "Point",
+									"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+								};
+
+						var point = new Terraformer.Primitive(pt_json);
+						if (point.within(polygon))
+						{
+							var c = 0;
+							corona_features[i].attributes.flat_number = parseInt(c);
+							tableData.push(corona_features[i].attributes);
+							//console.log(corona_features[i].attributes);
+						}
+						
+					}	
+					appVue.desserts = tableData;
+
+					appVue.sheet = true;
+					
+				});
+			}
+			else
+			{
+				this.mdiClose = false;
+				this.cancelClick();
+			}
+			//}
+		},
+
+		geocode () {
+			if (PolygonId)
+			{
+				govmap.clearGeometriesById(PolygonId)
+			}
+
+			appVue.desserts = [];
+			tableData = [];
+			govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "UNIQ_ID = -1", 'zoomToExtent': false});
+			govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='x'", 'zoomToExtent': true});
+			//console.log(this.geocode_text);
+			govmap.geocode({keyword: this.geocode_text},govmap.geocodeType.FullResult)
+			.then(function(response){
+
+			//console.log(response);
+			if (response.status == 0)
+			{
+				if (response.data[0].DescLayerID == "ADDR_V1" || response.data[0].DescLayerID == "STREET_MID_POINT")
+				{
+					appVue.tableTitle = "במרחק  " + appVue.radius + " מ' מ" +response.data[0].ResultLable;
+					//console.log("then:");
+					//console.log(response);
+					var data = {
+					'circleGeometries': [{x: response.data[0].X, y: response.data[0].Y, radius: appVue.radius}],
+					'names': ['p1'],
+					'geometryType': govmap.geometryType.CIRCLE,
+					'defaultSymbol':
+					{
+					'outlineColor': [0, 0, 255, 1],
+					'outlineWidth': 3,
+					'fillColor': [255, 255, 255, 0.5]
+					},
+					'symbols': [],
+					'clearExisting': false,
+					'data': { }
+					};
+
+					govmap.displayGeometries(data).then(function (e)
+					{
+						circle_result = e;
+						//console.log(e);
+						PolygonId = circle_result.data;
+					});
+					lvl = 4;
+                    //govmap.zoomToDrawing();
+					if (appVue.radius == 100)
+					{
+						lvl = 10
+					}
+					if (appVue.radius == 2500)
+					{
+						lvl = 5
+					}
+					if (appVue.radius == 5000)
+					{
+						lvl = 4
+					}
+					if (appVue.radius == 7500)
+					{
+						lvl = 3
+					}
+					if (appVue.radius == 10000)
+					{
+						lvl = 2
+					}
+					console.log(lvl);
+					govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: lvl, marker: true });
+					
+					wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, appVue.radius);	
+					polygon = Terraformer.WKT.parse(wkt_polygon);
+					for (i = 0; i < corona_features.length; i++)
+					{
+
+						pt_json = {
+									"type": "Point",
+									"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+								};
+
+						var point = new Terraformer.Primitive(pt_json);
+						if (point.within(polygon))
+						{
+							////console.log(corona_features[i].attributes.Place);
+							var a = response.data[0].X - corona_features[i].geometry.x;
+							var b = response.data[0].Y - corona_features[i].geometry.y;
+							var c = Math.sqrt( a*a + b*b );
+							corona_features[i].attributes.flat_number = parseInt(c);
+							tableData.push(corona_features[i].attributes);
+							//console.log(corona_features[i].attributes);
+						}
+						
+					}
+				}
+				if (response.data[0].DescLayerID =="SETL_MID_POINT")
+				{
+					appVue.tableTitle = response.data[0].ResultLable;
+
+					setl_id = response.data[0].ObjectID;
+					console.log(setl_id);
+					govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+setl_id+"'", 'zoomToExtent': true});
+					var wkt = PointToPolygon(response.data[0].X, response.data[0].Y, 1);
+					console.log(response.data[0].X + " - " +  response.data[0].Y);
+					govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "LOCALITY_210410", 'fields': ["CR_LAMAS"],getShapes: true})
+					.then(function (e) {
+							console.log(e);
+							if (e.data != null && e.data.length > 0)
+							{
+								new_wkt = e.data[0].Values[3];
+								console.log(e.data[0].Values[0])
+								 
+								var data = {  
+									wkts: [new_wkt],  
+									names: ['p1'],  
+									geometryType: govmap.drawType.Polygon,  
+									defaultSymbol:  
+									{  
+										'outlineColor': [0, 0, 255, 1],
+										'outlineWidth': 3,
+										'fillColor': [255, 255, 255, 0.5]
+									},    
+									symbols: [],  
+									'clearExisting': false,
+									data: {  
+		
+									} 
+								}
+								//govmap.displayGeometries(data).then(function (response)  
+								//{  
+									//console.log(response.data);
+                                    //PolygonId = response.data;
+								//}); 
+								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
+								govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+e.data[0].Values[0]+"'", 'zoomToExtent': true});
+                                //govmap.zoomToDrawing();
+								
+								wkt_polygon = new_wkt
+								polygon = Terraformer.WKT.parse(wkt_polygon);
+								for (i = 0; i < corona_features.length; i++)
+								{
+
+									pt_json = {
+												"type": "Point",
+												"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+											};
+
+									var point = new Terraformer.Primitive(pt_json);
+									if (point.within(polygon))
+									{
+										////console.log(corona_features[i].attributes.Place);
+										var a = response.data[0].X - corona_features[i].geometry.x;
+										var b = response.data[0].Y - corona_features[i].geometry.y;
+										var c = Math.sqrt( a*a + b*b );
+										corona_features[i].attributes.flat_number = parseInt(c);
+										tableData.push(corona_features[i].attributes);
+										console.log(corona_features[i].attributes);
+									}
+									
+								}
+							};
+
+					});				 
+				}
+				if (response.data[0].DescLayerID == "Neighborhoods_area")
+				{
+					appVue.tableTitle = response.data[0].ResultLable;
+
+					var wkt = PointToPolygon(response.data[0].X, response.data[0].Y, 1);
+					govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "NEIGHBORHOODS_AREA", 'fields': ["UNIQ_ID"],getShapes: true})
+					.then(function (e) {
+							//console.log(e);
+							if (e.data != null && e.data.length > 0)
+							{
+								new_wkt = e.data[0].Values[3];
+								 //console.log(new_wkt.replace("Z ", ""));
+								var data = {  
+									wkts: [new_wkt.replace("Z ", "")],  
+									names: ['p1'],  
+									geometryType: govmap.drawType.Polygon,  
+									defaultSymbol:  
+									{  
+										'outlineColor': [0, 0, 255, 1],
+										'outlineWidth': 3,
+										'fillColor': [255, 255, 255, 0.5]
+									},    
+									symbols: [],  
+									'clearExisting': false, 
+									data: {  
+		
+									} 
+								}
+								//govmap.displayGeometries(data).then(function (response)  
+								//{  
+									//console.log(response.data);
+                                    //PolygonId = response.data;
+								//}); 
+								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
+								govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "UNIQ_ID ="+e.data[0].Values[0], 'zoomToExtent': true});
+                                //govmap.zoomToDrawing();
+								
+								wkt_polygon = new_wkt
+								polygon = Terraformer.WKT.parse(wkt_polygon);
+								for (i = 0; i < corona_features.length; i++)
+								{
+
+									pt_json = {
+												"type": "Point",
+												"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+											};
+
+									var point = new Terraformer.Primitive(pt_json);
+									if (point.within(polygon))
+									{
+										////console.log(corona_features[i].attributes.Place);
+										var a = response.data[0].X - corona_features[i].geometry.x;
+										var b = response.data[0].Y - corona_features[i].geometry.y;
+										var c = Math.sqrt( a*a + b*b );
+										corona_features[i].attributes.flat_number = parseInt(c);
+										tableData.push(corona_features[i].attributes);
+										//console.log(corona_features[i].attributes);
+									}
+									
+								}
+							};
+
+					});		
+
+
+				}
+                govmap.zoomToDrawing();
+				tableData = tableData.sort((a, b) => (a.flat_number > b.flat_number) ? 1 : -1);
+				appVue.desserts = tableData;
+				appVue.sheet = true;
+				appVue.mdiClose = true;
+			}
+			else{
+				alert("לא נמצאה הכתובת המבוקשת");
+				appVue.tableTitle = "";
+			}
+			
+					
+			});
+
+		},
+
+		
+
+		cancelClick()
+		{
+			appVue.tableTitle = "";
+			appVue.desserts = [];
+			tableData = []
+			govmap.clearDrawings(); 
+			if (this.points_checkbox == true)
+			{
+					AddUserPoints(data_all);
+			}
+			if (this.setl_checkbox == true)
+			{
+					displaySetlPolygons();
+			}
+		},
+
+
+	
+
+
+		zoomItem(item)
+		{
+			var pid = item.OBJECTID;
+			var filteredData = corona_features.filter(function(i) {
+						return i.attributes["OBJECTID"] == pid;
+			});
+			//console.log(filteredData[0].geometry.x);
+			govmap.zoomToXY({ x: filteredData[0].geometry.x, y: filteredData[0].geometry.y, level: 10, marker: false });
+
+		},
+
+		shareWhatsapp()
+		{
+			var isMobile = {
+				Android: function() {
+					return navigator.userAgent.match(/Android/i);
+				},
+
+				BlackBerry: function() {
+					return navigator.userAgent.match(/BlackBerry/i);
+				},
+				iOS: function() {
+					return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				},
+				Opera: function() {
+					return navigator.userAgent.match(/Opera Mini/i);
+				},
+				Windows: function() {
+					return navigator.userAgent.match(/IEMobile/i);
+				},
+				any: function() {
+					return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+				}
+			};
+			if( isMobile.any() ) {
+
+				var url = window.location.href;
+				var message = encodeURIComponent(window.location.href);
+				var whatsapp_url = "whatsapp://send?text=" + message;
+				window.location.href = whatsapp_url;
+			} else {
+				var win = window.open('https://web.whatsapp.com/', '_blank');
+  				win.focus();
+			}
+
+		},
+
+		shareFacebook()
+		{
+			window.open(
+			'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+			'facebook-share-dialog', 
+			'width=626,height=436');
+        },
+        
+
+
+
+
+
+        
+		zoomCurrentLocation()
+		{
+			if (navigator.geolocation) {
+				appVue.tableTitle = "במרחק " + appVue.radius/1000 + ' ק"מ ממיקומך'
+				this.mdiClose = true;
+				navigator.geolocation.getCurrentPosition(function showPosition(position) {
+					x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
+					y_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[1];
+					var data = {
+				'circleGeometries': [{x: x_, y: y_, radius: appVue.radius}],
+				'names': ['p1'],
+				'geometryType': govmap.geometryType.CIRCLE,
+				'defaultSymbol':
+				{
+				'outlineColor': [0, 0, 255, 1],
+				'outlineWidth': 3,
+				'fillColor': [255, 255, 255, 0.5]
+				},
+				'symbols': [],
+				'clearExisting': false,
+				'data': { }
+				};
+
+				govmap.displayGeometries(data).then(function (e)
+				{
+					circle_result = e;
+					//console.log(e);
+					PolygonId = circle_result.data;
+				});
+				//govmap.zoomToDrawing();
+				if (appVue.radius == 100)
+					{
+						lvl = 10
+					}
+					if (appVue.radius == 2500)
+					{
+						lvl = 5
+					}
+					if (appVue.radius == 5000)
+					{
+						lvl = 4
+					}
+					if (appVue.radius == 7500)
+					{
+						lvl = 3
+					}
+					if (appVue.radius == 10000)
+					{
+						lvl = 2
+					}
+				govmap.zoomToXY({ x: x_, y: y_, level: lvl, marker: true });
+				
+				wkt_polygon = PointToPolygon(x_, y_, appVue.radius);	
+				polygon = Terraformer.WKT.parse(wkt_polygon);
+				for (i = 0; i < corona_features.length; i++)
+				{
+
+					pt_json = {
+								"type": "Point",
+								"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+							   };
+
+					var point = new Terraformer.Primitive(pt_json);
+					if (point.within(polygon))
+					{
+						var a = x_- corona_features[i].geometry.x;
+						var b = y_ - corona_features[i].geometry.y;
+						var c = Math.sqrt( a*a + b*b );
+						corona_features[i].attributes.flat_number = parseInt(c);
+						tableData.push(corona_features[i].attributes);
+						//console.log(corona_features[i].attributes);
+					}
+					
+				}
+				tableData.sort((a, b) => (a.flat_number > b.flat_number) ? 1 : -1);
+				appVue.desserts = tableData;
+				appVue.sheet = true;
+
+					});
+			} else {
+				appVue.tableTitle = "";
+				alert("מיקום אינו זמין בדפדפן זה");
+			}
+		},
+
+        playDateSlider()
+        {
+			if (this.mdiPause == true)
+			{
+				//console.log("no...");
+			}
+			else{
+				document.getElementById("heat_map_btn").disabled = true;
+				this.mdiPause = true;
+				this.slider = 0;
+				myLoop(0, dates.length)
+			}
+        },
+
+		getCountByDate()
+		{
+			if (this.mdiPause == true)
+			{
+				//console.log("getCountByDate() " +this.slider);	
+				date = dates[this.slider];
+				//console.log(date);
+				filter_Date = corona_features.filter(function(f) {
+								return f.attributes["fromTime"] == date;			
+				});
+				// wkts_all = [];
+				// names_all = [];
+				// bubbleHTMLParameters_all = [];
+				//govmap.removeHeatLayer();
+				if (this.slider == 0)
+				{
+					//heatmap_features_date = [];
+					d = 0;
+					//for (c = 0; c < filter_Date.length; c++)
+					//{
+						//feat = filter_Date[c];
+						//wkts_all.push("POINT(("+feat.geometry.x+" "+feat.geometry.y+"))");
+						//names_all.push(feat.attributes.Name);
+						//bubbleHTMLParameters_all.push([feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + place, "בשעות " + feat.attributes.stayTimes]);
+						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
+						//heatmap_features_date.push(feat.heatPoint);
+					//}
+				}
+				else{
+					//for (c = 0; c < filter_Date.length; c++)
+					//{
+						//feat = filter_Date[c];
+						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
+						//heatmap_features_date.push(feat.heatPoint);
+					//}
+					d = filter_Date.length;
+				}
+
+				pts_date = data_dates[this.slider];
+				if (pts_date)
+				{
+					heatmap_features_date = pts_date[1];
+					pts_features_date = pts_date[0];
+
+					if (appVue.mdiHeatClose == true && current_scale <= 25030)
+					{
+						govmap.setHeatLayer({  
+							points: heatmap_features_date
+							,options: { valueField: 'val1' }  
+						});
+					}
+					AddUserPoints(pts_features_date);
+					if (this.slider == 0 && this.setl_checkbox == true)
+					{
+					 	displaySetlPolygons();
+					}
+				}
+			}
+			else
+			{
+				d = 0;
+			}
+			return d
+		
+		},
+
+		getCountByDateTotal()
+		{
+			indx = this.slider - 1;
+			if (indx > 0)
+			{
+				date = dates[indx];
+				conter = 0;
+				for (i= 0; i < corona_features.length; i++)
+				{
+					if (dates.indexOf(corona_features[i].attributes.fromTime) <= indx)
+					{
+						conter = conter + 1;
+					}
+				}
+			}
+			else{
+				conter = 0;
+			}
+
+			this.slider_circle_value = conter / (corona_features.length  / 100);
+			return conter;
+		},
+
+		displayCircleValue()
+		{
+			val = this.circle_value *  (corona_features.length  / 100);
+			return parseInt(val);
+		},
+
+		bufferChange(e)
+		{
+			//console.log(e);
+			appVue.radius = e;
+		}
+	},
+
+
+	
+})
+</script>
+</body>
+</html>
