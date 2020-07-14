@@ -399,20 +399,31 @@
 	<v-hover
         v-slot:default="{ hover }"
         open-delay="200"
-      >
+	  >
 	<v-flex xs5 style="width: 33.3%; text-align:center;">
 	<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-badge
+		left
+		color="#EF5350"
+		:content="infected_added"
+		:value="infected_added"
+	  >
 		<v-layout center style="height:40px;  text-align:center; color :red">
 		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נדבקו</p>
 		</v-layout>
+	</v-badge>
 		<v-layout center style="height:40px">
 			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
 				{{infected_count_all}}
 			  </p>
 	  </v-layout>
+	
 	  </v-card>
+	
 	</v-flex>
+
 	</v-hover>
+
 
 	<v-divider vertical></v-divider>
 	<v-hover
@@ -1697,10 +1708,12 @@ $(document).ready(function (){
     // Success response
     	//health =$(html);
 		//dashboard = health.find('.dashboard');
+		appVue.loading_text = "5%";
 
 		appVue.infected_count_all = data[0].INFECTED;
 		appVue.deaths_count_all = data[0].DIES;
 		appVue.cures_count_all = data[0].CURED;
+		appVue.infected_added = data[0].ADDED;
 
 
 
@@ -1762,11 +1775,12 @@ $(document).ready(function (){
 		var json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
 		var d = $.getJSON(json_str);
 		d.complete(function(response) {
+
+			appVue.loading_text = "7%";
 			//console.log(response);
 			for (i = 0; i < d.responseJSON.features.length; i++)
 			{
 				//console.log(i);
-				appVue.loading_text ="10%";
 				feat = d.responseJSON.features[i];
 				name = d.responseJSON.features[i].attributes.Name;
 				place = d.responseJSON.features[i].attributes.Place;
@@ -1829,7 +1843,7 @@ $(document).ready(function (){
 
 				//AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);				
 			}
-
+			appVue.loading_text = "10%";
 			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
 			//Add Points
 			data_all = {  
@@ -1931,7 +1945,7 @@ $(document).ready(function (){
 			d_stat = $.getJSON(json_stat_str);
             d_stat.complete(function(response) {
 
-				appVue.loading_text ="70%";
+				
                 $.get(json_stat_infceted_5000).then(function (data) {
                     //console.log(data.result.records);
                     var mostRecentDate = new Date(Math.max.apply(null, data.result.records.map( e => {
@@ -1944,8 +1958,19 @@ $(document).ready(function (){
                         //console.log(response);
                         formated_max_date = max_date.split("-")[2] + "/" + max_date.split("-")[1] + "/" +  max_date.split("-")[0];
                         console.log(formated_max_date);
+
+						total = d_stat.responseJSON.features.length;
+						one_precent = total / 100;
+						interval = 10;
+
                         for (i = 0; i < d_stat.responseJSON.features.length; i++)
                         {
+							p = i/one_precent;
+							if (p > interval)
+							{
+								appVue.loading_text = interval + "%";
+								interval = interval + 10;
+							}
                             //console.log(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
                             polygon = d_stat.responseJSON.features[i].geometry
                             st_wkts.push(Terraformer.WKT.convert(polygon));
@@ -1978,14 +2003,38 @@ $(document).ready(function (){
                                     accumulated_cases = "פחות מ 15";
                                 }
                                 accumulated_deaths = filter[0].accumulated_deaths;
+								if (accumulated_deaths > 0)
+                                {
+                                    accumulated_deaths = parseInt(accumulated_cases);
+                                }
+								if (accumulated_deaths == "<15")
+                                {
+                                    accumulated_deaths = "פחות מ 15";
+                                }
                                 accumulated_hospitalized = filter[0].accumulated_hospitalized;
+								if (accumulated_hospitalized > 0)
+                                {
+                                    accumulated_hospitalized = parseInt(accumulated_hospitalized);
+                                }
+								if (accumulated_hospitalized == "<15")
+                                {
+                                    accumulated_hospitalized = "פחות מ 15";
+                                }
                                 accumulated_recoveries = filter[0].accumulated_recoveries;
+								if (accumulated_recoveries > 0)
+                                {
+                                    accumulated_recoveries = parseInt(accumulated_recoveries);
+                                }
+								if (accumulated_recoveries == "<15")
+                                {
+                                    accumulated_recoveries = "פחות מ 15";
+                                }
                                 new_cases_on_date = filter[0].new_cases_on_date;
                                 new_deaths_on_date = filter[0].new_deaths_on_date;
                                 new_hospitalized_on_date = filter[0].new_hospitalized_on_date;
                                 new_recoveries_on_date = filter[0].new_recoveries_on_date;
                                 st_tooltips.push(this_setlname+": " + accumulated_cases + " מאומתים")
-                                st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים במצטבר: "+accumulated_cases+"<br /></div><div>מאומתים בתאריך "+ formated_max_date + ": " + new_cases_on_date+"<br /></div>"]); 
+                                st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים : "+accumulated_cases+"<br /></div><div>מאושפזים : "+accumulated_hospitalized+"<br /></div><div>מחלימים : "+accumulated_recoveries+"<br /></div><div>מעודכן לתאריך: "+ formated_max_date + "<br /></div>"]); 
                             }
                             else{
                                 st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים: אין מידע</div>"]);
@@ -2000,7 +2049,7 @@ $(document).ready(function (){
                             
 
                         }
-						appVue.loading_text ="90%";
+						//appVue.loading_text ="90%";
                         var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
                         stat_data = {  
                             wkts: st_wkts,  
@@ -2204,6 +2253,7 @@ var appVue = new Vue({
 		infected_count_all: 0,
 		deaths_count_all: 0,
 		cures_count_all: 0,
+		infected_added: 0,
 		loading_text: "טוען נתונים" ,
 		setl_checkbox: true,
 		points_checkbox: true,
@@ -2305,13 +2355,13 @@ var appVue = new Vue({
 			if (e == true)
 			{
 				AddUserPoints(data_all);
-				displaySetlPolygons();
+				displayStatPolygons();
 			}
 			else{
 				ClearUserPoints();
 				if (this.setl_checkbox == true)
 				{
-					displaySetlPolygons();
+					displayStatPolygons();
 				}
 			}
 
