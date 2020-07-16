@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html style='width:100%; height:100%;'>
 <head>
@@ -398,20 +395,31 @@
 	<v-hover
         v-slot:default="{ hover }"
         open-delay="200"
-      >
+	  >
 	<v-flex xs5 style="width: 33.3%; text-align:center;">
 	<v-card dark color="transparent" :elevation="hover ? 16 : 2" :class="{ active: hover }">
+		<v-badge
+		left
+		color="#EF5350"
+		:content="infected_added"
+		:value="infected_added"
+	  >
 		<v-layout center style="height:40px;  text-align:center; color :red">
 		<p style="width: 100%; margin-left: 0%; margin-right: 0%; margin-top:10px; font-family:Arial; text-align:center;" class="text-center font-weight-light">נדבקו</p>
 		</v-layout>
+	</v-badge>
 		<v-layout center style="height:40px">
 			<p style="width: 100%; margin-left: 0%; margin-right: 0%; font-family:Arial;" class="font-weight-bold text--primary text-center">
 				{{infected_count_all}}
 			  </p>
 	  </v-layout>
+	
 	  </v-card>
+	
 	</v-flex>
+
 	</v-hover>
+
 
 	<v-divider vertical></v-divider>
 	<v-hover
@@ -657,8 +665,8 @@ placeholder="רדיוס במ'"
 	<v-layout class="switch_watermark" right style="max-width: 180px">
 		<v-flex xs5 style="width: 175px;">
 			<v-layout style="width: 175px; height:40px">
-			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2"  @change="turnSetl" v-model="setl_checkbox" ></v-checkbox>
-			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">ישובים</p>
+			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2"  @change="turnStat" v-model="setl_checkbox" ></v-checkbox>
+			<p style="margin-top:10px; font-family:Arial;" class="text-right font-weight-light">אזורים סטטיסטיים</p>
 			</v-layout>
 			<v-layout style="width: 175px; height:40px">
 			<v-checkbox color="blue darken-4" hide-details style="margin-top:8px;" class="text-right shrink mr-2" @change="turnPoints" v-model="points_checkbox" ></v-checkbox>
@@ -1174,17 +1182,6 @@ function ClearUserPoints(){
 }
 
 function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
-		// if (current_scale >= 1000003)
-		// {
-		// 	png = 'http://localhost/Corona/O3.png'
-		// }
-		// else if (current_scale <= 100000)
-		// {
-		// 	png = 'http://localhost/Corona/O1.png'
-		// }
-		// else{
-		// 	png = 'http://localhost/Corona/O2.png'
-		// }
 
 		var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
 		var data = {  
@@ -1212,6 +1209,192 @@ function AddUserPoint(x, y, place, name, fdate_stay_times, clearExisting){
 		  //console.log(response.data);
 		}); 
 }
+
+
+
+		var json_stat_str = "https://yovavsanders.github.io/Corona/STAT_AREA.json";
+        var json_stat_infceted_all = "https://data.gov.il/api/3/action/datastore_search?&resource_id=d07c0771-01a8-43b2-96cc-c6154e7fa9bd&limit=500000";
+
+
+        var st_wkts = [];
+        var st_names = [];
+        var st_symbols = [];
+        var st_tooltips = [];
+        var st_bubbleHTMLParameters = [];
+        var infected_stat_features = [];
+        var max_date;
+
+        Number.prototype.between = function(a, b) {
+                  var min = Math.min.apply(Math, [a, b]),
+                      max = Math.max.apply(Math, [a, b]);
+                      return this >= min && this < max;
+                  };
+
+
+
+var classBreakeSymbolsStat ={
+                  blue:
+                      {  
+                          'outlineColor': [0, 0, 255, 1],
+                          'outlineWidth': 3,
+                          'fillColor': [255, 255, 255, 0.5]
+                      }, 
+				  cherry: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [128, 0, 0, 0.5]
+                      }, 
+				  red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [179, 0, 0, 0.5]
+                      },  
+                  light_red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [230, 81, 0, 0.5]
+                      },
+                  red_orange:  
+                       {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 179, 0, 0.5] 
+                      },
+                  orange:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 164, 89, 0.5] 
+                      },
+                  yellow:  {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [255, 238, 88, 0.5]
+                      },
+                  green_yellow: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [178, 255, 89, 0.5]
+                      },
+                  green: {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [56, 142, 60, 0.5]
+                         }
+                  };
+      
+
+function getSymbolStat(number) {
+    //console.log(number);
+	Symbol = classBreakeSymbolsStat.blue;
+	if (number.between(-1,3))
+	{
+		Symbol = classBreakeSymbolsStat.green;
+	}
+	if (number.between(3,4))
+	{
+		Symbol = classBreakeSymbolsStat.green_yellow;
+	}
+	if (number.between(4,5))
+	{
+		Symbol = classBreakeSymbolsStat.yellow;
+	}
+	if (number.between(5,6))
+	{
+		Symbol = classBreakeSymbolsStat.orange;
+	}
+	if (number.between(6,7))
+	{
+		Symbol = classBreakeSymbolsStat.red_orange;
+	}
+	if (number.between(7,8))
+	{
+		Symbol = classBreakeSymbolsStat.light_red;
+	}
+	if (number.between(8,9))
+	{
+		Symbol = classBreakeSymbolsStat.red
+	}
+	if (number.between(9,1000))
+	{
+		Symbol = classBreakeSymbolsStat.cherry;
+	}
+	return  Symbol;
+}
+
+
+
+function getJsonData(json_infceted){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {;
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							//console.log(i);
+							infected_setl_features.push(json_data[i]);
+							appVue.loading_text = "60%";
+						}	
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_infceted
+			});
+	}
+
+        function getJsonDataStat(json_file){
+			$.ajax({
+				dataType: 'json',
+				beforeSend : function() {
+
+                        console.log("before send");
+				},
+				success: function(json_data) {
+					{
+						for (i = 0; i < json_data.length; i++)
+						{
+							console.log(i);
+							infected_stat_features.push(json_data[i]);
+						}	
+					}
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("Error occurred: " + errorThrown);
+				},
+				url: json_file
+			});
+	    }
+
+        function getMaximumDates(json_stat_infceted_5000)
+        {
+            var max_date;
+            var mostRecentDate = new Date(Math.max.apply(null, $.getJSON(json_stat_infceted_5000).responseJSON.result.records.map( e => {
+                    return new Date(e.date);
+                })));
+            max_date =  formatDate(mostRecentDate);
+            return max_date;
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
 
 
 
@@ -1354,10 +1537,7 @@ function getJsonData(json_infceted){
 							appVue.loading_text = "60%";
 						}	
 					}
-					
-					//setTimeout(getIsoData(),5000);
-					getIsoData(iso_json_string);
-					console.log("RungetIsoData")
+
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log("Error occurred: " + errorThrown);
@@ -1366,28 +1546,7 @@ function getJsonData(json_infceted){
 			});
 	}
 
-	function getIsoData(iso_json_string){ 
-                    $.ajax({
-                        dataType: 'json',
-                        beforeSend : function() {
-						console.log('BeforegetIsoData');
-                        },
-                        success: function(iso_data) {
-                          //console.log(iso_data.features.length)
-                          for (i = 0; i < iso_data.features.length; i++)
-                          {
-                            iso_setl_features.push(iso_data.features[i]);
-							//appVue.loading_text = iso_data.features[i].attributes.Municipality_desc;
-							appVue.loading_text = "75%";
-							//console.log("iso " + i);
-                          }
-                        },
-                        error : function(jqXHR, textStatus, errorThrown) {
-                          console.log("Error occurred: " + errorThrown);
-                        },
-                        url: iso_json_string
-                    });
-                  }
+
 
 var a=0;
 var addr = "";
@@ -1421,6 +1580,16 @@ function displaySetlPolygons()
 				}
 
 				govmap.displayGeometries(setl_data).then(function (response)  
+				{  
+					//PolygonId = response.data;
+					console.log(response);
+				});
+}
+
+function displayStatPolygons()
+{
+
+				govmap.displayGeometries(stat_data).then(function (response)  
 				{  
 					//PolygonId = response.data;
 					console.log(response);
@@ -1469,48 +1638,35 @@ function toArray(x) {
     return a
 }
 
+var filter_test;
+var stat_data;
+var d_stat;
+var d_stat_all;
+var d_stat_infected_all;
 $(document).ready(function (){
 
 	
 	const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	const url = "https://govextra.gov.il/ministry-of-health/corona/corona-virus/";
 	var infected;
+			
+
 	//$.get(proxyurl + url).then(function (html) {
 	$.get('https://yovavsanders.github.io/Corona/Sum.json').then(function (data) {
 		appVue.loading = true;
     // Success response
     	//health =$(html);
 		//dashboard = health.find('.dashboard');
+		appVue.loading_text = "5%";
 
 		appVue.infected_count_all = data[0].INFECTED;
 		appVue.deaths_count_all = data[0].DIES;
 		appVue.cures_count_all = data[0].CURED;
+		appVue.infected_added = data[0].ADDED;
 
-		// appVue.infected_count_all = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
-		// appVue.deaths_count_all = $(html).find('.corona-dead')[0].children[0].children[1].innerText;
-		// appVue.cures_count_all = $(html).find('.corona-well')[0].children[0].children[1].innerText;
-		// htmlList = $(html).find('h2');
-		// arry = toArray(htmlList);
-		// ar = arry;
-		// result = arry.filter(i => (i.tagName =="H2" && i.innerText.includes("תמונת מצב נכונה ל")));
-		// if (result)
-		// {
-		// 	console.log(result);
 		appVue.tooltip_text = data[0].REMARK;
-		// }
-
-		//total_infected = $(html).find('.dashboard').children()[0].children[0].children[1].innerText;
-		//infected_added = $(html).find('.dashboard').children()[0].children[0].children[0].children[1].children[0].innerText;
-		//infected_kal = $(html).find('.dashboard').children()[0].children[0].children[2].children[0].children[1].innerText;
-		//infected_benony = $(html).find('.dashboard').children()[0].children[0].children[2].children[1].children[1].innerText;
-		//infected_kashe = $(html).find('.dashboard').children()[0].children[0].children[2].children[2].children[1].innerText;
-		//infected_munshamim = $(html).find('.dashboard').children()[0].children[0].children[2].children[3].children[1].innerText;
     	console.log("total_infected: " +appVue.infected_count_all);
-		//infected = {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony , kashe:infected_kashe, munshamim: infected_munshamim};
-		//setTimeout(function () { return {total:total_infected, added:infected_added, kal:infected_kal, benony:infected_benony, kashe:infected_kashe, munshamim:infected_munshamim}}, 1500);
 
-
-		
 		appVue.dialog = true;
 		govmap.createMap('map_div', {
 			token: my_token,
@@ -1527,27 +1683,19 @@ $(document).ready(function (){
 		wkts_all = [];
 		names_all = [];
 		bubbleHTMLParameters_all = [];
+
 		
-		//setl_json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_infecteds_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
-		//var s = $.getJSON(setl_json_str);
-		//s.complete(function(response) {
-			//console.log(response);
-		//});
-
-
-		//json_str = "https://gisweb.azureedge.net/Points.json";
-       var json_infceted = "https://yovavsanders.github.io/Corona/Infected.json";
-        //var json_infceted = "Infected_1904.json";
-		var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA.json";
-		iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
-		json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Exposure_View/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		//var json_str = "https://gisweb.azureedge.net/Points.json";
+		//var iso_json_string = "https://services5.arcgis.com/dlrDjz89gx9qyfev/ArcGIS/rest/services/Corona_Muni_Isolations_VIEW2/FeatureServer/0/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid+is+not+null&time=&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=&outFields=%22*%22&f=pjson";
+		var json_str = "https://services5.arcgis.com/dlrDjz89gx9qyfev/arcgis/rest/services/Corona_Exposure_View/FeatureServer/0/query?f=json&where=1=1&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&maxRecordCountFactor=4&outSR=&resultOffset=0&resultRecordCount=8000&cacheHint=true";
 		var d = $.getJSON(json_str);
 		d.complete(function(response) {
+
+			appVue.loading_text = "7%";
 			//console.log(response);
 			for (i = 0; i < d.responseJSON.features.length; i++)
 			{
 				//console.log(i);
-				appVue.loading_text ="10%";
 				feat = d.responseJSON.features[i];
 				name = d.responseJSON.features[i].attributes.Name;
 				place = d.responseJSON.features[i].attributes.Place;
@@ -1610,7 +1758,7 @@ $(document).ready(function (){
 
 				//AddUserPoint(xy[0],xy[1],place, name+  "<br />"  + "שהה בתאריך " +  " " + fdate + "<br />" + "ב" + place, "בשעות " + stay_times, false);				
 			}
-
+			appVue.loading_text = "10%";
 			corona_features = corona_features.sort((a, b) => (a.attributes.realdate > b.attributes.realdate) ? 1 : -1);
 			//Add Points
 			data_all = {  
@@ -1706,102 +1854,150 @@ $(document).ready(function (){
 			appVue.circle_value = corona_features.length / (corona_features.length / 100);
 			appVue.slider_circle_value = 0;
 
-			//get infected_setl_features..
+
+			//get stat_features..
 			//////////////////////////////
+			d_stat = $.getJSON(json_stat_str);
+            d_stat.complete(function(response) {
+				d_stat_infected_all = $.getJSON(json_stat_infceted_all);
+				d_stat_infected_all.complete(function (data) {
+					d_stat_all = data.responseJSON.result.records;
+					var myDate = new Date();
+                var newDate = new Date(myDate.getTime() - (60*60*24*14*1000));
+				infected_stat_features = d_stat_all.filter(function(item) {
+                      return new Date(item.date) > newDate;
+				});
+				//console.log(data.result.records);
+				var mostRecentDate = new Date(Math.max.apply(null, infected_stat_features.map( e => {
+					return new Date(e.date);
+				})));
+				max_date = formatDate(mostRecentDate);
 
-			$.ajax({
-                      dataType: 'json',
-                      beforeSend : function() {
-						//getHealthGovData();
-                        getJsonData(json_infceted);
-						console.log("getJsonData(json_infceted)");
-						//setTimeout(getIsoData(iso_setl_features, iso_json_string),5);
-                       
-                      },
-                      success: function(setl_area_data) {
+				//console.log(response);
+				formated_max_date = max_date.split("-")[2] + "/" + max_date.split("-")[1] + "/" +  max_date.split("-")[0];
+				console.log(formated_max_date);
 
-						setl_area_features = setl_area_data.features;
-
-						// for (i in infected_setl_features)
-                        // {
-                        //     feat = infected_setl_features[i];
-						// 	infected_count_all = infected_count_all + feat.INFECTED
-						// }
-						for (i in iso_setl_features)
-                        {
-                            feat = iso_setl_features[i];
-							iso_count_all = iso_count_all + feat.attributes.Isolations
-						}
-						appVue.dialog = true;
-						//console.log(infected_setl_features);
-						console.log("for (i = 0; i < infected_setl_features; i++)");
-						for (i = 0; i < infected_setl_features.length; i++)
+				total = d_stat.responseJSON.features.length;
+				one_precent = total / 100;
+				interval = 10;
+				maxi = 0;
+				for (i = 0; i < d_stat.responseJSON.features.length; i++)
+				{
+					p = i/one_precent;
+					if (p > interval)
+					{
+						appVue.loading_text = interval + "%";
+						interval = interval + 10;
+					}
+					//console.log(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
+					polygon = d_stat.responseJSON.features[i].geometry
+					st_wkts.push(Terraformer.WKT.convert(polygon));
+					st_names.push(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
+					this_setlname = d_stat.responseJSON.features[i].properties.SHEM_YISHU;
+					this_setlcode = d_stat.responseJSON.features[i].properties.SEMEL_YISH;
+					this_statcode = d_stat.responseJSON.features[i].properties.STAT11;
+					//console.log(this_setlcode + ' ' + this_statcode) ;	
+					filter_test = infected_stat_features.filter(function(f) {
+								return f.town_code == this_setlcode &&  f.agas_code == this_statcode ;			
+					});
+					var obj = {};
+					if (filter_test.length > 0)
+					{
+						obj["town_code"] = filter_test[0].town_code;
+						obj["agas_code"] = filter_test[0].agas_code;
+						obj["town"] = filter_test[0].town;
+						var accumulated_cases = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_cases_on_date;
+						}, 0);
+						if (accumulated_cases > maxi)
 						{
-							//console.log(infected_setl_features[i].SETL_CODE);
-							setlcode= infected_setl_features[i].SETL_CODE;
-							 this_setlname = infected_setl_features[i].SETL_NAME;
-							 console.log(this_setlname);
-							 appVue.loading_text ="90%"
-							infecteds = infected_setl_features[i].INFECTED;
-
-							population = infected_setl_features[i].POPULATION;
-							
-							s_features = setl_area_features.filter(function(f) {
-								return f.properties["SETL_CODE"] == setlcode;			
-							}); 
-							//console.log("s_features: ");
-							//console.log(s_features);
-							if (s_features.length > 0)
-							{
-								infectedper1000 = infecteds / (population/1000);
-								infectedper10000 =  parseFloat(infected_setl_features[i].POP_TO_10000);
-								setlnames.push(this_setlname);
-								//set geometry layer atts:
-								polygon = s_features[0].geometry
-								s_wkts.push(Terraformer.WKT.convert(polygon));
-								s_codes.push("'" +setlcode + "'");
-								s_names.push(this_setlname);
-								console.log("infecteds: " + infecteds);
-								console.log("population: " + population);
-								console.log(infectedper10000);
-
-								s_symbols.push(getSymbol((infecteds / (population / 100))  * (100)));
-								iso_features = iso_setl_features.filter(function(f) {
-									return f.attributes["Municipality"] == setlcode;			
-								}); 
-								if (iso_features.length > 0)
-								{
-									iso_feat = iso_features[0];
-									isolations = iso_feat.attributes.Isolations;
-									isoper1000 = iso_feat.attributes.Iso_per_1000;		
-									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div><div>מבודדים בישוב: "+isolations+"<br /></div><div>מבודדים לכל 1000 תושבים: "+isoper1000+"<br /></div><div>מבודדים בארץ: "+iso_count_all+"<br /></div>"]);               
-								}
-								else
-								{
-									s_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>סמל ישוב: " + setlcode+"<br /></div><div>סה''כ אוכלוסיה: "+population +"<br /></div>","<div>נדבקים: "+infecteds+"<br /></div><div>נדבקים בארץ: "+appVue.infected_count_all+"<br /></div>"]);          
-								}
-							}
-							else{
-								console.log("no setlcode found");
-							}	
-
+							maxi = accumulated_cases;
 						}
-						displaySetlPolygons();
-						appVue.dialog = false;
+						var accumulated_hospitalized = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_hospitalized_on_date;
+						}, 0);
+						var accumulated_recoveries = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_recoveries_on_date;
+						}, 0);
+						obj["accumulated_cases"] = accumulated_cases;
+						obj["accumulated_hospitalized"] = accumulated_hospitalized;
+						obj["accumulated_recoveries"] = accumulated_recoveries;
+						var filter =[obj];
 
-					  },
-                      error : function(jqXHR, textStatus, errorThrown) {
-                          console.log("Error occurred: " + errorThrown);
-                      },
-                      url: mapi_json_string
-                      
-                  }); 
 
-			
-		
+								
+						if (filter.length > 0)
+						{
+							//console.log(filter);`
+							accumulated_cases = filter[0].accumulated_cases;
+							//console.log(accumulated_cases)
+							if (accumulated_cases > 0)
+							{
+								st_symbols.push(getSymbolStat(parseInt(accumulated_cases)));
+								//console.log(getSymbolStat(parseInt(accumulated_cases)));
+								accumulated_cases = parseInt(accumulated_cases);
+							}
+							if (accumulated_cases == 0)
+							{
+								st_symbols.push({  
+									outlineColor: [0, 0, 0, 1],  
+									outlineWidth: 1,  
+									fillColor: [205, 232, 238, 0.5]
+									});
+							}
+							accumulated_hospitalized = filter[0].accumulated_hospitalized;
+							accumulated_hospitalized = parseInt(accumulated_hospitalized);
 
-			
-		});
+							accumulated_recoveries = filter[0].accumulated_recoveries;
+							accumulated_recoveries = parseInt(accumulated_recoveries);
+							st_tooltips.push(this_setlname+": " + accumulated_cases + " מאומתים")
+							st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים בשבועיים האחרונים: "+accumulated_cases+"<br /></div><div>מאושפזים בשבועיים האחרונים: "+accumulated_hospitalized+"<br /></div><div>מחלימים בשבועיים האחרונים: "+accumulated_recoveries+"<br /></div><div>מעודכן לתאריך: "+ formated_max_date + "<br /></div>"]); 
+						}
+					}
+					else{
+						st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים: אין מידע</div>"]);
+						st_symbols.push({  
+							outlineColor: [0, 0, 0, 1],  
+							outlineWidth: 1,  
+							fillColor: [255, 255, 255, 0.5]
+								});
+						st_tooltips.push(this_setlname+": אין מידע")
+					}
+						
+						
+
+				}
+				console.log("max: " + maxi);
+				//appVue.loading_text ="90%";
+				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
+				stat_data = {  
+					wkts: st_wkts,  
+					names: st_names,  
+					geometryType: govmap.drawType.Polygon,  
+					BubbleType: 1,
+					defaultSymbol:  
+						{  
+						outlineColor: [0, 0, 0, 1],  
+						outlineWidth: 1,  
+						fillColor: [255, 255, 255, 0.5]
+						},  
+					symbols: st_symbols,  
+					clearExisting: false,  
+					data: {  
+							tooltips: st_tooltips,  
+							headers: st_names,
+							bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+							bubbleHTMLParameters: st_bubbleHTMLParameters
+					}  
+				};  
+				govmap.displayGeometries(stat_data).then(function (response)  
+				{  
+					//console.log(response.data);
+				});
+				appVue.dialog = false;   
+                });        
+            });			
+		 });
 
 		govmap.zoomToXY({ x: 181440, y: 665200, level: 6, marker: false });
 		//set pan event;
@@ -1877,6 +2073,7 @@ var appVue = new Vue({
 		infected_count_all: 0,
 		deaths_count_all: 0,
 		cures_count_all: 0,
+		infected_added: 0,
 		loading_text: "טוען נתונים" ,
 		setl_checkbox: true,
 		points_checkbox: true,
@@ -1953,12 +2150,12 @@ var appVue = new Vue({
     methods: {
 
 
-		turnSetl (e) 
+		turnStat (e) 
 		{
 			//console.log(e)
 			if (e == true)
 			{
-				displaySetlPolygons();
+				displayStatPolygons();
 			}
 			else
 			{
@@ -1978,14 +2175,13 @@ var appVue = new Vue({
 			if (e == true)
 			{
 				AddUserPoints(data_all);
-				displaySetlPolygons();
 			}
 			else{
 				ClearUserPoints();
-				if (this.setl_checkbox == true)
-				{
-					displaySetlPolygons();
-				}
+			}
+			if (this.setl_checkbox == true)
+			{
+				displayStatPolygons();
 			}
 
 		},
@@ -2164,41 +2360,112 @@ var appVue = new Vue({
 					appVue.tableTitle = response.data[0].ResultLable;
 
 					setl_id = response.data[0].ObjectID;
+					console.log(setl_id);
+					govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+setl_id+"'", 'zoomToExtent': true});
 					var wkt = PointToPolygon(response.data[0].X, response.data[0].Y, 1);
+					console.log(response.data[0].X + " - " +  response.data[0].Y);
 					govmap.intersectFeatures({ 'geometry': wkt, 'layerName': "LOCALITY_210410", 'fields': ["CR_LAMAS"],getShapes: true})
 					.then(function (e) {
-							//console.log(e);
-							if (e.data != null && e.data.length > 0)
+							console.log(e);
+							if (e.status == 0)
 							{
-								new_wkt = e.data[0].Values[3];
-								//console.log(e.data[0].Values[0])
-								 
-								var data = {  
-									wkts: [new_wkt],  
-									names: ['p1'],  
-									geometryType: govmap.drawType.Polygon,  
-									defaultSymbol:  
-									{  
-										'outlineColor': [0, 0, 255, 1],
-										'outlineWidth': 3,
-										'fillColor': [255, 255, 255, 0.5]
-									},    
-									symbols: [],  
-									'clearExisting': false,
-									data: {  
-		
-									} 
+								if (e.data != null && e.data.length > 0)
+								{
+									new_wkt = e.data[0].Values[3];
+									console.log(e.data[0].Values[0])
+									
+									var data = {  
+										wkts: [new_wkt],  
+										names: ['p1'],  
+										geometryType: govmap.drawType.Polygon,  
+										defaultSymbol:  
+										{  
+											'outlineColor': [0, 0, 255, 1],
+											'outlineWidth': 3,
+											'fillColor': [255, 255, 255, 0.5]
+										},    
+										symbols: [],  
+										'clearExisting': false,
+										data: {  
+			
+										} 
+									}
+									govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+e.data[0].Values[0]+"'", 'zoomToExtent': true});
+									
+									wkt_polygon = new_wkt
+									polygon = Terraformer.WKT.parse(wkt_polygon);
+									for (i = 0; i < corona_features.length; i++)
+									{
+
+										pt_json = {
+													"type": "Point",
+													"coordinates": [corona_features[i].geometry.x, corona_features[i].geometry.y]
+												};
+
+										var point = new Terraformer.Primitive(pt_json);
+										if (point.within(polygon))
+										{
+											////console.log(corona_features[i].attributes.Place);
+											var a = response.data[0].X - corona_features[i].geometry.x;
+											var b = response.data[0].Y - corona_features[i].geometry.y;
+											var c = Math.sqrt( a*a + b*b );
+											corona_features[i].attributes.flat_number = parseInt(c);
+											tableData.push(corona_features[i].attributes);
+											console.log(corona_features[i].attributes);
+										}
+										
+									}
 								}
-								//govmap.displayGeometries(data).then(function (response)  
-								//{  
-									//console.log(response.data);
-                                    //PolygonId = response.data;
-								//}); 
-								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 4, marker: true });
-								govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+e.data[0].Values[0]+"'", 'zoomToExtent': true});
-                                //govmap.zoomToDrawing();
+							}
+							if (e.status == 1)
+							{
+								var data = {
+								'circleGeometries': [{x: response.data[0].X, y: response.data[0].Y, radius: appVue.radius}],
+								'names': ['p1'],
+								'geometryType': govmap.geometryType.CIRCLE,
+								'defaultSymbol':
+								{
+								'outlineColor': [0, 0, 255, 1],
+								'outlineWidth': 3,
+								'fillColor': [255, 255, 255, 0.5]
+								},
+								'symbols': [],
+								'clearExisting': false,
+								'data': { }
+								};
+
+								govmap.displayGeometries(data).then(function (e)
+								{
+									circle_result = e;
+									//console.log(e);
+									PolygonId = circle_result.data;
+								});
+								lvl = 4;
+								//govmap.zoomToDrawing();
+								if (appVue.radius == 100)
+								{
+									lvl = 10
+								}
+								if (appVue.radius == 2500)
+								{
+									lvl = 5
+								}
+								if (appVue.radius == 5000)
+								{
+									lvl = 4
+								}
+								if (appVue.radius == 7500)
+								{
+									lvl = 3
+								}
+								if (appVue.radius == 10000)
+								{
+									lvl = 2
+								}
+								console.log(lvl);
+								govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: lvl, marker: true });
 								
-								wkt_polygon = new_wkt
+								wkt_polygon = PointToPolygon(response.data[0].X, response.data[0].Y, appVue.radius);	
 								polygon = Terraformer.WKT.parse(wkt_polygon);
 								for (i = 0; i < corona_features.length; i++)
 								{
@@ -2221,7 +2488,8 @@ var appVue = new Vue({
 									}
 									
 								}
-							};
+
+							}
 
 					});				 
 				}
@@ -2253,14 +2521,8 @@ var appVue = new Vue({
 		
 									} 
 								}
-								//govmap.displayGeometries(data).then(function (response)  
-								//{  
-									//console.log(response.data);
-                                    //PolygonId = response.data;
-								//}); 
-								//govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
 								govmap.filterLayers({ 'layerName': "NEIGHBORHOODS_AREA", 'whereClause': "UNIQ_ID ="+e.data[0].Values[0], 'zoomToExtent': true});
-                                //govmap.zoomToDrawing();
+
 								
 								wkt_polygon = new_wkt
 								polygon = Terraformer.WKT.parse(wkt_polygon);
@@ -2321,7 +2583,7 @@ var appVue = new Vue({
 			}
 			if (this.setl_checkbox == true)
 			{
-					displaySetlPolygons();
+					displayStatPolygons();
 			}
 		},
 
@@ -2492,38 +2754,16 @@ var appVue = new Vue({
 		getCountByDate()
 		{
 			if (this.mdiPause == true)
-			{
-				//console.log("getCountByDate() " +this.slider);	
+			{	
 				date = dates[this.slider];
-				//console.log(date);
 				filter_Date = corona_features.filter(function(f) {
 								return f.attributes["fromTime"] == date;			
 				});
-				// wkts_all = [];
-				// names_all = [];
-				// bubbleHTMLParameters_all = [];
-				//govmap.removeHeatLayer();
 				if (this.slider == 0)
 				{
-					//heatmap_features_date = [];
 					d = 0;
-					//for (c = 0; c < filter_Date.length; c++)
-					//{
-						//feat = filter_Date[c];
-						//wkts_all.push("POINT(("+feat.geometry.x+" "+feat.geometry.y+"))");
-						//names_all.push(feat.attributes.Name);
-						//bubbleHTMLParameters_all.push([feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + place, "בשעות " + feat.attributes.stayTimes]);
-						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, true);
-						//heatmap_features_date.push(feat.heatPoint);
-					//}
 				}
 				else{
-					//for (c = 0; c < filter_Date.length; c++)
-					//{
-						//feat = filter_Date[c];
-						//AddUserPoint(feat.geometry.x,feat.geometry.y,feat.attributes.Place, feat.attributes.Name+  "<br />"  + "שהה בתאריך " +  " " + feat.attributes.fromTime + "<br />" + "ב" + feat.attributes.Place, "בשעות " + feat.attributes.stayTimes, false);
-						//heatmap_features_date.push(feat.heatPoint);
-					//}
 					d = filter_Date.length;
 				}
 
