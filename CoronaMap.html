@@ -1857,6 +1857,7 @@ $(document).ready(function (){
 
 			//get stat_features..
 			//////////////////////////////
+			appVue.loading_text = "75%";
 			d_stat = $.getJSON(json_stat_str);
             d_stat.complete(function(response) {
 				d_stat_infected_all = $.getJSON(json_stat_infceted_all);
@@ -1881,6 +1882,7 @@ $(document).ready(function (){
 				one_precent = total / 100;
 				interval = 10;
 				maxi = 0;
+				appVue.loading_text = "75%";
 				for (i = 0; i < d_stat.responseJSON.features.length; i++)
 				{
 					p = i/one_precent;
