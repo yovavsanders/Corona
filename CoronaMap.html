@@ -1881,7 +1881,6 @@ $(document).ready(function (){
 				total = d_stat.responseJSON.features.length;
 				one_precent = total / 100;
 				interval = 10;
-				maxi = 0;
 				appVue.loading_text = "75%";
 				for (i = 0; i < d_stat.responseJSON.features.length; i++)
 				{
@@ -1911,10 +1910,6 @@ $(document).ready(function (){
 						var accumulated_cases = filter_test.reduce((sum, currentValue) => {
 						return sum + currentValue.new_cases_on_date;
 						}, 0);
-						if (accumulated_cases > maxi)
-						{
-							maxi = accumulated_cases;
-						}
 						var accumulated_hospitalized = filter_test.reduce((sum, currentValue) => {
 						return sum + currentValue.new_hospitalized_on_date;
 						}, 0);
@@ -1969,7 +1964,6 @@ $(document).ready(function (){
 						
 
 				}
-				console.log("max: " + maxi);
 				//appVue.loading_text ="90%";
 				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
 				stat_data = {  
