@@ -1523,26 +1523,153 @@ function myLoop (i, all) {  //  create a loop function
 		}
 
 
-function getJsonData(json_infceted){
+function getJsonData(json_stat_str){
 			$.ajax({
 				dataType: 'json',
-				beforeSend : function() {;
+				beforeSend : function() {
+
+				d_stat_infected_all = $.getJSON(json_stat_infceted_all);
+			       
 				},
-				success: function(json_data) {
+				success: function(d_stat) {
+
+					d_stat_infected_all.complete(function (data) {
+					d_stat_all = data.responseJSON.result.records;
+					var myDate = new Date();
+                var newDate = new Date(myDate.getTime() - (60*60*24*14*1000));
+				infected_stat_features = d_stat_all.filter(function(item) {
+                      return new Date(item.date) > newDate;
+				});
+				//console.log(data.result.records);
+				var mostRecentDate = new Date(Math.max.apply(null, infected_stat_features.map( e => {
+					return new Date(e.date);
+				})));
+				max_date = formatDate(mostRecentDate);
+
+				//console.log(response);
+				formated_max_date = max_date.split("-")[2] + "/" + max_date.split("-")[1] + "/" +  max_date.split("-")[0];
+				console.log(formated_max_date);
+
+				total = d_stat.features.length;
+				one_precent = total / 100;
+				interval = 10;
+				appVue.loading_text = "75%";
+				for (i = 0; i < d_stat.features.length; i++)
+				{
+					p = i/one_precent;
+					if (p > interval)
 					{
-						for (i = 0; i < json_data.length; i++)
-						{
-							//console.log(i);
-							infected_setl_features.push(json_data[i]);
-							appVue.loading_text = "60%";
-						}	
+						appVue.loading_text = interval + "%";
+						interval = interval + 10;
 					}
+					//console.log(d_stat.features[i].properties.SHEM_YISHU + " " + d_stat.features[i].properties.STAT11);
+					polygon = d_stat.features[i].geometry
+					st_wkts.push(Terraformer.WKT.convert(polygon));
+					st_names.push(d_stat.features[i].properties.SHEM_YISHU + " " + d_stat.features[i].properties.STAT11);
+					this_setlname = d_stat.features[i].properties.SHEM_YISHU;
+					this_setlcode = d_stat.features[i].properties.SEMEL_YISH;
+					this_statcode = d_stat.features[i].properties.STAT11;
+					//console.log(this_setlcode + ' ' + this_statcode) ;	
+					filter_test = infected_stat_features.filter(function(f) {
+								return f.town_code == this_setlcode &&  f.agas_code == this_statcode ;			
+					});
+					var obj = {};
+					if (filter_test.length > 0)
+					{
+						obj["town_code"] = filter_test[0].town_code;
+						obj["agas_code"] = filter_test[0].agas_code;
+						obj["town"] = filter_test[0].town;
+						var accumulated_cases = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_cases_on_date;
+						}, 0);
+						var accumulated_hospitalized = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_hospitalized_on_date;
+						}, 0);
+						var accumulated_recoveries = filter_test.reduce((sum, currentValue) => {
+						return sum + currentValue.new_recoveries_on_date;
+						}, 0);
+						obj["accumulated_cases"] = accumulated_cases;
+						obj["accumulated_hospitalized"] = accumulated_hospitalized;
+						obj["accumulated_recoveries"] = accumulated_recoveries;
+						var filter =[obj];
+
+
+								
+						if (filter.length > 0)
+						{
+							//console.log(filter);`
+							accumulated_cases = filter[0].accumulated_cases;
+							//console.log(accumulated_cases)
+							if (accumulated_cases > 0)
+							{
+								st_symbols.push(getSymbolStat(parseInt(accumulated_cases)));
+								//console.log(getSymbolStat(parseInt(accumulated_cases)));
+								accumulated_cases = parseInt(accumulated_cases);
+							}
+							if (accumulated_cases == 0)
+							{
+								st_symbols.push({  
+									outlineColor: [0, 0, 0, 1],  
+									outlineWidth: 1,  
+									fillColor: [205, 232, 238, 0.5]
+									});
+							}
+							accumulated_hospitalized = filter[0].accumulated_hospitalized;
+							accumulated_hospitalized = parseInt(accumulated_hospitalized);
+
+							accumulated_recoveries = filter[0].accumulated_recoveries;
+							accumulated_recoveries = parseInt(accumulated_recoveries);
+							st_tooltips.push(this_setlname+": " + accumulated_cases + " מאומתים")
+							st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים בשבועיים האחרונים: "+accumulated_cases+"<br /></div><div>מאושפזים בשבועיים האחרונים: "+accumulated_hospitalized+"<br /></div><div>מחלימים בשבועיים האחרונים: "+accumulated_recoveries+"<br /></div><div>מעודכן לתאריך: "+ formated_max_date + "<br /></div>"]); 
+						}
+					}
+					else{
+						st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים: אין מידע</div>"]);
+						st_symbols.push({  
+							outlineColor: [0, 0, 0, 1],  
+							outlineWidth: 1,  
+							fillColor: [255, 255, 255, 0.5]
+								});
+						st_tooltips.push(this_setlname+": אין מידע")
+					}
+						
+						
+
+				}
+				//appVue.loading_text ="90%";
+				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
+				stat_data = {  
+					wkts: st_wkts,  
+					names: st_names,  
+					geometryType: govmap.drawType.Polygon,  
+					BubbleType: 1,
+					defaultSymbol:  
+						{  
+						outlineColor: [0, 0, 0, 1],  
+						outlineWidth: 1,  
+						fillColor: [255, 255, 255, 0.5]
+						},  
+					symbols: st_symbols,  
+					clearExisting: false,  
+					data: {  
+							tooltips: st_tooltips,  
+							headers: st_names,
+							bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
+							bubbleHTMLParameters: st_bubbleHTMLParameters
+					}  
+				};  
+				govmap.displayGeometries(stat_data).then(function (response)  
+				{  
+					//console.log(response.data);
+				});
+				appVue.dialog = false;   
+                }); 
 
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					console.log("Error occurred: " + errorThrown);
 				},
-				url: json_infceted
+				url: json_stat_str
 			});
 	}
 
@@ -1858,141 +1985,8 @@ $(document).ready(function (){
 			//get stat_features..
 			//////////////////////////////
 			appVue.loading_text = "75%";
-			d_stat = $.getJSON(json_stat_str);
-            d_stat.complete(function(response) {
-				d_stat_infected_all = $.getJSON(json_stat_infceted_all);
-				d_stat_infected_all.complete(function (data) {
-					d_stat_all = data.responseJSON.result.records;
-					var myDate = new Date();
-                var newDate = new Date(myDate.getTime() - (60*60*24*14*1000));
-				infected_stat_features = d_stat_all.filter(function(item) {
-                      return new Date(item.date) > newDate;
-				});
-				//console.log(data.result.records);
-				var mostRecentDate = new Date(Math.max.apply(null, infected_stat_features.map( e => {
-					return new Date(e.date);
-				})));
-				max_date = formatDate(mostRecentDate);
-
-				//console.log(response);
-				formated_max_date = max_date.split("-")[2] + "/" + max_date.split("-")[1] + "/" +  max_date.split("-")[0];
-				console.log(formated_max_date);
-
-				total = d_stat.responseJSON.features.length;
-				one_precent = total / 100;
-				interval = 10;
-				appVue.loading_text = "75%";
-				for (i = 0; i < d_stat.responseJSON.features.length; i++)
-				{
-					p = i/one_precent;
-					if (p > interval)
-					{
-						appVue.loading_text = interval + "%";
-						interval = interval + 10;
-					}
-					//console.log(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
-					polygon = d_stat.responseJSON.features[i].geometry
-					st_wkts.push(Terraformer.WKT.convert(polygon));
-					st_names.push(d_stat.responseJSON.features[i].properties.SHEM_YISHU + " " + d_stat.responseJSON.features[i].properties.STAT11);
-					this_setlname = d_stat.responseJSON.features[i].properties.SHEM_YISHU;
-					this_setlcode = d_stat.responseJSON.features[i].properties.SEMEL_YISH;
-					this_statcode = d_stat.responseJSON.features[i].properties.STAT11;
-					//console.log(this_setlcode + ' ' + this_statcode) ;	
-					filter_test = infected_stat_features.filter(function(f) {
-								return f.town_code == this_setlcode &&  f.agas_code == this_statcode ;			
-					});
-					var obj = {};
-					if (filter_test.length > 0)
-					{
-						obj["town_code"] = filter_test[0].town_code;
-						obj["agas_code"] = filter_test[0].agas_code;
-						obj["town"] = filter_test[0].town;
-						var accumulated_cases = filter_test.reduce((sum, currentValue) => {
-						return sum + currentValue.new_cases_on_date;
-						}, 0);
-						var accumulated_hospitalized = filter_test.reduce((sum, currentValue) => {
-						return sum + currentValue.new_hospitalized_on_date;
-						}, 0);
-						var accumulated_recoveries = filter_test.reduce((sum, currentValue) => {
-						return sum + currentValue.new_recoveries_on_date;
-						}, 0);
-						obj["accumulated_cases"] = accumulated_cases;
-						obj["accumulated_hospitalized"] = accumulated_hospitalized;
-						obj["accumulated_recoveries"] = accumulated_recoveries;
-						var filter =[obj];
-
-
-								
-						if (filter.length > 0)
-						{
-							//console.log(filter);`
-							accumulated_cases = filter[0].accumulated_cases;
-							//console.log(accumulated_cases)
-							if (accumulated_cases > 0)
-							{
-								st_symbols.push(getSymbolStat(parseInt(accumulated_cases)));
-								//console.log(getSymbolStat(parseInt(accumulated_cases)));
-								accumulated_cases = parseInt(accumulated_cases);
-							}
-							if (accumulated_cases == 0)
-							{
-								st_symbols.push({  
-									outlineColor: [0, 0, 0, 1],  
-									outlineWidth: 1,  
-									fillColor: [205, 232, 238, 0.5]
-									});
-							}
-							accumulated_hospitalized = filter[0].accumulated_hospitalized;
-							accumulated_hospitalized = parseInt(accumulated_hospitalized);
-
-							accumulated_recoveries = filter[0].accumulated_recoveries;
-							accumulated_recoveries = parseInt(accumulated_recoveries);
-							st_tooltips.push(this_setlname+": " + accumulated_cases + " מאומתים")
-							st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים בשבועיים האחרונים: "+accumulated_cases+"<br /></div><div>מאושפזים בשבועיים האחרונים: "+accumulated_hospitalized+"<br /></div><div>מחלימים בשבועיים האחרונים: "+accumulated_recoveries+"<br /></div><div>מעודכן לתאריך: "+ formated_max_date + "<br /></div>"]); 
-						}
-					}
-					else{
-						st_bubbleHTMLParameters.push(["<div>שם ישוב: " + this_setlname+ "<br /></div><div>אזור סטטיסטי: " + this_statcode+"<br /></div>","<div>מאומתים: אין מידע</div>"]);
-						st_symbols.push({  
-							outlineColor: [0, 0, 0, 1],  
-							outlineWidth: 1,  
-							fillColor: [255, 255, 255, 0.5]
-								});
-						st_tooltips.push(this_setlname+": אין מידע")
-					}
-						
-						
-
-				}
-				//appVue.loading_text ="90%";
-				var bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>";
-				stat_data = {  
-					wkts: st_wkts,  
-					names: st_names,  
-					geometryType: govmap.drawType.Polygon,  
-					BubbleType: 1,
-					defaultSymbol:  
-						{  
-						outlineColor: [0, 0, 0, 1],  
-						outlineWidth: 1,  
-						fillColor: [255, 255, 255, 0.5]
-						},  
-					symbols: st_symbols,  
-					clearExisting: false,  
-					data: {  
-							tooltips: st_tooltips,  
-							headers: st_names,
-							bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div>{0}</div><div>{1}</div><div>{3}</div></div>",
-							bubbleHTMLParameters: st_bubbleHTMLParameters
-					}  
-				};  
-				govmap.displayGeometries(stat_data).then(function (response)  
-				{  
-					//console.log(response.data);
-				});
-				appVue.dialog = false;   
-                });        
-            });			
+			getJsonData(json_stat_str);
+		
 		 });
 
 		govmap.zoomToXY({ x: 181440, y: 665200, level: 6, marker: false });
