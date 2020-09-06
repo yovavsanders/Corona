@@ -1,0 +1,441 @@
+
+<html style='width:100%; height:100%;'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.v-sheet--offset {
+    top: -24px;
+    position: relative;
+  }
+</style>
+<head>
+<title>דירוג ישובים</title>
+
+<link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+
+<script src="https://unpkg.com/terraformer@1.0.8"></script>
+<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+
+
+</head>
+    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+        <div id="isolation_app">
+            <v-app>
+        
+            <v-app-bar
+            color="blue lighten-1"
+            dense
+            dark
+            id="myTitle"
+            >
+
+            
+            <div class="text-right" style="width:25%; text-align:right;">
+                <v-autocomplete
+                v-model="select"
+                :loading="loading"
+                :items="items"
+                :search-input.sync="search"
+                cache-items
+                class="mx-4"
+                flat
+                hide-no-data
+                hide-details
+                label="שם ישוב"
+                solo-inverted
+                @change='getSetlPointCount'
+              ></v-autocomplete>
+            </div>
+	
+		    <v-divider vertical></v-divider>
+
+            <v-spacer></v-spacer>
+            <v-toolbar-title class="white--text" style="text-align: center; width:40%">ישובים לפי תכנית הרמזור לדירוג רמת הדבקה</v-toolbar-title>
+            <v-spacer></v-spacer>
+
+            <div class="text-right" style="width:25%; text-align:right;">
+            </div>
+
+
+
+
+    
+            </v-app-bar>
+        
+            <form name="form" style='height: 100%;' scrolling='no'> 
+                    
+                    <div id="map_div" style="width: 100%; height: 100%; float:left">
+                            
+                            
+                    </div> 			
+            </form>
+
+
+
+        
+
+
+        </v-app>
+    </div>
+    
+    
+<script>
+
+
+
+
+
+        function isInArray(value, array) {
+            return array.indexOf(value) > -1;
+        }
+
+        function getDates(startDate, stopDate) {
+            var dateArray = new Array();
+            var currentDate = startDate;
+            while (currentDate <= stopDate) {
+                dateArray.push(new Date (currentDate));
+                currentDate = currentDate.addDays(1);
+            }
+            return dateArray;
+        }
+
+    
+
+       
+
+        var intersect_res;
+
+
+        
+        var setl_area_features =[];
+        var iso_setl_features =[];
+
+        var s_wkts = [];
+        var s_names = [];
+        var s_symbols = [];
+        var bubbleHTMLParameters_all = [];
+
+        var corona_features = [];
+
+
+        var classBreakeSymbols ={
+            blue:
+                {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [255, 255, 255, 0.5]
+                },    
+                red: 
+                      {  
+                          'outlineColor': [0, 0, 0, 1],
+                          'outlineWidth': 1.5,
+                          'fillColor': [179, 0, 0, 0.5]
+                      }, 
+            red_orange:  
+                 {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [230, 81, 0, 0.5]
+                },
+            orange:  {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [255, 179, 0, 0.5]
+                },
+            yellow:  {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [255, 238, 88, 0.5]
+                },
+            green_yellow: {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [178, 255, 89, 0.5]
+                },
+            green: {  
+                    'outlineColor': [0, 0, 0, 1],
+                    'outlineWidth': 1.5,
+                    'fillColor': [56, 142, 60, 0.5]
+                   }
+            };
+
+
+            Number.prototype.between = function(a, b) {
+            var min = Math.min.apply(Math, [a, b]),
+                max = Math.max.apply(Math, [a, b]);
+                return this >= min && this < max;
+            };
+
+            function dateConvert(unixts)
+            {
+                var date = new Date(unixts);
+                //var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+                var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
+                return(fdate);
+            }
+
+            function stringToDate(_date,_format,_delimiter)
+            {
+                        var formatLowerCase=_format.toLowerCase();
+                        var formatItems=formatLowerCase.split(_delimiter);
+                        var dateItems=_date.split(_delimiter);
+                        var monthIndex=formatItems.indexOf("mm");
+                        var dayIndex=formatItems.indexOf("dd");
+                        var yearIndex=formatItems.indexOf("yyyy");
+                        var month=parseInt(dateItems[monthIndex]);
+                        month-=1;
+                        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                        return formatedDate;
+            }
+
+           function getSymbol(number) {
+                Symbol = classBreakeSymbols.blue;
+                if (number.between(0,2))
+                {
+                    Symbol = classBreakeSymbols.green;
+                }
+                if (number.between(2,3))
+                {
+                    Symbol = classBreakeSymbols.green_yellow;
+                }
+                if (number.between(3,5))
+                {
+                    Symbol = classBreakeSymbols.yellow;
+                }
+                if (number.between(5,6))
+                {
+                    Symbol = classBreakeSymbols.orange;
+                }
+                if (number.between(6,7))
+                {
+                    Symbol = classBreakeSymbols.red_orange;
+                }
+                if (number.between(7,10))
+                {
+                    Symbol = classBreakeSymbols.red;
+                }
+                return  Symbol;
+           }
+           var polyon;
+
+
+           var colors = {
+                    "GREEN":"ירוק",
+                    "YELLOW": "צהוב",
+                    "ORANGE": "כתום",
+                    "RED":"אדום"
+
+           }
+
+         //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+        var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+        $(document).ready(function ()
+        {
+
+
+            govmap.createMap('map_div', {
+                token: my_token,
+                visibleLayers: [],
+                layers:["SCHOOL","KIDS_G"], 
+                layersMode: 4, 
+                showXY: true,
+                level: 1,
+                center: {x: 186000, y: 658000},
+                identifyOnClick: true
+            });
+
+        
+            var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA_RAMZOR.geojson";
+            $.ajax({
+                dataType: 'json',
+                beforeSend : function() {
+                console.log('Before Ajax Request Starts !!');
+                },
+                success: function(setl_area_data) {
+                        //console.log(iso_data);
+                        console.log(setl_area_data);
+                        setl_area_features = setl_area_data.features;
+                        setlnames = [];
+                        for (i in setl_area_features)
+                        {
+                            feat = setl_area_features[i];
+
+   
+                            setlcode = feat.properties.SETL_CODE;
+                            setlname = feat.properties.SETL_NAME;
+                            rank = feat.properties.RANK;
+                            color = feat.properties.COLOR;
+
+
+
+                            setlnames.push(setlname);
+
+                            //set geometry layer atts:
+                            polygon = feat.geometry
+                            s_wkts.push(Terraformer.WKT.convert(polygon));
+                            s_names.push(setlname);
+                            s_symbols.push(getSymbol(feat.properties.RANK));
+
+
+
+                            bubbleHTMLParameters_all.push(["שם ישוב: " +  " " + setlname + "<br />" + "דירוג: " + rank, "<br />" + "סיווג:  " + colors[color]]);
+
+
+                            setlnames = setlnames.sort();
+                            appVue.items = setlnames;
+                        }
+
+                        var data = {  
+                            wkts: s_wkts,  
+                            names: s_names,  
+                            geometryType: govmap.drawType.Polygon,  
+                            showBubble: true, 
+                            defaultSymbol:  
+                            {  
+                                'outlineColor': [0, 0, 0, 1],
+                                'outlineWidth': 3,
+                                'fillColor': [255, 255, 255, 0.5]
+                            },    
+                            symbols: s_symbols,  
+                            'clearExisting': false,
+                            data: {  
+                                tooltips: s_names,  
+                                headers: s_names,
+                                bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+                                bubbleHTMLParameters:bubbleHTMLParameters_all
+
+                            } 
+                        }
+
+                        govmap.displayGeometries(data).then(function (response)  
+                        {  
+                            PolygonId = response.data;
+                        });
+
+
+
+
+
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                    alert("Error occurred: " + errorThrown);
+                },
+                url: mapi_json_string
+            });  
+        });
+
+        
+    var appVue = new Vue({
+        el:"#isolation_app",
+        vuetify: new Vuetify(),
+        data () {
+            return {
+
+                checking: false,
+                points: [85, 115, 87, 98, 91, 112, 104, 103, 113, 94, 97, 119, 98, 109],
+                labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+
+                graphTitle: "שם ישוב",
+                step: 1,
+            
+                loading: false,
+                items: [],
+                search: null,
+                select: null,
+                setl_names: [],
+
+
+                iso: [],
+            }
+        },
+        watch: {
+            search (val) {
+                val && val !== this.select && this.querySelections(val)
+            },
+        },
+        computed: {
+            currentTitle () {
+                switch (this.step) {
+                case 1: return 'כפר סבא'
+                case 2: return 'Create a password'
+                default: return 'Account created'
+                }
+            },
+
+            avg () {
+                const sum = this.points.reduce((acc, cur) => acc + cur, 0)
+                const length = this.points.length
+
+                if (!sum && !length) return 0
+
+                return Math.ceil(sum / length)
+            },
+        },
+
+        methods: {
+            querySelections (v) {
+                this.loading = true
+                // Simulated ajax query
+                setTimeout(() => {
+                this.items = this.setl_names.filter(e => {
+                    return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                })
+                this.loading = false
+                }, 500)
+            },
+
+            pointsCount () {
+                100
+            },
+
+            getSetlPointCount (setlname){
+                console.log(setlname);
+
+                govmap.geocode({keyword: setlname},govmap.geocodeType.FullResult)
+					.then(function(response){
+                        govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+                    })
+                // var count = 0;
+                // s_features = setl_area_features.filter(function(f) {
+                //     return f.properties.SETL_NAME == setlname;		
+                // });
+                // if (s_features.length > 0)
+                // {
+                //     govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+s_features[0].properties.SETL_CODE+"'", 'zoomToExtent': true});
+                // }
+
+
+                // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
+
+
+            }
+
+
+
+        },
+    });
+    
+    
+    </script>
+<body>
+
+
+   
+</html>
