@@ -70,7 +70,7 @@
                 flat
                 hide-no-data
                 hide-details
-                label="שם ישוב"
+                placeholder="שם ישוב"
                 solo-inverted
                 @change='getSetlPointCount'
               ></v-autocomplete>
@@ -102,9 +102,9 @@
             <div class="text-right" style="width:100%; text-align:right;">
                 <v-autocomplete
                 v-model="select"
-                :loading="loading"
+                :loading="loading_mobile"
                 :items="items"
-                :search-input.sync="search"
+                :search-input.sync="search_mobile"
                 cache-items
                 class="mx-4"
                 flat
@@ -404,7 +404,9 @@
                 loading: false,
                 items: [],
                 search: null,
+                loading_mobile: null,
                 select: null,
+                select_mobile: null,
                 setl_names: [],
 
 
