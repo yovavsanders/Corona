@@ -10,6 +10,19 @@
     top: -24px;
     position: relative;
   }
+
+  @media (max-width: 600px) {
+    #myTitle {
+      display: none;
+    }
+
+  }
+
+   @media (min-width: 600px) {
+    #myTitleMobile {
+      display: none;
+    }
+   }
 </style>
 <head>
 <title>דירוג ישובים</title>
@@ -66,11 +79,44 @@
 		    <v-divider vertical></v-divider>
 
             <v-spacer></v-spacer>
-            <v-toolbar-title class="white--text" style="text-align: center; width:40%">מפת תכנית הרמזור</v-toolbar-title>
+            <v-toolbar-title class="font-weight-medium" style="text-align: center; width:40%">מפת תכנית הרמזור</v-toolbar-title>
             <v-spacer></v-spacer>
 
             <div class="text-right" style="width:25%; text-align:right;">
             </div>
+
+
+
+
+    
+            </v-app-bar>
+
+            <v-app-bar
+            color="blue lighten-1"
+            dense
+            dark
+            id="myTitleMobile"
+            >
+
+            
+            <div class="text-right" style="width:100%; text-align:right;">
+                <v-autocomplete
+                v-model="select"
+                :loading="loading"
+                :items="items"
+                :search-input.sync="search"
+                cache-items
+                class="mx-4"
+                flat
+                hide-no-data
+                hide-details
+                placeholder="שם ישוב"
+                solo-inverted
+                @change='getSetlPointCount'
+              ></v-autocomplete>
+            </div>
+	
+
 
 
 
