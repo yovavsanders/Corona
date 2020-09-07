@@ -1,4 +1,5 @@
 
+
 <html style='width:100%; height:100%;'>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
@@ -272,13 +273,13 @@
                 {
                     Symbol = classBreakeSymbols.red_orange;
                 }
-                if (number.between(7.5,10))
+                if (number.between(7.5,10.5))
                 {
                     Symbol = classBreakeSymbols.red;
                 }
                 return  Symbol;
            }
-           var polyon;
+           var polygon;
 
 
            var colors = {
@@ -288,6 +289,8 @@
                     "RED":"אדום"
 
            }
+
+           var ramzor_data;
 
          //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
         var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
@@ -307,12 +310,20 @@
                 identifyOnClick: true
             });
 
-        
+            //var mapi_json_string = "https://www.govmap.gov.il/sites/SETL_AREA.json";
             var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA_RAMZOR.geojson";
+            var ramzor_json_string = "https://data.gov.il/api/3/action/datastore_search?&resource_id=718ff8c3-84ae-4ea8-b686-101cf98f343f&limit=5000";
             $.ajax({
                 dataType: 'json',
                 beforeSend : function() {
-                console.log('Before Ajax Request Starts !!');
+                    $.get(ramzor_json_string).then(function (data) {
+                        ramzor_data = data.result.records;
+                    });
+                    console.log('Before Ajax Request Starts !!');
+
+
+
+
                 },
                 success: function(setl_area_data) {
                         //console.log(iso_data);
@@ -326,26 +337,35 @@
    
                             setlcode = feat.properties.SETL_CODE;
                             setlname = feat.properties.SETL_NAME;
-                            rank = feat.properties.RANK;
-                            color = feat.properties.COLOR;
+                            
+
+                            ramzor_filter = ramzor_data.filter(function(f) {
+								return f.city_code == setlcode || f.city_desc == setlname;			
+	                        });
+                            if (ramzor_filter.length > 0)
+                            {
+                                rank = ramzor_filter[0].score;
+                                color = ramzor_filter[0].colour_Calc;
+                                polygon = feat.geometry
+
+                                s_wkts.push(Terraformer.WKT.convert(polygon));
+                                s_names.push(setlname);
+                                setlnames.push(setlname);
+                                console.log(rank);
+                                s_symbols.push(getSymbol(parseFloat(rank)))
+
+                                bubbleHTMLParameters_all.push(["שם ישוב: " +  " " + setlname + "<br />" + "דירוג: " + rank, "<br />" + "סיווג:  " + color]);
 
 
 
-                            setlnames.push(setlname);
-
-                            //set geometry layer atts:
-                            polygon = feat.geometry
-                            s_wkts.push(Terraformer.WKT.convert(polygon));
-                            s_names.push(setlname);
-                            s_symbols.push(getSymbol(feat.properties.RANK));
+                                setlnames = setlnames.sort();
+                                appVue.items = setlnames;
 
 
+                            }
 
-                            bubbleHTMLParameters_all.push(["שם ישוב: " +  " " + setlname + "<br />" + "דירוג: " + rank, "<br />" + "סיווג:  " + colors[color]]);
-
-
-                            setlnames = setlnames.sort();
-                            appVue.items = setlnames;
+                            //rank = feat.properties.RANK;
+                            //color = feat.properties.COLOR;
                         }
 
                         var data = {  
@@ -404,6 +424,7 @@
                 loading: false,
                 items: [],
                 search: null,
+                search_mobile: null,
                 loading_mobile: null,
                 select: null,
                 select_mobile: null,
