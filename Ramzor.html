@@ -1,510 +1,4644 @@
 
 
 <html style='width:100%; height:100%;'>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.v-sheet--offset {
-    top: -24px;
-    position: relative;
-  }
-
-  @media (max-width: 600px) {
-    #myTitle {
-      display: none;
-    }
-
-  }
-
-   @media (min-width: 600px) {
-    #myTitleMobile {
-      display: none;
-    }
-   }
-</style>
-<head>
-<title>דירוג ישובים</title>
-
-<link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
-
-
-<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
-<script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
-
-<script src="https://unpkg.com/terraformer@1.0.8"></script>
-<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
-<script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
-
-
-</head>
-    <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
-        <div id="isolation_app">
-            <v-app>
-        
-            <v-app-bar style="text-align: center; max-height: 48px;"
-            color="blue lighten-1"
-            dense
-            dark
-            id="myTitle"
-            >
-
-            
-            <div class="text-right" style="width:25%; text-align:right;">
-                <v-autocomplete
-                v-model="select"
-                :loading="loading"
-                :items="items"
-                :search-input.sync="search"
-                cache-items
-                class="mx-4"
-                flat
-                hide-no-data
-                hide-details
-                placeholder="שם ישוב"
-                solo-inverted
-                @change='getSetlPointCount'
-              ></v-autocomplete>
-            </div>
-	
-		    <v-divider vertical></v-divider>
-
-            <v-spacer></v-spacer>
-            <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מפת תכנית הרמזור</v-toolbar-title>
-            <v-spacer></v-spacer>
-
-            <div class="text-right" style="width:25%; text-align:right;">
-            </div>
-
-
-
-
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
     
-            </v-app-bar>
-
-            <v-app-bar
-            color="blue lighten-1"
-            dense
-            dark
-            id="myTitleMobile"
-            >
-
-            
-            <div class="text-right" style="width:100%; text-align:right;">
-                <v-autocomplete
-                v-model="select"
-                :loading="loading_mobile"
-                :items="items"
-                :search-input.sync="search_mobile"
-                cache-items
-                class="mx-4"
-                flat
-                hide-no-data
-                hide-details
-                placeholder="שם ישוב"
-                solo-inverted
-                @change='getSetlPointCount'
-              ></v-autocomplete>
-            </div>
-	
-
-
-
-
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .v-sheet--offset {
+        top: -24px;
+        position: relative;
+      }
     
-            </v-app-bar>
-        
-            <form name="form" style='height: 100%;' scrolling='no'> 
-                    
-                    <div id="map_div" style="width: 100%; height: 100%; float:left">
-                            
-                            
-                    </div> 			
-            </form>
-
-
-
-        
-
-
-        </v-app>
-    </div>
-    
-    
-<script>
-
-
-
-
-
-        function isInArray(value, array) {
-            return array.indexOf(value) > -1;
+      @media (max-width: 600px) {
+        #myTitle {
+          display: none;
         }
-
-        function getDates(startDate, stopDate) {
-            var dateArray = new Array();
-            var currentDate = startDate;
-            while (currentDate <= stopDate) {
-                dateArray.push(new Date (currentDate));
-                currentDate = currentDate.addDays(1);
-            }
-            return dateArray;
-        }
-
     
-
-       
-
-        var intersect_res;
-
-
+      }
+    
+       @media (min-width: 600px) {
+        #myTitleMobile {
+          display: none;
+        }
+       }
+    </style>
+    <head>
+    <title>דירוג ישובים</title>
+    
+    <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    
+    <script src="https://unpkg.com/terraformer@1.0.8"></script>
+    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+    
+    
+    </head>
+        <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+            <div id="isolation_app">
+                <v-app>
+            
+                <v-app-bar style="text-align: center; max-height: 48px;"
+                color="blue lighten-1"
+                dense
+                dark
+                id="myTitle"
+                >
+    
+                
+                <div class="text-right" style="width:25%; text-align:right;">
+                    <v-autocomplete
+                    v-model="select"
+                    :loading="loading"
+                    :items="items"
+                    :search-input.sync="search"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם ישוב"
+                    solo-inverted
+                    @change='getSetlPointCount'
+                  ></v-autocomplete>
+                </div>
         
-        var setl_area_features =[];
-        var iso_setl_features =[];
-
-        var s_wkts = [];
-        var s_names = [];
-        var s_symbols = [];
-        var bubbleHTMLParameters_all = [];
-
-        var corona_features = [];
-
-
-        var classBreakeSymbols ={
-            blue:
-                {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [255, 255, 255, 0.5]
-                },    
-                red: 
-                      {  
-                          'outlineColor': [0, 0, 0, 1],
-                          'outlineWidth': 1.5,
-                          'fillColor': [179, 0, 0, 0.5]
-                      }, 
-            red_orange:  
-                 {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [230, 81, 0, 0.5]
-                },
-            orange:  {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [255, 179, 0, 0.5]
-                },
-            yellow:  {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [255, 238, 88, 0.5]
-                },
-            green_yellow: {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [178, 255, 89, 0.5]
-                },
-            green: {  
-                    'outlineColor': [0, 0, 0, 1],
-                    'outlineWidth': 1.5,
-                    'fillColor': [56, 142, 60, 0.5]
-                   }
-            };
-
-
-            Number.prototype.between = function(a, b) {
-            var min = Math.min.apply(Math, [a, b]),
-                max = Math.max.apply(Math, [a, b]);
-                return this >= min && this < max;
-            };
-
-            function dateConvert(unixts)
-            {
-                var date = new Date(unixts);
-                //var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
-                var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
-                return(fdate);
+                <v-divider vertical></v-divider>
+    
+                <v-spacer></v-spacer>
+                <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מפת תכנית הרמזור</v-toolbar-title>
+                <v-spacer></v-spacer>
+    
+                <div class="text-right" style="width:25%; text-align:right;">
+                </div>
+    
+    
+    
+    
+        
+                </v-app-bar>
+    
+                <v-app-bar
+                color="blue lighten-1"
+                dense
+                dark
+                id="myTitleMobile"
+                >
+    
+                
+                <div class="text-right" style="width:100%; text-align:right;">
+                    <v-autocomplete
+                    v-model="select"
+                    :loading="loading_mobile"
+                    :items="items"
+                    :search-input.sync="search_mobile"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם ישוב"
+                    solo-inverted
+                    @change='getSetlPointCount'
+                  ></v-autocomplete>
+                </div>
+        
+    
+    
+    
+    
+    
+        
+                </v-app-bar>
+            
+                <form name="form" style='height: 100%;' scrolling='no'> 
+                        
+                        <div id="map_div" style="width: 100%; height: 100%; float:left">
+                                
+                                
+                        </div> 			
+                </form>
+    
+    
+    
+            
+    
+    
+            </v-app>
+        </div>
+        
+        
+    <script>
+    
+    
+    
+    
+    
+            function isInArray(value, array) {
+                return array.indexOf(value) > -1;
             }
-
-            function stringToDate(_date,_format,_delimiter)
-            {
-                        var formatLowerCase=_format.toLowerCase();
-                        var formatItems=formatLowerCase.split(_delimiter);
-                        var dateItems=_date.split(_delimiter);
-                        var monthIndex=formatItems.indexOf("mm");
-                        var dayIndex=formatItems.indexOf("dd");
-                        var yearIndex=formatItems.indexOf("yyyy");
-                        var month=parseInt(dateItems[monthIndex]);
-                        month-=1;
-                        var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
-                        return formatedDate;
+    
+            function getDates(startDate, stopDate) {
+                var dateArray = new Array();
+                var currentDate = startDate;
+                while (currentDate <= stopDate) {
+                    dateArray.push(new Date (currentDate));
+                    currentDate = currentDate.addDays(1);
+                }
+                return dateArray;
             }
-
-           function getSymbol(number) {
-                Symbol = classBreakeSymbols.blue;
-                if (number.between(0,2))
+    
+        
+    
+           
+    
+            var intersect_res;
+    
+    
+            
+            var setl_area_features =[];
+            var iso_setl_features =[];
+    
+            var s_wkts = [];
+            var s_names = [];
+            var s_symbols = [];
+            var bubbleHTMLParameters_all = [];
+    
+            var corona_features = [];
+    
+    
+            var classBreakeSymbols ={
+                blue:
+                    {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [255, 255, 255, 0.5]
+                    },    
+                    red: 
+                          {  
+                              'outlineColor': [0, 0, 0, 1],
+                              'outlineWidth': 1.5,
+                              'fillColor': [179, 0, 0, 0.5]
+                          }, 
+                red_orange:  
+                     {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [230, 81, 0, 0.5]
+                    },
+                orange:  {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [255, 179, 0, 0.5]
+                    },
+                yellow:  {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [255, 238, 88, 0.5]
+                    },
+                green_yellow: {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [178, 255, 89, 0.5]
+                    },
+                green: {  
+                        'outlineColor': [0, 0, 0, 1],
+                        'outlineWidth': 1.5,
+                        'fillColor': [56, 142, 60, 0.5]
+                       }
+                };
+    
+    
+                Number.prototype.between = function(a, b) {
+                var min = Math.min.apply(Math, [a, b]),
+                    max = Math.max.apply(Math, [a, b]);
+                    return this >= min && this < max;
+                };
+    
+                function dateConvert(unixts)
                 {
-                    Symbol = classBreakeSymbols.green;
+                    var date = new Date(unixts);
+                    //var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+                    var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
+                    return(fdate);
                 }
-                if (number.between(2,4.5))
+    
+                function stringToDate(_date,_format,_delimiter)
                 {
-                    Symbol = classBreakeSymbols.green_yellow;
+                            var formatLowerCase=_format.toLowerCase();
+                            var formatItems=formatLowerCase.split(_delimiter);
+                            var dateItems=_date.split(_delimiter);
+                            var monthIndex=formatItems.indexOf("mm");
+                            var dayIndex=formatItems.indexOf("dd");
+                            var yearIndex=formatItems.indexOf("yyyy");
+                            var month=parseInt(dateItems[monthIndex]);
+                            month-=1;
+                            var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                            return formatedDate;
                 }
-                if (number.between(4.5,5.5))
-                {
-                    Symbol = classBreakeSymbols.yellow;
-                }
-                if (number.between(5.5,6.5))
-                {
-                    Symbol = classBreakeSymbols.orange;
-                }
-                if (number.between(6.5,7.5))
-                {
-                    Symbol = classBreakeSymbols.red_orange;
-                }
-                if (number.between(7.5,10.5))
-                {
-                    Symbol = classBreakeSymbols.red;
-                }
-                return  Symbol;
-           }
-           var polygon;
+    
+               function getSymbol(number) {
+                    Symbol = classBreakeSymbols.blue;
+                    if (number.between(0,2))
+                    {
+                        Symbol = classBreakeSymbols.green;
+                    }
+                    if (number.between(2,4.5))
+                    {
+                        Symbol = classBreakeSymbols.green_yellow;
+                    }
+                    if (number.between(4.5,5.5))
+                    {
+                        Symbol = classBreakeSymbols.yellow;
+                    }
+                    if (number.between(5.5,6.5))
+                    {
+                        Symbol = classBreakeSymbols.orange;
+                    }
+                    if (number.between(6.5,7.5))
+                    {
+                        Symbol = classBreakeSymbols.red_orange;
+                    }
+                    if (number.between(7.5,10.5))
+                    {
+                        Symbol = classBreakeSymbols.red;
+                    }
+                    return  Symbol;
+               }
+               var polygon;
+    
+    
+               var colors = {
+                        "GREEN":"ירוק",
+                        "YELLOW": "צהוב",
+                        "ORANGE": "כתום",
+                        "RED":"אדום"
+    
+               }
+    
+               var ramzor_cities=[
+ {
+   "R_SETL_NAME": "אבו תלול",
+   "R_SETL_CODE": 1375
+ },
+ {
+   "R_SETL_NAME": "אבטליון",
+   "R_SETL_CODE": 1275
+ },
+ {
+   "R_SETL_NAME": "אביאל",
+   "R_SETL_CODE": 679
+ },
+ {
+   "R_SETL_NAME": "אביבים",
+   "R_SETL_CODE": 1115
+ },
+ {
+   "R_SETL_NAME": "אביגדור",
+   "R_SETL_CODE": 819
+ },
+ {
+   "R_SETL_NAME": "אביחיל",
+   "R_SETL_CODE": 175
+ },
+ {
+   "R_SETL_NAME": "אביטל",
+   "R_SETL_CODE": 2052
+ },
+ {
+   "R_SETL_NAME": "אביעזר",
+   "R_SETL_CODE": 1070
+ },
+ {
+   "R_SETL_NAME": "אבירים",
+   "R_SETL_CODE": 1220
+ },
+ {
+   "R_SETL_NAME": "אבן יהודה",
+   "R_SETL_CODE": 182
+ },
+ {
+   "R_SETL_NAME": "אבן מנחם",
+   "R_SETL_CODE": 1081
+ },
+ {
+   "R_SETL_NAME": "אבן ספיר",
+   "R_SETL_CODE": 783
+ },
+ {
+   "R_SETL_NAME": "אבן שמואל",
+   "R_SETL_CODE": 400
+ },
+ {
+   "R_SETL_NAME": "אבני איתן",
+   "R_SETL_CODE": 4011
+ },
+ {
+   "R_SETL_NAME": "אבני חפץ",
+   "R_SETL_CODE": 3793
+ },
+ {
+   "R_SETL_NAME": "אבנת",
+   "R_SETL_CODE": 3786
+ },
+ {
+   "R_SETL_NAME": "אבשלום",
+   "R_SETL_CODE": 1311
+ },
+ {
+   "R_SETL_NAME": "אדורה",
+   "R_SETL_CODE": 3759
+ },
+ {
+   "R_SETL_NAME": "אדירים",
+   "R_SETL_CODE": 113
+ },
+ {
+   "R_SETL_NAME": "אדמית",
+   "R_SETL_CODE": 1068
+ },
+ {
+   "R_SETL_NAME": "אדרת",
+   "R_SETL_CODE": 1123
+ },
+ {
+   "R_SETL_NAME": "אודים",
+   "R_SETL_CODE": 446
+ },
+ {
+   "R_SETL_NAME": "אודם",
+   "R_SETL_CODE": 4010
+ },
+ {
+   "R_SETL_NAME": "אוהד",
+   "R_SETL_CODE": 1046
+ },
+ {
+   "R_SETL_NAME": "אום אל-קוטוף",
+   "R_SETL_CODE": 2024
+ },
+ {
+   "R_SETL_NAME": "אום בטין",
+   "R_SETL_CODE": 1358
+ },
+ {
+   "R_SETL_NAME": "אומן",
+   "R_SETL_CODE": 1108
+ },
+ {
+   "R_SETL_NAME": "אומץ",
+   "R_SETL_CODE": 680
+ },
+ {
+   "R_SETL_NAME": "אור הגנוז",
+   "R_SETL_CODE": 1294
+ },
+ {
+   "R_SETL_NAME": "אור הנר",
+   "R_SETL_CODE": 67
+ },
+ {
+   "R_SETL_NAME": "אור יהודה",
+   "R_SETL_CODE": 2400
+ },
+ {
+   "R_SETL_NAME": "אורה",
+   "R_SETL_CODE": 780
+ },
+ {
+   "R_SETL_NAME": "אורות",
+   "R_SETL_CODE": 2012
+ },
+ {
+   "R_SETL_NAME": "אורטל",
+   "R_SETL_CODE": 4013
+ },
+ {
+   "R_SETL_NAME": "אורים",
+   "R_SETL_CODE": 403
+ },
+ {
+   "R_SETL_NAME": "אושה",
+   "R_SETL_CODE": 278
+ },
+ {
+   "R_SETL_NAME": "אזור",
+   "R_SETL_CODE": 565
+ },
+ {
+   "R_SETL_NAME": "אחווה",
+   "R_SETL_CODE": 1157
+ },
+ {
+   "R_SETL_NAME": "אחוזם",
+   "R_SETL_CODE": 821
+ },
+ {
+   "R_SETL_NAME": "אחוזת ברק",
+   "R_SETL_CODE": 1330
+ },
+ {
+   "R_SETL_NAME": "אחיהוד",
+   "R_SETL_CODE": 785
+ },
+ {
+   "R_SETL_NAME": "איבים",
+   "R_SETL_CODE": 338
+ },
+ {
+   "R_SETL_NAME": "אייל",
+   "R_SETL_CODE": 716
+ },
+ {
+   "R_SETL_NAME": "איילת השחר",
+   "R_SETL_CODE": 77
+ },
+ {
+   "R_SETL_NAME": "אילון",
+   "R_SETL_CODE": 294
+ },
+ {
+   "R_SETL_NAME": "אילות",
+   "R_SETL_CODE": 1126
+ },
+ {
+   "R_SETL_NAME": "אילניה",
+   "R_SETL_CODE": 49
+ },
+ {
+   "R_SETL_NAME": "אילת",
+   "R_SETL_CODE": 2600
+ },
+ {
+   "R_SETL_NAME": "אירוס",
+   "R_SETL_CODE": 1336
+ },
+ {
+   "R_SETL_NAME": "איתמר",
+   "R_SETL_CODE": 3762
+ },
+ {
+   "R_SETL_NAME": "איתן",
+   "R_SETL_CODE": 37
+ },
+ {
+   "R_SETL_NAME": "איתנים",
+   "R_SETL_CODE": 886
+ },
+ {
+   "R_SETL_NAME": "אכסאל",
+   "R_SETL_CODE": 478
+ },
+ {
+   "R_SETL_NAME": "אל-עזי",
+   "R_SETL_CODE": 1339
+ },
+ {
+   "R_SETL_NAME": "אל-עריאן",
+   "R_SETL_CODE": 1316
+ },
+ {
+   "R_SETL_NAME": "אל-רום",
+   "R_SETL_CODE": 4003
+ },
+ {
+   "R_SETL_NAME": "אל סייד",
+   "R_SETL_CODE": 1359
+ },
+ {
+   "R_SETL_NAME": "אלומה",
+   "R_SETL_CODE": 1145
+ },
+ {
+   "R_SETL_NAME": "אלומות",
+   "R_SETL_CODE": 330
+ },
+ {
+   "R_SETL_NAME": "אלון הגליל",
+   "R_SETL_CODE": 1182
+ },
+ {
+   "R_SETL_NAME": "אלון מורה",
+   "R_SETL_CODE": 3579
+ },
+ {
+   "R_SETL_NAME": "אלון שבות",
+   "R_SETL_CODE": 3604
+ },
+ {
+   "R_SETL_NAME": "אלוני אבא",
+   "R_SETL_CODE": 429
+ },
+ {
+   "R_SETL_NAME": "אלוני הבשן",
+   "R_SETL_CODE": 4017
+ },
+ {
+   "R_SETL_NAME": "אלוני יצחק",
+   "R_SETL_CODE": 868
+ },
+ {
+   "R_SETL_NAME": "אלונים",
+   "R_SETL_CODE": 285
+ },
+ {
+   "R_SETL_NAME": "אלי-עד",
+   "R_SETL_CODE": 4002
+ },
+ {
+   "R_SETL_NAME": "אליאב",
+   "R_SETL_CODE": 1365
+ },
+ {
+   "R_SETL_NAME": "אליכין",
+   "R_SETL_CODE": 41
+ },
+ {
+   "R_SETL_NAME": "אליפז",
+   "R_SETL_CODE": 1248
+ },
+ {
+   "R_SETL_NAME": "אליפלט",
+   "R_SETL_CODE": 730
+ },
+ {
+   "R_SETL_NAME": "אלישיב",
+   "R_SETL_CODE": 204
+ },
+ {
+   "R_SETL_NAME": "אלישמע",
+   "R_SETL_CODE": 841
+ },
+ {
+   "R_SETL_NAME": "אלמגור",
+   "R_SETL_CODE": 1125
+ },
+ {
+   "R_SETL_NAME": "אלמוג",
+   "R_SETL_CODE": 3556
+ },
+ {
+   "R_SETL_NAME": "אלעזר",
+   "R_SETL_CODE": 3618
+ },
+ {
+   "R_SETL_NAME": "אלפי מנשה",
+   "R_SETL_CODE": 3750
+ },
+ {
+   "R_SETL_NAME": "אלקוש",
+   "R_SETL_CODE": 603
+ },
+ {
+   "R_SETL_NAME": "אלקנה",
+   "R_SETL_CODE": 3560
+ },
+ {
+   "R_SETL_NAME": "אמונים",
+   "R_SETL_CODE": 772
+ },
+ {
+   "R_SETL_NAME": "אמירים",
+   "R_SETL_CODE": 1064
+ },
+ {
+   "R_SETL_NAME": "אמנון",
+   "R_SETL_CODE": 1253
+ },
+ {
+   "R_SETL_NAME": "אמציה",
+   "R_SETL_CODE": 23
+ },
+ {
+   "R_SETL_NAME": "אניעם",
+   "R_SETL_CODE": 4012
+ },
+ {
+   "R_SETL_NAME": "אספר",
+   "R_SETL_CODE": 3754
+ },
+ {
+   "R_SETL_NAME": "אפיק",
+   "R_SETL_CODE": 4301
+ },
+ {
+   "R_SETL_NAME": "אפיקים",
+   "R_SETL_CODE": 176
+ },
+ {
+   "R_SETL_NAME": "אפק",
+   "R_SETL_CODE": 313
+ },
+ {
+   "R_SETL_NAME": "ארבל",
+   "R_SETL_CODE": 701
+ },
+ {
+   "R_SETL_NAME": "ארגמן",
+   "R_SETL_CODE": 3598
+ },
+ {
+   "R_SETL_NAME": "ארז",
+   "R_SETL_CODE": 714
+ },
+ {
+   "R_SETL_NAME": "אריאל",
+   "R_SETL_CODE": 3570
+ },
+ {
+   "R_SETL_NAME": "ארסוף",
+   "R_SETL_CODE": 1324
+ },
+ {
+   "R_SETL_NAME": "אשבול",
+   "R_SETL_CODE": 71
+ },
+ {
+   "R_SETL_NAME": "אשבל",
+   "R_SETL_CODE": 1276
+ },
+ {
+   "R_SETL_NAME": "אשחר",
+   "R_SETL_CODE": 1188
+ },
+ {
+   "R_SETL_NAME": "אשכולות",
+   "R_SETL_CODE": 3722
+ },
+ {
+   "R_SETL_NAME": "אשל הנשיא",
+   "R_SETL_CODE": 2021
+ },
+ {
+   "R_SETL_NAME": "אשלים",
+   "R_SETL_CODE": 1152
+ },
+ {
+   "R_SETL_NAME": "אשרת",
+   "R_SETL_CODE": 1256
+ },
+ {
+   "R_SETL_NAME": "אשתאול",
+   "R_SETL_CODE": 740
+ },
+ {
+   "R_SETL_NAME": "באר אורה",
+   "R_SETL_CODE": 21
+ },
+ {
+   "R_SETL_NAME": "באר גנים",
+   "R_SETL_CODE": 1376
+ },
+ {
+   "R_SETL_NAME": "באר יעקב",
+   "R_SETL_CODE": 2530
+ },
+ {
+   "R_SETL_NAME": "באר מילכה",
+   "R_SETL_CODE": 1278
+ },
+ {
+   "R_SETL_NAME": "באר שבע",
+   "R_SETL_CODE": 9000
+ },
+ {
+   "R_SETL_NAME": "בארות יצחק",
+   "R_SETL_CODE": 450
+ },
+ {
+   "R_SETL_NAME": "בארותיים",
+   "R_SETL_CODE": 697
+ },
+ {
+   "R_SETL_NAME": "בארי",
+   "R_SETL_CODE": 399
+ },
+ {
+   "R_SETL_NAME": "בוסתן הגליל",
+   "R_SETL_CODE": 559
+ },
+ {
+   "R_SETL_NAME": "בחן",
+   "R_SETL_CODE": 2043
+ },
+ {
+   "R_SETL_NAME": "בטחה",
+   "R_SETL_CODE": 762
+ },
+ {
+   "R_SETL_NAME": "ביצרון",
+   "R_SETL_CODE": 234
+ },
+ {
+   "R_SETL_NAME": "ביר אל-מכסור",
+   "R_SETL_CODE": 998
+ },
+ {
+   "R_SETL_NAME": "ביר הדאג'",
+   "R_SETL_CODE": 1348
+ },
+ {
+   "R_SETL_NAME": "ביריה",
+   "R_SETL_CODE": 368
+ },
+ {
+   "R_SETL_NAME": "בית אורן",
+   "R_SETL_CODE": 317
+ },
+ {
+   "R_SETL_NAME": "בית אל",
+   "R_SETL_CODE": 3574
+ },
+ {
+   "R_SETL_NAME": "בית אלעזרי",
+   "R_SETL_CODE": 562
+ },
+ {
+   "R_SETL_NAME": "בית אלפא",
+   "R_SETL_CODE": 95
+ },
+ {
+   "R_SETL_NAME": "בית אריה",
+   "R_SETL_CODE": 3652
+ },
+ {
+   "R_SETL_NAME": "בית ברל",
+   "R_SETL_CODE": 1076
+ },
+ {
+   "R_SETL_NAME": "בית גוברין",
+   "R_SETL_CODE": 619
+ },
+ {
+   "R_SETL_NAME": "בית גמליאל",
+   "R_SETL_CODE": 571
+ },
+ {
+   "R_SETL_NAME": "בית דגן",
+   "R_SETL_CODE": 466
+ },
+ {
+   "R_SETL_NAME": "בית הגדי",
+   "R_SETL_CODE": 723
+ },
+ {
+   "R_SETL_NAME": "בית הלוי",
+   "R_SETL_CODE": 373
+ },
+ {
+   "R_SETL_NAME": "בית הלל",
+   "R_SETL_CODE": 322
+ },
+ {
+   "R_SETL_NAME": "בית העמק",
+   "R_SETL_CODE": 572
+ },
+ {
+   "R_SETL_NAME": "בית הערבה",
+   "R_SETL_CODE": 3645
+ },
+ {
+   "R_SETL_NAME": "בית השיטה",
+   "R_SETL_CODE": 242
+ },
+ {
+   "R_SETL_NAME": "בית זיד",
+   "R_SETL_CODE": 353
+ },
+ {
+   "R_SETL_NAME": "בית זית",
+   "R_SETL_CODE": 710
+ },
+ {
+   "R_SETL_NAME": "בית זרע",
+   "R_SETL_CODE": 143
+ },
+ {
+   "R_SETL_NAME": "בית חורון",
+   "R_SETL_CODE": 3575
+ },
+ {
+   "R_SETL_NAME": "בית חירות",
+   "R_SETL_CODE": 877
+ },
+ {
+   "R_SETL_NAME": "בית חנן",
+   "R_SETL_CODE": 159
+ },
+ {
+   "R_SETL_NAME": "בית חנניה",
+   "R_SETL_CODE": 800
+ },
+ {
+   "R_SETL_NAME": "בית חשמונאי",
+   "R_SETL_CODE": 1050
+ },
+ {
+   "R_SETL_NAME": "בית יהושע",
+   "R_SETL_CODE": 288
+ },
+ {
+   "R_SETL_NAME": "בית יוסף",
+   "R_SETL_CODE": 265
+ },
+ {
+   "R_SETL_NAME": "בית ינאי",
+   "R_SETL_CODE": 200
+ },
+ {
+   "R_SETL_NAME": "בית יצחק-שער חפר",
+   "R_SETL_CODE": 326
+ },
+ {
+   "R_SETL_NAME": "בית לחם הגלילית",
+   "R_SETL_CODE": 430
+ },
+ {
+   "R_SETL_NAME": "בית מאיר",
+   "R_SETL_CODE": 751
+ },
+ {
+   "R_SETL_NAME": "בית נחמיה",
+   "R_SETL_CODE": 784
+ },
+ {
+   "R_SETL_NAME": "בית ניר",
+   "R_SETL_CODE": 16
+ },
+ {
+   "R_SETL_NAME": "בית עובד",
+   "R_SETL_CODE": 202
+ },
+ {
+   "R_SETL_NAME": "בית עוזיאל",
+   "R_SETL_CODE": 301
+ },
+ {
+   "R_SETL_NAME": "בית עזרא",
+   "R_SETL_CODE": 756
+ },
+ {
+   "R_SETL_NAME": "בית עריף",
+   "R_SETL_CODE": 604
+ },
+ {
+   "R_SETL_NAME": "בית צבי",
+   "R_SETL_CODE": 212
+ },
+ {
+   "R_SETL_NAME": "בית קמה",
+   "R_SETL_CODE": 598
+ },
+ {
+   "R_SETL_NAME": "בית קשת",
+   "R_SETL_CODE": 365
+ },
+ {
+   "R_SETL_NAME": "בית רימון",
+   "R_SETL_CODE": 1162
+ },
+ {
+   "R_SETL_NAME": "בית שאן",
+   "R_SETL_CODE": 9200
+ },
+ {
+   "R_SETL_NAME": "בית שערים",
+   "R_SETL_CODE": 248
+ },
+ {
+   "R_SETL_NAME": "בית שקמה",
+   "R_SETL_CODE": 747
+ },
+ {
+   "R_SETL_NAME": "בלפוריה",
+   "R_SETL_CODE": 94
+ },
+ {
+   "R_SETL_NAME": "בן עמי",
+   "R_SETL_CODE": 712
+ },
+ {
+   "R_SETL_NAME": "בני דרום",
+   "R_SETL_CODE": 592
+ },
+ {
+   "R_SETL_NAME": "בני דרור",
+   "R_SETL_CODE": 386
+ },
+ {
+   "R_SETL_NAME": "בני יהודה",
+   "R_SETL_CODE": 4015
+ },
+ {
+   "R_SETL_NAME": "בני נצרים",
+   "R_SETL_CODE": 1363
+ },
+ {
+   "R_SETL_NAME": "בני עטרות",
+   "R_SETL_CODE": 448
+ },
+ {
+   "R_SETL_NAME": "בני עי\"ש",
+   "R_SETL_CODE": 1066
+ },
+ {
+   "R_SETL_NAME": "בני ציון",
+   "R_SETL_CODE": 418
+ },
+ {
+   "R_SETL_NAME": "בני ראם",
+   "R_SETL_CODE": 588
+ },
+ {
+   "R_SETL_NAME": "בניה",
+   "R_SETL_CODE": 685
+ },
+ {
+   "R_SETL_NAME": "בנימינה-גבעת עדה",
+   "R_SETL_CODE": 9800
+ },
+ {
+   "R_SETL_NAME": "בסמ\"ה",
+   "R_SETL_CODE": 1326
+ },
+ {
+   "R_SETL_NAME": "בסמת טבעון",
+   "R_SETL_CODE": 944
+ },
+ {
+   "R_SETL_NAME": "בצרה",
+   "R_SETL_CODE": 389
+ },
+ {
+   "R_SETL_NAME": "בצת",
+   "R_SETL_CODE": 589
+ },
+ {
+   "R_SETL_NAME": "בקוע",
+   "R_SETL_CODE": 864
+ },
+ {
+   "R_SETL_NAME": "בקעות",
+   "R_SETL_CODE": 3612
+ },
+ {
+   "R_SETL_NAME": "בר גיורא",
+   "R_SETL_CODE": 823
+ },
+ {
+   "R_SETL_NAME": "בר יוחאי",
+   "R_SETL_CODE": 1191
+ },
+ {
+   "R_SETL_NAME": "ברוכין",
+   "R_SETL_CODE": 3097
+ },
+ {
+   "R_SETL_NAME": "ברור חיל",
+   "R_SETL_CODE": 428
+ },
+ {
+   "R_SETL_NAME": "ברכה",
+   "R_SETL_CODE": 3710
+ },
+ {
+   "R_SETL_NAME": "ברכיה",
+   "R_SETL_CODE": 746
+ },
+ {
+   "R_SETL_NAME": "ברעם",
+   "R_SETL_CODE": 667
+ },
+ {
+   "R_SETL_NAME": "ברק",
+   "R_SETL_CODE": 141
+ },
+ {
+   "R_SETL_NAME": "ברקת",
+   "R_SETL_CODE": 2038
+ },
+ {
+   "R_SETL_NAME": "בת הדר",
+   "R_SETL_CODE": 1323
+ },
+ {
+   "R_SETL_NAME": "בת חן",
+   "R_SETL_CODE": 1361
+ },
+ {
+   "R_SETL_NAME": "בת חפר",
+   "R_SETL_CODE": 1319
+ },
+ {
+   "R_SETL_NAME": "בת עין",
+   "R_SETL_CODE": 3794
+ },
+ {
+   "R_SETL_NAME": "בת שלמה",
+   "R_SETL_CODE": 33
+ },
+ {
+   "R_SETL_NAME": "ג'סר א-זרקא",
+   "R_SETL_CODE": 541
+ },
+ {
+   "R_SETL_NAME": "גאולי תימן",
+   "R_SETL_CODE": 872
+ },
+ {
+   "R_SETL_NAME": "גאולים",
+   "R_SETL_CODE": 379
+ },
+ {
+   "R_SETL_NAME": "גאליה",
+   "R_SETL_CODE": 853
+ },
+ {
+   "R_SETL_NAME": "גבולות",
+   "R_SETL_CODE": 352
+ },
+ {
+   "R_SETL_NAME": "גבים",
+   "R_SETL_CODE": 424
+ },
+ {
+   "R_SETL_NAME": "גבע",
+   "R_SETL_CODE": 86
+ },
+ {
+   "R_SETL_NAME": "גבע בנימין",
+   "R_SETL_CODE": 3763
+ },
+ {
+   "R_SETL_NAME": "גבע כרמל",
+   "R_SETL_CODE": 683
+ },
+ {
+   "R_SETL_NAME": "גבעולים",
+   "R_SETL_CODE": 2014
+ },
+ {
+   "R_SETL_NAME": "גבעות בר",
+   "R_SETL_CODE": 1344
+ },
+ {
+   "R_SETL_NAME": "גבעת אלה",
+   "R_SETL_CODE": 1288
+ },
+ {
+   "R_SETL_NAME": "גבעת ברנר",
+   "R_SETL_CODE": 147
+ },
+ {
+   "R_SETL_NAME": "גבעת ח\"ן",
+   "R_SETL_CODE": 207
+ },
+ {
+   "R_SETL_NAME": "גבעת יואב",
+   "R_SETL_CODE": 4021
+ },
+ {
+   "R_SETL_NAME": "גבעת יערים",
+   "R_SETL_CODE": 787
+ },
+ {
+   "R_SETL_NAME": "גבעת ישעיהו",
+   "R_SETL_CODE": 919
+ },
+ {
+   "R_SETL_NAME": "גבעת כ\"ח",
+   "R_SETL_CODE": 802
+ },
+ {
+   "R_SETL_NAME": "גבעת ניל\"י",
+   "R_SETL_CODE": 360
+ },
+ {
+   "R_SETL_NAME": "גבעת עוז",
+   "R_SETL_CODE": 703
+ },
+ {
+   "R_SETL_NAME": "גבעת שמש",
+   "R_SETL_CODE": 566
+ },
+ {
+   "R_SETL_NAME": "גבעת שפירא",
+   "R_SETL_CODE": 1077
+ },
+ {
+   "R_SETL_NAME": "גבעתי",
+   "R_SETL_CODE": 793
+ },
+ {
+   "R_SETL_NAME": "גבעתיים",
+   "R_SETL_CODE": 6300
+ },
+ {
+   "R_SETL_NAME": "גבת",
+   "R_SETL_CODE": 133
+ },
+ {
+   "R_SETL_NAME": "גדות",
+   "R_SETL_CODE": 35
+ },
+ {
+   "R_SETL_NAME": "גדיש",
+   "R_SETL_CODE": 145
+ },
+ {
+   "R_SETL_NAME": "גדרה",
+   "R_SETL_CODE": 2550
+ },
+ {
+   "R_SETL_NAME": "גונן",
+   "R_SETL_CODE": 852
+ },
+ {
+   "R_SETL_NAME": "גורן",
+   "R_SETL_CODE": 755
+ },
+ {
+   "R_SETL_NAME": "גורנות הגליל",
+   "R_SETL_CODE": 1219
+ },
+ {
+   "R_SETL_NAME": "גזית",
+   "R_SETL_CODE": 457
+ },
+ {
+   "R_SETL_NAME": "גזר",
+   "R_SETL_CODE": 370
+ },
+ {
+   "R_SETL_NAME": "גיאה",
+   "R_SETL_CODE": 706
+ },
+ {
+   "R_SETL_NAME": "גיבתון",
+   "R_SETL_CODE": 196
+ },
+ {
+   "R_SETL_NAME": "גיזו",
+   "R_SETL_CODE": 1043
+ },
+ {
+   "R_SETL_NAME": "גילון",
+   "R_SETL_CODE": 1204
+ },
+ {
+   "R_SETL_NAME": "גילת",
+   "R_SETL_CODE": 736
+ },
+ {
+   "R_SETL_NAME": "גינוסר",
+   "R_SETL_CODE": 262
+ },
+ {
+   "R_SETL_NAME": "גיניגר",
+   "R_SETL_CODE": 92
+ },
+ {
+   "R_SETL_NAME": "גינתון",
+   "R_SETL_CODE": 863
+ },
+ {
+   "R_SETL_NAME": "גיתה",
+   "R_SETL_CODE": 1206
+ },
+ {
+   "R_SETL_NAME": "גיתית",
+   "R_SETL_CODE": 3613
+ },
+ {
+   "R_SETL_NAME": "גלאון",
+   "R_SETL_CODE": 393
+ },
+ {
+   "R_SETL_NAME": "גלגל",
+   "R_SETL_CODE": 3606
+ },
+ {
+   "R_SETL_NAME": "גליל ים",
+   "R_SETL_CODE": 346
+ },
+ {
+   "R_SETL_NAME": "גמזו",
+   "R_SETL_CODE": 745
+ },
+ {
+   "R_SETL_NAME": "גן הדרום",
+   "R_SETL_CODE": 1072
+ },
+ {
+   "R_SETL_NAME": "גן השומרון",
+   "R_SETL_CODE": 225
+ },
+ {
+   "R_SETL_NAME": "גן חיים",
+   "R_SETL_CODE": 239
+ },
+ {
+   "R_SETL_NAME": "גן יאשיה",
+   "R_SETL_CODE": 734
+ },
+ {
+   "R_SETL_NAME": "גן יבנה",
+   "R_SETL_CODE": 166
+ },
+ {
+   "R_SETL_NAME": "גן נר",
+   "R_SETL_CODE": 1274
+ },
+ {
+   "R_SETL_NAME": "גן שורק",
+   "R_SETL_CODE": 311
+ },
+ {
+   "R_SETL_NAME": "גן שלמה",
+   "R_SETL_CODE": 144
+ },
+ {
+   "R_SETL_NAME": "גן שמואל",
+   "R_SETL_CODE": 72
+ },
+ {
+   "R_SETL_NAME": "גנות",
+   "R_SETL_CODE": 836
+ },
+ {
+   "R_SETL_NAME": "גנות הדר",
+   "R_SETL_CODE": 549
+ },
+ {
+   "R_SETL_NAME": "גני הדר",
+   "R_SETL_CODE": 1103
+ },
+ {
+   "R_SETL_NAME": "גני טל",
+   "R_SETL_CODE": 1371
+ },
+ {
+   "R_SETL_NAME": "גני יוחנן",
+   "R_SETL_CODE": 862
+ },
+ {
+   "R_SETL_NAME": "גני מודיעין",
+   "R_SETL_CODE": 3797
+ },
+ {
+   "R_SETL_NAME": "גני עם",
+   "R_SETL_CODE": 218
+ },
+ {
+   "R_SETL_NAME": "גני תקווה",
+   "R_SETL_CODE": 229
+ },
+ {
+   "R_SETL_NAME": "געש",
+   "R_SETL_CODE": 842
+ },
+ {
+   "R_SETL_NAME": "געתון",
+   "R_SETL_CODE": 463
+ },
+ {
+   "R_SETL_NAME": "גרופית",
+   "R_SETL_CODE": 1129
+ },
+ {
+   "R_SETL_NAME": "גשור",
+   "R_SETL_CODE": 4022
+ },
+ {
+   "R_SETL_NAME": "גשר",
+   "R_SETL_CODE": 305
+ },
+ {
+   "R_SETL_NAME": "גת רימון",
+   "R_SETL_CODE": 128
+ },
+ {
+   "R_SETL_NAME": "דבורה",
+   "R_SETL_CODE": 146
+ },
+ {
+   "R_SETL_NAME": "דבוריה",
+   "R_SETL_CODE": 489
+ },
+ {
+   "R_SETL_NAME": "דבירה",
+   "R_SETL_CODE": 849
+ },
+ {
+   "R_SETL_NAME": "דברת",
+   "R_SETL_CODE": 407
+ },
+ {
+   "R_SETL_NAME": "דגניה א'",
+   "R_SETL_CODE": 62
+ },
+ {
+   "R_SETL_NAME": "דגניה ב'",
+   "R_SETL_CODE": 79
+ },
+ {
+   "R_SETL_NAME": "דוב\"ב",
+   "R_SETL_CODE": 1067
+ },
+ {
+   "R_SETL_NAME": "דולב",
+   "R_SETL_CODE": 3747
+ },
+ {
+   "R_SETL_NAME": "דור",
+   "R_SETL_CODE": 738
+ },
+ {
+   "R_SETL_NAME": "דחי",
+   "R_SETL_CODE": 475
+ },
+ {
+   "R_SETL_NAME": "דייר אל-אסד",
+   "R_SETL_CODE": 490
+ },
+ {
+   "R_SETL_NAME": "דייר ראפאת",
+   "R_SETL_CODE": 493
+ },
+ {
+   "R_SETL_NAME": "דישון",
+   "R_SETL_CODE": 2063
+ },
+ {
+   "R_SETL_NAME": "דליה",
+   "R_SETL_CODE": 300
+ },
+ {
+   "R_SETL_NAME": "דלתון",
+   "R_SETL_CODE": 431
+ },
+ {
+   "R_SETL_NAME": "דן",
+   "R_SETL_CODE": 303
+ },
+ {
+   "R_SETL_NAME": "דקל",
+   "R_SETL_CODE": 1241
+ },
+ {
+   "R_SETL_NAME": "דריג'את",
+   "R_SETL_CODE": 1349
+ },
+ {
+   "R_SETL_NAME": "האון",
+   "R_SETL_CODE": 702
+ },
+ {
+   "R_SETL_NAME": "הבונים",
+   "R_SETL_CODE": 675
+ },
+ {
+   "R_SETL_NAME": "הגושרים",
+   "R_SETL_CODE": 356
+ },
+ {
+   "R_SETL_NAME": "הדר עם",
+   "R_SETL_CODE": 191
+ },
+ {
+   "R_SETL_NAME": "הודיות",
+   "R_SETL_CODE": 1322
+ },
+ {
+   "R_SETL_NAME": "הודייה",
+   "R_SETL_CODE": 726
+ },
+ {
+   "R_SETL_NAME": "הושעיה",
+   "R_SETL_CODE": 1186
+ },
+ {
+   "R_SETL_NAME": "הזורע",
+   "R_SETL_CODE": 250
+ },
+ {
+   "R_SETL_NAME": "הזורעים",
+   "R_SETL_CODE": 307
+ },
+ {
+   "R_SETL_NAME": "החותרים",
+   "R_SETL_CODE": 434
+ },
+ {
+   "R_SETL_NAME": "היוגב",
+   "R_SETL_CODE": 684
+ },
+ {
+   "R_SETL_NAME": "הילה",
+   "R_SETL_CODE": 1208
+ },
+ {
+   "R_SETL_NAME": "המעפיל",
+   "R_SETL_CODE": 377
+ },
+ {
+   "R_SETL_NAME": "הסוללים",
+   "R_SETL_CODE": 677
+ },
+ {
+   "R_SETL_NAME": "העוגן",
+   "R_SETL_CODE": 423
+ },
+ {
+   "R_SETL_NAME": "הר אדר",
+   "R_SETL_CODE": 3769
+ },
+ {
+   "R_SETL_NAME": "הר גילה",
+   "R_SETL_CODE": 3603
+ },
+ {
+   "R_SETL_NAME": "הר עמשא",
+   "R_SETL_CODE": 1261
+ },
+ {
+   "R_SETL_NAME": "הראל",
+   "R_SETL_CODE": 464
+ },
+ {
+   "R_SETL_NAME": "הרדוף",
+   "R_SETL_CODE": 1249
+ },
+ {
+   "R_SETL_NAME": "הרצליה",
+   "R_SETL_CODE": 6400
+ },
+ {
+   "R_SETL_NAME": "הררית",
+   "R_SETL_CODE": 1203
+ },
+ {
+   "R_SETL_NAME": "ורד יריחו",
+   "R_SETL_CODE": 3639
+ },
+ {
+   "R_SETL_NAME": "ורדון",
+   "R_SETL_CODE": 1133
+ },
+ {
+   "R_SETL_NAME": "זבדיאל",
+   "R_SETL_CODE": 815
+ },
+ {
+   "R_SETL_NAME": "זוהר",
+   "R_SETL_CODE": 44
+ },
+ {
+   "R_SETL_NAME": "זיקים",
+   "R_SETL_CODE": 584
+ },
+ {
+   "R_SETL_NAME": "זיתן",
+   "R_SETL_CODE": 788
+ },
+ {
+   "R_SETL_NAME": "זכרון יעקב",
+   "R_SETL_CODE": 9300
+ },
+ {
+   "R_SETL_NAME": "זכריה",
+   "R_SETL_CODE": 799
+ },
+ {
+   "R_SETL_NAME": "זמרת",
+   "R_SETL_CODE": 1065
+ },
+ {
+   "R_SETL_NAME": "זנוח",
+   "R_SETL_CODE": 816
+ },
+ {
+   "R_SETL_NAME": "זרועה",
+   "R_SETL_CODE": 2064
+ },
+ {
+   "R_SETL_NAME": "זרזיר",
+   "R_SETL_CODE": 975
+ },
+ {
+   "R_SETL_NAME": "זרחיה",
+   "R_SETL_CODE": 818
+ },
+ {
+   "R_SETL_NAME": "ח'ואלד",
+   "R_SETL_CODE": 1321
+ },
+ {
+   "R_SETL_NAME": "חבצלת השרון",
+   "R_SETL_CODE": 235
+ },
+ {
+   "R_SETL_NAME": "חבר",
+   "R_SETL_CODE": 1110
+ },
+ {
+   "R_SETL_NAME": "חגור",
+   "R_SETL_CODE": 717
+ },
+ {
+   "R_SETL_NAME": "חגי",
+   "R_SETL_CODE": 3764
+ },
+ {
+   "R_SETL_NAME": "חגלה",
+   "R_SETL_CODE": 205
+ },
+ {
+   "R_SETL_NAME": "חד-נס",
+   "R_SETL_CODE": 4026
+ },
+ {
+   "R_SETL_NAME": "חדיד",
+   "R_SETL_CODE": 618
+ },
+ {
+   "R_SETL_NAME": "חדרה",
+   "R_SETL_CODE": 6500
+ },
+ {
+   "R_SETL_NAME": "חולדה",
+   "R_SETL_CODE": 160
+ },
+ {
+   "R_SETL_NAME": "חולית",
+   "R_SETL_CODE": 1239
+ },
+ {
+   "R_SETL_NAME": "חולתה",
+   "R_SETL_CODE": 253
+ },
+ {
+   "R_SETL_NAME": "חוסן",
+   "R_SETL_CODE": 662
+ },
+ {
+   "R_SETL_NAME": "חוסנייה",
+   "R_SETL_CODE": 1332
+ },
+ {
+   "R_SETL_NAME": "חופית",
+   "R_SETL_CODE": 115
+ },
+ {
+   "R_SETL_NAME": "חוקוק",
+   "R_SETL_CODE": 374
+ },
+ {
+   "R_SETL_NAME": "חורה",
+   "R_SETL_CODE": 1303
+ },
+ {
+   "R_SETL_NAME": "חורפיש",
+   "R_SETL_CODE": 496
+ },
+ {
+   "R_SETL_NAME": "חורשים",
+   "R_SETL_CODE": 355
+ },
+ {
+   "R_SETL_NAME": "חזון",
+   "R_SETL_CODE": 1047
+ },
+ {
+   "R_SETL_NAME": "חיבת ציון",
+   "R_SETL_CODE": 219
+ },
+ {
+   "R_SETL_NAME": "חיננית",
+   "R_SETL_CODE": 3643
+ },
+ {
+   "R_SETL_NAME": "חירות",
+   "R_SETL_CODE": 162
+ },
+ {
+   "R_SETL_NAME": "חלוץ",
+   "R_SETL_CODE": 1272
+ },
+ {
+   "R_SETL_NAME": "חלמיש",
+   "R_SETL_CODE": 3573
+ },
+ {
+   "R_SETL_NAME": "חלץ",
+   "R_SETL_CODE": 820
+ },
+ {
+   "R_SETL_NAME": "חמאם",
+   "R_SETL_CODE": 993
+ },
+ {
+   "R_SETL_NAME": "חמד",
+   "R_SETL_CODE": 801
+ },
+ {
+   "R_SETL_NAME": "חמדיה",
+   "R_SETL_CODE": 343
+ },
+ {
+   "R_SETL_NAME": "חמדת",
+   "R_SETL_CODE": 3646
+ },
+ {
+   "R_SETL_NAME": "חמרה",
+   "R_SETL_CODE": 3609
+ },
+ {
+   "R_SETL_NAME": "חניאל",
+   "R_SETL_CODE": 807
+ },
+ {
+   "R_SETL_NAME": "חניתה",
+   "R_SETL_CODE": 280
+ },
+ {
+   "R_SETL_NAME": "חנתון",
+   "R_SETL_CODE": 1257
+ },
+ {
+   "R_SETL_NAME": "חספין",
+   "R_SETL_CODE": 4005
+ },
+ {
+   "R_SETL_NAME": "חפץ חיים",
+   "R_SETL_CODE": 363
+ },
+ {
+   "R_SETL_NAME": "חפצי-בה",
+   "R_SETL_CODE": 90
+ },
+ {
+   "R_SETL_NAME": "חצב",
+   "R_SETL_CODE": 700
+ },
+ {
+   "R_SETL_NAME": "חצבה",
+   "R_SETL_CODE": 13
+ },
+ {
+   "R_SETL_NAME": "חצור-אשדוד",
+   "R_SETL_CODE": 406
+ },
+ {
+   "R_SETL_NAME": "חצור הגלילית",
+   "R_SETL_CODE": 2034
+ },
+ {
+   "R_SETL_NAME": "חצרים",
+   "R_SETL_CODE": 397
+ },
+ {
+   "R_SETL_NAME": "חרב לאת",
+   "R_SETL_CODE": 422
+ },
+ {
+   "R_SETL_NAME": "חרוצים",
+   "R_SETL_CODE": 1024
+ },
+ {
+   "R_SETL_NAME": "חריש",
+   "R_SETL_CODE": 1247
+ },
+ {
+   "R_SETL_NAME": "חרמש",
+   "R_SETL_CODE": 3717
+ },
+ {
+   "R_SETL_NAME": "חרשים",
+   "R_SETL_CODE": 1209
+ },
+ {
+   "R_SETL_NAME": "חשמונאים",
+   "R_SETL_CODE": 3770
+ },
+ {
+   "R_SETL_NAME": "טובא-זנגריה",
+   "R_SETL_CODE": 962
+ },
+ {
+   "R_SETL_NAME": "טירת יהודה",
+   "R_SETL_CODE": 663
+ },
+ {
+   "R_SETL_NAME": "טירת כרמל",
+   "R_SETL_CODE": 2100
+ },
+ {
+   "R_SETL_NAME": "טירת צבי",
+   "R_SETL_CODE": 268
+ },
+ {
+   "R_SETL_NAME": "טל-אל",
+   "R_SETL_CODE": 1181
+ },
+ {
+   "R_SETL_NAME": "טל שחר",
+   "R_SETL_CODE": 462
+ },
+ {
+   "R_SETL_NAME": "טללים",
+   "R_SETL_CODE": 1177
+ },
+ {
+   "R_SETL_NAME": "טלמון",
+   "R_SETL_CODE": 3788
+ },
+ {
+   "R_SETL_NAME": "טנא",
+   "R_SETL_CODE": 3743
+ },
+ {
+   "R_SETL_NAME": "טפחות",
+   "R_SETL_CODE": 1214
+ },
+ {
+   "R_SETL_NAME": "יאנוח-ג'ת",
+   "R_SETL_CODE": 1295
+ },
+ {
+   "R_SETL_NAME": "יבול",
+   "R_SETL_CODE": 1232
+ },
+ {
+   "R_SETL_NAME": "יבנאל",
+   "R_SETL_CODE": 46
+ },
+ {
+   "R_SETL_NAME": "יבנה",
+   "R_SETL_CODE": 2660
+ },
+ {
+   "R_SETL_NAME": "יגור",
+   "R_SETL_CODE": 96
+ },
+ {
+   "R_SETL_NAME": "יגל",
+   "R_SETL_CODE": 798
+ },
+ {
+   "R_SETL_NAME": "יד השמונה",
+   "R_SETL_CODE": 1134
+ },
+ {
+   "R_SETL_NAME": "יד חנה",
+   "R_SETL_CODE": 758
+ },
+ {
+   "R_SETL_NAME": "יד מרדכי",
+   "R_SETL_CODE": 358
+ },
+ {
+   "R_SETL_NAME": "יד נתן",
+   "R_SETL_CODE": 775
+ },
+ {
+   "R_SETL_NAME": "יד רמב\"ם",
+   "R_SETL_CODE": 64
+ },
+ {
+   "R_SETL_NAME": "יהוד",
+   "R_SETL_CODE": 9400
+ },
+ {
+   "R_SETL_NAME": "יהל",
+   "R_SETL_CODE": 1158
+ },
+ {
+   "R_SETL_NAME": "יובל",
+   "R_SETL_CODE": 2009
+ },
+ {
+   "R_SETL_NAME": "יובלים",
+   "R_SETL_CODE": 1226
+ },
+ {
+   "R_SETL_NAME": "יודפת",
+   "R_SETL_CODE": 1112
+ },
+ {
+   "R_SETL_NAME": "יונתן",
+   "R_SETL_CODE": 4007
+ },
+ {
+   "R_SETL_NAME": "יושיביה",
+   "R_SETL_CODE": 803
+ },
+ {
+   "R_SETL_NAME": "יזרעאל",
+   "R_SETL_CODE": 452
+ },
+ {
+   "R_SETL_NAME": "יחיעם",
+   "R_SETL_CODE": 409
+ },
+ {
+   "R_SETL_NAME": "יטבתה",
+   "R_SETL_CODE": 866
+ },
+ {
+   "R_SETL_NAME": "ייט\"ב",
+   "R_SETL_CODE": 3607
+ },
+ {
+   "R_SETL_NAME": "יכיני",
+   "R_SETL_CODE": 811
+ },
+ {
+   "R_SETL_NAME": "ינוב",
+   "R_SETL_CODE": 753
+ },
+ {
+   "R_SETL_NAME": "ינון",
+   "R_SETL_CODE": 2011
+ },
+ {
+   "R_SETL_NAME": "יסוד המעלה",
+   "R_SETL_CODE": 29
+ },
+ {
+   "R_SETL_NAME": "יעד",
+   "R_SETL_CODE": 1138
+ },
+ {
+   "R_SETL_NAME": "יעל",
+   "R_SETL_CODE": 1117
+ },
+ {
+   "R_SETL_NAME": "יעף",
+   "R_SETL_CODE": 1044
+ },
+ {
+   "R_SETL_NAME": "יערה",
+   "R_SETL_CODE": 795
+ },
+ {
+   "R_SETL_NAME": "יפית",
+   "R_SETL_CODE": 3566
+ },
+ {
+   "R_SETL_NAME": "יפעת",
+   "R_SETL_CODE": 134
+ },
+ {
+   "R_SETL_NAME": "יפתח",
+   "R_SETL_CODE": 453
+ },
+ {
+   "R_SETL_NAME": "יצהר",
+   "R_SETL_CODE": 3749
+ },
+ {
+   "R_SETL_NAME": "יציץ",
+   "R_SETL_CODE": 759
+ },
+ {
+   "R_SETL_NAME": "יקום",
+   "R_SETL_CODE": 417
+ },
+ {
+   "R_SETL_NAME": "יקנעם עילית",
+   "R_SETL_CODE": 240
+ },
+ {
+   "R_SETL_NAME": "יראון",
+   "R_SETL_CODE": 623
+ },
+ {
+   "R_SETL_NAME": "ירדנה",
+   "R_SETL_CODE": 2026
+ },
+ {
+   "R_SETL_NAME": "ירוחם",
+   "R_SETL_CODE": 831
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירושלים",
+   "R_SETL_CODE": 3000
+ },
+ {
+   "R_SETL_NAME": "ירחיב",
+   "R_SETL_CODE": 718
+ },
+ {
+   "R_SETL_NAME": "ירכא",
+   "R_SETL_CODE": 502
+ },
+ {
+   "R_SETL_NAME": "ירקונה",
+   "R_SETL_CODE": 183
+ },
+ {
+   "R_SETL_NAME": "ישע",
+   "R_SETL_CODE": 916
+ },
+ {
+   "R_SETL_NAME": "ישעי",
+   "R_SETL_CODE": 805
+ },
+ {
+   "R_SETL_NAME": "ישרש",
+   "R_SETL_CODE": 828
+ },
+ {
+   "R_SETL_NAME": "יתד",
+   "R_SETL_CODE": 1227
+ },
+ {
+   "R_SETL_NAME": "כאבול",
+   "R_SETL_CODE": 504
+ },
+ {
+   "R_SETL_NAME": "כאוכב אבו אל-היג'א",
+   "R_SETL_CODE": 505
+ },
+ {
+   "R_SETL_NAME": "כברי",
+   "R_SETL_CODE": 576
+ },
+ {
+   "R_SETL_NAME": "כדורי",
+   "R_SETL_CODE": 371
+ },
+ {
+   "R_SETL_NAME": "כדיתה",
+   "R_SETL_CODE": 1338
+ },
+ {
+   "R_SETL_NAME": "כוכב השחר",
+   "R_SETL_CODE": 3564
+ },
+ {
+   "R_SETL_NAME": "כוכב מיכאל",
+   "R_SETL_CODE": 824
+ },
+ {
+   "R_SETL_NAME": "כורזים",
+   "R_SETL_CODE": 1252
+ },
+ {
+   "R_SETL_NAME": "כחל",
+   "R_SETL_CODE": 1210
+ },
+ {
+   "R_SETL_NAME": "כחלה",
+   "R_SETL_CODE": 1367
+ },
+ {
+   "R_SETL_NAME": "כיסופים",
+   "R_SETL_CODE": 840
+ },
+ {
+   "R_SETL_NAME": "כישור",
+   "R_SETL_CODE": 1153
+ },
+ {
+   "R_SETL_NAME": "כליל",
+   "R_SETL_CODE": 1183
+ },
+ {
+   "R_SETL_NAME": "כלנית",
+   "R_SETL_CODE": 1229
+ },
+ {
+   "R_SETL_NAME": "כמהין",
+   "R_SETL_CODE": 1291
+ },
+ {
+   "R_SETL_NAME": "כמון",
+   "R_SETL_CODE": 1201
+ },
+ {
+   "R_SETL_NAME": "כנות",
+   "R_SETL_CODE": 2006
+ },
+ {
+   "R_SETL_NAME": "כנף",
+   "R_SETL_CODE": 4028
+ },
+ {
+   "R_SETL_NAME": "כסיפה",
+   "R_SETL_CODE": 1059
+ },
+ {
+   "R_SETL_NAME": "כסלון",
+   "R_SETL_CODE": 859
+ },
+ {
+   "R_SETL_NAME": "כפר אביב",
+   "R_SETL_CODE": 857
+ },
+ {
+   "R_SETL_NAME": "כפר אדומים",
+   "R_SETL_CODE": 3638
+ },
+ {
+   "R_SETL_NAME": "כפר אוריה",
+   "R_SETL_CODE": 364
+ },
+ {
+   "R_SETL_NAME": "כפר אחים",
+   "R_SETL_CODE": 690
+ },
+ {
+   "R_SETL_NAME": "כפר ביאליק",
+   "R_SETL_CODE": 220
+ },
+ {
+   "R_SETL_NAME": "כפר ביל\"ו",
+   "R_SETL_CODE": 177
+ },
+ {
+   "R_SETL_NAME": "כפר בלום",
+   "R_SETL_CODE": 357
+ },
+ {
+   "R_SETL_NAME": "כפר בן נון",
+   "R_SETL_CODE": 2010
+ },
+ {
+   "R_SETL_NAME": "כפר ברוך",
+   "R_SETL_CODE": 132
+ },
+ {
+   "R_SETL_NAME": "כפר גדעון",
+   "R_SETL_CODE": 106
+ },
+ {
+   "R_SETL_NAME": "כפר גלים",
+   "R_SETL_CODE": 427
+ },
+ {
+   "R_SETL_NAME": "כפר גליקסון",
+   "R_SETL_CODE": 310
+ },
+ {
+   "R_SETL_NAME": "כפר גלעדי",
+   "R_SETL_CODE": 76
+ },
+ {
+   "R_SETL_NAME": "כפר דניאל",
+   "R_SETL_CODE": 707
+ },
+ {
+   "R_SETL_NAME": "כפר האורנים",
+   "R_SETL_CODE": 3796
+ },
+ {
+   "R_SETL_NAME": "כפר החורש",
+   "R_SETL_CODE": 192
+ },
+ {
+   "R_SETL_NAME": "כפר המכבי",
+   "R_SETL_CODE": 254
+ },
+ {
+   "R_SETL_NAME": "כפר הנגיד",
+   "R_SETL_CODE": 582
+ },
+ {
+   "R_SETL_NAME": "כפר הנוער הדתי",
+   "R_SETL_CODE": 890
+ },
+ {
+   "R_SETL_NAME": "כפר הנשיא",
+   "R_SETL_CODE": 443
+ },
+ {
+   "R_SETL_NAME": "כפר הס",
+   "R_SETL_CODE": 187
+ },
+ {
+   "R_SETL_NAME": "כפר הרא\"ה",
+   "R_SETL_CODE": 217
+ },
+ {
+   "R_SETL_NAME": "כפר הרי\"ף",
+   "R_SETL_CODE": 888
+ },
+ {
+   "R_SETL_NAME": "כפר ויתקין",
+   "R_SETL_CODE": 190
+ },
+ {
+   "R_SETL_NAME": "כפר ורבורג",
+   "R_SETL_CODE": 320
+ },
+ {
+   "R_SETL_NAME": "כפר ורדים",
+   "R_SETL_CODE": 1263
+ },
+ {
+   "R_SETL_NAME": "כפר זוהרים",
+   "R_SETL_CODE": 1325
+ },
+ {
+   "R_SETL_NAME": "כפר זיתים",
+   "R_SETL_CODE": 786
+ },
+ {
+   "R_SETL_NAME": "כפר חושן",
+   "R_SETL_CODE": 609
+ },
+ {
+   "R_SETL_NAME": "כפר חיטים",
+   "R_SETL_CODE": 255
+ },
+ {
+   "R_SETL_NAME": "כפר חיים",
+   "R_SETL_CODE": 193
+ },
+ {
+   "R_SETL_NAME": "כפר חנניה",
+   "R_SETL_CODE": 1297
+ },
+ {
+   "R_SETL_NAME": "כפר חסידים ב'",
+   "R_SETL_CODE": 889
+ },
+ {
+   "R_SETL_NAME": "כפר חרוב",
+   "R_SETL_CODE": 4004
+ },
+ {
+   "R_SETL_NAME": "כפר טרומן",
+   "R_SETL_CODE": 673
+ },
+ {
+   "R_SETL_NAME": "כפר יאסיף",
+   "R_SETL_CODE": 507
+ },
+ {
+   "R_SETL_NAME": "כפר ידידיה",
+   "R_SETL_CODE": 233
+ },
+ {
+   "R_SETL_NAME": "כפר יהושע",
+   "R_SETL_CODE": 140
+ },
+ {
+   "R_SETL_NAME": "כפר יונה",
+   "R_SETL_CODE": 168
+ },
+ {
+   "R_SETL_NAME": "כפר יחזקאל",
+   "R_SETL_CODE": 85
+ },
+ {
+   "R_SETL_NAME": "כפר יעבץ",
+   "R_SETL_CODE": 170
+ },
+ {
+   "R_SETL_NAME": "כפר כמא",
+   "R_SETL_CODE": 508
+ },
+ {
+   "R_SETL_NAME": "כפר מונש",
+   "R_SETL_CODE": 387
+ },
+ {
+   "R_SETL_NAME": "כפר מימון",
+   "R_SETL_CODE": 1095
+ },
+ {
+   "R_SETL_NAME": "כפר מל\"ל",
+   "R_SETL_CODE": 98
+ },
+ {
+   "R_SETL_NAME": "כפר מנחם",
+   "R_SETL_CODE": 274
+ },
+ {
+   "R_SETL_NAME": "כפר מסריק",
+   "R_SETL_CODE": 297
+ },
+ {
+   "R_SETL_NAME": "כפר מצר",
+   "R_SETL_CODE": 512
+ },
+ {
+   "R_SETL_NAME": "כפר מרדכי",
+   "R_SETL_CODE": 764
+ },
+ {
+   "R_SETL_NAME": "כפר נטר",
+   "R_SETL_CODE": 316
+ },
+ {
+   "R_SETL_NAME": "כפר סאלד",
+   "R_SETL_CODE": 345
+ },
+ {
+   "R_SETL_NAME": "כפר סבא",
+   "R_SETL_CODE": 6900
+ },
+ {
+   "R_SETL_NAME": "כפר סילבר",
+   "R_SETL_CODE": 107
+ },
+ {
+   "R_SETL_NAME": "כפר סירקין",
+   "R_SETL_CODE": 249
+ },
+ {
+   "R_SETL_NAME": "כפר עציון",
+   "R_SETL_CODE": 3488
+ },
+ {
+   "R_SETL_NAME": "כפר פינס",
+   "R_SETL_CODE": 189
+ },
+ {
+   "R_SETL_NAME": "כפר ראש הנקרה",
+   "R_SETL_CODE": 579
+ },
+ {
+   "R_SETL_NAME": "כפר רופין",
+   "R_SETL_CODE": 295
+ },
+ {
+   "R_SETL_NAME": "כפר רות",
+   "R_SETL_CODE": 1166
+ },
+ {
+   "R_SETL_NAME": "כפר שמאי",
+   "R_SETL_CODE": 605
+ },
+ {
+   "R_SETL_NAME": "כפר שמואל",
+   "R_SETL_CODE": 743
+ },
+ {
+   "R_SETL_NAME": "כפר שמריהו",
+   "R_SETL_CODE": 267
+ },
+ {
+   "R_SETL_NAME": "כפר תבור",
+   "R_SETL_CODE": 47
+ },
+ {
+   "R_SETL_NAME": "כפר תפוח",
+   "R_SETL_CODE": 3572
+ },
+ {
+   "R_SETL_NAME": "כרכום",
+   "R_SETL_CODE": 1285
+ },
+ {
+   "R_SETL_NAME": "כרם בן זמרה",
+   "R_SETL_CODE": 664
+ },
+ {
+   "R_SETL_NAME": "כרם בן שמן",
+   "R_SETL_CODE": 88
+ },
+ {
+   "R_SETL_NAME": "כרם מהר\"ל",
+   "R_SETL_CODE": 580
+ },
+ {
+   "R_SETL_NAME": "כרם שלום",
+   "R_SETL_CODE": 1085
+ },
+ {
+   "R_SETL_NAME": "כרמי יוסף",
+   "R_SETL_CODE": 1264
+ },
+ {
+   "R_SETL_NAME": "כרמי צור",
+   "R_SETL_CODE": 3766
+ },
+ {
+   "R_SETL_NAME": "כרמיאל",
+   "R_SETL_CODE": 1139
+ },
+ {
+   "R_SETL_NAME": "כרמיה",
+   "R_SETL_CODE": 768
+ },
+ {
+   "R_SETL_NAME": "כרמים",
+   "R_SETL_CODE": 1198
+ },
+ {
+   "R_SETL_NAME": "כרמל",
+   "R_SETL_CODE": 3498
+ },
+ {
+   "R_SETL_NAME": "לביא",
+   "R_SETL_CODE": 585
+ },
+ {
+   "R_SETL_NAME": "לבנים",
+   "R_SETL_CODE": 1230
+ },
+ {
+   "R_SETL_NAME": "להב",
+   "R_SETL_CODE": 2023
+ },
+ {
+   "R_SETL_NAME": "להבות הבשן",
+   "R_SETL_CODE": 380
+ },
+ {
+   "R_SETL_NAME": "להבות חביבה",
+   "R_SETL_CODE": 715
+ },
+ {
+   "R_SETL_NAME": "להבים",
+   "R_SETL_CODE": 1271
+ },
+ {
+   "R_SETL_NAME": "לוד",
+   "R_SETL_CODE": 7000
+ },
+ {
+   "R_SETL_NAME": "לוזית",
+   "R_SETL_CODE": 52
+ },
+ {
+   "R_SETL_NAME": "לוחמי הגיטאות",
+   "R_SETL_CODE": 595
+ },
+ {
+   "R_SETL_NAME": "לוטם",
+   "R_SETL_CODE": 1171
+ },
+ {
+   "R_SETL_NAME": "לוטן",
+   "R_SETL_CODE": 1255
+ },
+ {
+   "R_SETL_NAME": "לימן",
+   "R_SETL_CODE": 674
+ },
+ {
+   "R_SETL_NAME": "לכיש",
+   "R_SETL_CODE": 24
+ },
+ {
+   "R_SETL_NAME": "לפיד",
+   "R_SETL_CODE": 1310
+ },
+ {
+   "R_SETL_NAME": "לפידות",
+   "R_SETL_CODE": 1173
+ },
+ {
+   "R_SETL_NAME": "מאור",
+   "R_SETL_CODE": 2055
+ },
+ {
+   "R_SETL_NAME": "מאיר שפיה",
+   "R_SETL_CODE": 102
+ },
+ {
+   "R_SETL_NAME": "מבוא ביתר",
+   "R_SETL_CODE": 771
+ },
+ {
+   "R_SETL_NAME": "מבוא דותן",
+   "R_SETL_CODE": 3569
+ },
+ {
+   "R_SETL_NAME": "מבוא חורון",
+   "R_SETL_CODE": 3709
+ },
+ {
+   "R_SETL_NAME": "מבוא חמה",
+   "R_SETL_CODE": 4204
+ },
+ {
+   "R_SETL_NAME": "מבוא מודיעים",
+   "R_SETL_CODE": 1141
+ },
+ {
+   "R_SETL_NAME": "מבואות ים",
+   "R_SETL_CODE": 1318
+ },
+ {
+   "R_SETL_NAME": "מבועים",
+   "R_SETL_CODE": 1080
+ },
+ {
+   "R_SETL_NAME": "מבטחים",
+   "R_SETL_CODE": 829
+ },
+ {
+   "R_SETL_NAME": "מבקיעים",
+   "R_SETL_CODE": 573
+ },
+ {
+   "R_SETL_NAME": "מבשרת ציון",
+   "R_SETL_CODE": 1015
+ },
+ {
+   "R_SETL_NAME": "מג'דל שמס",
+   "R_SETL_CODE": 4201
+ },
+ {
+   "R_SETL_NAME": "מגדים",
+   "R_SETL_CODE": 689
+ },
+ {
+   "R_SETL_NAME": "מגדל",
+   "R_SETL_CODE": 65
+ },
+ {
+   "R_SETL_NAME": "מגדל עוז",
+   "R_SETL_CODE": 3561
+ },
+ {
+   "R_SETL_NAME": "מגדלים",
+   "R_SETL_CODE": 3751
+ },
+ {
+   "R_SETL_NAME": "מגידו",
+   "R_SETL_CODE": 586
+ },
+ {
+   "R_SETL_NAME": "מגן",
+   "R_SETL_CODE": 695
+ },
+ {
+   "R_SETL_NAME": "מגן שאול",
+   "R_SETL_CODE": 1155
+ },
+ {
+   "R_SETL_NAME": "מגשימים",
+   "R_SETL_CODE": 722
+ },
+ {
+   "R_SETL_NAME": "מדרך עוז",
+   "R_SETL_CODE": 2029
+ },
+ {
+   "R_SETL_NAME": "מדרשת בן גוריון",
+   "R_SETL_CODE": 1140
+ },
+ {
+   "R_SETL_NAME": "מדרשת רופין",
+   "R_SETL_CODE": 897
+ },
+ {
+   "R_SETL_NAME": "מודיעין-מכבים-רעות",
+   "R_SETL_CODE": 1200
+ },
+ {
+   "R_SETL_NAME": "מולדה",
+   "R_SETL_CODE": 1360
+ },
+ {
+   "R_SETL_NAME": "מולדת",
+   "R_SETL_CODE": 269
+ },
+ {
+   "R_SETL_NAME": "מוצא עילית",
+   "R_SETL_CODE": 208
+ },
+ {
+   "R_SETL_NAME": "מורן",
+   "R_SETL_CODE": 1163
+ },
+ {
+   "R_SETL_NAME": "מורשת",
+   "R_SETL_CODE": 1178
+ },
+ {
+   "R_SETL_NAME": "מזור",
+   "R_SETL_CODE": 606
+ },
+ {
+   "R_SETL_NAME": "מזכרת בתיה",
+   "R_SETL_CODE": 28
+ },
+ {
+   "R_SETL_NAME": "מזרע",
+   "R_SETL_CODE": 104
+ },
+ {
+   "R_SETL_NAME": "מזרעה",
+   "R_SETL_CODE": 517
+ },
+ {
+   "R_SETL_NAME": "מחולה",
+   "R_SETL_CODE": 3599
+ },
+ {
+   "R_SETL_NAME": "מחסיה",
+   "R_SETL_CODE": 776
+ },
+ {
+   "R_SETL_NAME": "מטולה",
+   "R_SETL_CODE": 43
+ },
+ {
+   "R_SETL_NAME": "מטע",
+   "R_SETL_CODE": 822
+ },
+ {
+   "R_SETL_NAME": "מי עמי",
+   "R_SETL_CODE": 1128
+ },
+ {
+   "R_SETL_NAME": "מיטב",
+   "R_SETL_CODE": 2054
+ },
+ {
+   "R_SETL_NAME": "מיצר",
+   "R_SETL_CODE": 4019
+ },
+ {
+   "R_SETL_NAME": "מירב",
+   "R_SETL_CODE": 1282
+ },
+ {
+   "R_SETL_NAME": "מירון",
+   "R_SETL_CODE": 607
+ },
+ {
+   "R_SETL_NAME": "מיתר",
+   "R_SETL_CODE": 1268
+ },
+ {
+   "R_SETL_NAME": "מכורה",
+   "R_SETL_CODE": 3614
+ },
+ {
+   "R_SETL_NAME": "מכחול",
+   "R_SETL_CODE": 1343
+ },
+ {
+   "R_SETL_NAME": "מכמורת",
+   "R_SETL_CODE": 382
+ },
+ {
+   "R_SETL_NAME": "מכמנים",
+   "R_SETL_CODE": 1202
+ },
+ {
+   "R_SETL_NAME": "מלאה",
+   "R_SETL_CODE": 164
+ },
+ {
+   "R_SETL_NAME": "מלילות",
+   "R_SETL_CODE": 2044
+ },
+ {
+   "R_SETL_NAME": "מלכיה",
+   "R_SETL_CODE": 596
+ },
+ {
+   "R_SETL_NAME": "מלכישוע",
+   "R_SETL_CODE": 1154
+ },
+ {
+   "R_SETL_NAME": "מנוף",
+   "R_SETL_CODE": 1174
+ },
+ {
+   "R_SETL_NAME": "מנות",
+   "R_SETL_CODE": 1205
+ },
+ {
+   "R_SETL_NAME": "מנרה",
+   "R_SETL_CODE": 347
+ },
+ {
+   "R_SETL_NAME": "מסד",
+   "R_SETL_CODE": 1258
+ },
+ {
+   "R_SETL_NAME": "מסדה",
+   "R_SETL_CODE": 263
+ },
+ {
+   "R_SETL_NAME": "מסילות",
+   "R_SETL_CODE": 298
+ },
+ {
+   "R_SETL_NAME": "מסילת ציון",
+   "R_SETL_CODE": 742
+ },
+ {
+   "R_SETL_NAME": "מסלול",
+   "R_SETL_CODE": 748
+ },
+ {
+   "R_SETL_NAME": "מסעדה",
+   "R_SETL_CODE": 4203
+ },
+ {
+   "R_SETL_NAME": "מעברות",
+   "R_SETL_CODE": 197
+ },
+ {
+   "R_SETL_NAME": "מעגן מיכאל",
+   "R_SETL_CODE": 694
+ },
+ {
+   "R_SETL_NAME": "מעוז חיים",
+   "R_SETL_CODE": 272
+ },
+ {
+   "R_SETL_NAME": "מעון",
+   "R_SETL_CODE": 3657
+ },
+ {
+   "R_SETL_NAME": "מעונה",
+   "R_SETL_CODE": 570
+ },
+ {
+   "R_SETL_NAME": "מעין ברוך",
+   "R_SETL_CODE": 416
+ },
+ {
+   "R_SETL_NAME": "מעין צבי",
+   "R_SETL_CODE": 290
+ },
+ {
+   "R_SETL_NAME": "מעלה אדומים",
+   "R_SETL_CODE": 3616
+ },
+ {
+   "R_SETL_NAME": "מעלה אפרים",
+   "R_SETL_CODE": 3608
+ },
+ {
+   "R_SETL_NAME": "מעלה גלבוע",
+   "R_SETL_CODE": 1127
+ },
+ {
+   "R_SETL_NAME": "מעלה גמלא",
+   "R_SETL_CODE": 4008
+ },
+ {
+   "R_SETL_NAME": "מעלה החמישה",
+   "R_SETL_CODE": 286
+ },
+ {
+   "R_SETL_NAME": "מעלה לבונה",
+   "R_SETL_CODE": 3752
+ },
+ {
+   "R_SETL_NAME": "מעלה עמוס",
+   "R_SETL_CODE": 3653
+ },
+ {
+   "R_SETL_NAME": "מעלה שומרון",
+   "R_SETL_CODE": 3637
+ },
+ {
+   "R_SETL_NAME": "מעלות-תרשיחא",
+   "R_SETL_CODE": 1063
+ },
+ {
+   "R_SETL_NAME": "מענית",
+   "R_SETL_CODE": 344
+ },
+ {
+   "R_SETL_NAME": "מעש",
+   "R_SETL_CODE": 230
+ },
+ {
+   "R_SETL_NAME": "מפלסים",
+   "R_SETL_CODE": 668
+ },
+ {
+   "R_SETL_NAME": "מצדות יהודה",
+   "R_SETL_CODE": 3745
+ },
+ {
+   "R_SETL_NAME": "מצליח",
+   "R_SETL_CODE": 757
+ },
+ {
+   "R_SETL_NAME": "מצפה",
+   "R_SETL_CODE": 58
+ },
+ {
+   "R_SETL_NAME": "מצפה אילן",
+   "R_SETL_CODE": 1370
+ },
+ {
+   "R_SETL_NAME": "מצפה יריחו",
+   "R_SETL_CODE": 3576
+ },
+ {
+   "R_SETL_NAME": "מצפה נטופה",
+   "R_SETL_CODE": 1190
+ },
+ {
+   "R_SETL_NAME": "מצפה רמון",
+   "R_SETL_CODE": 99
+ },
+ {
+   "R_SETL_NAME": "מצפה שלם",
+   "R_SETL_CODE": 3610
+ },
+ {
+   "R_SETL_NAME": "מצר",
+   "R_SETL_CODE": 648
+ },
+ {
+   "R_SETL_NAME": "מרגליות",
+   "R_SETL_CODE": 843
+ },
+ {
+   "R_SETL_NAME": "מרחב עם",
+   "R_SETL_CODE": 1340
+ },
+ {
+   "R_SETL_NAME": "מרכז שפירא",
+   "R_SETL_CODE": 1098
+ },
+ {
+   "R_SETL_NAME": "משאבי שדה",
+   "R_SETL_CODE": 421
+ },
+ {
+   "R_SETL_NAME": "משגב עם",
+   "R_SETL_CODE": 378
+ },
+ {
+   "R_SETL_NAME": "משואה",
+   "R_SETL_CODE": 3605
+ },
+ {
+   "R_SETL_NAME": "משואות יצחק",
+   "R_SETL_CODE": 620
+ },
+ {
+   "R_SETL_NAME": "משכיות",
+   "R_SETL_CODE": 3785
+ },
+ {
+   "R_SETL_NAME": "משמר איילון",
+   "R_SETL_CODE": 670
+ },
+ {
+   "R_SETL_NAME": "משמר דוד",
+   "R_SETL_CODE": 563
+ },
+ {
+   "R_SETL_NAME": "משמר הנגב",
+   "R_SETL_CODE": 395
+ },
+ {
+   "R_SETL_NAME": "משמר העמק",
+   "R_SETL_CODE": 130
+ },
+ {
+   "R_SETL_NAME": "משמר השבעה",
+   "R_SETL_CODE": 729
+ },
+ {
+   "R_SETL_NAME": "משמר השרון",
+   "R_SETL_CODE": 194
+ },
+ {
+   "R_SETL_NAME": "משמרות",
+   "R_SETL_CODE": 213
+ },
+ {
+   "R_SETL_NAME": "משמרת",
+   "R_SETL_CODE": 425
+ },
+ {
+   "R_SETL_NAME": "משען",
+   "R_SETL_CODE": 791
+ },
+ {
+   "R_SETL_NAME": "מתן",
+   "R_SETL_CODE": 1315
+ },
+ {
+   "R_SETL_NAME": "מתת",
+   "R_SETL_CODE": 1184
+ },
+ {
+   "R_SETL_NAME": "מתתיהו",
+   "R_SETL_CODE": 3648
+ },
+ {
+   "R_SETL_NAME": "נאות גולן",
+   "R_SETL_CODE": 4551
+ },
+ {
+   "R_SETL_NAME": "נאות הכיכר",
+   "R_SETL_CODE": 1124
+ },
+ {
+   "R_SETL_NAME": "נאות מרדכי",
+   "R_SETL_CODE": 408
+ },
+ {
+   "R_SETL_NAME": "נאות סמדר",
+   "R_SETL_CODE": 1197
+ },
+ {
+   "R_SETL_NAME": "נבטים",
+   "R_SETL_CODE": 396
+ },
+ {
+   "R_SETL_NAME": "נגבה",
+   "R_SETL_CODE": 315
+ },
+ {
+   "R_SETL_NAME": "נגוהות",
+   "R_SETL_CODE": 3724
+ },
+ {
+   "R_SETL_NAME": "נהלל",
+   "R_SETL_CODE": 80
+ },
+ {
+   "R_SETL_NAME": "נוב",
+   "R_SETL_CODE": 4304
+ },
+ {
+   "R_SETL_NAME": "נוגה",
+   "R_SETL_CODE": 55
+ },
+ {
+   "R_SETL_NAME": "נווה",
+   "R_SETL_CODE": 1366
+ },
+ {
+   "R_SETL_NAME": "נווה אור",
+   "R_SETL_CODE": 590
+ },
+ {
+   "R_SETL_NAME": "נווה אטי\"ב",
+   "R_SETL_CODE": 4303
+ },
+ {
+   "R_SETL_NAME": "נווה אילן",
+   "R_SETL_CODE": 405
+ },
+ {
+   "R_SETL_NAME": "נווה איתן",
+   "R_SETL_CODE": 296
+ },
+ {
+   "R_SETL_NAME": "נווה דניאל",
+   "R_SETL_CODE": 3725
+ },
+ {
+   "R_SETL_NAME": "נווה זוהר",
+   "R_SETL_CODE": 1057
+ },
+ {
+   "R_SETL_NAME": "נווה זיו",
+   "R_SETL_CODE": 1314
+ },
+ {
+   "R_SETL_NAME": "נווה חריף",
+   "R_SETL_CODE": 1279
+ },
+ {
+   "R_SETL_NAME": "נווה ים",
+   "R_SETL_CODE": 312
+ },
+ {
+   "R_SETL_NAME": "נווה ימין",
+   "R_SETL_CODE": 686
+ },
+ {
+   "R_SETL_NAME": "נווה ירק",
+   "R_SETL_CODE": 858
+ },
+ {
+   "R_SETL_NAME": "נווה מבטח",
+   "R_SETL_CODE": 827
+ },
+ {
+   "R_SETL_NAME": "נווה מיכאל",
+   "R_SETL_CODE": 1071
+ },
+ {
+   "R_SETL_NAME": "נווה שלום",
+   "R_SETL_CODE": 1259
+ },
+ {
+   "R_SETL_NAME": "נועם",
+   "R_SETL_CODE": 15
+ },
+ {
+   "R_SETL_NAME": "נוף איילון",
+   "R_SETL_CODE": 1333
+ },
+ {
+   "R_SETL_NAME": "נוף הגליל",
+   "R_SETL_CODE": 1061
+ },
+ {
+   "R_SETL_NAME": "נופים",
+   "R_SETL_CODE": 3790
+ },
+ {
+   "R_SETL_NAME": "נופית",
+   "R_SETL_CODE": 1284
+ },
+ {
+   "R_SETL_NAME": "נוקדים",
+   "R_SETL_CODE": 3726
+ },
+ {
+   "R_SETL_NAME": "נורדיה",
+   "R_SETL_CODE": 447
+ },
+ {
+   "R_SETL_NAME": "נורית",
+   "R_SETL_CODE": 833
+ },
+ {
+   "R_SETL_NAME": "נחושה",
+   "R_SETL_CODE": 59
+ },
+ {
+   "R_SETL_NAME": "נחל עוז",
+   "R_SETL_CODE": 844
+ },
+ {
+   "R_SETL_NAME": "נחלה",
+   "R_SETL_CODE": 2045
+ },
+ {
+   "R_SETL_NAME": "נחליאל",
+   "R_SETL_CODE": 3767
+ },
+ {
+   "R_SETL_NAME": "נחלים",
+   "R_SETL_CODE": 449
+ },
+ {
+   "R_SETL_NAME": "נחם",
+   "R_SETL_CODE": 809
+ },
+ {
+   "R_SETL_NAME": "נחף",
+   "R_SETL_CODE": 522
+ },
+ {
+   "R_SETL_NAME": "נחשולים",
+   "R_SETL_CODE": 433
+ },
+ {
+   "R_SETL_NAME": "נחשון",
+   "R_SETL_CODE": 777
+ },
+ {
+   "R_SETL_NAME": "נחשונים",
+   "R_SETL_CODE": 705
+ },
+ {
+   "R_SETL_NAME": "נטועה",
+   "R_SETL_CODE": 1147
+ },
+ {
+   "R_SETL_NAME": "נטור",
+   "R_SETL_CODE": 4014
+ },
+ {
+   "R_SETL_NAME": "נטע",
+   "R_SETL_CODE": 1369
+ },
+ {
+   "R_SETL_NAME": "נטעים",
+   "R_SETL_CODE": 174
+ },
+ {
+   "R_SETL_NAME": "נטף",
+   "R_SETL_CODE": 1254
+ },
+ {
+   "R_SETL_NAME": "ניין",
+   "R_SETL_CODE": 523
+ },
+ {
+   "R_SETL_NAME": "ניצן",
+   "R_SETL_CODE": 351
+ },
+ {
+   "R_SETL_NAME": "ניצן ב'",
+   "R_SETL_CODE": 1419
+ },
+ {
+   "R_SETL_NAME": "ניצני סיני",
+   "R_SETL_CODE": 1280
+ },
+ {
+   "R_SETL_NAME": "ניצני עוז",
+   "R_SETL_CODE": 851
+ },
+ {
+   "R_SETL_NAME": "ניצנים",
+   "R_SETL_CODE": 359
+ },
+ {
+   "R_SETL_NAME": "ניר אליהו",
+   "R_SETL_CODE": 808
+ },
+ {
+   "R_SETL_NAME": "ניר גלים",
+   "R_SETL_CODE": 720
+ },
+ {
+   "R_SETL_NAME": "ניר ח\"ן",
+   "R_SETL_CODE": 11
+ },
+ {
+   "R_SETL_NAME": "ניר יפה",
+   "R_SETL_CODE": 165
+ },
+ {
+   "R_SETL_NAME": "ניר יצחק",
+   "R_SETL_CODE": 402
+ },
+ {
+   "R_SETL_NAME": "ניר ישראל",
+   "R_SETL_CODE": 699
+ },
+ {
+   "R_SETL_NAME": "ניר משה",
+   "R_SETL_CODE": 2047
+ },
+ {
+   "R_SETL_NAME": "ניר עוז",
+   "R_SETL_CODE": 69
+ },
+ {
+   "R_SETL_NAME": "ניר עם",
+   "R_SETL_CODE": 348
+ },
+ {
+   "R_SETL_NAME": "ניר עציון",
+   "R_SETL_CODE": 769
+ },
+ {
+   "R_SETL_NAME": "ניר צבי",
+   "R_SETL_CODE": 331
+ },
+ {
+   "R_SETL_NAME": "נירים",
+   "R_SETL_CODE": 602
+ },
+ {
+   "R_SETL_NAME": "נירית",
+   "R_SETL_CODE": 1236
+ },
+ {
+   "R_SETL_NAME": "נירן",
+   "R_SETL_CODE": 3620
+ },
+ {
+   "R_SETL_NAME": "נס הרים",
+   "R_SETL_CODE": 825
+ },
+ {
+   "R_SETL_NAME": "נס עמים",
+   "R_SETL_CODE": 1143
+ },
+ {
+   "R_SETL_NAME": "נס ציונה",
+   "R_SETL_CODE": 7200
+ },
+ {
+   "R_SETL_NAME": "נעורים",
+   "R_SETL_CODE": 186
+ },
+ {
+   "R_SETL_NAME": "נעלה",
+   "R_SETL_CODE": 3787
+ },
+ {
+   "R_SETL_NAME": "נעמ\"ה",
+   "R_SETL_CODE": 3713
+ },
+ {
+   "R_SETL_NAME": "נען",
+   "R_SETL_CODE": 158
+ },
+ {
+   "R_SETL_NAME": "נצר חזני",
+   "R_SETL_CODE": 1372
+ },
+ {
+   "R_SETL_NAME": "נצר סרני",
+   "R_SETL_CODE": 435
+ },
+ {
+   "R_SETL_NAME": "נתיב הגדוד",
+   "R_SETL_CODE": 3555
+ },
+ {
+   "R_SETL_NAME": "נתיב הל\"ה",
+   "R_SETL_CODE": 693
+ },
+ {
+   "R_SETL_NAME": "נתיב העשרה",
+   "R_SETL_CODE": 1242
+ },
+ {
+   "R_SETL_NAME": "נתיב השיירה",
+   "R_SETL_CODE": 792
+ },
+ {
+   "R_SETL_NAME": "סאסא",
+   "R_SETL_CODE": 578
+ },
+ {
+   "R_SETL_NAME": "סביון",
+   "R_SETL_CODE": 587
+ },
+ {
+   "R_SETL_NAME": "סגולה",
+   "R_SETL_CODE": 2046
+ },
+ {
+   "R_SETL_NAME": "סולם",
+   "R_SETL_CODE": 526
+ },
+ {
+   "R_SETL_NAME": "סוסיה",
+   "R_SETL_CODE": 3756
+ },
+ {
+   "R_SETL_NAME": "סופה",
+   "R_SETL_CODE": 1238
+ },
+ {
+   "R_SETL_NAME": "סלעית",
+   "R_SETL_CODE": 3567
+ },
+ {
+   "R_SETL_NAME": "סמר",
+   "R_SETL_CODE": 1156
+ },
+ {
+   "R_SETL_NAME": "סנסנה",
+   "R_SETL_CODE": 3777
+ },
+ {
+   "R_SETL_NAME": "סעד",
+   "R_SETL_CODE": 419
+ },
+ {
+   "R_SETL_NAME": "סער",
+   "R_SETL_CODE": 454
+ },
+ {
+   "R_SETL_NAME": "ספיר",
+   "R_SETL_CODE": 1176
+ },
+ {
+   "R_SETL_NAME": "סתריה",
+   "R_SETL_CODE": 610
+ },
+ {
+   "R_SETL_NAME": "ע'ג'ר",
+   "R_SETL_CODE": 4501
+ },
+ {
+   "R_SETL_NAME": "עבדון",
+   "R_SETL_CODE": 892
+ },
+ {
+   "R_SETL_NAME": "עברון",
+   "R_SETL_CODE": 376
+ },
+ {
+   "R_SETL_NAME": "עגור",
+   "R_SETL_CODE": 794
+ },
+ {
+   "R_SETL_NAME": "עדי",
+   "R_SETL_CODE": 1199
+ },
+ {
+   "R_SETL_NAME": "עדנים",
+   "R_SETL_CODE": 2035
+ },
+ {
+   "R_SETL_NAME": "עוזה",
+   "R_SETL_CODE": 826
+ },
+ {
+   "R_SETL_NAME": "עולש",
+   "R_SETL_CODE": 737
+ },
+ {
+   "R_SETL_NAME": "עומר",
+   "R_SETL_CODE": 666
+ },
+ {
+   "R_SETL_NAME": "עזוז",
+   "R_SETL_CODE": 328
+ },
+ {
+   "R_SETL_NAME": "עזר",
+   "R_SETL_CODE": 1149
+ },
+ {
+   "R_SETL_NAME": "עזריאל",
+   "R_SETL_CODE": 837
+ },
+ {
+   "R_SETL_NAME": "עזריה",
+   "R_SETL_CODE": 711
+ },
+ {
+   "R_SETL_NAME": "עזריקם",
+   "R_SETL_CODE": 817
+ },
+ {
+   "R_SETL_NAME": "עטרת",
+   "R_SETL_CODE": 3658
+ },
+ {
+   "R_SETL_NAME": "עידן",
+   "R_SETL_CODE": 1175
+ },
+ {
+   "R_SETL_NAME": "עיילבון",
+   "R_SETL_CODE": 530
+ },
+ {
+   "R_SETL_NAME": "עיינות",
+   "R_SETL_CODE": 156
+ },
+ {
+   "R_SETL_NAME": "עין אל-אסד",
+   "R_SETL_CODE": 546
+ },
+ {
+   "R_SETL_NAME": "עין גב",
+   "R_SETL_CODE": 273
+ },
+ {
+   "R_SETL_NAME": "עין גדי",
+   "R_SETL_CODE": 2042
+ },
+ {
+   "R_SETL_NAME": "עין דור",
+   "R_SETL_CODE": 436
+ },
+ {
+   "R_SETL_NAME": "עין הבשור",
+   "R_SETL_CODE": 1240
+ },
+ {
+   "R_SETL_NAME": "עין הוד",
+   "R_SETL_CODE": 74
+ },
+ {
+   "R_SETL_NAME": "עין החורש",
+   "R_SETL_CODE": 167
+ },
+ {
+   "R_SETL_NAME": "עין המפרץ",
+   "R_SETL_CODE": 289
+ },
+ {
+   "R_SETL_NAME": "עין הנצי\"ב",
+   "R_SETL_CODE": 383
+ },
+ {
+   "R_SETL_NAME": "עין העמק",
+   "R_SETL_CODE": 367
+ },
+ {
+   "R_SETL_NAME": "עין השופט",
+   "R_SETL_CODE": 270
+ },
+ {
+   "R_SETL_NAME": "עין השלושה",
+   "R_SETL_CODE": 676
+ },
+ {
+   "R_SETL_NAME": "עין ורד",
+   "R_SETL_CODE": 157
+ },
+ {
+   "R_SETL_NAME": "עין זיוון",
+   "R_SETL_CODE": 4503
+ },
+ {
+   "R_SETL_NAME": "עין חוד",
+   "R_SETL_CODE": 1320
+ },
+ {
+   "R_SETL_NAME": "עין חצבה",
+   "R_SETL_CODE": 1053
+ },
+ {
+   "R_SETL_NAME": "עין יהב",
+   "R_SETL_CODE": 806
+ },
+ {
+   "R_SETL_NAME": "עין יעקב",
+   "R_SETL_CODE": 813
+ },
+ {
+   "R_SETL_NAME": "עין כרם-בי\"ס חקלאי",
+   "R_SETL_CODE": 1056
+ },
+ {
+   "R_SETL_NAME": "עין כרמל",
+   "R_SETL_CODE": 426
+ },
+ {
+   "R_SETL_NAME": "עין נקובא",
+   "R_SETL_CODE": 521
+ },
+ {
+   "R_SETL_NAME": "עין עירון",
+   "R_SETL_CODE": 223
+ },
+ {
+   "R_SETL_NAME": "עין צורים",
+   "R_SETL_CODE": 622
+ },
+ {
+   "R_SETL_NAME": "עין קנייא",
+   "R_SETL_CODE": 4502
+ },
+ {
+   "R_SETL_NAME": "עין שמר",
+   "R_SETL_CODE": 139
+ },
+ {
+   "R_SETL_NAME": "עין שריד",
+   "R_SETL_CODE": 880
+ },
+ {
+   "R_SETL_NAME": "עין תמר",
+   "R_SETL_CODE": 1251
+ },
+ {
+   "R_SETL_NAME": "עיר אובות",
+   "R_SETL_CODE": 1187
+ },
+ {
+   "R_SETL_NAME": "עלומים",
+   "R_SETL_CODE": 1146
+ },
+ {
+   "R_SETL_NAME": "עלי",
+   "R_SETL_CODE": 3765
+ },
+ {
+   "R_SETL_NAME": "עלי זהב",
+   "R_SETL_CODE": 3727
+ },
+ {
+   "R_SETL_NAME": "עלמה",
+   "R_SETL_CODE": 688
+ },
+ {
+   "R_SETL_NAME": "עלמון",
+   "R_SETL_CODE": 3715
+ },
+ {
+   "R_SETL_NAME": "עמוקה",
+   "R_SETL_CODE": 1212
+ },
+ {
+   "R_SETL_NAME": "עמיחי",
+   "R_SETL_CODE": 3824
+ },
+ {
+   "R_SETL_NAME": "עמיעד",
+   "R_SETL_CODE": 385
+ },
+ {
+   "R_SETL_NAME": "עמיעוז",
+   "R_SETL_CODE": 318
+ },
+ {
+   "R_SETL_NAME": "עמיקם",
+   "R_SETL_CODE": 773
+ },
+ {
+   "R_SETL_NAME": "עמיר",
+   "R_SETL_CODE": 319
+ },
+ {
+   "R_SETL_NAME": "עמקה",
+   "R_SETL_CODE": 708
+ },
+ {
+   "R_SETL_NAME": "עפולה",
+   "R_SETL_CODE": 7700
+ },
+ {
+   "R_SETL_NAME": "עפרה",
+   "R_SETL_CODE": 3617
+ },
+ {
+   "R_SETL_NAME": "עץ אפרים",
+   "R_SETL_CODE": 3778
+ },
+ {
+   "R_SETL_NAME": "עצמון שגב",
+   "R_SETL_CODE": 917
+ },
+ {
+   "R_SETL_NAME": "עראבה",
+   "R_SETL_CODE": 531
+ },
+ {
+   "R_SETL_NAME": "עראמשה",
+   "R_SETL_CODE": 1246
+ },
+ {
+   "R_SETL_NAME": "ערב אל נעים",
+   "R_SETL_CODE": 1335
+ },
+ {
+   "R_SETL_NAME": "ערד",
+   "R_SETL_CODE": 2560
+ },
+ {
+   "R_SETL_NAME": "ערוגות",
+   "R_SETL_CODE": 593
+ },
+ {
+   "R_SETL_NAME": "ערערה-בנגב",
+   "R_SETL_CODE": 1192
+ },
+ {
+   "R_SETL_NAME": "עשרת",
+   "R_SETL_CODE": 591
+ },
+ {
+   "R_SETL_NAME": "עתלית",
+   "R_SETL_CODE": 53
+ },
+ {
+   "R_SETL_NAME": "עתניאל",
+   "R_SETL_CODE": 3748
+ },
+ {
+   "R_SETL_NAME": "פארן",
+   "R_SETL_CODE": 1151
+ },
+ {
+   "R_SETL_NAME": "פדואל",
+   "R_SETL_CODE": 3768
+ },
+ {
+   "R_SETL_NAME": "פדויים",
+   "R_SETL_CODE": 750
+ },
+ {
+   "R_SETL_NAME": "פדיה",
+   "R_SETL_CODE": 838
+ },
+ {
+   "R_SETL_NAME": "פוריה עילית",
+   "R_SETL_CODE": 1313
+ },
+ {
+   "R_SETL_NAME": "פטיש",
+   "R_SETL_CODE": 749
+ },
+ {
+   "R_SETL_NAME": "פלך",
+   "R_SETL_CODE": 1185
+ },
+ {
+   "R_SETL_NAME": "פלמחים",
+   "R_SETL_CODE": 597
+ },
+ {
+   "R_SETL_NAME": "פני חבר",
+   "R_SETL_CODE": 3723
+ },
+ {
+   "R_SETL_NAME": "פסגות",
+   "R_SETL_CODE": 3659
+ },
+ {
+   "R_SETL_NAME": "פסוטה",
+   "R_SETL_CODE": 535
+ },
+ {
+   "R_SETL_NAME": "פעמי תש\"ז",
+   "R_SETL_CODE": 2059
+ },
+ {
+   "R_SETL_NAME": "פצאל",
+   "R_SETL_CODE": 3615
+ },
+ {
+   "R_SETL_NAME": "פקיעין חדשה",
+   "R_SETL_CODE": 281
+ },
+ {
+   "R_SETL_NAME": "פרדס חנה-כרכור",
+   "R_SETL_CODE": 7800
+ },
+ {
+   "R_SETL_NAME": "פרדסיה",
+   "R_SETL_CODE": 171
+ },
+ {
+   "R_SETL_NAME": "פרוד",
+   "R_SETL_CODE": 599
+ },
+ {
+   "R_SETL_NAME": "פרי גן",
+   "R_SETL_CODE": 1231
+ },
+ {
+   "R_SETL_NAME": "צאלים",
+   "R_SETL_CODE": 413
+ },
+ {
+   "R_SETL_NAME": "צביה",
+   "R_SETL_CODE": 1180
+ },
+ {
+   "R_SETL_NAME": "צבעון",
+   "R_SETL_CODE": 1213
+ },
+ {
+   "R_SETL_NAME": "צובה",
+   "R_SETL_CODE": 465
+ },
+ {
+   "R_SETL_NAME": "צוחר",
+   "R_SETL_CODE": 1136
+ },
+ {
+   "R_SETL_NAME": "צופים",
+   "R_SETL_CODE": 3791
+ },
+ {
+   "R_SETL_NAME": "צופית",
+   "R_SETL_CODE": 198
+ },
+ {
+   "R_SETL_NAME": "צופר",
+   "R_SETL_CODE": 1150
+ },
+ {
+   "R_SETL_NAME": "צוקי ים",
+   "R_SETL_CODE": 1102
+ },
+ {
+   "R_SETL_NAME": "צוקים",
+   "R_SETL_CODE": 1262
+ },
+ {
+   "R_SETL_NAME": "צור הדסה",
+   "R_SETL_CODE": 1113
+ },
+ {
+   "R_SETL_NAME": "צור יצחק",
+   "R_SETL_CODE": 1345
+ },
+ {
+   "R_SETL_NAME": "צור נתן",
+   "R_SETL_CODE": 1148
+ },
+ {
+   "R_SETL_NAME": "צוריאל",
+   "R_SETL_CODE": 774
+ },
+ {
+   "R_SETL_NAME": "צורית",
+   "R_SETL_CODE": 1221
+ },
+ {
+   "R_SETL_NAME": "ציפורי",
+   "R_SETL_CODE": 613
+ },
+ {
+   "R_SETL_NAME": "צלפון",
+   "R_SETL_CODE": 796
+ },
+ {
+   "R_SETL_NAME": "צפריה",
+   "R_SETL_CODE": 594
+ },
+ {
+   "R_SETL_NAME": "צפרירים",
+   "R_SETL_CODE": 1079
+ },
+ {
+   "R_SETL_NAME": "צפת",
+   "R_SETL_CODE": 8000
+ },
+ {
+   "R_SETL_NAME": "צרופה",
+   "R_SETL_CODE": 612
+ },
+ {
+   "R_SETL_NAME": "צרעה",
+   "R_SETL_CODE": 567
+ },
+ {
+   "R_SETL_NAME": "קבוצת יבנה",
+   "R_SETL_CODE": 334
+ },
+ {
+   "R_SETL_NAME": "קדומים",
+   "R_SETL_CODE": 3557
+ },
+ {
+   "R_SETL_NAME": "קדימה-צורן",
+   "R_SETL_CODE": 195
+ },
+ {
+   "R_SETL_NAME": "קדמה",
+   "R_SETL_CODE": 392
+ },
+ {
+   "R_SETL_NAME": "קדמת צבי",
+   "R_SETL_CODE": 4025
+ },
+ {
+   "R_SETL_NAME": "קדר",
+   "R_SETL_CODE": 3781
+ },
+ {
+   "R_SETL_NAME": "קדרון",
+   "R_SETL_CODE": 615
+ },
+ {
+   "R_SETL_NAME": "קדרים",
+   "R_SETL_CODE": 1211
+ },
+ {
+   "R_SETL_NAME": "קוממיות",
+   "R_SETL_CODE": 766
+ },
+ {
+   "R_SETL_NAME": "קורנית",
+   "R_SETL_CODE": 1179
+ },
+ {
+   "R_SETL_NAME": "קטורה",
+   "R_SETL_CODE": 1052
+ },
+ {
+   "R_SETL_NAME": "קיסריה",
+   "R_SETL_CODE": 1167
+ },
+ {
+   "R_SETL_NAME": "קלחים",
+   "R_SETL_CODE": 414
+ },
+ {
+   "R_SETL_NAME": "קליה",
+   "R_SETL_CODE": 3601
+ },
+ {
+   "R_SETL_NAME": "קלע",
+   "R_SETL_CODE": 4024
+ },
+ {
+   "R_SETL_NAME": "קציר",
+   "R_SETL_CODE": 1243
+ },
+ {
+   "R_SETL_NAME": "קצר א-סר",
+   "R_SETL_CODE": 1347
+ },
+ {
+   "R_SETL_NAME": "קצרין",
+   "R_SETL_CODE": 4100
+ },
+ {
+   "R_SETL_NAME": "קרית אונו",
+   "R_SETL_CODE": 2620
+ },
+ {
+   "R_SETL_NAME": "קרית ארבע",
+   "R_SETL_CODE": 3611
+ },
+ {
+   "R_SETL_NAME": "קרית אתא",
+   "R_SETL_CODE": 6800
+ },
+ {
+   "R_SETL_NAME": "קרית ביאליק",
+   "R_SETL_CODE": 9500
+ },
+ {
+   "R_SETL_NAME": "קרית גת",
+   "R_SETL_CODE": 2630
+ },
+ {
+   "R_SETL_NAME": "קרית טבעון",
+   "R_SETL_CODE": 2300
+ },
+ {
+   "R_SETL_NAME": "קרית ים",
+   "R_SETL_CODE": 9600
+ },
+ {
+   "R_SETL_NAME": "קרית נטפים",
+   "R_SETL_CODE": 3746
+ },
+ {
+   "R_SETL_NAME": "קרית ענבים",
+   "R_SETL_CODE": 78
+ },
+ {
+   "R_SETL_NAME": "קרית עקרון",
+   "R_SETL_CODE": 469
+ },
+ {
+   "R_SETL_NAME": "קרית שלמה",
+   "R_SETL_CODE": 412
+ },
+ {
+   "R_SETL_NAME": "קרני שומרון",
+   "R_SETL_CODE": 3640
+ },
+ {
+   "R_SETL_NAME": "קשת",
+   "R_SETL_CODE": 4006
+ },
+ {
+   "R_SETL_NAME": "ראס אל-עין",
+   "R_SETL_CODE": 1334
+ },
+ {
+   "R_SETL_NAME": "ראס עלי",
+   "R_SETL_CODE": 990
+ },
+ {
+   "R_SETL_NAME": "ראש העין",
+   "R_SETL_CODE": 2640
+ },
+ {
+   "R_SETL_NAME": "ראש פינה",
+   "R_SETL_CODE": 26
+ },
+ {
+   "R_SETL_NAME": "ראש צורים",
+   "R_SETL_CODE": 3602
+ },
+ {
+   "R_SETL_NAME": "ראשון לציון",
+   "R_SETL_CODE": 8300
+ },
+ {
+   "R_SETL_NAME": "רבבה",
+   "R_SETL_CODE": 3795
+ },
+ {
+   "R_SETL_NAME": "רבדים",
+   "R_SETL_CODE": 564
+ },
+ {
+   "R_SETL_NAME": "רביבים",
+   "R_SETL_CODE": 354
+ },
+ {
+   "R_SETL_NAME": "רביד",
+   "R_SETL_CODE": 1225
+ },
+ {
+   "R_SETL_NAME": "רגבה",
+   "R_SETL_CODE": 390
+ },
+ {
+   "R_SETL_NAME": "רגבים",
+   "R_SETL_CODE": 444
+ },
+ {
+   "R_SETL_NAME": "רוויה",
+   "R_SETL_CODE": 2016
+ },
+ {
+   "R_SETL_NAME": "רוחמה",
+   "R_SETL_CODE": 362
+ },
+ {
+   "R_SETL_NAME": "רומאנה",
+   "R_SETL_CODE": 539
+ },
+ {
+   "R_SETL_NAME": "רומת הייב",
+   "R_SETL_CODE": 997
+ },
+ {
+   "R_SETL_NAME": "רועי",
+   "R_SETL_CODE": 3619
+ },
+ {
+   "R_SETL_NAME": "רותם",
+   "R_SETL_CODE": 3782
+ },
+ {
+   "R_SETL_NAME": "רחוב",
+   "R_SETL_CODE": 854
+ },
+ {
+   "R_SETL_NAME": "רחובות",
+   "R_SETL_CODE": 8400
+ },
+ {
+   "R_SETL_NAME": "ריחאניה",
+   "R_SETL_CODE": 540
+ },
+ {
+   "R_SETL_NAME": "ריחן",
+   "R_SETL_CODE": 3568
+ },
+ {
+   "R_SETL_NAME": "רימונים",
+   "R_SETL_CODE": 3565
+ },
+ {
+   "R_SETL_NAME": "רם-און",
+   "R_SETL_CODE": 1069
+ },
+ {
+   "R_SETL_NAME": "רמות",
+   "R_SETL_CODE": 4702
+ },
+ {
+   "R_SETL_NAME": "רמות השבים",
+   "R_SETL_CODE": 206
+ },
+ {
+   "R_SETL_NAME": "רמות מאיר",
+   "R_SETL_CODE": 735
+ },
+ {
+   "R_SETL_NAME": "רמות מנשה",
+   "R_SETL_CODE": 445
+ },
+ {
+   "R_SETL_NAME": "רמות נפתלי",
+   "R_SETL_CODE": 372
+ },
+ {
+   "R_SETL_NAME": "רמת גן",
+   "R_SETL_CODE": 8600
+ },
+ {
+   "R_SETL_NAME": "רמת דוד",
+   "R_SETL_CODE": 135
+ },
+ {
+   "R_SETL_NAME": "רמת הכובש",
+   "R_SETL_CODE": 184
+ },
+ {
+   "R_SETL_NAME": "רמת השופט",
+   "R_SETL_CODE": 335
+ },
+ {
+   "R_SETL_NAME": "רמת השרון",
+   "R_SETL_CODE": 2650
+ },
+ {
+   "R_SETL_NAME": "רמת ישי",
+   "R_SETL_CODE": 122
+ },
+ {
+   "R_SETL_NAME": "רמת מגשימים",
+   "R_SETL_CODE": 4701
+ },
+ {
+   "R_SETL_NAME": "רמת צבי",
+   "R_SETL_CODE": 339
+ },
+ {
+   "R_SETL_NAME": "רמת רזיאל",
+   "R_SETL_CODE": 460
+ },
+ {
+   "R_SETL_NAME": "רמת רחל",
+   "R_SETL_CODE": 127
+ },
+ {
+   "R_SETL_NAME": "רנן",
+   "R_SETL_CODE": 789
+ },
+ {
+   "R_SETL_NAME": "רעים",
+   "R_SETL_CODE": 713
+ },
+ {
+   "R_SETL_NAME": "רעננה",
+   "R_SETL_CODE": 8700
+ },
+ {
+   "R_SETL_NAME": "רקפת",
+   "R_SETL_CODE": 1228
+ },
+ {
+   "R_SETL_NAME": "רשפון",
+   "R_SETL_CODE": 247
+ },
+ {
+   "R_SETL_NAME": "רשפים",
+   "R_SETL_CODE": 437
+ },
+ {
+   "R_SETL_NAME": "רתמים",
+   "R_SETL_CODE": 1260
+ },
+ {
+   "R_SETL_NAME": "שאר ישוב",
+   "R_SETL_CODE": 324
+ },
+ {
+   "R_SETL_NAME": "שבי דרום",
+   "R_SETL_CODE": 1377
+ },
+ {
+   "R_SETL_NAME": "שבי ציון",
+   "R_SETL_CODE": 282
+ },
+ {
+   "R_SETL_NAME": "שבי שומרון",
+   "R_SETL_CODE": 3571
+ },
+ {
+   "R_SETL_NAME": "שגב-שלום",
+   "R_SETL_CODE": 1286
+ },
+ {
+   "R_SETL_NAME": "שדה אילן",
+   "R_SETL_CODE": 721
+ },
+ {
+   "R_SETL_NAME": "שדה אליהו",
+   "R_SETL_CODE": 304
+ },
+ {
+   "R_SETL_NAME": "שדה אליעזר",
+   "R_SETL_CODE": 861
+ },
+ {
+   "R_SETL_NAME": "שדה בוקר",
+   "R_SETL_CODE": 885
+ },
+ {
+   "R_SETL_NAME": "שדה דוד",
+   "R_SETL_CODE": 36
+ },
+ {
+   "R_SETL_NAME": "שדה ורבורג",
+   "R_SETL_CODE": 284
+ },
+ {
+   "R_SETL_NAME": "שדה יואב",
+   "R_SETL_CODE": 293
+ },
+ {
+   "R_SETL_NAME": "שדה יעקב",
+   "R_SETL_CODE": 142
+ },
+ {
+   "R_SETL_NAME": "שדה יצחק",
+   "R_SETL_CODE": 2008
+ },
+ {
+   "R_SETL_NAME": "שדה משה",
+   "R_SETL_CODE": 18
+ },
+ {
+   "R_SETL_NAME": "שדה נחום",
+   "R_SETL_CODE": 259
+ },
+ {
+   "R_SETL_NAME": "שדה נחמיה",
+   "R_SETL_CODE": 329
+ },
+ {
+   "R_SETL_NAME": "שדה ניצן",
+   "R_SETL_CODE": 1058
+ },
+ {
+   "R_SETL_NAME": "שדה עוזיהו",
+   "R_SETL_CODE": 739
+ },
+ {
+   "R_SETL_NAME": "שדה צבי",
+   "R_SETL_CODE": 2049
+ },
+ {
+   "R_SETL_NAME": "שדות ים",
+   "R_SETL_CODE": 327
+ },
+ {
+   "R_SETL_NAME": "שדות מיכה",
+   "R_SETL_CODE": 27
+ },
+ {
+   "R_SETL_NAME": "שדי אברהם",
+   "R_SETL_CODE": 1223
+ },
+ {
+   "R_SETL_NAME": "שדי חמד",
+   "R_SETL_CODE": 2015
+ },
+ {
+   "R_SETL_NAME": "שדי תרומות",
+   "R_SETL_CODE": 2057
+ },
+ {
+   "R_SETL_NAME": "שדמה",
+   "R_SETL_CODE": 555
+ },
+ {
+   "R_SETL_NAME": "שדמות דבורה",
+   "R_SETL_CODE": 306
+ },
+ {
+   "R_SETL_NAME": "שדמות מחולה",
+   "R_SETL_CODE": 3578
+ },
+ {
+   "R_SETL_NAME": "שדרות",
+   "R_SETL_CODE": 1031
+ },
+ {
+   "R_SETL_NAME": "שואבה",
+   "R_SETL_CODE": 741
+ },
+ {
+   "R_SETL_NAME": "שובה",
+   "R_SETL_CODE": 761
+ },
+ {
+   "R_SETL_NAME": "שובל",
+   "R_SETL_CODE": 394
+ },
+ {
+   "R_SETL_NAME": "שומרה",
+   "R_SETL_CODE": 614
+ },
+ {
+   "R_SETL_NAME": "שומריה",
+   "R_SETL_CODE": 1265
+ },
+ {
+   "R_SETL_NAME": "שוקדה",
+   "R_SETL_CODE": 415
+ },
+ {
+   "R_SETL_NAME": "שורש",
+   "R_SETL_CODE": 456
+ },
+ {
+   "R_SETL_NAME": "שורשים",
+   "R_SETL_CODE": 1235
+ },
+ {
+   "R_SETL_NAME": "שושנת העמקים",
+   "R_SETL_CODE": 224
+ },
+ {
+   "R_SETL_NAME": "שזור",
+   "R_SETL_CODE": 527
+ },
+ {
+   "R_SETL_NAME": "שחר",
+   "R_SETL_CODE": 7
+ },
+ {
+   "R_SETL_NAME": "שחרות",
+   "R_SETL_CODE": 1266
+ },
+ {
+   "R_SETL_NAME": "שיבולים",
+   "R_SETL_CODE": 865
+ },
+ {
+   "R_SETL_NAME": "שילה",
+   "R_SETL_CODE": 3641
+ },
+ {
+   "R_SETL_NAME": "שכניה",
+   "R_SETL_CODE": 1160
+ },
+ {
+   "R_SETL_NAME": "שלווה",
+   "R_SETL_CODE": 873
+ },
+ {
+   "R_SETL_NAME": "שלווה במדבר",
+   "R_SETL_CODE": 1373
+ },
+ {
+   "R_SETL_NAME": "שלוחות",
+   "R_SETL_CODE": 439
+ },
+ {
+   "R_SETL_NAME": "שלומי",
+   "R_SETL_CODE": 812
+ },
+ {
+   "R_SETL_NAME": "שלומית",
+   "R_SETL_CODE": 1364
+ },
+ {
+   "R_SETL_NAME": "שמיר",
+   "R_SETL_CODE": 366
+ },
+ {
+   "R_SETL_NAME": "שמעה",
+   "R_SETL_CODE": 3784
+ },
+ {
+   "R_SETL_NAME": "שמרת",
+   "R_SETL_CODE": 432
+ },
+ {
+   "R_SETL_NAME": "שמשית",
+   "R_SETL_CODE": 1337
+ },
+ {
+   "R_SETL_NAME": "שניר",
+   "R_SETL_CODE": 1132
+ },
+ {
+   "R_SETL_NAME": "שעב",
+   "R_SETL_CODE": 538
+ },
+ {
+   "R_SETL_NAME": "שעל",
+   "R_SETL_CODE": 4009
+ },
+ {
+   "R_SETL_NAME": "שעלבים",
+   "R_SETL_CODE": 856
+ },
+ {
+   "R_SETL_NAME": "שער אפרים",
+   "R_SETL_CODE": 661
+ },
+ {
+   "R_SETL_NAME": "שער הגולן",
+   "R_SETL_CODE": 264
+ },
+ {
+   "R_SETL_NAME": "שער העמקים",
+   "R_SETL_CODE": 237
+ },
+ {
+   "R_SETL_NAME": "שער מנשה",
+   "R_SETL_CODE": 921
+ },
+ {
+   "R_SETL_NAME": "שערי תקווה",
+   "R_SETL_CODE": 3720
+ },
+ {
+   "R_SETL_NAME": "שפיים",
+   "R_SETL_CODE": 232
+ },
+ {
+   "R_SETL_NAME": "שפיר",
+   "R_SETL_CODE": 692
+ },
+ {
+   "R_SETL_NAME": "שפרעם",
+   "R_SETL_CODE": 8800
+ },
+ {
+   "R_SETL_NAME": "שקד",
+   "R_SETL_CODE": 3649
+ },
+ {
+   "R_SETL_NAME": "שקף",
+   "R_SETL_CODE": 1233
+ },
+ {
+   "R_SETL_NAME": "שרונה",
+   "R_SETL_CODE": 292
+ },
+ {
+   "R_SETL_NAME": "שריד",
+   "R_SETL_CODE": 126
+ },
+ {
+   "R_SETL_NAME": "שתולה",
+   "R_SETL_CODE": 1045
+ },
+ {
+   "R_SETL_NAME": "שתולים",
+   "R_SETL_CODE": 763
+ },
+ {
+   "R_SETL_NAME": "תאשור",
+   "R_SETL_CODE": 2062
+ },
+ {
+   "R_SETL_NAME": "תדהר",
+   "R_SETL_CODE": 2061
+ },
+ {
+   "R_SETL_NAME": "תובל",
+   "R_SETL_CODE": 1172
+ },
+ {
+   "R_SETL_NAME": "תומר",
+   "R_SETL_CODE": 3558
+ },
+ {
+   "R_SETL_NAME": "תושיה",
+   "R_SETL_CODE": 1083
+ },
+ {
+   "R_SETL_NAME": "תימורים",
+   "R_SETL_CODE": 163
+ },
+ {
+   "R_SETL_NAME": "תירוש",
+   "R_SETL_CODE": 10
+ },
+ {
+   "R_SETL_NAME": "תל אביב - יפו",
+   "R_SETL_CODE": 5000
+ },
+ {
+   "R_SETL_NAME": "תל יוסף",
+   "R_SETL_CODE": 84
+ },
+ {
+   "R_SETL_NAME": "תל יצחק",
+   "R_SETL_CODE": 287
+ },
+ {
+   "R_SETL_NAME": "תל מונד",
+   "R_SETL_CODE": 154
+ },
+ {
+   "R_SETL_NAME": "תל עדשים",
+   "R_SETL_CODE": 103
+ },
+ {
+   "R_SETL_NAME": "תל קציר",
+   "R_SETL_CODE": 719
+ },
+ {
+   "R_SETL_NAME": "תל שבע",
+   "R_SETL_CODE": 1054
+ },
+ {
+   "R_SETL_NAME": "תל תאומים",
+   "R_SETL_CODE": 1283
+ },
+ {
+   "R_SETL_NAME": "תלם",
+   "R_SETL_CODE": 3719
+ },
+ {
+   "R_SETL_NAME": "תלמי אליהו",
+   "R_SETL_CODE": 1051
+ },
+ {
+   "R_SETL_NAME": "תלמי אלעזר",
+   "R_SETL_CODE": 2003
+ },
+ {
+   "R_SETL_NAME": "תלמי ביל\"ו",
+   "R_SETL_CODE": 2050
+ },
+ {
+   "R_SETL_NAME": "תלמי יוסף",
+   "R_SETL_CODE": 1237
+ },
+ {
+   "R_SETL_NAME": "תלמי יחיאל",
+   "R_SETL_CODE": 727
+ },
+ {
+   "R_SETL_NAME": "תלמי יפה",
+   "R_SETL_CODE": 744
+ },
+ {
+   "R_SETL_NAME": "תלמים",
+   "R_SETL_CODE": 814
+ },
+ {
+   "R_SETL_NAME": "תמרת",
+   "R_SETL_CODE": 1244
+ },
+ {
+   "R_SETL_NAME": "תנובות",
+   "R_SETL_CODE": 2002
+ },
+ {
+   "R_SETL_NAME": "תעוז",
+   "R_SETL_CODE": 752
+ },
+ {
+   "R_SETL_NAME": "תקומה",
+   "R_SETL_CODE": 665
+ },
+ {
+   "R_SETL_NAME": "תקוע",
+   "R_SETL_CODE": 3563
+ },
+ {
+   "R_SETL_NAME": "תראבין א-צאנע",
+   "R_SETL_CODE": 970
+ },
+ {
+   "R_SETL_NAME": "תרום",
+   "R_SETL_CODE": 778
+ }
+]
 
-
-           var colors = {
-                    "GREEN":"ירוק",
-                    "YELLOW": "צהוב",
-                    "ORANGE": "כתום",
-                    "RED":"אדום"
-
-           }
-
-           var ramzor_data;
-
-         //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-        var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
-        //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
-        $(document).ready(function ()
-        {
-
-
-            govmap.createMap('map_div', {
-                token: my_token,
-                visibleLayers: [],
-                layers:["SCHOOL","KIDS_G"], 
-                layersMode: 4, 
-                showXY: true,
-                level: 1,
-                center: {x: 186000, y: 658000},
-                identifyOnClick: true
-            });
-
-            //var mapi_json_string = "https://www.govmap.gov.il/sites/SETL_AREA.json";
-            var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA_RAMZOR.geojson";
-            var ramzor_json_string = "https://data.gov.il/api/3/action/datastore_search?&resource_id=718ff8c3-84ae-4ea8-b686-101cf98f343f&limit=5000";
-            $.ajax({
-                dataType: 'json',
-                beforeSend : function() {
-                    $.get(ramzor_json_string).then(function (data) {
-                        ramzor_data = data.result.records;
-                    });
-                    console.log('Before Ajax Request Starts !!');
-
-
-
-
-                },
-                success: function(setl_area_data) {
-                        //console.log(iso_data);
-                        console.log(setl_area_data);
-                        setl_area_features = setl_area_data.features;
-                        setlnames = [];
-                        for (i in setl_area_features)
-                        {
-                            feat = setl_area_features[i];
-
-   
-                            setlcode = feat.properties.SETL_CODE;
-                            setlname = feat.properties.SETL_NAME;
-                            
-
-                            ramzor_filter = ramzor_data.filter(function(f) {
-								return f.city_code == setlcode || f.city_desc == setlname;			
-	                        });
-                            if (ramzor_filter.length > 0)
-                            {
-                                rank = ramzor_filter[0].score;
-                                color = ramzor_filter[0].colour_Calc;
-                                polygon = feat.geometry
-
-                                s_wkts.push(Terraformer.WKT.convert(polygon));
-                                s_names.push(setlname);
-                                setlnames.push(setlname);
-                                console.log(rank);
-                                s_symbols.push(getSymbol(parseFloat(rank)))
-
-                                bubbleHTMLParameters_all.push(["שם ישוב: " +  " " + setlname + "<br />" + "דירוג: " + rank, "<br />" + "סיווג:  " + color]);
-
-
-
-                                setlnames = setlnames.sort();
-                                appVue.items = setlnames;
-
-
-                            }
-
-                            //rank = feat.properties.RANK;
-                            //color = feat.properties.COLOR;
-                        }
-
-                        var data = {  
-                            wkts: s_wkts,  
-                            names: s_names,  
-                            geometryType: govmap.drawType.Polygon,  
-                            showBubble: true, 
-                            defaultSymbol:  
-                            {  
-                                'outlineColor': [0, 0, 0, 1],
-                                'outlineWidth': 3,
-                                'fillColor': [255, 255, 255, 0.5]
-                            },    
-                            symbols: s_symbols,  
-                            'clearExisting': false,
-                            data: {  
-                                tooltips: s_names,  
-                                headers: s_names,
-                                bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
-                                bubbleHTMLParameters:bubbleHTMLParameters_all
-
-                            } 
-                        }
-
-                        govmap.displayGeometries(data).then(function (response)  
-                        {  
-                            PolygonId = response.data;
+               
+               var ramzor_data;
+    
+             //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            $(document).ready(function ()
+            {
+    
+    
+                govmap.createMap('map_div', {
+                    token: my_token,
+                    visibleLayers: [],
+                    layers:["SCHOOL","KIDS_G"], 
+                    layersMode: 4, 
+                    showXY: true,
+                    level: 1,
+                    center: {x: 186000, y: 658000},
+                    identifyOnClick: true
+                });
+    
+                //var mapi_json_string = "https://www.govmap.gov.il/sites/SETL_AREA.json";
+                var mapi_json_string = "https://yovavsanders.github.io/Corona/SETL_AREA_RAMZOR.geojson";
+                var ramzor_json_string = "https://data.gov.il/api/3/action/datastore_search?&resource_id=718ff8c3-84ae-4ea8-b686-101cf98f343f&limit=5000";
+                $.ajax({
+                    dataType: 'json',
+                    beforeSend : function() {
+                        $.get(ramzor_json_string).then(function (data) {
+                            ramzor_data = data.result.records;
                         });
+                        console.log('Before Ajax Request Starts !!');
+    
+    
+    
+    
+                    },
+                    success: function(setl_area_data) {
+                            //console.log(iso_data);
+                            console.log(setl_area_data);
+                            setl_area_features = setl_area_data.features;
+                            setlnames = [];
+                            for (i in setl_area_features)
+                            {
+                                feat = setl_area_features[i];
+    
+       
+                                setlcode = feat.properties.SETL_CODE;
+                                setlname = feat.properties.SETL_NAME;
+                            
+         
+                                var ramzor_filter = ramzor_data.filter(function(f) {
+                                    return f.city_code == setlcode || f.city_desc == setlname;			
+                                });
+                                
+                                if (ramzor_filter.length == 0)
+                                {
+                                    ramzor_city = ramzor_cities.filter(function(f) {
+                                        return f.R_SETL_CODE == setlcode;			
+                                    });
+                                    if (ramzor_city.length > 0)
+                                    {
+                                        var ramzor_name = ramzor_city[0].R_SETL_NAME;  
+                                        ramzor_filter = ramzor_data.filter(function(f) {
+                                            return f.city_desc == ramzor_name;			
+                                        });
+                                    }
+                                }
+                                if (ramzor_filter.length > 0)
+                                {
+                                    rank = ramzor_filter[0].score;
+                                    color = ramzor_filter[0].colour_Calc;
+                                    polygon = feat.geometry
+    
+                                    s_wkts.push(Terraformer.WKT.convert(polygon));
+                                    s_names.push(setlname);
+                                    setlnames.push(setlname);
+                                    console.log(rank);
+                                    s_symbols.push(getSymbol(parseFloat(rank)))
+    
+                                    bubbleHTMLParameters_all.push(["שם ישוב: " +  " " + setlname + "<br />" + "דירוג: " + rank, "<br />" + "סיווג:  " + color]);
+    
+    
+    
+                                    setlnames = setlnames.sort();
+                                    appVue.items = setlnames;
+    
+    
+                                }
+                                else{
 
-
-
-
-
-                },
-                error : function(jqXHR, textStatus, errorThrown) {
-                    alert("Error occurred: " + errorThrown);
-                },
-                url: mapi_json_string
-            });  
-        });
-
-        
-    var appVue = new Vue({
-        el:"#isolation_app",
-        vuetify: new Vuetify(),
-        data () {
-            return {
-
-                checking: false,
-                points: [85, 115, 87, 98, 91, 112, 104, 103, 113, 94, 97, 119, 98, 109],
-                labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-
-                graphTitle: "שם ישוב",
-                step: 1,
+                                }
+    
+                                //rank = feat.properties.RANK;
+                                //color = feat.properties.COLOR;
+                            }
+    
+                            var data = {  
+                                wkts: s_wkts,  
+                                names: s_names,  
+                                geometryType: govmap.drawType.Polygon,  
+                                showBubble: true, 
+                                defaultSymbol:  
+                                {  
+                                    'outlineColor': [0, 0, 0, 1],
+                                    'outlineWidth': 3,
+                                    'fillColor': [255, 255, 255, 0.5]
+                                },    
+                                symbols: s_symbols,  
+                                'clearExisting': false,
+                                data: {  
+                                    tooltips: s_names,  
+                                    headers: s_names,
+                                    bubbleHTML: "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'>{0}{1}</div>",
+                                    bubbleHTMLParameters:bubbleHTMLParameters_all
+    
+                                } 
+                            }
+    
+                            govmap.displayGeometries(data).then(function (response)  
+                            {  
+                                PolygonId = response.data;
+                            });
+    
+    
+    
+    
+    
+                    },
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        alert("Error occurred: " + errorThrown);
+                    },
+                    url: mapi_json_string
+                });  
+            });
+    
             
-                loading: false,
-                items: [],
-                search: null,
-                search_mobile: null,
-                loading_mobile: null,
-                select: null,
-                select_mobile: null,
-                setl_names: [],
-
-
-                iso: [],
-            }
-        },
-        watch: {
-            search (val) {
-                val && val !== this.select && this.querySelections(val)
-            },
-        },
-        computed: {
-            currentTitle () {
-                switch (this.step) {
-                case 1: return 'כפר סבא'
-                case 2: return 'Create a password'
-                default: return 'Account created'
+        var appVue = new Vue({
+            el:"#isolation_app",
+            vuetify: new Vuetify(),
+            data () {
+                return {
+    
+                    checking: false,
+                    points: [85, 115, 87, 98, 91, 112, 104, 103, 113, 94, 97, 119, 98, 109],
+                    labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    
+                    graphTitle: "שם ישוב",
+                    step: 1,
+                
+                    loading: false,
+                    items: [],
+                    search: null,
+                    search_mobile: null,
+                    loading_mobile: null,
+                    select: null,
+                    select_mobile: null,
+                    setl_names: [],
+    
+    
+                    iso: [],
                 }
             },
-
-            avg () {
-                const sum = this.points.reduce((acc, cur) => acc + cur, 0)
-                const length = this.points.length
-
-                if (!sum && !length) return 0
-
-                return Math.ceil(sum / length)
+            watch: {
+                search (val) {
+                    val && val !== this.select && this.querySelections(val)
+                },
             },
-        },
-
-        methods: {
-            querySelections (v) {
-                this.loading = true
-                // Simulated ajax query
-                setTimeout(() => {
-                this.items = this.setl_names.filter(e => {
-                    return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-                })
-                this.loading = false
-                }, 500)
+            computed: {
+                currentTitle () {
+                    switch (this.step) {
+                    case 1: return 'כפר סבא'
+                    case 2: return 'Create a password'
+                    default: return 'Account created'
+                    }
+                },
+    
+                avg () {
+                    const sum = this.points.reduce((acc, cur) => acc + cur, 0)
+                    const length = this.points.length
+    
+                    if (!sum && !length) return 0
+    
+                    return Math.ceil(sum / length)
+                },
             },
-
-            pointsCount () {
-                100
-            },
-
-            getSetlPointCount (setlname){
-                console.log(setlname);
-
-                govmap.geocode({keyword: setlname},govmap.geocodeType.FullResult)
-					.then(function(response){
-                        govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+    
+            methods: {
+                querySelections (v) {
+                    this.loading = true
+                    // Simulated ajax query
+                    setTimeout(() => {
+                    this.items = this.setl_names.filter(e => {
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
                     })
-                // var count = 0;
-                // s_features = setl_area_features.filter(function(f) {
-                //     return f.properties.SETL_NAME == setlname;		
-                // });
-                // if (s_features.length > 0)
-                // {
-                //     govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+s_features[0].properties.SETL_CODE+"'", 'zoomToExtent': true});
-                // }
-
-
-                // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
-
-
-            }
-
-
-
-        },
-    });
+                    this.loading = false
+                    }, 500)
+                },
+    
+                pointsCount () {
+                    100
+                },
+    
+                getSetlPointCount (setlname){
+                    console.log(setlname);
+    
+                    govmap.geocode({keyword: setlname},govmap.geocodeType.FullResult)
+                        .then(function(response){
+                            govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 5, marker: true });
+                        })
+                    // var count = 0;
+                    // s_features = setl_area_features.filter(function(f) {
+                    //     return f.properties.SETL_NAME == setlname;		
+                    // });
+                    // if (s_features.length > 0)
+                    // {
+                    //     govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='"+s_features[0].properties.SETL_CODE+"'", 'zoomToExtent': true});
+                    // }
     
     
-    </script>
-<body>
-
-
-   
-</html>
+                    // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
+    
+    
+                }
+    
+    
+    
+            },
+        });
+        
+        
+        </script>
+    <body>
+    
+    
+       
+    </html>
+    
