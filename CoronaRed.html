@@ -91,32 +91,28 @@
         
                 </v-app-bar>
     
-
-                <v-toolbar
-                dense
-                floating
-                id="myTitleMobile"
+                <v-app-bar
                 color="red lighten-1"
+                dense
                 dark
-              >
-              <v-autocomplete
-              v-model="select"
-              :loading="loading_mobile"
-              :items="items"
-              :search-input.sync="search_mobile"
-              cache-items
-              class="mx-4"
-              flat
-              hide-no-data
-              hide-details
-              placeholder="שם ישוב"
-              solo-inverted
-              @change='getSetlPointCount'
-            ></v-autocomplete>
-
- 
-              </v-toolbar>
-
+                id="myTitleMobile"
+                >           
+                    <v-autocomplete
+                    color="red lighten-1"
+                    v-model="select"
+                    :loading="loading_mobile"
+                    :items="items"
+                    :search-input.sync="search_mobile"
+                    cache-items
+                    class="mx-4"
+                    flat
+                    hide-no-data
+                    hide-details
+                    placeholder="שם ישוב"
+                    solo-inverted
+                    @change='getSetlPointCount'
+                  ></v-autocomplete>
+                </v-app-bar>
             
                 <form name="form" style='height: 100%;' scrolling='no'> 
                         
@@ -418,8 +414,8 @@
     
             var setlnames = [];
     
-            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
-            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
             //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
             $(document).ready(function ()
             {
