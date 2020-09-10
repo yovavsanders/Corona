@@ -1,8 +1,70 @@
+
+<html style='width:100%; height:100%;'>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .v-sheet--offset {
+        top: -24px;
+        position: relative;
+      }
+    
+      @media (max-width: 600px) {
+        #myTitle {
+          display: none;
+        }
+    
+      }
+    
+       @media (min-width: 600px) {
+        #myTitleMobile {
+          display: none;
+        }
+       }
+    </style>
+    <head>
+    <title>מגבלות קורונה</title>
+    
+    <link rel= 'stylesheet' href= 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+    <script src="https://www.govmap.gov.il/govmap/api/govmap.api.js" ></script>
+    
+    <script src="https://unpkg.com/terraformer@1.0.8"></script>
+    <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated"></script> 
+    
+    
+    </head>
+        <body style='width:100%; height:95%;' scrolling='no' dir="rtl">
+            <div id="isolation_app">
+                <v-app>
+            
+                <v-app-bar style="text-align: center; max-height: 48px;"
+                color="red lighten-1"
+                dense
+                dark
+                id="myTitle"
+                >
+    
+                
+                <div class="text-right" style="width:25%; text-align:right;">
                     <v-autocomplete
                     v-model="select"
-                    :loading="loading_mobile"
+                    :loading="loading"
                     :items="items"
-                    :search-input.sync="search_mobile"
+                    :search-input.sync="search"
                     cache-items
                     class="mx-4"
                     flat
@@ -12,3 +74,477 @@
                     solo-inverted
                     @change='getSetlPointCount'
                   ></v-autocomplete>
+                </div>
+        
+                <v-divider vertical></v-divider>
+    
+                <v-spacer></v-spacer>
+                <v-toolbar-title class="white--text" style="text-align: center; max-height: 48px;">מגבלות קורונה - שכונות וישובים</v-toolbar-title>
+                <v-spacer></v-spacer>
+    
+                <div class="text-right" style="width:25%; text-align:right;">
+                </div>
+    
+    
+    
+    
+        
+                </v-app-bar>
+    
+
+                <v-toolbar
+                dense
+                floating
+                id="myTitleMobile"
+                color="red lighten-1"
+                dark
+              >
+              <v-autocomplete
+              v-model="select"
+              :loading="loading_mobile"
+              :items="items"
+              :search-input.sync="search_mobile"
+              cache-items
+              class="mx-4"
+              flat
+              hide-no-data
+              hide-details
+              placeholder="שם ישוב"
+              solo-inverted
+              @change='getSetlPointCount'
+            ></v-autocomplete>
+
+ 
+              </v-toolbar>
+
+            
+                <form name="form" style='height: 100%;' scrolling='no'> 
+                        
+                        <div id="map_div" style="width: 100%; height: 100%; float:left">
+                                
+                                
+                        </div> 			
+                </form>
+    
+    
+    
+            
+    
+    
+            </v-app>
+        </div>
+        
+        
+    <script>
+    
+    
+    
+    
+    
+            function isInArray(value, array) {
+                return array.indexOf(value) > -1;
+            }
+    
+            function getDates(startDate, stopDate) {
+                var dateArray = new Array();
+                var currentDate = startDate;
+                while (currentDate <= stopDate) {
+                    dateArray.push(new Date (currentDate));
+                    currentDate = currentDate.addDays(1);
+                }
+                return dateArray;
+            }
+    
+        
+    
+           var json = [
+ {
+   "OBJECTID": 5,
+   "NAME": "כפר ברא"
+ },
+ {
+   "OBJECTID": 6,
+   "NAME": "ג'לג'וליה"
+ },
+ {
+   "OBJECTID": 7,
+   "NAME": "אלעד"
+ },
+ {
+   "OBJECTID": 8,
+   "NAME": "טירה"
+ },
+ {
+   "OBJECTID": 9,
+   "NAME": "טייבה"
+ },
+ {
+   "OBJECTID": 10,
+   "NAME": "באקה אל-גרביה"
+ },
+ {
+   "OBJECTID": 11,
+   "NAME": "נצרת"
+ },
+ {
+   "OBJECTID": 12,
+   "NAME": "אבו סנאן"
+ },
+ {
+   "OBJECTID": 43,
+   "NAME": "אשדוד - רובע ז"
+ },
+ {
+   "OBJECTID": 44,
+   "NAME": "אשקלון - ברנע"
+ },
+ {
+   "OBJECTID": 13,
+   "NAME": "יפיע"
+ },
+ {
+   "OBJECTID": 14,
+   "NAME": "בוקעאתא"
+ },
+ {
+   "OBJECTID": 15,
+   "NAME": "ג'ולס"
+ },
+ {
+   "OBJECTID": 16,
+   "NAME": "כסרא - סמיע"
+ },
+ {
+   "OBJECTID": 1,
+   "NAME": "ג'ת"
+ },
+ {
+   "OBJECTID": 2,
+   "NAME": "אום אל-פחם"
+ },
+ {
+   "OBJECTID": 3,
+   "NAME": "בני ברק"
+ },
+ {
+   "OBJECTID": 4,
+   "NAME": "קלנסווה"
+ },
+ {
+   "OBJECTID": 45,
+   "NAME": "ירושלים - א - טור"
+ },
+ {
+   "OBJECTID": 46,
+   "NAME": "בית שמש - רמת בית שמש ג"
+ },
+ {
+   "OBJECTID": 47,
+   "NAME": "בית שמש - רמת בית שמש א"
+ },
+ {
+   "OBJECTID": 48,
+   "NAME": "אשקלון - גבעת ציון"
+ },
+ {
+   "OBJECTID": 49,
+   "NAME": "ביתר עילית"
+ },
+ {
+   "OBJECTID": 50,
+   "NAME": "עמנואל"
+ },
+ {
+   "OBJECTID": 51,
+   "NAME": "עספיא"
+ },
+ {
+   "OBJECTID": 52,
+   "NAME": "כפר קאסם"
+ },
+ {
+   "OBJECTID": 53,
+   "NAME": "בועיינה-נוג'ידאת"
+ },
+ {
+   "OBJECTID": 54,
+   "NAME": "זמר"
+ },
+ {
+   "OBJECTID": 17,
+   "NAME": "כפר מנדא"
+ },
+ {
+   "OBJECTID": 18,
+   "NAME": "עין מאהל"
+ },
+ {
+   "OBJECTID": 19,
+   "NAME": "ריינה"
+ },
+ {
+   "OBJECTID": 20,
+   "NAME": "שפרעם"
+ },
+ {
+   "OBJECTID": 21,
+   "NAME": "לקיה"
+ },
+ {
+   "OBJECTID": 22,
+   "NAME": "נתיבות"
+ },
+ {
+   "OBJECTID": 23,
+   "NAME": "רכסים"
+ },
+ {
+   "OBJECTID": 24,
+   "NAME": "דאלית אל-כרמל"
+ },
+ {
+   "OBJECTID": 25,
+   "NAME": "פוריידיס"
+ },
+ {
+   "OBJECTID": 26,
+   "NAME": "ערערה"
+ },
+ {
+   "OBJECTID": 27,
+   "NAME": "ערערה"
+ },
+ {
+   "OBJECTID": 28,
+   "NAME": "כפר קרע"
+ },
+ {
+   "OBJECTID": 29,
+   "NAME": "אילת - שחמון"
+ },
+ {
+   "OBJECTID": 30,
+   "NAME": "שדרות - נאות הנביאים"
+ },
+ {
+   "OBJECTID": 31,
+   "NAME": "ירושלים - שעפט"
+ },
+ {
+   "OBJECTID": 32,
+   "NAME": "ירושלים - כפר עקב"
+ },
+ {
+   "OBJECTID": 33,
+   "NAME": "ירושלים - בית חנינא"
+ },
+ {
+   "OBJECTID": 34,
+   "NAME": "ירושלים - רמות"
+ },
+ {
+   "OBJECTID": 35,
+   "NAME": "ירושלים - עיסאוויה"
+ },
+ {
+   "OBJECTID": 36,
+   "NAME": "ירושלים - סנהדריה"
+ },
+ {
+   "OBJECTID": 37,
+   "NAME": "ירושלים - רמת שלמה"
+ },
+ {
+   "OBJECTID": 38,
+   "NAME": "שדרות - נאות יצחק רבין"
+ },
+ {
+   "OBJECTID": 39,
+   "NAME": "אשדוד - רובע ג"
+ },
+ {
+   "OBJECTID": 40,
+   "NAME": "בית שמש - בית ומנוחה"
+ },
+ {
+   "OBJECTID": 41,
+   "NAME": "אשקלון - גבעת ציון וגבעת הפרחים"
+ },
+ {
+   "OBJECTID": 42,
+   "NAME": "אשדוד - רובע ח"
+ }
+]
+
+           
+    
+            var names;
+    
+
+
+    
+    
+    
+                Number.prototype.between = function(a, b) {
+                var min = Math.min.apply(Math, [a, b]),
+                    max = Math.max.apply(Math, [a, b]);
+                    return this >= min && this < max;
+                };
+    
+                function dateConvert(unixts)
+                {
+                    var date = new Date(unixts);
+                    //var fdate = date.getFullYear() + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + ("0" + date.getDate()).slice(-2);
+                    var fdate  = ("0" + date.getDate()).slice(-2) +  '/' + ("0" + (date.getMonth() + 1)).slice(-2) + '/' + date.getFullYear() 
+                    return(fdate);
+                }
+    
+                function stringToDate(_date,_format,_delimiter)
+                {
+                            var formatLowerCase=_format.toLowerCase();
+                            var formatItems=formatLowerCase.split(_delimiter);
+                            var dateItems=_date.split(_delimiter);
+                            var monthIndex=formatItems.indexOf("mm");
+                            var dayIndex=formatItems.indexOf("dd");
+                            var yearIndex=formatItems.indexOf("yyyy");
+                            var month=parseInt(dateItems[monthIndex]);
+                            month-=1;
+                            var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+                            return formatedDate;
+                }
+    
+               var polygon;
+
+    
+            var setlnames = [];
+    
+            var my_token = "0fff9694-a045-4ede-b997-ee9927b0d56c";//govmap
+            //var my_token ='aafedfe5-8dfa-4fd5-9af9-8b95759447bd'; // my github
+            //var my_token = "5a4b8472-b95b-4687-8179-0ccb621c7990";//localhost
+            $(document).ready(function ()
+            {
+    
+    
+                govmap.createMap('map_div', {
+                    token: my_token,
+                    visibleLayers: ["sites_covid_restrictions_09092020"],
+                    layers:["sites_covid_restrictions_09092020"], 
+                    layersMode: 2, 
+                    showXY: true,
+                    level: 1,
+                    center: {x: 186000, y: 658000},
+                    identifyOnClick: true
+                });
+
+
+                for (i = 0; i < json.length; i++)
+                {
+                    setlnames.push(json[i].NAME)
+                }
+                setlnames.sort();
+                appVue.items = setlnames;
+
+            });
+    
+               
+    
+            
+        var appVue = new Vue({
+            el:"#isolation_app",
+            vuetify: new Vuetify(),
+            data () {
+                return {
+    
+                    checking: false,
+                    points: [85, 115, 87, 98, 91, 112, 104, 103, 113, 94, 97, 119, 98, 109],
+                    labels: ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    
+                    graphTitle: "שם ישוב",
+                    step: 1,
+                
+                    loading: false,
+                    items: [],
+                    search: null,
+                    search_mobile: null,
+                    loading_mobile: null,
+                    select: null,
+                    select_mobile: null,
+                    setl_names: [],
+    
+    
+                    iso: [],
+                }
+            },
+            watch: {
+                search (val) {
+                    val && val !== this.select && this.querySelections(val)
+                },
+            },
+            computed: {
+                currentTitle () {
+                    switch (this.step) {
+                    case 1: return 'כפר סבא'
+                    case 2: return 'Create a password'
+                    default: return 'Account created'
+                    }
+                },
+    
+                avg () {
+                    const sum = this.points.reduce((acc, cur) => acc + cur, 0)
+                    const length = this.points.length
+    
+                    if (!sum && !length) return 0
+    
+                    return Math.ceil(sum / length)
+                },
+            },
+    
+            methods: {
+                querySelections (v) {
+                    this.loading = true
+                    // Simulated ajax query
+                    setTimeout(() => {
+                    this.items = this.setl_names.filter(e => {
+                        return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+                    })
+                    this.loading = false
+                    }, 500)
+                },
+    
+                pointsCount () {
+                    100
+                },
+    
+                getSetlPointCount (setlname){
+                    console.log(setlname);
+    
+
+                    // var count = 0;
+                    s_features = json.filter(function(f) {
+                         return f.NAME == setlname;		
+                    });
+
+                     if (s_features.length > 0)
+                     {
+                         govmap.filterLayers({ 'layerName': "sites_covid_restrictions_09092020", 'whereClause': "OBJECTID ="+s_features[0].OBJECTID, 'zoomToExtent': true});
+                     }
+                     govmap.filterLayers({ 'layerName': "sites_covid_restrictions_09092020", 'whereClause': "OBJECTID > 0", 'zoomToExtent': false});
+    
+    
+                    // govmap.filterLayers({ 'layerName': "LOCALITY_210410", 'whereClause': "CR_LAMAS ='X'", 'zoomToExtent': false});
+    
+    
+                }
+    
+    
+    
+            },
+        });
+        
+        
+        </script>
+    <body>
+    
+    
+       
+    </html>
