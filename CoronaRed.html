@@ -52,7 +52,7 @@
                 <v-app>
             
                 <v-app-bar style="text-align: center; max-height: 48px;"
-                color="red lighten-1"
+                src="red_bg.jpg"
                 dense
                 dark
                 id="myTitle"
@@ -91,28 +91,34 @@
         
                 </v-app-bar>
     
-                <v-app-bar
-                color="blue lighten-1"
-                dense
+
+
+                <v-toolbar
                 dark
+                src="red_bg.jpg"
                 id="myTitleMobile"
-                >           
-                    <v-autocomplete
-                    color="blue lighten-1"
-                    v-model="select"
-                    :loading="loading_mobile"
-                    :items="items"
-                    :search-input.sync="search_mobile"
-                    cache-items
-                    class="mx-4"
-                    flat
-                    hide-no-data
-                    hide-details
-                    placeholder="שם ישוב"
-                    solo-inverted
-                    @change='getSetlPointCount'
-                  ></v-autocomplete>
-                </v-app-bar>
+              >
+
+
+              <v-row>
+                <v-autocomplete
+                color="blue lighten-1"
+                v-model="select"
+                :loading="loading_mobile"
+                :items="items"
+                :search-input.sync="search_mobile"
+                cache-items
+                class="mx-4"
+                flat
+                hide-no-data
+                hide-details
+                placeholder="שם ישוב"
+                solo-inverted
+                @change='getSetlPointCount'
+              ></v-autocomplete>
+              </v-row>
+
+              </v-toolbar>
             
                 <form name="form" style='height: 100%;' scrolling='no'> 
                         
