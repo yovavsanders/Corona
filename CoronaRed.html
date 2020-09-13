@@ -103,9 +103,9 @@
                 <v-divider vertical></v-divider>
 
                 <div class="text-right" style="width:25%; text-align:right; padding-right: 30px; position: relative; margin: 0 auto;" > 
-                  <v-dialog
+                  <v-dialog right
                   v-model="dialog"
-                  width="250"
+                  width="300"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn tile block outlined color="white"
@@ -185,9 +185,9 @@
 
 
           <div class="text-right" style="width:25%; text-align:right; margin-top: 5px;"> 
-            <v-dialog
+            <v-dialog right
             v-model="dialog"
-            width="250"
+            width="300"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn tile outlined color="white"
@@ -198,19 +198,16 @@
               </v-btn>
             </template>
       
-            <v-card class="d-inline-block mx-auto">
-              <v-container>
+            <v-card class="d-inline-block" right>
 
-                    <v-radio-group v-model="radios" :mandatory="false">
+                    <v-radio-group right v-model="radios">
                                          
                            
-                       <v-radio label="שכונות וישובים תחת עוצר לילי"  color="red" @change="redLayer" value="radio-1"></v-radio>
+                       <v-radio right label="שכונות וישובים תחת עוצר לילי"  color="red" @change="redLayer" value="radio-1"></v-radio>
                                              
                          
-                      <v-radio label="דירוג ישובים לפי תכנית רמזור" color="warning" @change="orangeLayer" value="radio-2"></v-radio>
+                      <v-radio right label="דירוג ישובים לפי תכנית רמזור" color="warning" @change="orangeLayer" value="radio-2"></v-radio>
                   </v-radio-group>
-
-              </v-container>
           </v-card>
           </v-dialog>
           </div>      
