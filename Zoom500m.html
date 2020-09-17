@@ -443,7 +443,7 @@ function WgsToIsrael(latitude, longitude)
                                 govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: false });
 
                                 var data = {
-                                    'circleGeometries': [{ x: x_, y: y_, radius:1000 }],
+                                    'circleGeometries': [{ x: x_, y: y_, radius:500 }],
                                     'geomData': [{ 'name': 'test1', 'aaa': 1 }],
                                     'showBubble': false,
                                     'names': ['p1'],
@@ -488,7 +488,7 @@ function WgsToIsrael(latitude, longitude)
                             govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: false });
 
                             var data = {
-                                'circleGeometries': [{ x: response.data[0].X, y: response.data[0].Y, radius:1000 }],
+                                'circleGeometries': [{ x: response.data[0].X, y: response.data[0].Y, radius:500 }],
                                 'geomData': [{ 'name': 'test1', 'aaa': 1 }],
                                 'showBubble': false,
                                 'names': ['p1'],
