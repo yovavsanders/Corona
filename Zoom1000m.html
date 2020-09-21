@@ -85,13 +85,13 @@
 ></v-divider>
 
 
-  <v-btn icon
-  @click="zoom"
->
-<v-btn @click="zoom" icon>
+
+<v-btn @click="zoomCurrentLocation" icon>
   <v-icon>mdi-crosshairs-gps</v-icon>
 </v-btn>
-</v-btn>
+
+
+<img class="mr-1" height="70" src="https://yovavsanders.github.io/Corona/logo.png"/>
 
 
 
@@ -109,7 +109,11 @@
     dense
   >
 
+  <img class="mr-1"  height="60" src="https://yovavsanders.github.io/Corona/logo.png"/>
+
     <v-toolbar-title center>התמקד לטווח 1000 מ'</v-toolbar-title>
+
+    
 
 
   </v-app-bar>
@@ -132,13 +136,12 @@ vertical
 ></v-divider>
 
 
-<v-btn icon
-@click="zoom"
->
-<v-btn @click="zoom" icon>
+<v-btn @click="zoomCurrentLocation" icon>
 <v-icon>mdi-crosshairs-gps</v-icon>
 </v-btn>
-</v-btn>
+
+
+
 </v-app-bar>
                 
                     <v-card
@@ -376,7 +379,7 @@ function WgsToIsrael(latitude, longitude)
                         };
                         if( isMobile.any() ) {
 
-                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.5
+                            h = ($(window).height() - $(document.getElementById("menu_row")).height()) / 1.3
                             this.titleEl = false;
                         } 
                         console.log(h);
@@ -402,7 +405,7 @@ function WgsToIsrael(latitude, longitude)
                         visibleLayers: ['NEIGHBORHOODS_AREA'],
                         layers:['NEIGHBORHOODS_AREA', "LOCALITY_210410", "SCHOOL", "KIDS_G"],  
                         showXY: true,
-                        identifyOnClick: true,
+                        identifyOnClick: false,
                         layersMode: 2,
                         level: 0,
                         center: {x: 207000, y: 647000}
