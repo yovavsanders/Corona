@@ -440,7 +440,7 @@ function WgsToIsrael(latitude, longitude)
                                 x_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[0];
                                 y_ =  WgsToIsrael(position.coords.latitude, position.coords.longitude)[1];
                             
-                                govmap.zoomToXY({ x: x_, y: y_, level: 7, marker: true });
+                                govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: true });
 
                                 var data = {
                                     'circleGeometries': [{ x: x_, y: y_, radius:1000 }],
@@ -485,7 +485,7 @@ function WgsToIsrael(latitude, longitude)
                         if (response.status == 0)
                         {
                             
-                            govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 7, marker: true });
+                            govmap.zoomToXY({ x: response.data[0].X, y: response.data[0].Y, level: 6, marker: true });
 
                             var data = {
                                 'circleGeometries': [{ x: response.data[0].X, y: response.data[0].Y, radius:1000 }],
