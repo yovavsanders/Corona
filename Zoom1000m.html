@@ -419,6 +419,8 @@ function WgsToIsrael(latitude, longitude)
                         x_ = click_result.mapPoint.x;
                         y_ = click_result.mapPoint.y;
 
+                        govmap.zoomToXY({ x: x_, y: y_, level: 6, marker: true });
+
                         var data = {
                                     'circleGeometries': [{ x: x_, y: y_, radius:1000 }],
                                     'geomData': [{ 'name': 'test1', 'aaa': 1 }],
