@@ -399,7 +399,7 @@ function WgsToIsrael(latitude, longitude)
             $(function () {
                     govmap.createMap('map_div', {
                         token: my_token,
-                        visibleLayers: ["a"],
+                        visibleLayers: ['NEIGHBORHOODS_AREA'],
                         layers:['NEIGHBORHOODS_AREA', "LOCALITY_210410", "SCHOOL", "KIDS_G"],  
                         showXY: true,
                         identifyOnClick: true,
@@ -408,6 +408,43 @@ function WgsToIsrael(latitude, longitude)
                         center: {x: 207000, y: 647000}
 
                     });
+
+
+                    govmap.onEvent(govmap.events.CLICK).progress(function (e)  
+				    //govmap.draw(govmap.drawType.Point).progress(function (e)  
+				    {	
+					    click_result = e;
+					    console.log(click_result)
+
+                        x_ = click_result.mapPoint.x;
+                        y_ = click_result.mapPoint.y;
+
+                        var data = {
+                                    'circleGeometries': [{ x: x_, y: y_, radius:1000 }],
+                                    'geomData': [{ 'name': 'test1', 'aaa': 1 }],
+                                    'showBubble': false,
+                                    'names': ['p1'],
+                                    'geometryType': 4,
+                                    'defaultSymbol':
+                                        {
+                                            'outlineColor': [192, 0, 0, 1],
+                                            'outlineWidth': 1,
+                                            'fillColor': [255, 192, 203, 0.5]
+                                        },
+                                    'symbols': [],
+                                    'clearExisting': true,
+                                    'data': {
+
+                                    }
+                                };
+                        govmap.displayGeometries(data).then(function (e)
+                        {
+                            console.log(data);
+                            
+                        });
+
+
+				    });  
                         
             });
         });
